@@ -1,19 +1,19 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
-class catogrumodel {
+class User {
   String? catogryname;
   String? catogryimage;
-  catogrumodel({
+  User({
     this.catogryname,
     this.catogryimage,
   });
 
-  catogrumodel copyWith({
+  User copyWith({
     String? catogryname,
     String? catogryimage,
   }) {
-    return catogrumodel(
+    return User(
       catogryname: catogryname ?? this.catogryname,
       catogryimage: catogryimage ?? this.catogryimage,
     );
@@ -26,8 +26,8 @@ class catogrumodel {
     };
   }
 
-  factory catogrumodel.fromMap(Map<String, dynamic> map) {
-    return catogrumodel(
+  factory User.fromMap(Map<String, dynamic> map) {
+    return User(
       catogryname:
           map['catogryname'] != null ? map['catogryname'] as String : null,
       catogryimage:
@@ -37,15 +37,15 @@ class catogrumodel {
 
   String toJson() => json.encode(toMap());
 
-  factory catogrumodel.fromJson(String source) =>
-      catogrumodel.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory User.fromJson(String source) =>
+      User.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
   String toString() =>
       'catogrumodel(catogryname: $catogryname, catogryimage: $catogryimage)';
 
   @override
-  bool operator ==(covariant catogrumodel other) {
+  bool operator ==(covariant User other) {
     if (identical(this, other)) return true;
 
     return other.catogryname == catogryname &&

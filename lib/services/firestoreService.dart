@@ -65,18 +65,20 @@ class FirestoreService {
     Timestamp time = Timestamp.now();
     String response = '';
     await property.add({
+      "username": box.read('name'),
+      "usernumber": box.read('phone'),
       'currentUserId': propertyModel.currentUserId.toString(),
       'propertyFor': propertyModel.propertyFor.toString(),
       'propertyType': propertyModel.propertyType.toString(),
       'city': propertyModel.city.toString(),
       'area': propertyModel.area.toString(),
-      'size': "propertyModel.size.toString()",
-      'bedrooms': box.read('phone'),
+      'size': propertyModel.size.toString(),
+      'bedrooms': propertyModel.bedrooms.toString(),
       'address': propertyModel.address.toString(),
-      'bathrooms': box.read('name'),
-      'kitchen': "propertyModel.kitchen.toString()",
+      'bathrooms': propertyModel.bathrooms.toString(),
+      'kitchen': propertyModel.kitchen.toString(),
       'des': propertyModel.descr.toString(),
-      'price': "propertyModel.price.toString()",
+      'price': propertyModel.price.toString(),
       'images': imageUrls,
       'propertyAction': 'None'.toString(),
       'time': time
@@ -88,11 +90,10 @@ class FirestoreService {
     return response;
   }
 
-  Stream<List<catogrumodel>> getAllupdaetList() {
+  Stream<List<User>> getAllupdaetList() {
     return FirebaseFirestore.instance.collection('catogry').snapshots().map(
-        (querySnapshot) => querySnapshot.docs
-            .map((doc) => catogrumodel.fromMap(doc.data()))
-            .toList());
+        (querySnapshot) =>
+            querySnapshot.docs.map((doc) => User.fromMap(doc.data())).toList());
   }
 
   Stream<List<CityModel>> getAllcityList() {
@@ -133,6 +134,8 @@ class FirestoreService {
         // print("Document Id is ${doc.id}");
         String docId = doc.id;
         PropertyModel propertyModel = PropertyModel.getFromServer(
+          doc['username'],
+          doc['usernumber'],
           doc['time'],
           doc['propertyAction'],
           docId,
@@ -168,6 +171,8 @@ class FirestoreService {
         .then((QuerySnapshot querySnapshot) {
       querySnapshot.docs.forEach((doc) {
         PropertyModel propertyModel = PropertyModel.getFromServer(
+          doc['username'],
+          doc['usernumber'],
           doc['time'],
           doc['propertyAction'],
           doc.id,
@@ -203,6 +208,8 @@ class FirestoreService {
         .then((QuerySnapshot querySnapshot) {
       querySnapshot.docs.forEach((doc) {
         PropertyModel propertyModel = PropertyModel.getFromServer(
+          doc['username'],
+          doc['usernumber'],
           doc['time'],
           doc['propertyAction'],
           doc.id,
@@ -220,8 +227,8 @@ class FirestoreService {
           doc['price'],
           doc['images'],
         );
-        if (doc['bathrooms'] == box.read("name") &&
-            doc['bedrooms'] == box.read("phone")) {
+        if (doc['username'] == box.read("name") &&
+            doc['usernumber'] == box.read("phone")) {
           propertyList.add(propertyModel);
         }
       });
@@ -238,6 +245,8 @@ class FirestoreService {
         .then((QuerySnapshot querySnapshot) {
       querySnapshot.docs.forEach((doc) {
         PropertyModel propertyModel = PropertyModel.getFromServer(
+          doc['username'],
+          doc['usernumber'],
           doc['time'],
           doc['propertyAction'],
           doc.id,
@@ -272,6 +281,8 @@ class FirestoreService {
         .then((QuerySnapshot querySnapshot) {
       querySnapshot.docs.forEach((doc) {
         PropertyModel propertyModel = PropertyModel.getFromServer(
+          doc['username'],
+          doc['usernumber'],
           doc['time'],
           doc['propertyAction'],
           doc.id,
@@ -368,6 +379,8 @@ class FirestoreService {
           .then((QuerySnapshot querySnapshot) {
         querySnapshot.docs.forEach((doc) {
           PropertyModel propertyModel = PropertyModel.getFromServer(
+            doc['username'],
+            doc['usernumber'],
             doc['time'],
             doc['propertyAction'],
             doc.id,
@@ -398,6 +411,8 @@ class FirestoreService {
           .then((QuerySnapshot querySnapshot) {
         querySnapshot.docs.forEach((doc) {
           PropertyModel propertyModel = PropertyModel.getFromServer(
+            doc['username'],
+            doc['usernumber'],
             doc['time'],
             doc['propertyAction'],
             doc.id,
@@ -432,6 +447,8 @@ class FirestoreService {
           .then((QuerySnapshot querySnapshot) {
         querySnapshot.docs.forEach((doc) {
           PropertyModel propertyModel = PropertyModel.getFromServer(
+            doc['username'],
+            doc['usernumber'],
             doc['time'],
             doc['propertyAction'],
             doc.id,
@@ -466,6 +483,8 @@ class FirestoreService {
           .then((QuerySnapshot querySnapshot) {
         querySnapshot.docs.forEach((doc) {
           PropertyModel propertyModel = PropertyModel.getFromServer(
+            doc['username'],
+            doc['usernumber'],
             doc['time'],
             doc['propertyAction'],
             doc.id,
@@ -501,6 +520,8 @@ class FirestoreService {
           .then((QuerySnapshot querySnapshot) {
         querySnapshot.docs.forEach((doc) {
           PropertyModel propertyModel = PropertyModel.getFromServer(
+            doc['username'],
+            doc['usernumber'],
             doc['time'],
             doc['propertyAction'],
             doc.id,
@@ -533,6 +554,8 @@ class FirestoreService {
           .then((QuerySnapshot querySnapshot) {
         querySnapshot.docs.forEach((doc) {
           PropertyModel propertyModel = PropertyModel.getFromServer(
+            doc['username'],
+            doc['usernumber'],
             doc['time'],
             doc['propertyAction'],
             doc.id,
@@ -565,6 +588,8 @@ class FirestoreService {
           .then((QuerySnapshot querySnapshot) {
         querySnapshot.docs.forEach((doc) {
           PropertyModel propertyModel = PropertyModel.getFromServer(
+            doc['username'],
+            doc['usernumber'],
             doc['time'],
             doc['propertyAction'],
             doc.id,
@@ -610,6 +635,8 @@ class FirestoreService {
           .then((QuerySnapshot querySnapshot) {
         querySnapshot.docs.forEach((doc) {
           PropertyModel propertyModel = PropertyModel.getFromServer(
+            doc['username'],
+            doc['usernumber'],
             doc['time'],
             doc['propertyAction'],
             doc.id,
@@ -643,6 +670,8 @@ class FirestoreService {
           .then((QuerySnapshot querySnapshot) {
         querySnapshot.docs.forEach((doc) {
           PropertyModel propertyModel = PropertyModel.getFromServer(
+            doc['username'],
+            doc['usernumber'],
             doc['time'],
             doc['propertyAction'],
             doc.id,
@@ -677,6 +706,8 @@ class FirestoreService {
           .then((QuerySnapshot querySnapshot) {
         querySnapshot.docs.forEach((doc) {
           PropertyModel propertyModel = PropertyModel.getFromServer(
+            doc['username'],
+            doc['usernumber'],
             doc['time'],
             doc['propertyAction'],
             doc.id,
@@ -711,6 +742,8 @@ class FirestoreService {
           .then((QuerySnapshot querySnapshot) {
         querySnapshot.docs.forEach((doc) {
           PropertyModel propertyModel = PropertyModel.getFromServer(
+            doc['username'],
+            doc['usernumber'],
             doc['time'],
             doc['propertyAction'],
             doc.id,
@@ -746,6 +779,8 @@ class FirestoreService {
           .then((QuerySnapshot querySnapshot) {
         querySnapshot.docs.forEach((doc) {
           PropertyModel propertyModel = PropertyModel.getFromServer(
+            doc['username'],
+            doc['usernumber'],
             doc['time'],
             doc['propertyAction'],
             doc.id,
@@ -778,6 +813,8 @@ class FirestoreService {
           .then((QuerySnapshot querySnapshot) {
         querySnapshot.docs.forEach((doc) {
           PropertyModel propertyModel = PropertyModel.getFromServer(
+            doc['username'],
+            doc['usernumber'],
             doc['time'],
             doc['propertyAction'],
             doc.id,
@@ -810,6 +847,8 @@ class FirestoreService {
           .then((QuerySnapshot querySnapshot) {
         querySnapshot.docs.forEach((doc) {
           PropertyModel propertyModel = PropertyModel.getFromServer(
+            doc['username'],
+            doc['usernumber'],
             doc['time'],
             doc['propertyAction'],
             doc.id,

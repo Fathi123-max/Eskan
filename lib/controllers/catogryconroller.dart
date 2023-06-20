@@ -40,7 +40,7 @@ import '../models/catogrymodel.dart';
 import '../services/firestoreService.dart';
 
 class catogryController extends GetxController {
-  RxList<catogrumodel> catogryList = RxList<catogrumodel>([]);
+  RxList<User> catogryList = RxList<User>([]);
 
   @override
   void onInit() async {

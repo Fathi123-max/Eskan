@@ -10,5 +10,6 @@ class DraweController extends GetxController {
     DrawerItem(title: 'Home'.tr, icon: Icons.home_outlined),
     // DrawerItem(title: 'Liked Property ', icon: Icons.favorite_outline),
     DrawerItem(title: 'Account Setting'.tr, icon: Icons.settings_outlined),
+    DrawerItem(title: 'Rooms'.tr, icon: Icons.settings_outlined),
   ].obs;
 }

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
+import 'package:flutter_firebase_chat_core/flutter_firebase_chat_core.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:haider/controllers/addpropertyController.dart';
@@ -265,6 +267,281 @@ class AddDataScreen extends StatelessWidget {
               },
             ),
           ),
+          // add sections
+
+          Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  'المساحه',
+                  style: TextStyle(
+                      fontSize: 18,
+                      color: CustomColors.greyColor,
+                      fontWeight: FontWeight.bold),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(
+                    left: 25, right: 25, top: 8, bottom: 2),
+                child: TextFormField(
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
+                  controller: controller.sizeEditTextController,
+                  keyboardType: TextInputType.number,
+                  cursorColor: CustomColors.orangeColor,
+                  textInputAction: TextInputAction.next,
+                  decoration: InputDecoration(
+                    hintText: '',
+                    focusedErrorBorder: new OutlineInputBorder(
+                        borderRadius: new BorderRadius.circular(10.0),
+                        borderSide:
+                            new BorderSide(color: CustomColors.orangeColor)),
+                    errorBorder: new OutlineInputBorder(
+                        borderRadius: new BorderRadius.circular(10.0),
+                        borderSide:
+                            new BorderSide(color: CustomColors.orangeColor)),
+                    enabledBorder: new OutlineInputBorder(
+                        borderRadius: new BorderRadius.circular(10.0),
+                        borderSide:
+                            new BorderSide(color: CustomColors.orangeColor)),
+                    focusedBorder: new OutlineInputBorder(
+                        borderRadius: new BorderRadius.circular(10.0),
+                        borderSide:
+                            new BorderSide(color: CustomColors.orangeColor)),
+                    labelText: 'المساحه بالمتر',
+                    labelStyle: TextStyle(color: Colors.grey),
+                    prefixIcon: Icon(
+                      Icons.photo_size_select_small_outlined,
+                      color: Colors.grey,
+                    ),
+                  ),
+                  validator: (value) {
+                    if (value == '' || value == null) return 'Area  required';
+                  },
+                  onSaved: (value) {
+                    controller.propertyModel.size = value.toString();
+                    //authController.userModel.userEmail = value.toString();
+                  },
+                ),
+              ),
+            ],
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text(
+              'غرف النوم',
+              style: TextStyle(
+                  fontSize: 18,
+                  color: CustomColors.greyColor,
+                  fontWeight: FontWeight.bold),
+            ),
+          ),
+          Padding(
+            padding:
+                const EdgeInsets.only(left: 25, right: 25, top: 8, bottom: 2),
+            child: TextFormField(
+              autovalidateMode: AutovalidateMode.onUserInteraction,
+              controller: controller.bedroomsEditTextController,
+              keyboardType: TextInputType.number,
+              cursorColor: CustomColors.orangeColor,
+              textInputAction: TextInputAction.next,
+              decoration: InputDecoration(
+                hintText: '',
+                focusedErrorBorder: new OutlineInputBorder(
+                    borderRadius: new BorderRadius.circular(10.0),
+                    borderSide:
+                        new BorderSide(color: CustomColors.orangeColor)),
+                errorBorder: new OutlineInputBorder(
+                    borderRadius: new BorderRadius.circular(10.0),
+                    borderSide:
+                        new BorderSide(color: CustomColors.orangeColor)),
+                enabledBorder: new OutlineInputBorder(
+                    borderRadius: new BorderRadius.circular(10.0),
+                    borderSide:
+                        new BorderSide(color: CustomColors.orangeColor)),
+                focusedBorder: new OutlineInputBorder(
+                    borderRadius: new BorderRadius.circular(10.0),
+                    borderSide:
+                        new BorderSide(color: CustomColors.orangeColor)),
+                labelText: 'عدد غرف النوم',
+                labelStyle: TextStyle(color: Colors.grey),
+                prefixIcon: Icon(
+                  Icons.bed_outlined,
+                  color: Colors.grey,
+                ),
+              ),
+              validator: (value) {
+                if (value == '' || value == null)
+                  return 'No of Bedrooms  required';
+              },
+              onSaved: (value) {
+                controller.propertyModel.bedrooms = value.toString();
+                //authController.userModel.userEmail = value.toString();
+              },
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text(
+              'الحمامات',
+              style: TextStyle(
+                  fontSize: 18,
+                  color: CustomColors.greyColor,
+                  fontWeight: FontWeight.bold),
+            ),
+          ),
+          Padding(
+            padding:
+                const EdgeInsets.only(left: 25, right: 25, top: 8, bottom: 2),
+            child: TextFormField(
+              autovalidateMode: AutovalidateMode.onUserInteraction,
+              controller: controller.bathroomsTextController,
+              keyboardType: TextInputType.number,
+              cursorColor: CustomColors.orangeColor,
+              textInputAction: TextInputAction.next,
+              decoration: InputDecoration(
+                hintText: '',
+                focusedErrorBorder: new OutlineInputBorder(
+                    borderRadius: new BorderRadius.circular(10.0),
+                    borderSide:
+                        new BorderSide(color: CustomColors.orangeColor)),
+                errorBorder: new OutlineInputBorder(
+                    borderRadius: new BorderRadius.circular(10.0),
+                    borderSide:
+                        new BorderSide(color: CustomColors.orangeColor)),
+                enabledBorder: new OutlineInputBorder(
+                    borderRadius: new BorderRadius.circular(10.0),
+                    borderSide:
+                        new BorderSide(color: CustomColors.orangeColor)),
+                focusedBorder: new OutlineInputBorder(
+                    borderRadius: new BorderRadius.circular(10.0),
+                    borderSide:
+                        new BorderSide(color: CustomColors.orangeColor)),
+                labelText: 'عدد الحمامات',
+                labelStyle: TextStyle(color: Colors.grey),
+                prefixIcon: Icon(
+                  Icons.bathroom_outlined,
+                  color: Colors.grey,
+                ),
+              ),
+              validator: (value) {
+                if (value == '' || value == null)
+                  return 'No of Bathrooms required';
+              },
+              onSaved: (value) {
+                controller.propertyModel.bathrooms = value.toString();
+                //authController.userModel.userEmail = value.toString();
+              },
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text(
+              'المطبخ',
+              style: TextStyle(
+                  fontSize: 18,
+                  color: CustomColors.greyColor,
+                  fontWeight: FontWeight.bold),
+            ),
+          ),
+          Padding(
+            padding:
+                const EdgeInsets.only(left: 25, right: 25, top: 8, bottom: 2),
+            child: TextFormField(
+              autovalidateMode: AutovalidateMode.onUserInteraction,
+              controller: controller.kitchenEditTextController,
+              keyboardType: TextInputType.number,
+              cursorColor: CustomColors.orangeColor,
+              textInputAction: TextInputAction.next,
+              decoration: InputDecoration(
+                hintText: '',
+                focusedErrorBorder: new OutlineInputBorder(
+                    borderRadius: new BorderRadius.circular(10.0),
+                    borderSide:
+                        new BorderSide(color: CustomColors.orangeColor)),
+                errorBorder: new OutlineInputBorder(
+                    borderRadius: new BorderRadius.circular(10.0),
+                    borderSide:
+                        new BorderSide(color: CustomColors.orangeColor)),
+                enabledBorder: new OutlineInputBorder(
+                    borderRadius: new BorderRadius.circular(10.0),
+                    borderSide:
+                        new BorderSide(color: CustomColors.orangeColor)),
+                focusedBorder: new OutlineInputBorder(
+                    borderRadius: new BorderRadius.circular(10.0),
+                    borderSide:
+                        new BorderSide(color: CustomColors.orangeColor)),
+                labelText: 'عدد المطابخ',
+                labelStyle: TextStyle(color: Colors.grey),
+                prefixIcon: Icon(
+                  Icons.kitchen_outlined,
+                  color: Colors.grey,
+                ),
+              ),
+              validator: (value) {
+                if (value == '' || value == null)
+                  return 'No of Kitchens required';
+              },
+              onSaved: (value) {
+                controller.propertyModel.kitchen = value.toString();
+                //authController.userModel.userEmail = value.toString();
+              },
+            ),
+          ),
+
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text(
+              value == 'sale' ? 'Price' : 'الايجار / الشهر',
+              style: TextStyle(
+                  fontSize: 18,
+                  color: CustomColors.greyColor,
+                  fontWeight: FontWeight.bold),
+            ),
+          ),
+          Padding(
+            padding:
+                const EdgeInsets.only(left: 25, right: 25, top: 8, bottom: 2),
+            child: TextFormField(
+              autovalidateMode: AutovalidateMode.onUserInteraction,
+              controller: controller.priceEditTextController,
+              keyboardType: TextInputType.number,
+              cursorColor: CustomColors.orangeColor,
+              textInputAction: TextInputAction.next,
+              decoration: InputDecoration(
+                hintText: '',
+                focusedErrorBorder: new OutlineInputBorder(
+                    borderRadius: new BorderRadius.circular(10.0),
+                    borderSide:
+                        new BorderSide(color: CustomColors.orangeColor)),
+                errorBorder: new OutlineInputBorder(
+                    borderRadius: new BorderRadius.circular(10.0),
+                    borderSide:
+                        new BorderSide(color: CustomColors.orangeColor)),
+                enabledBorder: new OutlineInputBorder(
+                    borderRadius: new BorderRadius.circular(10.0),
+                    borderSide:
+                        new BorderSide(color: CustomColors.orangeColor)),
+                focusedBorder: new OutlineInputBorder(
+                    borderRadius: new BorderRadius.circular(10.0),
+                    borderSide:
+                        new BorderSide(color: CustomColors.orangeColor)),
+                labelText: value == 'sale' ? 'Price' : 'الايجار',
+                labelStyle: TextStyle(color: Colors.grey),
+                prefixIcon: Icon(
+                  Icons.label_important_outline,
+                  color: Colors.grey,
+                ),
+              ),
+              validator: (value) {
+                if (value == '' || value == null) return 'Price required';
+              },
+              onSaved: (value) {
+                controller.propertyModel.price = value.toString();
+              },
+            ),
+          ),
+          // end sections
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Text(
@@ -275,6 +552,7 @@ class AddDataScreen extends StatelessWidget {
                   fontWeight: FontWeight.bold),
             ),
           ),
+
           Padding(
             padding:
                 const EdgeInsets.only(left: 25, right: 25, top: 8, bottom: 2),
@@ -376,6 +654,17 @@ class AddDataScreen extends StatelessWidget {
                               .validate()) {
                             return;
                           } else {
+                            await FirebaseChatCore.instance
+                                .createUserInFirestore(
+                              types.User(
+                                firstName: box.read("name"),
+                                id: await box.read(
+                                    "phone"), // UID from Firebase Authentication
+                                imageUrl:
+                                    'https://images.unsplash.com/photo-1599566147214-ce487862ea4f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MzV8fGF2YXRhcnxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=400&q=60',
+                              ),
+                            );
+
                             controller.propertyModel.city =
                                 controller.selectedCity.value;
                             controller.propertyModel.propertyType =

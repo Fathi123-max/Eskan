@@ -29,7 +29,7 @@ class catogrylist extends StatelessWidget {
                 itemCount: catoController.catogryList.value.length,
                 itemBuilder: (BuildContext context, int index) {
                   return _buildServiceCategory(
-                      catoController.catogryList[index].catogryname!.tr,
+                      catoController.catogryList[index].catogryname!,
                       catoController.catogryList[index].catogryimage!);
                 },
               ));

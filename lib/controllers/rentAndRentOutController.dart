@@ -7,7 +7,7 @@ class RentAndRentOutController extends GetxController {
   // final AuthController controller = Get.find();
   FirestoreService firestoreService = FirestoreService();
   var currentUserRentOutlist = <PropertyModel>[].obs;
-
+  var username = "".obs;
   var allRentList = <PropertyModel>[].obs;
   var allcatList = [].obs;
   var isLoading = false.obs;

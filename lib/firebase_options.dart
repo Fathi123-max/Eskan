@@ -53,11 +53,10 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyCNn23DwVXkHjS1Q9-I9UEGK-7FUXDvuHE',
-    appId: '1:556979629799:android:54670c970d8e5335b87c42',
-    messagingSenderId: '556979629799',
-    projectId: 'gofireui',
-    databaseURL: 'https://gofireui-default-rtdb.firebaseio.com',
-    storageBucket: 'gofireui.appspot.com',
+    apiKey: 'AIzaSyABE_is7xr1SsQiI8dNjH14H1i1tB_FpZE',
+    appId: '1:811029168672:android:0b3991379aa6f38b5f7245',
+    messagingSenderId: '811029168672',
+    projectId: 'escan-7127b',
+    storageBucket: 'escan-7127b.appspot.com',
   );
 }

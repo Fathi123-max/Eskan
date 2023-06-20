@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class PropertyModel {
+  late String username;
+  late String usernumber;
   late Timestamp timestamp;
   late String action;
   late String docId;
@@ -21,6 +23,8 @@ class PropertyModel {
   PropertyModel(); // PropertyModel();
 
   PropertyModel.getFromServer(
+      this.username,
+      this.usernumber,
       this.timestamp,
       this.action,
       this.docId,

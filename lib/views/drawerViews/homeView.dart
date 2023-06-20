@@ -1,4 +1,5 @@
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -7,6 +8,7 @@ import 'package:haider/utills/customColors.dart';
 import 'package:haider/views/drawerViews/homeViewsitems/accountSetttings.dart';
 
 import '../../controllers/draweController.dart';
+import '../chat/rooms.dart';
 import '../choosescreen.dart';
 import '../info.dart';
 
@@ -88,6 +90,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                       onTap: () {
                         print(index);
                         index == 1 ? Get.to(() => AccountSettings()) : null;
+                        index == 2 ? Get.to(() => RoomsPage()) : null;
                       },
                     );
                   }),
@@ -116,7 +119,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                       // pageViewController.pageViewIndex.value = 0;
                       box.remove('name');
                       box.remove('phone');
-
+                      await FirebaseAuth.instance.signOut();
                       Get.offAll(() => EnterInfo());
                     },
                   ),

@@ -1,193 +1,48 @@
 {
   "project_info": {
-    "project_number": "556979629799",
-    "firebase_url": "https://gofireui-default-rtdb.firebaseio.com",
-    "project_id": "gofireui",
-    "storage_bucket": "gofireui.appspot.com"
+    "project_number": "811029168672",
+    "project_id": "escan-7127b",
+    "storage_bucket": "escan-7127b.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:556979629799:android:f926054837c00be6b87c42",
+        "mobilesdk_app_id": "1:811029168672:android:0b3991379aa6f38b5f7245",
         "android_client_info": {
-          "package_name": "com.example.adminapp"
+          "package_name": "com.marwan.fathi"
         }
       },
       "oauth_client": [
         {
-          "client_id": "556979629799-n48hei7v29t4ehgugmn9r7r6lr03vulf.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyCNn23DwVXkHjS1Q9-I9UEGK-7FUXDvuHE"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "556979629799-htl3pe2fsbev036utpl4d8nin341n5l8.apps.googleusercontent.com",
-              "client_type": 3
-            },
-            {
-              "client_id": "556979629799-25sihe3fheon0nta384brqk19u6gelft.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.example.fireui"
-              }
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:556979629799:android:86338d7695ef0dbbb87c42",
-        "android_client_info": {
-          "package_name": "com.example.custom_project"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "556979629799-n48hei7v29t4ehgugmn9r7r6lr03vulf.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyCNn23DwVXkHjS1Q9-I9UEGK-7FUXDvuHE"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "556979629799-htl3pe2fsbev036utpl4d8nin341n5l8.apps.googleusercontent.com",
-              "client_type": 3
-            },
-            {
-              "client_id": "556979629799-25sihe3fheon0nta384brqk19u6gelft.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.example.fireui"
-              }
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:556979629799:android:3eb0e5268b3e8f90b87c42",
-        "android_client_info": {
-          "package_name": "com.example.delivery_app1"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "556979629799-n48hei7v29t4ehgugmn9r7r6lr03vulf.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyCNn23DwVXkHjS1Q9-I9UEGK-7FUXDvuHE"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "556979629799-htl3pe2fsbev036utpl4d8nin341n5l8.apps.googleusercontent.com",
-              "client_type": 3
-            },
-            {
-              "client_id": "556979629799-25sihe3fheon0nta384brqk19u6gelft.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.example.fireui"
-              }
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:556979629799:android:b0ea959311028b82b87c42",
-        "android_client_info": {
-          "package_name": "com.example.foodiee_app"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "556979629799-n48hei7v29t4ehgugmn9r7r6lr03vulf.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyCNn23DwVXkHjS1Q9-I9UEGK-7FUXDvuHE"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "556979629799-htl3pe2fsbev036utpl4d8nin341n5l8.apps.googleusercontent.com",
-              "client_type": 3
-            },
-            {
-              "client_id": "556979629799-25sihe3fheon0nta384brqk19u6gelft.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.example.fireui"
-              }
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:556979629799:android:54670c970d8e5335b87c42",
-        "android_client_info": {
-          "package_name": "com.example.haider"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "556979629799-9heu9cci25o3jvnlqsjj1340qmgumnv2.apps.googleusercontent.com",
+          "client_id": "811029168672-iu7ftcvjbojlglip05gu2j9sil09qkl5.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.example.haider",
-            "certificate_hash": "7c203ed98f7c49d030c57b5a63b226ef61c544f6"
+            "package_name": "com.marwan.fathi",
+            "certificate_hash": "7c7ab172a12e6ddf0ec1e87f63783ee5237c524a"
           }
         },
         {
-          "client_id": "556979629799-n48hei7v29t4ehgugmn9r7r6lr03vulf.apps.googleusercontent.com",
+          "client_id": "811029168672-lkvptq17fce37pn92rg98hbo4rupb0rk.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCNn23DwVXkHjS1Q9-I9UEGK-7FUXDvuHE"
+          "current_key": "AIzaSyABE_is7xr1SsQiI8dNjH14H1i1tB_FpZE"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "556979629799-htl3pe2fsbev036utpl4d8nin341n5l8.apps.googleusercontent.com",
+              "client_id": "811029168672-lkvptq17fce37pn92rg98hbo4rupb0rk.apps.googleusercontent.com",
               "client_type": 3
             },
             {
-              "client_id": "556979629799-25sihe3fheon0nta384brqk19u6gelft.apps.googleusercontent.com",
+              "client_id": "811029168672-7sbtnjc9leu0o0ev3n3g2jun2so7okcp.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.example.fireui"
+                "bundle_id": "com.reasa.reasa"
               }
             }
           ]
@@ -196,34 +51,34 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:556979629799:android:6accde8b19473c93b87c42",
+        "mobilesdk_app_id": "1:811029168672:android:99a0afad4b401b4b5f7245",
         "android_client_info": {
-          "package_name": "com.localhost.service_delivery_app"
+          "package_name": "com.reasa.reasa"
         }
       },
       "oauth_client": [
         {
-          "client_id": "556979629799-n48hei7v29t4ehgugmn9r7r6lr03vulf.apps.googleusercontent.com",
+          "client_id": "811029168672-lkvptq17fce37pn92rg98hbo4rupb0rk.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCNn23DwVXkHjS1Q9-I9UEGK-7FUXDvuHE"
+          "current_key": "AIzaSyABE_is7xr1SsQiI8dNjH14H1i1tB_FpZE"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "556979629799-htl3pe2fsbev036utpl4d8nin341n5l8.apps.googleusercontent.com",
+              "client_id": "811029168672-lkvptq17fce37pn92rg98hbo4rupb0rk.apps.googleusercontent.com",
               "client_type": 3
             },
             {
-              "client_id": "556979629799-25sihe3fheon0nta384brqk19u6gelft.apps.googleusercontent.com",
+              "client_id": "811029168672-7sbtnjc9leu0o0ev3n3g2jun2so7okcp.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.example.fireui"
+                "bundle_id": "com.reasa.reasa"
               }
             }
           ]

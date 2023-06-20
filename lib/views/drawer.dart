@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -87,7 +88,7 @@ class drawerwidget extends StatelessWidget {
                     // pageViewController.pageViewIndex.value = 0;
                     box.remove('name');
                     box.remove('phone');
-
+                    FirebaseAuth.instance.signOut();
                     Get.offAll(() => EnterInfo());
                   },
                 ),
