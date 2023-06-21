@@ -35,15 +35,15 @@ class Choosetype extends GetView {
               },
               child: Container(
                   decoration: BoxDecoration(
-                      color: CustomColors.lioghtGrey,
-                      border: Border.all(color: CustomColors.lioghtGrey),
+                      color: CustomColors.green_color,
+                      border: Border.all(color: CustomColors.green_color),
                       borderRadius: BorderRadius.all(Radius.circular(10))),
                   height: 60,
                   width: MediaQuery.of(context).size.width,
                   child: Center(
                       child: Text(
                     'Next'.tr,
-                    style: TextStyle(color: CustomColors.greyColor),
+                    style: TextStyle(color: CustomColors.blue_color),
                   ))),
             ),
           ),

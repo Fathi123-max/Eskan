@@ -40,8 +40,8 @@ class drawerwidget extends StatelessWidget {
                     leading: Icon(
                       draweController.drawerItemsList[index].icon,
                       color: draweController.selectedDrawerIndex == index
-                          ? CustomColors.orangeColor
-                          : CustomColors.greyColor,
+                          ? CustomColors.prime_color
+                          : CustomColors.blue_color,
                     ),
                     title: Text(
                       draweController.drawerItemsList[index].title,
@@ -51,8 +51,8 @@ class drawerwidget extends StatelessWidget {
                                   ? FontWeight.bold
                                   : FontWeight.normal,
                           color: draweController.selectedDrawerIndex == index
-                              ? CustomColors.orangeColor
-                              : CustomColors.greyColor),
+                              ? CustomColors.prime_color
+                              : CustomColors.blue_color),
                     ),
                     onTap: () {
                       print(index);
@@ -68,7 +68,7 @@ class drawerwidget extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: Container(
               decoration: BoxDecoration(
-                  color: CustomColors.orangeColor,
+                  color: CustomColors.prime_color,
                   borderRadius: BorderRadius.circular(10)),
               child: Center(
                 child: ListTile(

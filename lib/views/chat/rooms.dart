@@ -1,12 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
 import 'package:flutter_firebase_chat_core/flutter_firebase_chat_core.dart';
 
 import '../../utills/chatutlies.dart';
 import 'chats.dart';
-import 'users.dart';
 
 class RoomsPage extends StatefulWidget {
   const RoomsPage({super.key});
@@ -93,27 +91,14 @@ class _RoomsPageState extends State<RoomsPage> {
 
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
+        title: Text("المحادثات"),
         actions: [
           IconButton(
-            icon: const Icon(Icons.add),
-            onPressed: _user == null
-                ? null
-                : () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        fullscreenDialog: true,
-                        builder: (context) => const UsersPage(),
-                      ),
-                    );
-                  },
-          ),
+              onPressed: () => Navigator.of(context).pop(),
+              icon: Icon(Icons.arrow_back_ios_new)),
         ],
-        leading: IconButton(
-          icon: const Icon(Icons.logout),
-          onPressed: _user == null ? null : logout,
-        ),
-        systemOverlayStyle: SystemUiOverlayStyle.light,
-        title: const Text('Rooms'),
+        elevation: 0.0,
       ),
       body: _user == null
           ? Container(

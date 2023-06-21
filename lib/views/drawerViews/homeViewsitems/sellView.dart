@@ -15,7 +15,7 @@ class SellView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-        backgroundColor: CustomColors.orangeColor,
+        backgroundColor: CustomColors.prime_color,
         heroTag: "hellofrom 2",
         child: Icon(Icons.add),
         onPressed: () {
@@ -34,7 +34,7 @@ class SellView extends StatelessWidget {
                     "No Data Found",
                     style: TextStyle(
                         fontWeight: FontWeight.bold,
-                        color: CustomColors.orangeColor),
+                        color: CustomColors.prime_color),
                   ),
                 )
               : Padding(
@@ -110,7 +110,7 @@ class SellView extends StatelessWidget {
                                                     child: Container(
                                                       decoration: BoxDecoration(
                                                           color: CustomColors
-                                                              .orangeColor,
+                                                              .prime_color,
                                                           borderRadius:
                                                               BorderRadius.all(
                                                                   Radius
@@ -156,7 +156,7 @@ class SellView extends StatelessWidget {
                                           '${getSellPropertyController.currentUserSellinglist[index].city[0].toUpperCase()}${getSellPropertyController.currentUserSellinglist[index].city.substring(1).toLowerCase()}',
                                           style: TextStyle(
                                               fontWeight: FontWeight.bold,
-                                              color: CustomColors.greyColor),
+                                              color: CustomColors.blue_color),
                                         ),
                                       ),
                                       Padding(
@@ -178,7 +178,7 @@ class SellView extends StatelessWidget {
                                               style: TextStyle(
                                                   fontWeight: FontWeight.bold,
                                                   color:
-                                                      CustomColors.orangeColor),
+                                                      CustomColors.prime_color),
                                             )
                                           ],
                                         ),

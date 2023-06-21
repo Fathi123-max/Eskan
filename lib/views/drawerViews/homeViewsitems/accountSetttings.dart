@@ -28,7 +28,7 @@ class AccountSettings extends StatelessWidget {
           Get.to(() => EnterInfo());
         },
         heroTag: "hellofrom 2dfdsjhfj",
-        backgroundColor: CustomColors.orangeColor,
+        backgroundColor: CustomColors.prime_color,
         child: Icon(Icons.edit_outlined),
       ),
       body: Obx(() {

@@ -89,7 +89,7 @@ class SearchScreen extends StatelessWidget {
               },
               child: Text('Apply'),
               style: ElevatedButton.styleFrom(
-                  primary: CustomColors.orangeColor,
+                  primary: CustomColors.prime_color,
                   minimumSize: Size(100, 40)),
             ),
           )

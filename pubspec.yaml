@@ -74,6 +74,8 @@ dependencies:
   faker: ^2.1.0
   file_picker: ^5.3.0
   flutter_firebase_chat_core: ^1.6.7
+  flutter_snake_navigationbar: ^0.6.1
+  carousel_slider: ^4.2.1
     
 dev_dependencies:
 

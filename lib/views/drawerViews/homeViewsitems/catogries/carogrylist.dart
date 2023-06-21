@@ -148,7 +148,7 @@ class _catogryViewState extends State<catogryView> {
                     "No Data Found",
                     style: TextStyle(
                         fontWeight: FontWeight.bold,
-                        color: CustomColors.orangeColor),
+                        color: CustomColors.prime_color),
                   ),
                 )
               : Padding(

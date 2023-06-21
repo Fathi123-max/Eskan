@@ -73,8 +73,8 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                       leading: Icon(
                         draweController.drawerItemsList[index].icon,
                         color: draweController.selectedDrawerIndex == index
-                            ? CustomColors.orangeColor
-                            : CustomColors.greyColor,
+                            ? CustomColors.prime_color
+                            : CustomColors.blue_color,
                       ),
                       title: Text(
                         draweController.drawerItemsList[index].title,
@@ -84,8 +84,8 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                                     ? FontWeight.bold
                                     : FontWeight.normal,
                             color: draweController.selectedDrawerIndex == index
-                                ? CustomColors.orangeColor
-                                : CustomColors.greyColor),
+                                ? CustomColors.prime_color
+                                : CustomColors.blue_color),
                       ),
                       onTap: () {
                         print(index);
@@ -99,7 +99,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
               padding: const EdgeInsets.all(8.0),
               child: Container(
                 decoration: BoxDecoration(
-                    color: CustomColors.orangeColor,
+                    color: CustomColors.prime_color,
                     borderRadius: BorderRadius.circular(10)),
                 child: Center(
                   child: ListTile(
@@ -138,7 +138,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
           'Services'.tr,
           style: TextStyle(
               fontWeight: FontWeight.bold,
-              color: CustomColors.greyColor,
+              color: CustomColors.blue_color,
               fontSize: 22),
         ),
         actions: [
@@ -152,16 +152,17 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
       bottomNavigationBar: ConvexAppBar(
         height: 55,
         controller: _tabController,
-        backgroundColor: CustomColors.orangeColor,
+        backgroundColor: CustomColors.prime_color,
         items: [
           TabItem(icon: Icons.home, title: 'Home'.tr),
           TabItem(icon: Icons.design_services_sharp, title: 'Services'.tr),
-          TabItem(icon: Icons.add, title: 'Add Service'.tr),
+          TabItem(icon: Icons.favorite, title: 'Favorite'.tr),
           TabItem(icon: Icons.people, title: 'My Services'.tr),
         ],
         onTap: (int i) {
           _pageIndex.value = i;
         },
+        style: TabStyle.custom,
       ),
       body: Column(
         children: [

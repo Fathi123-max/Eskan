@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:haider/controllers/currentUserInfoController.dart';
@@ -29,7 +30,7 @@ class RentView extends StatelessWidget {
                   "No Data Found",
                   style: TextStyle(
                       fontWeight: FontWeight.bold,
-                      color: CustomColors.orangeColor),
+                      color: CustomColors.prime_color),
                 ),
               )
             : Padding(
@@ -39,7 +40,51 @@ class RentView extends StatelessWidget {
                     children: [
                       rentAndRentOutController.value.value == true
                           ? Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
+                                Padding(
+                                  padding: const EdgeInsets.all(10.0),
+                                  child: Text(
+                                    'عناصر مميزه',
+                                    style: TextStyle(
+                                      fontSize: 24.0,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(height: 10.0),
+                                CarouselSlider(
+                                  options: CarouselOptions(
+                                    height: 300,
+                                    enlargeCenterPage: true,
+                                    autoPlay: true,
+                                    autoPlayInterval: Duration(seconds: 3),
+                                    autoPlayAnimationDuration:
+                                        Duration(milliseconds: 800),
+                                    autoPlayCurve: Curves.fastOutSlowIn,
+                                    enableInfiniteScroll: true,
+                                    viewportFraction: 1,
+                                  ),
+                                  items: rentAndRentOutController.allRentList
+                                      .map((property) {
+                                    return Builder(
+                                      builder: (BuildContext context) {
+                                        return realview(property: property);
+                                      },
+                                    );
+                                  }).toList(),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(10.0),
+                                  child: Text(
+                                    'مضاف حديثا',
+                                    style: TextStyle(
+                                      fontSize: 24.0,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(height: 10.0),
                                 GridView.builder(
                                     shrinkWrap: true,
                                     physics: BouncingScrollPhysics(),
@@ -50,98 +95,9 @@ class RentView extends StatelessWidget {
                                             crossAxisCount: 1,
                                             childAspectRatio: 1.07),
                                     itemBuilder: (context, index) {
-                                      return Container(
-                                        padding: EdgeInsets.all(20),
-                                        margin: EdgeInsets.all(10),
-                                        decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(20),
-                                          color: Colors.white,
-                                          boxShadow: [
-                                            BoxShadow(
-                                              color:
-                                                  Colors.grey.withOpacity(0.5),
-                                              spreadRadius: 2,
-                                              blurRadius: 5,
-                                              offset: Offset(0, 3),
-                                            ),
-                                          ],
-                                        ),
-                                        child: InkWell(
-                                          onTap: () {
-                                            userInfoController.Id.value =
-                                                rentAndRentOutController
-                                                    .allRentList[index]
-                                                    .currentUserId;
-                                            // userInfoController.getUserInfo();
-                                            Get.to(() => PropertyDetail(
-                                                data: rentAndRentOutController
-                                                    .allRentList[index]));
-                                          },
-                                          child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Container(
-                                                height: 170,
-                                                decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.circular(10),
-                                                  image: DecorationImage(
-                                                    image: NetworkImage(
-                                                        rentAndRentOutController
-                                                            .allRentList[index]
-                                                            .images[0]),
-                                                    fit: BoxFit.cover,
-                                                  ),
-                                                ),
-                                              ),
-                                              Padding(
-                                                padding:
-                                                    const EdgeInsets.all(8.0),
-                                                child: Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  children: [
-                                                    Text(
-                                                      rentAndRentOutController
-                                                          .allRentList[index]
-                                                          .address,
-                                                      style: TextStyle(
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                        fontSize: 12,
-                                                      ),
-                                                    ),
-                                                    SizedBox(height: 4),
-                                                    Text(
-                                                      rentAndRentOutController
-                                                          .allRentList[index]
-                                                          .descr,
-                                                      style: TextStyle(
-                                                        fontSize: 14,
-                                                        color: Colors.black54,
-                                                      ),
-                                                      maxLines: 1,
-                                                      overflow:
-                                                          TextOverflow.ellipsis,
-                                                    ),
-                                                    SizedBox(height: 4),
-                                                    Text(
-                                                      '${rentAndRentOutController.allRentList[index].city[0].toUpperCase()}${rentAndRentOutController.allRentList[index].city.substring(1).toLowerCase()}',
-                                                      style: TextStyle(
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                        color: Colors.black54,
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      );
+                                      var property = rentAndRentOutController
+                                          .allRentList[index];
+                                      return realview(property: property);
                                     }),
                               ],
                             )
@@ -158,7 +114,7 @@ class RentView extends StatelessWidget {
                                         'No Data Found',
                                         style: TextStyle(
                                             fontWeight: FontWeight.bold,
-                                            color: CustomColors.orangeColor),
+                                            color: CustomColors.prime_color),
                                       ))
                                     : GridView.builder(
                                         shrinkWrap: true,
@@ -249,7 +205,7 @@ class RentView extends StatelessWidget {
                                                                           Container(
                                                                         decoration: BoxDecoration(
                                                                             color:
-                                                                                CustomColors.orangeColor,
+                                                                                CustomColors.prime_color,
                                                                             borderRadius: BorderRadius.all(Radius.circular(10))),
                                                                         child:
                                                                             Padding(
@@ -337,7 +293,7 @@ class RentView extends StatelessWidget {
                                                                         FontWeight
                                                                             .bold,
                                                                     color: CustomColors
-                                                                        .orangeColor),
+                                                                        .prime_color),
                                                               )
                                                             ],
                                                           ),
@@ -352,6 +308,117 @@ class RentView extends StatelessWidget {
               );
       }
     }));
+  }
+
+  Widget realview({property}) {
+    return InkWell(
+      onTap: () => Get.to(() => PropertyDetail(
+            data: property,
+          )),
+      child: Container(
+        margin: EdgeInsets.all(10),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(20),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.5),
+              spreadRadius: 2,
+              blurRadius: 5,
+              offset: Offset(0, 3),
+            ),
+          ],
+        ),
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(20),
+          child: Stack(
+            children: [
+              Image.network(
+                property.images[0],
+                fit: BoxFit.cover,
+                width: double.infinity,
+                height: 200,
+              ),
+              Positioned(
+                bottom: 0,
+                left: 0,
+                right: 0,
+                child: Container(
+                  padding: EdgeInsets.all(10),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.vertical(
+                      bottom: Radius.circular(20),
+                    ),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        property.address,
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16,
+                        ),
+                      ),
+                      SizedBox(height: 4),
+                      Text(
+                        '${property.city[0].toUpperCase()}${property.city.substring(1).toLowerCase()}',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black54,
+                          fontSize: 14,
+                        ),
+                      ),
+                      SizedBox(height: 4),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Row(
+                            children: [
+                              Icon(Icons.king_bed),
+                              Text(
+                                ' ${property.bedrooms} | ',
+                                style: TextStyle(
+                                  color: Colors.black54,
+                                  fontSize: 14,
+                                ),
+                              ),
+                              Icon(Icons.bathtub),
+                              Text(
+                                ' ${property.bathrooms} | ',
+                                style: TextStyle(
+                                  color: Colors.black54,
+                                  fontSize: 14,
+                                ),
+                              ),
+                              Icon(Icons.aspect_ratio),
+                              Text(
+                                ' ${property.size}',
+                                style: TextStyle(
+                                  color: Colors.black54,
+                                  fontSize: 14,
+                                ),
+                              ),
+                            ],
+                          ),
+                          Text(
+                            '\$${property.price.toString()}',
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16,
+                                color: CustomColors.coral_Color),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }
 

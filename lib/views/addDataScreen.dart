@@ -48,7 +48,7 @@ class AddDataScreen extends StatelessWidget {
                 'Add Service'.tr,
                 style: TextStyle(
                     fontWeight: FontWeight.bold,
-                    color: CustomColors.orangeColor,
+                    color: CustomColors.prime_color,
                     fontSize: 20),
               ),
             ),
@@ -66,7 +66,7 @@ class AddDataScreen extends StatelessWidget {
               'Service Name'.tr,
               style: TextStyle(
                   fontSize: 18,
-                  color: CustomColors.greyColor,
+                  color: CustomColors.blue_color,
                   fontWeight: FontWeight.bold),
             ),
           ),
@@ -77,26 +77,26 @@ class AddDataScreen extends StatelessWidget {
               autovalidateMode: AutovalidateMode.onUserInteraction,
               controller: controller.addressEditTextController,
               keyboardType: TextInputType.text,
-              cursorColor: CustomColors.orangeColor,
+              cursorColor: CustomColors.prime_color,
               textInputAction: TextInputAction.next,
               decoration: InputDecoration(
                 hintText: '',
                 focusedErrorBorder: new OutlineInputBorder(
                     borderRadius: new BorderRadius.circular(10.0),
                     borderSide:
-                        new BorderSide(color: CustomColors.orangeColor)),
+                        new BorderSide(color: CustomColors.prime_color)),
                 errorBorder: new OutlineInputBorder(
                     borderRadius: new BorderRadius.circular(10.0),
                     borderSide:
-                        new BorderSide(color: CustomColors.orangeColor)),
+                        new BorderSide(color: CustomColors.prime_color)),
                 enabledBorder: new OutlineInputBorder(
                     borderRadius: new BorderRadius.circular(10.0),
                     borderSide:
-                        new BorderSide(color: CustomColors.orangeColor)),
+                        new BorderSide(color: CustomColors.prime_color)),
                 focusedBorder: new OutlineInputBorder(
                     borderRadius: new BorderRadius.circular(10.0),
                     borderSide:
-                        new BorderSide(color: CustomColors.orangeColor)),
+                        new BorderSide(color: CustomColors.prime_color)),
                 labelText: 'Enter your Service'.tr,
                 labelStyle: TextStyle(color: Colors.grey),
                 prefixIcon: Icon(
@@ -119,7 +119,7 @@ class AddDataScreen extends StatelessWidget {
               'Type of Service'.tr,
               style: TextStyle(
                   fontSize: 18,
-                  color: CustomColors.greyColor,
+                  color: CustomColors.blue_color,
                   fontWeight: FontWeight.bold),
             ),
           ),
@@ -133,7 +133,7 @@ class AddDataScreen extends StatelessWidget {
                     height: 60,
                     decoration: BoxDecoration(
                         border: Border.all(
-                            color: CustomColors.orangeColor, width: 1),
+                            color: CustomColors.prime_color, width: 1),
                         borderRadius: BorderRadius.all(Radius.circular(10))),
                     child: Center(
                         child: Padding(
@@ -170,7 +170,7 @@ class AddDataScreen extends StatelessWidget {
               'Select City'.tr,
               style: TextStyle(
                   fontSize: 18,
-                  color: CustomColors.greyColor,
+                  color: CustomColors.blue_color,
                   fontWeight: FontWeight.bold),
             ),
           ),
@@ -184,7 +184,7 @@ class AddDataScreen extends StatelessWidget {
                     height: 60,
                     decoration: BoxDecoration(
                         border: Border.all(
-                            color: CustomColors.orangeColor, width: 1),
+                            color: CustomColors.prime_color, width: 1),
                         borderRadius: BorderRadius.all(Radius.circular(10))),
                     child: Center(
                         child: Padding(
@@ -220,7 +220,7 @@ class AddDataScreen extends StatelessWidget {
               'Select Area'.tr,
               style: TextStyle(
                   fontSize: 18,
-                  color: CustomColors.greyColor,
+                  color: CustomColors.blue_color,
                   fontWeight: FontWeight.bold),
             ),
           ),
@@ -231,26 +231,26 @@ class AddDataScreen extends StatelessWidget {
               autovalidateMode: AutovalidateMode.onUserInteraction,
               controller: controller.areaEditTextController,
               keyboardType: TextInputType.text,
-              cursorColor: CustomColors.orangeColor,
+              cursorColor: CustomColors.prime_color,
               textInputAction: TextInputAction.next,
               decoration: InputDecoration(
                 hintText: '',
                 focusedErrorBorder: new OutlineInputBorder(
                     borderRadius: new BorderRadius.circular(10.0),
                     borderSide:
-                        new BorderSide(color: CustomColors.orangeColor)),
+                        new BorderSide(color: CustomColors.prime_color)),
                 errorBorder: new OutlineInputBorder(
                     borderRadius: new BorderRadius.circular(10.0),
                     borderSide:
-                        new BorderSide(color: CustomColors.orangeColor)),
+                        new BorderSide(color: CustomColors.prime_color)),
                 enabledBorder: new OutlineInputBorder(
                     borderRadius: new BorderRadius.circular(10.0),
                     borderSide:
-                        new BorderSide(color: CustomColors.orangeColor)),
+                        new BorderSide(color: CustomColors.prime_color)),
                 focusedBorder: new OutlineInputBorder(
                     borderRadius: new BorderRadius.circular(10.0),
                     borderSide:
-                        new BorderSide(color: CustomColors.orangeColor)),
+                        new BorderSide(color: CustomColors.prime_color)),
                 labelText: 'Area'.tr,
                 labelStyle: TextStyle(color: Colors.grey),
                 prefixIcon: Icon(
@@ -277,7 +277,7 @@ class AddDataScreen extends StatelessWidget {
                   'المساحه',
                   style: TextStyle(
                       fontSize: 18,
-                      color: CustomColors.greyColor,
+                      color: CustomColors.blue_color,
                       fontWeight: FontWeight.bold),
                 ),
               ),
@@ -288,26 +288,26 @@ class AddDataScreen extends StatelessWidget {
                   autovalidateMode: AutovalidateMode.onUserInteraction,
                   controller: controller.sizeEditTextController,
                   keyboardType: TextInputType.number,
-                  cursorColor: CustomColors.orangeColor,
+                  cursorColor: CustomColors.prime_color,
                   textInputAction: TextInputAction.next,
                   decoration: InputDecoration(
                     hintText: '',
                     focusedErrorBorder: new OutlineInputBorder(
                         borderRadius: new BorderRadius.circular(10.0),
                         borderSide:
-                            new BorderSide(color: CustomColors.orangeColor)),
+                            new BorderSide(color: CustomColors.prime_color)),
                     errorBorder: new OutlineInputBorder(
                         borderRadius: new BorderRadius.circular(10.0),
                         borderSide:
-                            new BorderSide(color: CustomColors.orangeColor)),
+                            new BorderSide(color: CustomColors.prime_color)),
                     enabledBorder: new OutlineInputBorder(
                         borderRadius: new BorderRadius.circular(10.0),
                         borderSide:
-                            new BorderSide(color: CustomColors.orangeColor)),
+                            new BorderSide(color: CustomColors.prime_color)),
                     focusedBorder: new OutlineInputBorder(
                         borderRadius: new BorderRadius.circular(10.0),
                         borderSide:
-                            new BorderSide(color: CustomColors.orangeColor)),
+                            new BorderSide(color: CustomColors.prime_color)),
                     labelText: 'المساحه بالمتر',
                     labelStyle: TextStyle(color: Colors.grey),
                     prefixIcon: Icon(
@@ -332,7 +332,7 @@ class AddDataScreen extends StatelessWidget {
               'غرف النوم',
               style: TextStyle(
                   fontSize: 18,
-                  color: CustomColors.greyColor,
+                  color: CustomColors.blue_color,
                   fontWeight: FontWeight.bold),
             ),
           ),
@@ -343,26 +343,26 @@ class AddDataScreen extends StatelessWidget {
               autovalidateMode: AutovalidateMode.onUserInteraction,
               controller: controller.bedroomsEditTextController,
               keyboardType: TextInputType.number,
-              cursorColor: CustomColors.orangeColor,
+              cursorColor: CustomColors.prime_color,
               textInputAction: TextInputAction.next,
               decoration: InputDecoration(
                 hintText: '',
                 focusedErrorBorder: new OutlineInputBorder(
                     borderRadius: new BorderRadius.circular(10.0),
                     borderSide:
-                        new BorderSide(color: CustomColors.orangeColor)),
+                        new BorderSide(color: CustomColors.prime_color)),
                 errorBorder: new OutlineInputBorder(
                     borderRadius: new BorderRadius.circular(10.0),
                     borderSide:
-                        new BorderSide(color: CustomColors.orangeColor)),
+                        new BorderSide(color: CustomColors.prime_color)),
                 enabledBorder: new OutlineInputBorder(
                     borderRadius: new BorderRadius.circular(10.0),
                     borderSide:
-                        new BorderSide(color: CustomColors.orangeColor)),
+                        new BorderSide(color: CustomColors.prime_color)),
                 focusedBorder: new OutlineInputBorder(
                     borderRadius: new BorderRadius.circular(10.0),
                     borderSide:
-                        new BorderSide(color: CustomColors.orangeColor)),
+                        new BorderSide(color: CustomColors.prime_color)),
                 labelText: 'عدد غرف النوم',
                 labelStyle: TextStyle(color: Colors.grey),
                 prefixIcon: Icon(
@@ -386,7 +386,7 @@ class AddDataScreen extends StatelessWidget {
               'الحمامات',
               style: TextStyle(
                   fontSize: 18,
-                  color: CustomColors.greyColor,
+                  color: CustomColors.blue_color,
                   fontWeight: FontWeight.bold),
             ),
           ),
@@ -397,26 +397,26 @@ class AddDataScreen extends StatelessWidget {
               autovalidateMode: AutovalidateMode.onUserInteraction,
               controller: controller.bathroomsTextController,
               keyboardType: TextInputType.number,
-              cursorColor: CustomColors.orangeColor,
+              cursorColor: CustomColors.prime_color,
               textInputAction: TextInputAction.next,
               decoration: InputDecoration(
                 hintText: '',
                 focusedErrorBorder: new OutlineInputBorder(
                     borderRadius: new BorderRadius.circular(10.0),
                     borderSide:
-                        new BorderSide(color: CustomColors.orangeColor)),
+                        new BorderSide(color: CustomColors.prime_color)),
                 errorBorder: new OutlineInputBorder(
                     borderRadius: new BorderRadius.circular(10.0),
                     borderSide:
-                        new BorderSide(color: CustomColors.orangeColor)),
+                        new BorderSide(color: CustomColors.prime_color)),
                 enabledBorder: new OutlineInputBorder(
                     borderRadius: new BorderRadius.circular(10.0),
                     borderSide:
-                        new BorderSide(color: CustomColors.orangeColor)),
+                        new BorderSide(color: CustomColors.prime_color)),
                 focusedBorder: new OutlineInputBorder(
                     borderRadius: new BorderRadius.circular(10.0),
                     borderSide:
-                        new BorderSide(color: CustomColors.orangeColor)),
+                        new BorderSide(color: CustomColors.prime_color)),
                 labelText: 'عدد الحمامات',
                 labelStyle: TextStyle(color: Colors.grey),
                 prefixIcon: Icon(
@@ -440,7 +440,7 @@ class AddDataScreen extends StatelessWidget {
               'المطبخ',
               style: TextStyle(
                   fontSize: 18,
-                  color: CustomColors.greyColor,
+                  color: CustomColors.blue_color,
                   fontWeight: FontWeight.bold),
             ),
           ),
@@ -451,27 +451,82 @@ class AddDataScreen extends StatelessWidget {
               autovalidateMode: AutovalidateMode.onUserInteraction,
               controller: controller.kitchenEditTextController,
               keyboardType: TextInputType.number,
-              cursorColor: CustomColors.orangeColor,
+              cursorColor: CustomColors.prime_color,
               textInputAction: TextInputAction.next,
               decoration: InputDecoration(
                 hintText: '',
                 focusedErrorBorder: new OutlineInputBorder(
                     borderRadius: new BorderRadius.circular(10.0),
                     borderSide:
-                        new BorderSide(color: CustomColors.orangeColor)),
+                        new BorderSide(color: CustomColors.prime_color)),
                 errorBorder: new OutlineInputBorder(
                     borderRadius: new BorderRadius.circular(10.0),
                     borderSide:
-                        new BorderSide(color: CustomColors.orangeColor)),
+                        new BorderSide(color: CustomColors.prime_color)),
                 enabledBorder: new OutlineInputBorder(
                     borderRadius: new BorderRadius.circular(10.0),
                     borderSide:
-                        new BorderSide(color: CustomColors.orangeColor)),
+                        new BorderSide(color: CustomColors.prime_color)),
                 focusedBorder: new OutlineInputBorder(
                     borderRadius: new BorderRadius.circular(10.0),
                     borderSide:
-                        new BorderSide(color: CustomColors.orangeColor)),
+                        new BorderSide(color: CustomColors.prime_color)),
                 labelText: 'عدد المطابخ',
+                labelStyle: TextStyle(color: Colors.grey),
+                prefixIcon: Icon(
+                  Icons.kitchen_outlined,
+                  color: Colors.grey,
+                ),
+              ),
+              validator: (value) {
+                if (value == '' || value == null)
+                  return 'No of Kitchens required';
+              },
+              onSaved: (value) {
+                controller.propertyModel.kitchen = value.toString();
+                //authController.userModel.userEmail = value.toString();
+              },
+            ),
+          ),
+
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text(
+              'الاستقبال',
+              style: TextStyle(
+                  fontSize: 18,
+                  color: CustomColors.blue_color,
+                  fontWeight: FontWeight.bold),
+            ),
+          ),
+          Padding(
+            padding:
+                const EdgeInsets.only(left: 25, right: 25, top: 8, bottom: 2),
+            child: TextFormField(
+              autovalidateMode: AutovalidateMode.onUserInteraction,
+              controller: controller.kitchenEditTextController,
+              keyboardType: TextInputType.number,
+              cursorColor: CustomColors.prime_color,
+              textInputAction: TextInputAction.next,
+              decoration: InputDecoration(
+                hintText: '',
+                focusedErrorBorder: new OutlineInputBorder(
+                    borderRadius: new BorderRadius.circular(10.0),
+                    borderSide:
+                        new BorderSide(color: CustomColors.prime_color)),
+                errorBorder: new OutlineInputBorder(
+                    borderRadius: new BorderRadius.circular(10.0),
+                    borderSide:
+                        new BorderSide(color: CustomColors.prime_color)),
+                enabledBorder: new OutlineInputBorder(
+                    borderRadius: new BorderRadius.circular(10.0),
+                    borderSide:
+                        new BorderSide(color: CustomColors.prime_color)),
+                focusedBorder: new OutlineInputBorder(
+                    borderRadius: new BorderRadius.circular(10.0),
+                    borderSide:
+                        new BorderSide(color: CustomColors.prime_color)),
+                labelText: 'عدد اماكن الاستقبال',
                 labelStyle: TextStyle(color: Colors.grey),
                 prefixIcon: Icon(
                   Icons.kitchen_outlined,
@@ -495,7 +550,7 @@ class AddDataScreen extends StatelessWidget {
               value == 'sale' ? 'Price' : 'الايجار / الشهر',
               style: TextStyle(
                   fontSize: 18,
-                  color: CustomColors.greyColor,
+                  color: CustomColors.blue_color,
                   fontWeight: FontWeight.bold),
             ),
           ),
@@ -506,26 +561,26 @@ class AddDataScreen extends StatelessWidget {
               autovalidateMode: AutovalidateMode.onUserInteraction,
               controller: controller.priceEditTextController,
               keyboardType: TextInputType.number,
-              cursorColor: CustomColors.orangeColor,
+              cursorColor: CustomColors.prime_color,
               textInputAction: TextInputAction.next,
               decoration: InputDecoration(
                 hintText: '',
                 focusedErrorBorder: new OutlineInputBorder(
                     borderRadius: new BorderRadius.circular(10.0),
                     borderSide:
-                        new BorderSide(color: CustomColors.orangeColor)),
+                        new BorderSide(color: CustomColors.prime_color)),
                 errorBorder: new OutlineInputBorder(
                     borderRadius: new BorderRadius.circular(10.0),
                     borderSide:
-                        new BorderSide(color: CustomColors.orangeColor)),
+                        new BorderSide(color: CustomColors.prime_color)),
                 enabledBorder: new OutlineInputBorder(
                     borderRadius: new BorderRadius.circular(10.0),
                     borderSide:
-                        new BorderSide(color: CustomColors.orangeColor)),
+                        new BorderSide(color: CustomColors.prime_color)),
                 focusedBorder: new OutlineInputBorder(
                     borderRadius: new BorderRadius.circular(10.0),
                     borderSide:
-                        new BorderSide(color: CustomColors.orangeColor)),
+                        new BorderSide(color: CustomColors.prime_color)),
                 labelText: value == 'sale' ? 'Price' : 'الايجار',
                 labelStyle: TextStyle(color: Colors.grey),
                 prefixIcon: Icon(
@@ -548,7 +603,7 @@ class AddDataScreen extends StatelessWidget {
               'Description'.tr,
               style: TextStyle(
                   fontSize: 18,
-                  color: CustomColors.greyColor,
+                  color: CustomColors.blue_color,
                   fontWeight: FontWeight.bold),
             ),
           ),
@@ -561,26 +616,26 @@ class AddDataScreen extends StatelessWidget {
               autovalidateMode: AutovalidateMode.onUserInteraction,
               controller: controller.desEditTextController,
               keyboardType: TextInputType.text,
-              cursorColor: CustomColors.orangeColor,
+              cursorColor: CustomColors.prime_color,
               textInputAction: TextInputAction.next,
               decoration: InputDecoration(
                 hintText: '',
                 focusedErrorBorder: new OutlineInputBorder(
                     borderRadius: new BorderRadius.circular(10.0),
                     borderSide:
-                        new BorderSide(color: CustomColors.orangeColor)),
+                        new BorderSide(color: CustomColors.prime_color)),
                 errorBorder: new OutlineInputBorder(
                     borderRadius: new BorderRadius.circular(10.0),
                     borderSide:
-                        new BorderSide(color: CustomColors.orangeColor)),
+                        new BorderSide(color: CustomColors.prime_color)),
                 enabledBorder: new OutlineInputBorder(
                     borderRadius: new BorderRadius.circular(10.0),
                     borderSide:
-                        new BorderSide(color: CustomColors.orangeColor)),
+                        new BorderSide(color: CustomColors.prime_color)),
                 focusedBorder: new OutlineInputBorder(
                     borderRadius: new BorderRadius.circular(10.0),
                     borderSide:
-                        new BorderSide(color: CustomColors.orangeColor)),
+                        new BorderSide(color: CustomColors.prime_color)),
                 labelText: 'Description'.tr,
                 labelStyle: TextStyle(color: Colors.grey),
               ),
@@ -600,7 +655,7 @@ class AddDataScreen extends StatelessWidget {
             child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
                     minimumSize: Size(100, 40),
-                    primary: CustomColors.orangeColor),
+                    primary: CustomColors.prime_color),
                 child: Text("Select Images".tr),
                 onPressed: () {
                   controller.getImage();
@@ -644,7 +699,7 @@ class AddDataScreen extends StatelessWidget {
                   ? ElevatedButton(
                       style: ElevatedButton.styleFrom(
                           minimumSize: Size(200, 50),
-                          backgroundColor: CustomColors.lioghtGrey),
+                          backgroundColor: CustomColors.green_color),
                       child: Text("Save Property".tr),
                       onPressed: () async {
                         if (controller.images.value.isEmpty) {
@@ -712,7 +767,7 @@ class AddDataScreen extends StatelessWidget {
                         }
                       })
                   : CircularProgressIndicator(
-                      color: CustomColors.orangeColor,
+                      color: CustomColors.prime_color,
                     ),
             );
           }),
@@ -782,7 +837,7 @@ class AddDataScreen extends StatelessWidget {
                                   SizedBox(width: 16.0),
                                   Icon(
                                     Icons.location_city,
-                                    color: CustomColors.orangeColor,
+                                    color: CustomColors.prime_color,
                                   ),
                                 ],
                               ),
@@ -864,7 +919,7 @@ class AddDataScreen extends StatelessWidget {
                                 SizedBox(width: 16.0),
                                 Icon(
                                   Icons.design_services,
-                                  color: CustomColors.orangeColor,
+                                  color: CustomColors.prime_color,
                                 ),
                               ],
                             ),

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
 import 'package:flutter_firebase_chat_core/flutter_firebase_chat_core.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
+import 'package:haider/utills/customColors.dart';
 
 import '../../controllers/rentAndRentOutController.dart';
 import '../../utills/chatutlies.dart';
@@ -60,6 +62,8 @@ class UsersPage extends StatelessWidget {
                 child: const Text('No users'),
               );
             }
+
+            // more filter in data base
             final filteredUsers = snapshot.data!
                 .where((user) =>
                     user.firstName ==
@@ -76,15 +80,19 @@ class UsersPage extends StatelessWidget {
                     _handlePressed(filteredUsers[index], context);
                   },
                   child: Container(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 16,
-                      vertical: 8,
+                    height: 50,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(30),
+                          bottomLeft: Radius.circular(30)),
+                      color: CustomColors.blue_color,
                     ),
-                    child: Row(
-                      children: [
-                        _buildAvatar(filteredUsers[index]),
-                        Text(getUserName(filteredUsers[index])),
-                      ],
+                    child: Center(
+                      child: FaIcon(
+                        color: Colors.white,
+                        FontAwesomeIcons.whatsapp,
+                        size: 30,
+                      ),
                     ),
                   ),
                 );

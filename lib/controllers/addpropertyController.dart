@@ -32,8 +32,8 @@ class AddPropertyController extends GetxController {
     'other'.tr,
   ].obs;
   var selectedValue = 'Carpentry'.obs;
-  var selectedColor = CustomColors.orangeColor.obs;
-  var unSelectedColor = CustomColors.greyColor.obs;
+  var selectedColor = CustomColors.prime_color.obs;
+  var unSelectedColor = CustomColors.blue_color.obs;
   var images = <Asset>[].obs;
   PropertyModel propertyModel = PropertyModel();
   FirestoreService firestoreService = FirestoreService();

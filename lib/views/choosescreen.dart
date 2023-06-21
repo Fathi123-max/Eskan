@@ -161,24 +161,24 @@ class _EnterInfoState extends State<EnterInfo> {
                   autovalidateMode: AutovalidateMode.onUserInteraction,
                   controller: _nameController,
                   keyboardType: TextInputType.name,
-                  cursorColor: CustomColors.orangeColor,
+                  cursorColor: CustomColors.prime_color,
                   textInputAction: TextInputAction.next,
                   decoration: InputDecoration(
                     focusedErrorBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10.0),
-                      borderSide: BorderSide(color: CustomColors.orangeColor),
+                      borderSide: BorderSide(color: CustomColors.prime_color),
                     ),
                     errorBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10.0),
-                      borderSide: BorderSide(color: CustomColors.orangeColor),
+                      borderSide: BorderSide(color: CustomColors.prime_color),
                     ),
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10.0),
-                      borderSide: BorderSide(color: CustomColors.orangeColor),
+                      borderSide: BorderSide(color: CustomColors.prime_color),
                     ),
                     focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10.0),
-                      borderSide: BorderSide(color: CustomColors.orangeColor),
+                      borderSide: BorderSide(color: CustomColors.prime_color),
                     ),
                     labelText: 'Name'.tr,
                     labelStyle: TextStyle(color: Colors.grey),
@@ -200,24 +200,24 @@ class _EnterInfoState extends State<EnterInfo> {
                   autovalidateMode: AutovalidateMode.onUserInteraction,
                   controller: _phoneController,
                   keyboardType: TextInputType.phone,
-                  cursorColor: CustomColors.orangeColor,
+                  cursorColor: CustomColors.prime_color,
                   textInputAction: TextInputAction.next,
                   decoration: InputDecoration(
                     focusedErrorBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10.0),
-                      borderSide: BorderSide(color: CustomColors.orangeColor),
+                      borderSide: BorderSide(color: CustomColors.prime_color),
                     ),
                     errorBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10.0),
-                      borderSide: BorderSide(color: CustomColors.orangeColor),
+                      borderSide: BorderSide(color: CustomColors.prime_color),
                     ),
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10.0),
-                      borderSide: BorderSide(color: CustomColors.orangeColor),
+                      borderSide: BorderSide(color: CustomColors.prime_color),
                     ),
                     focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10.0),
-                      borderSide: BorderSide(color: CustomColors.orangeColor),
+                      borderSide: BorderSide(color: CustomColors.prime_color),
                     ),
                     labelText: 'Phone'.tr,
                     labelStyle: TextStyle(color: Colors.grey),
@@ -246,9 +246,9 @@ class _EnterInfoState extends State<EnterInfo> {
                   child: Container(
                     decoration: BoxDecoration(
                       color: _isButtonEnabled
-                          ? CustomColors.lioghtGrey
+                          ? CustomColors.green_color
                           : Colors.grey,
-                      border: Border.all(color: CustomColors.lioghtGrey),
+                      border: Border.all(color: CustomColors.green_color),
                       borderRadius: BorderRadius.all(Radius.circular(10)),
                     ),
                     height: 60,
@@ -256,7 +256,7 @@ class _EnterInfoState extends State<EnterInfo> {
                     child: Center(
                       child: Text(
                         'Next'.tr,
-                        style: TextStyle(color: CustomColors.greyColor),
+                        style: TextStyle(color: CustomColors.blue_color),
                       ),
                     ),
                   ),
@@ -273,9 +273,9 @@ class _EnterInfoState extends State<EnterInfo> {
                   child: Container(
                     decoration: BoxDecoration(
                       color: _isButtonEnabled
-                          ? CustomColors.lioghtGrey
+                          ? CustomColors.green_color
                           : Colors.grey,
-                      border: Border.all(color: CustomColors.lioghtGrey),
+                      border: Border.all(color: CustomColors.green_color),
                       borderRadius: BorderRadius.all(Radius.circular(10)),
                     ),
                     height: 60,
@@ -283,7 +283,7 @@ class _EnterInfoState extends State<EnterInfo> {
                     child: Center(
                       child: Text(
                         'Sign in with google'.tr,
-                        style: TextStyle(color: CustomColors.greyColor),
+                        style: TextStyle(color: CustomColors.blue_color),
                       ),
                     ),
                   ),

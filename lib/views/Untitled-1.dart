@@ -117,7 +117,7 @@ class PropertyDetail extends StatelessWidget {
                           width: 10,
                           decoration: BoxDecoration(
                               color: controller.selectedIndex.value == index
-                                  ? CustomColors.orangeColor
+                                  ? CustomColors.prime_color
                                   : Colors.black54,
                               shape: BoxShape.circle),
                         ),
@@ -134,7 +134,7 @@ class PropertyDetail extends StatelessWidget {
                       style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 22,
-                          color: CustomColors.orangeColor),
+                          color: CustomColors.prime_color),
                     ),
                     SizedBox(
                       width: 50,
@@ -254,7 +254,7 @@ class PropertyDetail extends StatelessWidget {
                   'Listing Agent',
                   style: TextStyle(
                       fontWeight: FontWeight.bold,
-                      color: CustomColors.orangeColor),
+                      color: CustomColors.prime_color),
                 ),
               ),
               Obx(() {

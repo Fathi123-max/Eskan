@@ -30,7 +30,7 @@ class BuyView extends StatelessWidget {
                   "No Data Found",
                   style: TextStyle(
                       fontWeight: FontWeight.bold,
-                      color: CustomColors.orangeColor),
+                      color: CustomColors.prime_color),
                 ),
               )
             : Padding(
@@ -172,7 +172,7 @@ class BuyView extends StatelessWidget {
                                                             child: Container(
                                                               decoration: BoxDecoration(
                                                                   color: CustomColors
-                                                                      .orangeColor,
+                                                                      .prime_color,
                                                                   borderRadius:
                                                                       BorderRadius.all(
                                                                           Radius.circular(
@@ -246,7 +246,7 @@ class BuyView extends StatelessWidget {
                                                           fontWeight:
                                                               FontWeight.bold,
                                                           color: CustomColors
-                                                              .orangeColor),
+                                                              .prime_color),
                                                     )
                                                   ],
                                                 ),
@@ -266,7 +266,7 @@ class BuyView extends StatelessWidget {
                                         'No Data Found',
                                         style: TextStyle(
                                             fontWeight: FontWeight.bold,
-                                            color: CustomColors.orangeColor),
+                                            color: CustomColors.prime_color),
                                       ))
                                     : GridView.builder(
                                         shrinkWrap: true,
@@ -357,7 +357,7 @@ class BuyView extends StatelessWidget {
                                                                           Container(
                                                                         decoration: BoxDecoration(
                                                                             color:
-                                                                                CustomColors.orangeColor,
+                                                                                CustomColors.prime_color,
                                                                             borderRadius: BorderRadius.all(Radius.circular(10))),
                                                                         child:
                                                                             Padding(
@@ -445,7 +445,7 @@ class BuyView extends StatelessWidget {
                                                                         FontWeight
                                                                             .bold,
                                                                     color: CustomColors
-                                                                        .orangeColor),
+                                                                        .prime_color),
                                                               )
                                                             ],
                                                           ),

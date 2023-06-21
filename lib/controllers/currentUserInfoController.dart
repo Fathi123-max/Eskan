@@ -6,7 +6,7 @@ class CurrentUserInfoController extends GetxController {
   // AuthController authController = Get.find();
   var selectedIndex = 0.obs;
   var Id = ''.obs;
-
+  var currentUserinformation;
   var currentUserId = ''.obs;
   FirestoreService firestoreService = FirestoreService();
   var userInfo = UserModel(

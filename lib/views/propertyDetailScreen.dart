@@ -1,9 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
 import 'package:flutter_firebase_chat_core/flutter_firebase_chat_core.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:haider/controllers/currentUserInfoController.dart';
 import 'package:haider/models/propertyModel.dart';
@@ -21,7 +21,7 @@ class PropertyDetail extends StatelessWidget {
   final PropertyModel data;
 
   PropertyDetail({required this.data});
-
+  var firebaseuser = FirebaseAuth.instance.currentUser;
   final CurrentUserInfoController controller =
       Get.put(CurrentUserInfoController());
 
@@ -46,6 +46,47 @@ class PropertyDetail extends StatelessWidget {
     Get.put(RentAndRentOutController()).username.value = data.username;
     // sqfliliteController.getLIkiedOnly(data.docId);
     return Scaffold(
+        bottomSheet: Container(
+          height: 50,
+          decoration: BoxDecoration(borderRadius: BorderRadius.circular(30)),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Expanded(
+                child: InkWell(
+                  onTap: () =>
+                      FlutterPhoneDirectCaller.callNumber(data.usernumber),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.only(
+                          topRight: Radius.circular(30),
+                          bottomRight: Radius.circular(30)),
+                      color: CustomColors.green_color,
+                    ),
+                    child: Center(
+                        child: Icon(
+                      Icons.call,
+                      color: Colors.white,
+                    )),
+                  ),
+                ),
+              ),
+              Expanded(
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(30),
+                        bottomLeft: Radius.circular(30)),
+                  ),
+                  child: Center(
+                      child: Container(
+                          width: MediaQuery.of(context).size.width * .5,
+                          child: UsersPage())),
+                ),
+              )
+            ],
+          ),
+        ),
         appBar: AppBar(
           automaticallyImplyLeading: false,
           actions: [
@@ -128,7 +169,7 @@ class PropertyDetail extends StatelessWidget {
                           width: 10,
                           decoration: BoxDecoration(
                             color: controller.selectedIndex.value == index
-                                ? CustomColors.orangeColor
+                                ? CustomColors.prime_color
                                 : Colors.black54,
                             shape: BoxShape.circle,
                           ),
@@ -148,7 +189,7 @@ class PropertyDetail extends StatelessWidget {
                         style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 22,
-                            color: CustomColors.orangeColor),
+                            color: CustomColors.prime_color),
                       ),
                       SizedBox(
                         width: 50,
@@ -293,7 +334,7 @@ class PropertyDetail extends StatelessWidget {
                     'Service Provider'.tr,
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
-                      color: CustomColors.orangeColor,
+                      color: CustomColors.prime_color,
                     ),
                   ),
                 ),
@@ -307,6 +348,11 @@ class PropertyDetail extends StatelessWidget {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
+                          CircleAvatar(
+                            radius: 30,
+                            backgroundImage:
+                                NetworkImage(firebaseuser!.photoURL!),
+                          ),
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -327,19 +373,9 @@ class PropertyDetail extends StatelessWidget {
                             ],
                           ),
                           IconButton(
-                            onPressed: () => launchWhatsApp(),
-                            icon: FaIcon(
-                              color: Colors.green,
-                              FontAwesomeIcons.whatsapp,
-                              size: 30,
-                            ),
-                          ),
-                          IconButton(
                             onPressed: () {
                               print(data.usernumber);
                               print("***********************************");
-                              FlutterPhoneDirectCaller.callNumber(
-                                  data.usernumber);
                             },
                             icon: Icon(Icons.phone),
                           ),
@@ -348,8 +384,6 @@ class PropertyDetail extends StatelessWidget {
                     );
                   }
                 }),
-
-                SizedBox(height: 100, child: UsersPage())
               ],
             ),
           ),

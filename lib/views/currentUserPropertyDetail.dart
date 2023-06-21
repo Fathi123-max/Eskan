@@ -98,7 +98,7 @@ class CurrentUserPropertyDetail extends StatelessWidget {
                           width: 10,
                           decoration: BoxDecoration(
                               color: controller.selectedIndex.value == index
-                                  ? CustomColors.orangeColor
+                                  ? CustomColors.prime_color
                                   : Colors.black54,
                               shape: BoxShape.circle),
                         ),
@@ -238,7 +238,7 @@ class CurrentUserPropertyDetail extends StatelessWidget {
                               ? Center(child: CircularProgressIndicator())
                               : ElevatedButton(
                                   style: ElevatedButton.styleFrom(
-                                      primary: CustomColors.greyColor),
+                                      primary: CustomColors.blue_color),
                                   onPressed: () async {
                                     controller.showLoadingBar(true);
                                     String response =
@@ -313,7 +313,7 @@ class CurrentUserPropertyDetail extends StatelessWidget {
                                   ? Center(child: CircularProgressIndicator())
                                   : ElevatedButton(
                                       style: ElevatedButton.styleFrom(
-                                          primary: CustomColors.greyColor),
+                                          primary: CustomColors.blue_color),
                                       onPressed: () async {
                                         controller.showLoadingBar(true);
                                         String response =

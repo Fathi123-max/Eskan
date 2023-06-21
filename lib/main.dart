@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:haider/utills/customColors.dart';
 import 'package:haider/utills/localzation.dart';
 import 'package:haider/views/choosescreen.dart';
 import 'package:haider/views/drawerViews/homeView.dart';
@@ -41,6 +42,8 @@ class _MyAppState extends State<MyApp> {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
+        secondaryHeaderColor: CustomColors.coral_Color,
+        primaryColor: CustomColors.prime_color,
         visualDensity: VisualDensity.adaptivePlatformDensity,
         brightness: Brightness.light,
         useMaterial3: true,

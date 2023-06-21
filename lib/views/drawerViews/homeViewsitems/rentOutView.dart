@@ -24,7 +24,7 @@ class RentOutView extends StatelessWidget {
                   "No Data Found",
                   style: TextStyle(
                       fontWeight: FontWeight.bold,
-                      color: CustomColors.orangeColor),
+                      color: CustomColors.prime_color),
                 ),
               )
             : Padding(
