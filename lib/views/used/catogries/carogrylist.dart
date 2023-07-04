@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:haider/controllers/rentAndRentOutController.dart';
 
-import '../../../../controllers/catogryconroller.dart';
-import '../../../../utills/customColors.dart';
-import '../../../propertyDetailScreen.dart';
+import '../../../controllers/catogryconroller.dart';
+import '../../../utills/customColors.dart';
+import '../propertyDetailScreen.dart';
 
 class catogrylist extends StatelessWidget {
   // const RentOutView({Key key}) : super(key: key);

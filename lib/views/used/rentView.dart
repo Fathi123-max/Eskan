@@ -7,7 +7,7 @@ import 'package:haider/controllers/rentAndRentOutController.dart';
 import 'package:haider/controllers/searchRentController.dart';
 import 'package:haider/utills/customColors.dart';
 
-import '../../propertyDetailScreen.dart';
+import 'propertyDetailScreen.dart';
 
 class RentView extends StatelessWidget {
   final RentAndRentOutController rentAndRentOutController =

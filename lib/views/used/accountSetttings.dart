@@ -4,7 +4,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:haider/controllers/currentUserInfoController.dart';
 import 'package:haider/utills/customColors.dart';
 
-import '../../choosescreen.dart';
+import 'choosescreen.dart';
 
 class AccountSettings extends StatelessWidget {
   final CurrentUserInfoController currentUserInfoController =

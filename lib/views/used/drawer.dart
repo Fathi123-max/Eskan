@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
-import '../controllers/draweController.dart';
-import '../controllers/pageViewController.dart';
-import '../utills/customColors.dart';
+import '../../controllers/draweController.dart';
+import '../../controllers/pageViewController.dart';
+import '../../utills/customColors.dart';
 import 'choosescreen.dart';
 
 class drawerwidget extends StatelessWidget {
@@ -88,7 +88,7 @@ class drawerwidget extends StatelessWidget {
                     // pageViewController.pageViewIndex.value = 0;
                     box.remove('name');
                     box.remove('phone');
-                    FirebaseAuth.instance.signOut();
+                    await FirebaseAuth.instance.signOut();
                     Get.offAll(() => EnterInfo());
                   },
                 ),

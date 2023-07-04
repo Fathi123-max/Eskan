@@ -4,7 +4,7 @@ import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
 import 'package:flutter_firebase_chat_core/flutter_firebase_chat_core.dart';
 
 import '../../utills/chatutlies.dart';
-import 'chats.dart';
+import '../chat/chats.dart';
 
 class RoomsPage extends StatefulWidget {
   const RoomsPage({super.key});

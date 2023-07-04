@@ -5,8 +5,8 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:haider/utills/customColors.dart';
 import 'package:haider/utills/localzation.dart';
-import 'package:haider/views/choosescreen.dart';
-import 'package:haider/views/drawerViews/homeView.dart';
+import 'package:haider/views/used/choosescreen.dart';
+import 'package:haider/views/used/homeView.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

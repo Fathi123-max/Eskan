@@ -10,10 +10,10 @@ import 'package:haider/controllers/getSellAndBuyPropertController.dart';
 import 'package:haider/controllers/rentAndRentOutController.dart';
 import 'package:haider/utills/customColors.dart';
 import 'package:haider/utills/customToast.dart';
-import 'package:haider/views/drawerViews/homeView.dart';
+import 'package:haider/views/used/homeView.dart';
 import 'package:multi_image_picker/multi_image_picker.dart';
 
-import '../controllers/citycontroller.dart';
+import '../../controllers/citycontroller.dart';
 
 class AddDataScreen extends StatelessWidget {
   final String value;

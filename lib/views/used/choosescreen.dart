@@ -5,10 +5,10 @@ import 'package:flutter_firebase_chat_core/flutter_firebase_chat_core.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:haider/views/drawerViews/homeView.dart';
+import 'package:haider/views/used/homeView.dart';
 
-import '../controllers/currentUserInfoController.dart';
-import '../utills/customColors.dart';
+import '../../controllers/currentUserInfoController.dart';
+import '../../utills/customColors.dart';
 
 final FirebaseAuth _auth = FirebaseAuth.instance;
 final GoogleSignIn _googleSignIn = GoogleSignIn();

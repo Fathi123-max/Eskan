@@ -5,12 +5,12 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:haider/controllers/pageViewController.dart';
 import 'package:haider/utills/customColors.dart';
-import 'package:haider/views/drawerViews/homeViewsitems/accountSetttings.dart';
+import 'package:haider/views/used/accountSetttings.dart';
 
 import '../../controllers/draweController.dart';
-import '../chat/rooms.dart';
-import '../choosescreen.dart';
-import '../info.dart';
+import 'choosescreen.dart';
+import 'info.dart';
+import 'rooms.dart';
 
 class Home extends StatefulWidget {
   @override

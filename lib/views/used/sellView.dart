@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:haider/controllers/getSellAndBuyPropertController.dart';
 import 'package:haider/utills/customColors.dart';
-import 'package:haider/views/addDataScreen.dart';
+import 'package:haider/views/used/addDataScreen.dart';
 
-import '../../currentUserPropertyDetail.dart';
+import 'currentUserPropertyDetail.dart';
 
 class SellView extends StatelessWidget {
   final GetSellAndBuyPropertyController getSellPropertyController =

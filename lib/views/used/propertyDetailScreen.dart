@@ -12,10 +12,10 @@ import 'package:photo_view/photo_view.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:whatsapp_unilink/whatsapp_unilink.dart';
 
-import '../controllers/rentAndRentOutController.dart';
-import '../controllers/usrechatcontroller.dart';
-import 'chat/chats.dart';
-import 'chat/users.dart';
+import '../../controllers/rentAndRentOutController.dart';
+import '../../controllers/usrechatcontroller.dart';
+import '../chat/chats.dart';
+import '../chat/users.dart';
 
 class PropertyDetail extends StatelessWidget {
   final PropertyModel data;
