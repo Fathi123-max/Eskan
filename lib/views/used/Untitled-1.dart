@@ -2,7 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:get/get.dart';
-import 'package:haider/controllers/currentUserInfoController.dart';
+import 'package:haider/controllers/used/currentUserInfoController.dart';
 import 'package:haider/models/propertyModel.dart';
 import 'package:haider/utills/customColors.dart';
 

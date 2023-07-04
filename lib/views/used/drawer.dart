@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
-import '../../controllers/draweController.dart';
-import '../../controllers/pageViewController.dart';
+import '../../controllers/used/draweController.dart';
+import '../../controllers/used/pageViewController.dart';
 import '../../utills/customColors.dart';
 import 'choosescreen.dart';
 

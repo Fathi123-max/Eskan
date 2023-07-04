@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:haider/controllers/rentAndRentOutController.dart';
+import 'package:haider/controllers/used/rentAndRentOutController.dart';
 import 'package:haider/utills/customColors.dart';
 
-import '../../controllers/getSellAndBuyPropertController.dart';
+import '../../controllers/unused/getSellAndBuyPropertController.dart';
 import 'currentUserPropertyDetail.dart';
 
 class RentOutView extends StatelessWidget {

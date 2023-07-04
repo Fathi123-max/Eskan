@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:haider/controllers/rentAndRentOutController.dart';
+import 'package:haider/controllers/used/rentAndRentOutController.dart';
 
-import '../../../controllers/catogryconroller.dart';
+import '../../../controllers/used/catogryconroller.dart';
 import '../../../utills/customColors.dart';
 import '../propertyDetailScreen.dart';
 

@@ -7,7 +7,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:haider/views/used/homeView.dart';
 
-import '../../controllers/currentUserInfoController.dart';
+import '../../controllers/used/currentUserInfoController.dart';
 import '../../utills/customColors.dart';
 
 final FirebaseAuth _auth = FirebaseAuth.instance;

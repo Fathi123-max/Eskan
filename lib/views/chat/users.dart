@@ -5,7 +5,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:haider/utills/customColors.dart';
 
-import '../../controllers/rentAndRentOutController.dart';
+import '../../controllers/used/rentAndRentOutController.dart';
 import '../../utills/chatutlies.dart';
 import 'chats.dart';
 

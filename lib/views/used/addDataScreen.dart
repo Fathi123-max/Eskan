@@ -3,17 +3,17 @@ import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
 import 'package:flutter_firebase_chat_core/flutter_firebase_chat_core.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:haider/controllers/addpropertyController.dart';
-import 'package:haider/controllers/catogryconroller.dart';
-import 'package:haider/controllers/currentUserInfoController.dart';
-import 'package:haider/controllers/getSellAndBuyPropertController.dart';
-import 'package:haider/controllers/rentAndRentOutController.dart';
+import 'package:haider/controllers/unused/getSellAndBuyPropertController.dart';
+import 'package:haider/controllers/used/addpropertyController.dart';
+import 'package:haider/controllers/used/catogryconroller.dart';
+import 'package:haider/controllers/used/currentUserInfoController.dart';
+import 'package:haider/controllers/used/rentAndRentOutController.dart';
 import 'package:haider/utills/customColors.dart';
 import 'package:haider/utills/customToast.dart';
 import 'package:haider/views/used/homeView.dart';
 import 'package:multi_image_picker/multi_image_picker.dart';
 
-import '../../controllers/citycontroller.dart';
+import '../../controllers/used/citycontroller.dart';
 
 class AddDataScreen extends StatelessWidget {
   final String value;

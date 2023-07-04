@@ -5,15 +5,15 @@ import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
 import 'package:flutter_firebase_chat_core/flutter_firebase_chat_core.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:get/get.dart';
-import 'package:haider/controllers/currentUserInfoController.dart';
+import 'package:haider/controllers/used/currentUserInfoController.dart';
 import 'package:haider/models/propertyModel.dart';
 import 'package:haider/utills/customColors.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:whatsapp_unilink/whatsapp_unilink.dart';
 
-import '../../controllers/rentAndRentOutController.dart';
-import '../../controllers/usrechatcontroller.dart';
+import '../../controllers/used/rentAndRentOutController.dart';
+import '../../controllers/unused/usrechatcontroller.dart';
 import '../chat/chats.dart';
 import '../chat/users.dart';
 

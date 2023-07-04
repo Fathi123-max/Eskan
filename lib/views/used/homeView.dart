@@ -3,11 +3,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:haider/controllers/pageViewController.dart';
+import 'package:haider/controllers/used/pageViewController.dart';
 import 'package:haider/utills/customColors.dart';
 import 'package:haider/views/used/accountSetttings.dart';
 
-import '../../controllers/draweController.dart';
+import '../../controllers/used/draweController.dart';
 import 'choosescreen.dart';
 import 'info.dart';
 import 'rooms.dart';

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:haider/controllers/getSellAndBuyPropertController.dart';
-import 'package:haider/controllers/serachController.dart';
+import 'package:haider/controllers/unused/getSellAndBuyPropertController.dart';
+import 'package:haider/controllers/unused/serachController.dart';
 import 'package:haider/utills/customColors.dart';
 import 'package:haider/utills/customToast.dart';
 

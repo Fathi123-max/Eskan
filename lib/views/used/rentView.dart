@@ -2,9 +2,9 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:haider/controllers/currentUserInfoController.dart';
-import 'package:haider/controllers/rentAndRentOutController.dart';
-import 'package:haider/controllers/searchRentController.dart';
+import 'package:haider/controllers/used/currentUserInfoController.dart';
+import 'package:haider/controllers/used/rentAndRentOutController.dart';
+import 'package:haider/controllers/unused/searchRentController.dart';
 import 'package:haider/utills/customColors.dart';
 
 import 'propertyDetailScreen.dart';
