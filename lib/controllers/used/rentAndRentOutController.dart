@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:haider/models/propertyModel.dart';
+import 'package:haider/models/used/propertyModel.dart';
 import 'package:haider/services/firestoreService.dart';
 
 class RentAndRentOutController extends GetxController {

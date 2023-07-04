@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:haider/models/userModel.dart';
+import 'package:haider/models/unused/userModel.dart';
 import 'package:haider/services/firestoreService.dart';
 
 class CurrentUserInfoController extends GetxController {

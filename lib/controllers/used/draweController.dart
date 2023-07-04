@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:haider/models/drawerItems.dart';
+import 'package:haider/models/used/drawerItems.dart';
 
 class DraweController extends GetxController {
   var selectedDrawerIndex = 0.obs;

@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 import 'package:haider/controllers/used/rentAndRentOutController.dart';
-import 'package:haider/models/propertyModel.dart';
+import 'package:haider/models/used/propertyModel.dart';
 import 'package:haider/services/firestoreService.dart';
 
 class SearchRentController extends GetxController {

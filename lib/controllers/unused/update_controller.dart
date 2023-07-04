@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
-import 'package:haider/models/updatemodel.dart';
+import 'package:haider/models/unused/updatemodel.dart';
 
 class updateController extends GetxController {
   List<updateModel> updateList = [];

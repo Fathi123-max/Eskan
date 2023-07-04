@@ -1,12 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:haider/models/cityModel.dart';
-import 'package:haider/models/propertyModel.dart';
-import 'package:haider/models/userModel.dart';
+import 'package:haider/models/unused/userModel.dart';
+import 'package:haider/models/used/cityModel.dart';
+import 'package:haider/models/used/propertyModel.dart';
 import 'package:haider/utills/customToast.dart';
 
-import '../models/catogrymodel.dart';
+import '../models/used/catogrymodel.dart';
 
 class FirestoreService {
   // var currentUser = FirebaseAuth.instance.currentUser;
