@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:haider/models/used/propertyModel.dart';
-import 'package:haider/services/firestoreService.dart';
+import 'package:haider/services/PropertyServices.dart';
 
 class RentAndRentOutController extends GetxController {
   // final AuthController controller = Get.find();
-  FirestoreService firestoreService = FirestoreService();
+  PropertyServices firestoreService = PropertyServices();
   var currentUserRentOutlist = <PropertyModel>[].obs;
   var username = "".obs;
   var allRentList = <PropertyModel>[].obs;

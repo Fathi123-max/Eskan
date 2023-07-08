@@ -1,12 +1,12 @@
 import 'package:get/get.dart';
 import 'package:haider/controllers/used/rentAndRentOutController.dart';
 import 'package:haider/models/used/propertyModel.dart';
-import 'package:haider/services/firestoreService.dart';
+import 'package:haider/services/PropertyServices.dart';
 
 class SearchRentController extends GetxController {
   final RentAndRentOutController rentAndRentOutController = Get.find();
   var rentSerachList = <PropertyModel>[].obs;
-  FirestoreService firestoreService = FirestoreService();
+  PropertyServices firestoreService = PropertyServices();
   var isLoading = false.obs;
 
   Future<void> searchRentList() async {

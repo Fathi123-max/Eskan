@@ -2,7 +2,7 @@ import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 
 import '../../models/used/catogrymodel.dart';
-import '../../services/firestoreService.dart';
+import '../../services/PropertyServices.dart';
 
 class catogryController extends GetxController {
   RxList<User> catogryList = RxList<User>([]);
@@ -15,7 +15,7 @@ class catogryController extends GetxController {
   }
 
   Future<String> getAllcatogryList() async {
-    await FirestoreService().getAllupdaetList().listen((event) {
+    await PropertyServices().getAllupdaetList().listen((event) {
       catogryList.value = event;
     });
     return "";

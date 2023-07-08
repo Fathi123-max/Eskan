@@ -1,38 +1,18 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:haider/models/unused/userModel.dart';
 import 'package:haider/models/used/cityModel.dart';
 import 'package:haider/models/used/propertyModel.dart';
-import 'package:haider/utills/customToast.dart';
 
 import '../models/used/catogrymodel.dart';
 
-class FirestoreService {
-  // var currentUser = FirebaseAuth.instance.currentUser;
-  // final AuthController controller = Get.find();
-  CollectionReference users = FirebaseFirestore.instance.collection('users');
+class PropertyServices {
   CollectionReference property =
       FirebaseFirestore.instance.collection('property');
 
   final box = GetStorage();
 
-//Adding user Data to FireStore Database
-  Future<void> addUserToFireStore(UserModel userModel) async {
-    CustomToast.showToast('Adding data');
-    await users
-        .add({
-          'firstName': userModel.firstName.toString(),
-          'LastName': userModel.lastName.toString(),
-          'userId': userModel.currentUserId.toString(),
-          'phoneNo': userModel.phoneNumber.toString(),
-          'userEmail': userModel.userEmail.toString(),
-        })
-        .then((value) => CustomToast.showToast('added '))
-        .catchError((error) => CustomToast.showToast('error'));
-  }
-
-//Adding propert To FireStore Databse
+//? add prop to  firebase
   Future<String> addproprtyToDatabase(
       PropertyModel propertyModel, List images, String typeFor) async {
     List imageUrls = [];
@@ -62,10 +42,21 @@ class FirestoreService {
       }
       imageUrls.add(url);
     }
-    Timestamp time = Timestamp.now();
     String response = '';
-    await property.add({
-      "username": box.read('name'),
+    propertyModel.images = imageUrls;
+    propertyModel.username = box.read('name');
+    propertyModel.usernumber = box.read('phone');
+    propertyModel.timestamp = Timestamp.now();
+
+    await property.add(propertyModel.toMap()).then((value) {
+      response = 'Data added';
+    }).catchError((error) {
+      response = 'error occured';
+    });
+    return response;
+  }
+
+/** "username": box.read('name'),
       "usernumber": box.read('phone'),
       'currentUserId': propertyModel.currentUserId.toString(),
       'propertyFor': propertyModel.propertyFor.toString(),
@@ -81,15 +72,9 @@ class FirestoreService {
       'price': propertyModel.price.toString(),
       'images': imageUrls,
       'propertyAction': 'None'.toString(),
-      'time': time
-    }).then((value) {
-      response = 'Data added';
-    }).catchError((error) {
-      response = 'error occured';
-    });
-    return response;
-  }
+      'time': time */
 
+//? get all data fun
   Stream<List<User>> getAllupdaetList() {
     return FirebaseFirestore.instance.collection('catogry').snapshots().map(
         (querySnapshot) =>
@@ -103,65 +88,6 @@ class FirestoreService {
             .toList());
   }
 
-//
-
-//Get Cities Data
-  // Future<List<CityModel>> getcitiesList() async {
-  //   List<CityModel> citiesList = [];
-  //   await FirebaseFirestore.instance
-  //       .collection('cities')
-  //       .get()
-  //       .then((QuerySnapshot querySnapshot) {
-  //     querySnapshot.docs.forEach((doc) {
-  //       // print(doc['cityName']);
-  //       CityModel cityModel = CityModel(doc["cityName"]);
-  //       citiesList.add(cityModel);
-  //     });
-  //   });
-  //   return citiesList;
-  // }
-
-  //Get Propert Of CurrentUser For Selling
-
-  Future<List<PropertyModel>> getCurrentUserPropertyForSelling() async {
-    List<PropertyModel> propertyList = [];
-    await FirebaseFirestore.instance
-        .collection('property')
-        .orderBy('time', descending: true)
-        .get()
-        .then((QuerySnapshot querySnapshot) {
-      querySnapshot.docs.forEach((doc) {
-        // print("Document Id is ${doc.id}");
-        String docId = doc.id;
-        PropertyModel propertyModel =
-            PropertyModel.fromJson(doc.data() as String);
-        // if (doc['currentUserId'] == controller.currentUserId.value &&
-        //     doc['propertyFor'] == 'sale') {
-        propertyList.add(propertyModel);
-        // }
-      });
-    });
-    return propertyList;
-  }
-
-/**  doc['username'],
-          doc['usernumber'],
-          doc['time'],
-          doc['propertyAction'],
-          docId,
-          doc['currentUserId'],
-          doc['propertyType'],
-          doc['propertyFor'],
-          doc['city'],
-          doc['area'],
-          doc['address'],
-          doc['size'],
-          doc['bedrooms'],
-          doc['bathrooms'],
-          doc['kitchen'],
-          doc['des'],
-          doc['price'],
-          doc['images'], */
   Future<List<PropertyModel>> getAllBuyingList() async {
     List<PropertyModel> propertyList = [];
     await FirebaseFirestore.instance
@@ -171,28 +97,8 @@ class FirestoreService {
         .then((QuerySnapshot querySnapshot) {
       querySnapshot.docs.forEach((doc) {
         PropertyModel propertyModel =
-            PropertyModel.fromJson(doc.data() as String);
+            PropertyModel.fromMap(doc.data() as Map<String, dynamic>);
         if (doc['propertyFor'] == 'sale') {
-          propertyList.add(propertyModel);
-        }
-      });
-    });
-    return propertyList;
-  }
-
-  Future<List<PropertyModel>> getCurrentUserPropertyForRentOut() async {
-    // CustomToast.showToast(controller.currentUserId.value);
-    List<PropertyModel> propertyList = [];
-    await FirebaseFirestore.instance
-        .collection('property')
-        .orderBy('time', descending: true)
-        .get()
-        .then((QuerySnapshot querySnapshot) {
-      querySnapshot.docs.forEach((doc) {
-        PropertyModel propertyModel =
-            PropertyModel.fromJson(doc.data() as String);
-        if (doc['username'] == box.read("name") &&
-            doc['usernumber'] == box.read("phone")) {
           propertyList.add(propertyModel);
         }
       });
@@ -209,7 +115,7 @@ class FirestoreService {
         .then((QuerySnapshot querySnapshot) {
       querySnapshot.docs.forEach((doc) {
         PropertyModel propertyModel =
-            PropertyModel.fromJson(doc.data() as String);
+            PropertyModel.fromMap(doc.data() as Map<String, dynamic>);
 
         propertyList.add(propertyModel);
       });
@@ -227,7 +133,7 @@ class FirestoreService {
         .then((QuerySnapshot querySnapshot) {
       querySnapshot.docs.forEach((doc) {
         PropertyModel propertyModel =
-            PropertyModel.fromJson(doc.data() as String);
+            PropertyModel.fromMap(doc.data() as Map<String, dynamic>);
 
         propertyListbycat.add(propertyModel);
       });
@@ -235,30 +141,7 @@ class FirestoreService {
     return propertyListbycat;
   }
 
-  // Future<UserModel> getUserInfo(String id) async {
-  //   //  dynamic currentUserId = FirebaseAuth.instance.currentUser!.uid;
-  //   //CustomToast.showToast(id);
-  //   UserModel newUserModel = UserModel();
-  //   await FirebaseFirestore.instance
-  //       .collection('users')
-  //       .get()
-  //       .then((QuerySnapshot querySnapshot) {
-  //     querySnapshot.docs.forEach((doc) {
-  //       UserModel userModel = UserModel();
-  //       if (doc['userId'] == id) {
-  //         userModel.currentUserId = doc['userId'];
-  //         userModel.firstName = doc['firstName'];
-  //         print('user name is ${userModel.firstName}');
-  //         userModel.lastName = doc['LastName'];
-  //         userModel.phoneNumber = doc['phoneNo'];
-
-  //         newUserModel = userModel;
-  //       }
-  //     });
-  //   });
-  //   return newUserModel;
-  // }
-
+//? operation fun
   Future<String> updateProperty(String docID, String updatedValue) async {
     CollectionReference collectionReference =
         FirebaseFirestore.instance.collection('property');
@@ -294,136 +177,50 @@ class FirestoreService {
     return response;
   }
 
-  Future<List<PropertyModel>> serachBuyList(
-      String cityname, String priceFrom, String priceTo) async {
+//? get current user fun
+  Future<List<PropertyModel>> getCurrentUserPropertyForRentOut() async {
+    // CustomToast.showToast(controller.currentUserId.value);
     List<PropertyModel> propertyList = [];
-
-    if (cityname != '' && priceFrom == '' && priceTo == '') {
-      //   CustomToast.showToast('controller.cityEditTextController.text');
-      await FirebaseFirestore.instance
-          .collection('property')
-          .orderBy('time', descending: true)
-          .get()
-          .then((QuerySnapshot querySnapshot) {
-        querySnapshot.docs.forEach((doc) {
-          PropertyModel propertyModel =
-              PropertyModel.fromJson(doc.data() as String);
-          String city = doc['city'];
-
+    await FirebaseFirestore.instance
+        .collection('property')
+        .orderBy('time', descending: true)
+        .get()
+        .then((QuerySnapshot querySnapshot) {
+      querySnapshot.docs.forEach((doc) {
+        PropertyModel propertyModel =
+            PropertyModel.fromMap(doc.data() as Map<String, dynamic>);
+        if (doc['username'] == box.read("name") &&
+            doc['usernumber'] == box.read("phone")) {
           propertyList.add(propertyModel);
-        });
+        }
       });
-    } else if (cityname != '' && priceFrom != '' && priceTo == '') {
-      await FirebaseFirestore.instance
-          .collection('property')
-          .orderBy('price', descending: true)
-          .get()
-          .then((QuerySnapshot querySnapshot) {
-        querySnapshot.docs.forEach((doc) {
-          PropertyModel propertyModel =
-              PropertyModel.fromJson(doc.data() as String);
-          String city = doc['city'];
-          int price = int.parse(doc['price']);
-          if (doc['propertyFor'] == 'sale' &&
-              cityname.toLowerCase() == city.toLowerCase() &&
-              price >= int.parse(priceFrom)) {
-            propertyList.add(propertyModel);
-          }
-        });
-      });
-    } else if (cityname != '' && priceFrom == '' && priceTo != '') {
-      await FirebaseFirestore.instance
-          .collection('property')
-          .orderBy('price', descending: true)
-          .get()
-          .then((QuerySnapshot querySnapshot) {
-        querySnapshot.docs.forEach((doc) {
-          PropertyModel propertyModel =
-              PropertyModel.fromJson(doc.data() as String);
-          String city = doc['city'];
-          int price = int.parse(doc['price']);
-          if (doc['propertyFor'] == 'sale' &&
-              cityname.toLowerCase() == city.toLowerCase() &&
-              price <= int.parse(priceTo)) {
-            propertyList.add(propertyModel);
-          }
-        });
-      });
-    } else if (cityname != '' && priceFrom != '' && priceTo != '') {
-      await FirebaseFirestore.instance
-          .collection('property')
-          .orderBy('price', descending: true)
-          .get()
-          .then((QuerySnapshot querySnapshot) {
-        querySnapshot.docs.forEach((doc) {
-          PropertyModel propertyModel =
-              PropertyModel.fromJson(doc.data() as String);
-          String city = doc['city'];
-          int price = int.parse(doc['price']);
-          if (doc['propertyFor'] == 'sale' &&
-              cityname.toLowerCase() == city.toLowerCase() &&
-              price >= int.parse(priceFrom) &&
-              price <= int.parse(priceTo)) {
-            propertyList.add(propertyModel);
-          }
-        });
-      });
-    } else if (cityname == '' && priceFrom != '' && priceTo == '') {
-      await FirebaseFirestore.instance
-          .collection('property')
-          .orderBy('price', descending: true)
-          .get()
-          .then((QuerySnapshot querySnapshot) {
-        querySnapshot.docs.forEach((doc) {
-          PropertyModel propertyModel =
-              PropertyModel.fromJson(doc.data() as String);
-          String city = doc['city'];
-          int price = int.parse(doc['price']);
-          if (doc['propertyFor'] == 'sale' && price >= int.parse(priceFrom)) {
-            propertyList.add(propertyModel);
-          }
-        });
-      });
-    } else if (cityname == '' && priceFrom == '' && priceTo != '') {
-      await FirebaseFirestore.instance
-          .collection('property')
-          .orderBy('price', descending: true)
-          .get()
-          .then((QuerySnapshot querySnapshot) {
-        querySnapshot.docs.forEach((doc) {
-          PropertyModel propertyModel =
-              PropertyModel.fromJson(doc.data() as String);
-
-          int price = int.parse(doc['price']);
-          if (doc['propertyFor'] == 'sale' && price <= int.parse(priceTo)) {
-            propertyList.add(propertyModel);
-          }
-        });
-      });
-    } else if (cityname == '' && priceFrom != '' && priceTo != '') {
-      await FirebaseFirestore.instance
-          .collection('property')
-          .orderBy('price', descending: true)
-          .get()
-          .then((QuerySnapshot querySnapshot) {
-        querySnapshot.docs.forEach((doc) {
-          PropertyModel propertyModel =
-              PropertyModel.fromJson(doc.data() as String);
-          String city = doc['city'];
-          int price = int.parse(doc['price']);
-          if (doc['propertyFor'] == 'sale' &&
-              price >= int.parse(priceFrom) &&
-              price <= int.parse(priceTo)) {
-            propertyList.add(propertyModel);
-          }
-        });
-      });
-    }
-
+    });
     return propertyList;
   }
 
-////////////////////////////////////////////////////////////////////////
+  Future<List<PropertyModel>> getCurrentUserPropertyForSelling() async {
+    List<PropertyModel> propertyList = [];
+    await FirebaseFirestore.instance
+        .collection('property')
+        .orderBy('time', descending: true)
+        .get()
+        .then((QuerySnapshot querySnapshot) {
+      querySnapshot.docs.forEach((doc) {
+        // print("Document Id is ${doc.id}");
+        String docId = doc.id;
+        PropertyModel propertyModel =
+            PropertyModel.fromMap(doc.data() as Map<String, dynamic>);
+        // if (doc['currentUserId'] == controller.currentUserId.value &&
+        //     doc['propertyFor'] == 'sale') {
+        propertyList.add(propertyModel);
+        // }
+      });
+    });
+    return propertyList;
+  }
+
+//? Search fun
+
   Future<List<PropertyModel>> serachRentList(
       String cityname, String priceFrom, String priceTo) async {
     List<PropertyModel> propertyList = [];
@@ -437,7 +234,7 @@ class FirestoreService {
           .then((QuerySnapshot querySnapshot) {
         querySnapshot.docs.forEach((doc) {
           PropertyModel propertyModel =
-              PropertyModel.fromJson(doc.data() as String);
+              PropertyModel.fromMap(doc.data() as Map<String, dynamic>);
           String city = doc['city'];
 
           if (doc['propertyFor'] == 'rent' &&
@@ -454,7 +251,7 @@ class FirestoreService {
           .then((QuerySnapshot querySnapshot) {
         querySnapshot.docs.forEach((doc) {
           PropertyModel propertyModel =
-              PropertyModel.fromJson(doc.data() as String);
+              PropertyModel.fromMap(doc.data() as Map<String, dynamic>);
           String city = doc['city'];
           int price = int.parse(doc['price']);
           if (doc['propertyFor'] == 'rent' &&
@@ -472,7 +269,7 @@ class FirestoreService {
           .then((QuerySnapshot querySnapshot) {
         querySnapshot.docs.forEach((doc) {
           PropertyModel propertyModel =
-              PropertyModel.fromJson(doc.data() as String);
+              PropertyModel.fromMap(doc.data() as Map<String, dynamic>);
           String city = doc['city'];
           int price = int.parse(doc['price']);
           if (doc['propertyFor'] == 'rent' &&
@@ -490,7 +287,7 @@ class FirestoreService {
           .then((QuerySnapshot querySnapshot) {
         querySnapshot.docs.forEach((doc) {
           PropertyModel propertyModel =
-              PropertyModel.fromJson(doc.data() as String);
+              PropertyModel.fromMap(doc.data() as Map<String, dynamic>);
           String city = doc['city'];
           int price = int.parse(doc['price']);
           if (doc['propertyFor'] == 'rent' &&
@@ -509,7 +306,7 @@ class FirestoreService {
           .then((QuerySnapshot querySnapshot) {
         querySnapshot.docs.forEach((doc) {
           PropertyModel propertyModel =
-              PropertyModel.fromJson(doc.data() as String);
+              PropertyModel.fromMap(doc.data() as Map<String, dynamic>);
           String city = doc['city'];
           int price = int.parse(doc['price']);
           if (doc['propertyFor'] == 'rent' && price >= int.parse(priceFrom)) {
@@ -525,7 +322,7 @@ class FirestoreService {
           .then((QuerySnapshot querySnapshot) {
         querySnapshot.docs.forEach((doc) {
           PropertyModel propertyModel =
-              PropertyModel.fromJson(doc.data() as String);
+              PropertyModel.fromMap(doc.data() as Map<String, dynamic>);
 
           int price = int.parse(doc['price']);
           if (doc['propertyFor'] == 'rent' && price <= int.parse(priceTo)) {
@@ -541,10 +338,139 @@ class FirestoreService {
           .then((QuerySnapshot querySnapshot) {
         querySnapshot.docs.forEach((doc) {
           PropertyModel propertyModel =
-              PropertyModel.fromJson(doc.data() as String);
+              PropertyModel.fromMap(doc.data() as Map<String, dynamic>);
           String city = doc['city'];
           int price = int.parse(doc['price']);
           if (doc['propertyFor'] == 'rent' &&
+              price >= int.parse(priceFrom) &&
+              price <= int.parse(priceTo)) {
+            propertyList.add(propertyModel);
+          }
+        });
+      });
+    }
+
+    return propertyList;
+  }
+
+  Future<List<PropertyModel>> serachBuyList(
+      String cityname, String priceFrom, String priceTo) async {
+    List<PropertyModel> propertyList = [];
+
+    if (cityname != '' && priceFrom == '' && priceTo == '') {
+      //   CustomToast.showToast('controller.cityEditTextController.text');
+      await FirebaseFirestore.instance
+          .collection('property')
+          .orderBy('time', descending: true)
+          .get()
+          .then((QuerySnapshot querySnapshot) {
+        querySnapshot.docs.forEach((doc) {
+          PropertyModel propertyModel =
+              PropertyModel.fromMap(doc.data() as Map<String, dynamic>);
+          String city = doc['city'];
+
+          propertyList.add(propertyModel);
+        });
+      });
+    } else if (cityname != '' && priceFrom != '' && priceTo == '') {
+      await FirebaseFirestore.instance
+          .collection('property')
+          .orderBy('price', descending: true)
+          .get()
+          .then((QuerySnapshot querySnapshot) {
+        querySnapshot.docs.forEach((doc) {
+          PropertyModel propertyModel =
+              PropertyModel.fromMap(doc.data() as Map<String, dynamic>);
+          String city = doc['city'];
+          int price = int.parse(doc['price']);
+          if (doc['propertyFor'] == 'sale' &&
+              cityname.toLowerCase() == city.toLowerCase() &&
+              price >= int.parse(priceFrom)) {
+            propertyList.add(propertyModel);
+          }
+        });
+      });
+    } else if (cityname != '' && priceFrom == '' && priceTo != '') {
+      await FirebaseFirestore.instance
+          .collection('property')
+          .orderBy('price', descending: true)
+          .get()
+          .then((QuerySnapshot querySnapshot) {
+        querySnapshot.docs.forEach((doc) {
+          PropertyModel propertyModel =
+              PropertyModel.fromMap(doc.data() as Map<String, dynamic>);
+          String city = doc['city'];
+          int price = int.parse(doc['price']);
+          if (doc['propertyFor'] == 'sale' &&
+              cityname.toLowerCase() == city.toLowerCase() &&
+              price <= int.parse(priceTo)) {
+            propertyList.add(propertyModel);
+          }
+        });
+      });
+    } else if (cityname != '' && priceFrom != '' && priceTo != '') {
+      await FirebaseFirestore.instance
+          .collection('property')
+          .orderBy('price', descending: true)
+          .get()
+          .then((QuerySnapshot querySnapshot) {
+        querySnapshot.docs.forEach((doc) {
+          PropertyModel propertyModel =
+              PropertyModel.fromMap(doc.data() as Map<String, dynamic>);
+          String city = doc['city'];
+          int price = int.parse(doc['price']);
+          if (doc['propertyFor'] == 'sale' &&
+              cityname.toLowerCase() == city.toLowerCase() &&
+              price >= int.parse(priceFrom) &&
+              price <= int.parse(priceTo)) {
+            propertyList.add(propertyModel);
+          }
+        });
+      });
+    } else if (cityname == '' && priceFrom != '' && priceTo == '') {
+      await FirebaseFirestore.instance
+          .collection('property')
+          .orderBy('price', descending: true)
+          .get()
+          .then((QuerySnapshot querySnapshot) {
+        querySnapshot.docs.forEach((doc) {
+          PropertyModel propertyModel =
+              PropertyModel.fromMap(doc.data() as Map<String, dynamic>);
+          String city = doc['city'];
+          int price = int.parse(doc['price']);
+          if (doc['propertyFor'] == 'sale' && price >= int.parse(priceFrom)) {
+            propertyList.add(propertyModel);
+          }
+        });
+      });
+    } else if (cityname == '' && priceFrom == '' && priceTo != '') {
+      await FirebaseFirestore.instance
+          .collection('property')
+          .orderBy('price', descending: true)
+          .get()
+          .then((QuerySnapshot querySnapshot) {
+        querySnapshot.docs.forEach((doc) {
+          PropertyModel propertyModel =
+              PropertyModel.fromMap(doc.data() as Map<String, dynamic>);
+
+          int price = int.parse(doc['price']);
+          if (doc['propertyFor'] == 'sale' && price <= int.parse(priceTo)) {
+            propertyList.add(propertyModel);
+          }
+        });
+      });
+    } else if (cityname == '' && priceFrom != '' && priceTo != '') {
+      await FirebaseFirestore.instance
+          .collection('property')
+          .orderBy('price', descending: true)
+          .get()
+          .then((QuerySnapshot querySnapshot) {
+        querySnapshot.docs.forEach((doc) {
+          PropertyModel propertyModel =
+              PropertyModel.fromMap(doc.data() as Map<String, dynamic>);
+          String city = doc['city'];
+          int price = int.parse(doc['price']);
+          if (doc['propertyFor'] == 'sale' &&
               price >= int.parse(priceFrom) &&
               price <= int.parse(priceTo)) {
             propertyList.add(propertyModel);

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:haider/models/used/propertyModel.dart';
-import 'package:haider/services/firestoreService.dart';
+import 'package:haider/services/PropertyServices.dart';
 import 'package:haider/utills/customColors.dart';
 import 'package:multi_image_picker/multi_image_picker.dart';
 
@@ -36,7 +36,7 @@ class AddPropertyController extends GetxController {
   var unSelectedColor = CustomColors.blue_color.obs;
   var images = <Asset>[].obs;
   PropertyModel propertyModel = PropertyModel();
-  FirestoreService firestoreService = FirestoreService();
+  PropertyServices firestoreService = PropertyServices();
   var propertyFormKey = GlobalKey<FormState>();
   final cityEditTextController = TextEditingController();
   var areaEditTextController = TextEditingController();

@@ -1,13 +1,13 @@
 import 'package:get/get.dart';
 import 'package:haider/controllers/unused/getSellAndBuyPropertController.dart';
 import 'package:haider/models/used/propertyModel.dart';
-import 'package:haider/services/firestoreService.dart';
+import 'package:haider/services/PropertyServices.dart';
 
 class SerachController extends GetxController {
   final GetSellAndBuyPropertyController controller = Get.find();
 
   var buySerachList = <PropertyModel>[].obs;
-  FirestoreService firestoreService = FirestoreService();
+  PropertyServices firestoreService = PropertyServices();
   var isLoading = false.obs;
 
   Future<void> serachBuy() async {

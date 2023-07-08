@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:haider/models/used/propertyModel.dart';
-import 'package:haider/services/firestoreService.dart';
+import 'package:haider/services/PropertyServices.dart';
 
 class GetSellAndBuyPropertyController extends GetxController {
   // final AuthController controller=Get.find();
@@ -12,7 +12,7 @@ class GetSellAndBuyPropertyController extends GetxController {
   final rangeTextFromController = TextEditingController();
   final rangeTextToTextController = TextEditingController();
 
-  FirestoreService firestoreService = FirestoreService();
+  PropertyServices firestoreService = PropertyServices();
   var currentUserSellinglist = <PropertyModel>[].obs;
   var allBuyList = <PropertyModel>[].obs;
   var isLoading = false.obs;

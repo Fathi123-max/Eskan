@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 import 'package:haider/models/unused/userModel.dart';
-import 'package:haider/services/firestoreService.dart';
+import 'package:haider/services/PropertyServices.dart';
 
 class CurrentUserInfoController extends GetxController {
   // AuthController authController = Get.find();
@@ -8,7 +8,7 @@ class CurrentUserInfoController extends GetxController {
   var Id = ''.obs;
   var currentUserinformation;
   var currentUserId = ''.obs;
-  FirestoreService firestoreService = FirestoreService();
+  PropertyServices firestoreService = PropertyServices();
   var userInfo = UserModel(
           firstName: 'sdsf',
           lastName: 'sdfds',
