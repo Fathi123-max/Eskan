@@ -166,7 +166,9 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
         children: [
           Expanded(
             child: PageView(
-              onPageChanged: (index) {},
+              onPageChanged: (index) {
+                controller.pageViewIndex = index;
+              },
               controller: _pageController,
               children: pageViewController.pageViewItems,
             ),
