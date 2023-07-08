@@ -43,7 +43,7 @@ class Choosetype extends GetView {
                   child: Center(
                       child: Text(
                     'Next'.tr,
-                    style: TextStyle(color: CustomColors.blue_color),
+                    style: TextStyle(color: CustomColors.secondary_color),
                   ))),
             ),
           ),

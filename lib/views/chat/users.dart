@@ -85,7 +85,7 @@ class UsersPage extends StatelessWidget {
                       borderRadius: BorderRadius.only(
                           topLeft: Radius.circular(30),
                           bottomLeft: Radius.circular(30)),
-                      color: CustomColors.blue_color,
+                      color: CustomColors.secondary_color,
                     ),
                     child: Center(
                       child: FaIcon(

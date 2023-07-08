@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 
 class CustomColors {
-  // final tealColor = Color(0xFF008080);
-  static const prime_color = Color(0xFF228B22);
-  static const blue_color = Color(0xFF6495ED);
-  static const green_color = Color(0xFF228B22);
-  static const coral_Color = Color(0xFFFF7F50);
+  static const prime_color = Color.fromRGBO(0, 139, 222, 1);
+  static const secondary_color = Color.fromRGBO(218, 252, 255, 1);
+  static const green_color = Color.fromRGBO(0, 139, 222, 1);
+  static const coral_Color = Color.fromRGBO(0, 139, 222, 1);
 }

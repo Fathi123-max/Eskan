@@ -256,7 +256,7 @@ class _EnterInfoState extends State<EnterInfo> {
                     child: Center(
                       child: Text(
                         'Next'.tr,
-                        style: TextStyle(color: CustomColors.blue_color),
+                        style: TextStyle(color: CustomColors.secondary_color),
                       ),
                     ),
                   ),
@@ -283,7 +283,7 @@ class _EnterInfoState extends State<EnterInfo> {
                     child: Center(
                       child: Text(
                         'Sign in with google'.tr,
-                        style: TextStyle(color: CustomColors.blue_color),
+                        style: TextStyle(color: CustomColors.secondary_color),
                       ),
                     ),
                   ),

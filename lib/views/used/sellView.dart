@@ -156,7 +156,8 @@ class SellView extends StatelessWidget {
                                           '${getSellPropertyController.currentUserSellinglist[index].city![0].toUpperCase()}${getSellPropertyController.currentUserSellinglist[index].city!.substring(1).toLowerCase()}',
                                           style: TextStyle(
                                               fontWeight: FontWeight.bold,
-                                              color: CustomColors.blue_color),
+                                              color:
+                                                  CustomColors.secondary_color),
                                         ),
                                       ),
                                       Padding(

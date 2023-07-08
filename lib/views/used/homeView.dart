@@ -1,4 +1,4 @@
-import 'package:convex_bottom_bar/convex_bottom_bar.dart';
+import 'package:awesome_bottom_bar/awesome_bottom_bar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -19,8 +19,8 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   late PageController _pageController;
-  late TabController _tabController;
-  final ValueNotifier<int> _pageIndex = ValueNotifier<int>(0);
+
+  // final ValueNotifier<int> _pageIndex ;
   final PageViewController pageViewController = Get.put(PageViewController());
   final DraweController draweController = Get.put(DraweController());
   final box = GetStorage();
@@ -28,21 +28,13 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
-
-    _pageController = PageController(initialPage: _pageIndex.value);
-    _tabController =
-        TabController(length: 4, vsync: this, initialIndex: _pageIndex.value);
-    _pageIndex.addListener(() {
-      _pageController.jumpToPage(_pageIndex.value);
-      _tabController.animateTo(_pageIndex.value);
-    });
+    _pageController = PageController(initialPage: 0);
+    pageViewController.pageViewIndex.addListener(() {});
   }
 
   @override
   void dispose() {
     _pageController.dispose();
-    _tabController.dispose();
-    _pageIndex.dispose();
     super.dispose();
   }
 
@@ -66,7 +58,6 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
             ),
             Expanded(
               child: ListView.builder(
-                  // shrinkWrap: true,
                   itemCount: draweController.drawerItemsList.length,
                   itemBuilder: (context, index) {
                     return ListTile(
@@ -74,7 +65,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                         draweController.drawerItemsList[index].icon,
                         color: draweController.selectedDrawerIndex == index
                             ? CustomColors.prime_color
-                            : CustomColors.blue_color,
+                            : CustomColors.secondary_color,
                       ),
                       title: Text(
                         draweController.drawerItemsList[index].title,
@@ -85,7 +76,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                                     : FontWeight.normal,
                             color: draweController.selectedDrawerIndex == index
                                 ? CustomColors.prime_color
-                                : CustomColors.blue_color),
+                                : CustomColors.secondary_color),
                       ),
                       onTap: () {
                         print(index);
@@ -113,10 +104,6 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                           fontWeight: FontWeight.bold, color: Colors.white),
                     ),
                     onTap: () async {
-                      // await FirebaseAuth.instance.signOut();
-                      // authController.currentUser(false);
-                      // authController.update();
-                      // pageViewController.pageViewIndex.value = 0;
                       box.remove('name');
                       box.remove('phone');
                       await FirebaseAuth.instance.signOut();
@@ -138,7 +125,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
           'Services'.tr,
           style: TextStyle(
               fontWeight: FontWeight.bold,
-              color: CustomColors.blue_color,
+              color: CustomColors.secondary_color,
               fontSize: 22),
         ),
         actions: [
@@ -149,28 +136,37 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
               icon: Icon(Icons.info)),
         ],
       ),
-      bottomNavigationBar: ConvexAppBar(
-        height: 55,
-        controller: _tabController,
-        backgroundColor: CustomColors.prime_color,
-        items: [
-          TabItem(icon: Icons.home, title: 'Home'.tr),
-          TabItem(icon: Icons.design_services_sharp, title: 'Services'.tr),
-          TabItem(icon: Icons.favorite, title: 'Favorite'.tr),
-          TabItem(icon: Icons.people, title: 'My Services'.tr),
-        ],
-        onTap: (int i) {
-          _pageIndex.value = i;
-        },
-        style: TabStyle.custom,
-      ),
+      bottomNavigationBar: BottomBarDefault(
+          top: 5,
+          animated: true,
+          items: [
+            TabItem(icon: Icons.home, title: 'Home'.tr),
+            TabItem(icon: Icons.design_services_sharp, title: 'Services'.tr),
+            TabItem(icon: Icons.favorite, title: 'Favorite'.tr),
+            TabItem(icon: Icons.people, title: 'My Services'.tr),
+          ],
+          backgroundColor: CustomColors.prime_color,
+          color: CustomColors.secondary_color,
+          colorSelected: Colors.orange,
+          onTap: (int index) => setState(() {
+                _pageController.jumpToPage(index);
+              })),
+
+      //  ConvexAppBar(
+      //   height: 55,
+      //   controller: _tabController,
+      //   backgroundColor: CustomColors.prime_color,
+      //   items:,
+      //   onTap: (int i) {
+      //     _pageIndex.value = i;
+      //   },
+      //   style: TabStyle.custom,
+      // ),
       body: Column(
         children: [
           Expanded(
             child: PageView(
-              onPageChanged: (index) {
-                _pageIndex.value = index;
-              },
+              onPageChanged: (index) {},
               controller: _pageController,
               children: pageViewController.pageViewItems,
             ),

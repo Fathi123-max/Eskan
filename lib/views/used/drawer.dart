@@ -41,7 +41,7 @@ class drawerwidget extends StatelessWidget {
                       draweController.drawerItemsList[index].icon,
                       color: draweController.selectedDrawerIndex == index
                           ? CustomColors.prime_color
-                          : CustomColors.blue_color,
+                          : CustomColors.secondary_color,
                     ),
                     title: Text(
                       draweController.drawerItemsList[index].title,
@@ -52,7 +52,7 @@ class drawerwidget extends StatelessWidget {
                                   : FontWeight.normal,
                           color: draweController.selectedDrawerIndex == index
                               ? CustomColors.prime_color
-                              : CustomColors.blue_color),
+                              : CustomColors.secondary_color),
                     ),
                     onTap: () {
                       print(index);

@@ -66,7 +66,7 @@ class AddDataScreen extends StatelessWidget {
               'Service Name'.tr,
               style: TextStyle(
                   fontSize: 18,
-                  color: CustomColors.blue_color,
+                  color: CustomColors.secondary_color,
                   fontWeight: FontWeight.bold),
             ),
           ),
@@ -119,7 +119,7 @@ class AddDataScreen extends StatelessWidget {
               'Type of Service'.tr,
               style: TextStyle(
                   fontSize: 18,
-                  color: CustomColors.blue_color,
+                  color: CustomColors.secondary_color,
                   fontWeight: FontWeight.bold),
             ),
           ),
@@ -170,7 +170,7 @@ class AddDataScreen extends StatelessWidget {
               'Select City'.tr,
               style: TextStyle(
                   fontSize: 18,
-                  color: CustomColors.blue_color,
+                  color: CustomColors.secondary_color,
                   fontWeight: FontWeight.bold),
             ),
           ),
@@ -220,7 +220,7 @@ class AddDataScreen extends StatelessWidget {
               'Select Area'.tr,
               style: TextStyle(
                   fontSize: 18,
-                  color: CustomColors.blue_color,
+                  color: CustomColors.secondary_color,
                   fontWeight: FontWeight.bold),
             ),
           ),
@@ -277,7 +277,7 @@ class AddDataScreen extends StatelessWidget {
                   'المساحه',
                   style: TextStyle(
                       fontSize: 18,
-                      color: CustomColors.blue_color,
+                      color: CustomColors.secondary_color,
                       fontWeight: FontWeight.bold),
                 ),
               ),
@@ -332,7 +332,7 @@ class AddDataScreen extends StatelessWidget {
               'غرف النوم',
               style: TextStyle(
                   fontSize: 18,
-                  color: CustomColors.blue_color,
+                  color: CustomColors.secondary_color,
                   fontWeight: FontWeight.bold),
             ),
           ),
@@ -386,7 +386,7 @@ class AddDataScreen extends StatelessWidget {
               'الحمامات',
               style: TextStyle(
                   fontSize: 18,
-                  color: CustomColors.blue_color,
+                  color: CustomColors.secondary_color,
                   fontWeight: FontWeight.bold),
             ),
           ),
@@ -440,7 +440,7 @@ class AddDataScreen extends StatelessWidget {
               'المطبخ',
               style: TextStyle(
                   fontSize: 18,
-                  color: CustomColors.blue_color,
+                  color: CustomColors.secondary_color,
                   fontWeight: FontWeight.bold),
             ),
           ),
@@ -495,7 +495,7 @@ class AddDataScreen extends StatelessWidget {
               'الاستقبال',
               style: TextStyle(
                   fontSize: 18,
-                  color: CustomColors.blue_color,
+                  color: CustomColors.secondary_color,
                   fontWeight: FontWeight.bold),
             ),
           ),
@@ -550,7 +550,7 @@ class AddDataScreen extends StatelessWidget {
               value == 'sale' ? 'Price' : 'الايجار / الشهر',
               style: TextStyle(
                   fontSize: 18,
-                  color: CustomColors.blue_color,
+                  color: CustomColors.secondary_color,
                   fontWeight: FontWeight.bold),
             ),
           ),
@@ -603,7 +603,7 @@ class AddDataScreen extends StatelessWidget {
               'Description'.tr,
               style: TextStyle(
                   fontSize: 18,
-                  color: CustomColors.blue_color,
+                  color: CustomColors.secondary_color,
                   fontWeight: FontWeight.bold),
             ),
           ),
