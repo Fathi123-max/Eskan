@@ -71,7 +71,7 @@ class RentOutView extends StatelessWidget {
                                   image: DecorationImage(
                                     image: NetworkImage(rentOutController
                                         .currentUserRentOutlist[index]
-                                        .images[0]),
+                                        .images![0]),
                                     fit: BoxFit.cover,
                                   ),
                                 ),
@@ -84,7 +84,7 @@ class RentOutView extends StatelessWidget {
                                     Text(
                                       rentOutController
                                           .currentUserRentOutlist[index]
-                                          .address,
+                                          .address!,
                                       style: TextStyle(
                                         fontWeight: FontWeight.bold,
                                         fontSize: 12,
@@ -93,7 +93,7 @@ class RentOutView extends StatelessWidget {
                                     SizedBox(height: 4),
                                     Text(
                                       rentOutController
-                                          .currentUserRentOutlist[index].descr,
+                                          .currentUserRentOutlist[index].descr!,
                                       style: TextStyle(
                                         fontSize: 14,
                                         color: Colors.black54,
@@ -103,7 +103,7 @@ class RentOutView extends StatelessWidget {
                                     ),
                                     SizedBox(height: 4),
                                     Text(
-                                      '${rentOutController.currentUserRentOutlist[index].city[0].toUpperCase()}${rentOutController.currentUserRentOutlist[index].city.substring(1).toLowerCase()}',
+                                      '${rentOutController.currentUserRentOutlist[index].city![0].toUpperCase()}${rentOutController.currentUserRentOutlist[index].city!.substring(1).toLowerCase()}',
                                       style: TextStyle(
                                         fontWeight: FontWeight.bold,
                                         color: Colors.black54,

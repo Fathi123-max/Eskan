@@ -76,7 +76,7 @@ class SellView extends StatelessWidget {
                                                   getSellPropertyController
                                                       .currentUserSellinglist[
                                                           index]
-                                                      .images[0],
+                                                      .images![0],
                                               imageBuilder:
                                                   (context, imageProvider) =>
                                                       Container(
@@ -141,7 +141,7 @@ class SellView extends StatelessWidget {
                                         child: Text(
                                           getSellPropertyController
                                               .currentUserSellinglist[index]
-                                              .address,
+                                              .address!,
                                           textAlign: TextAlign.left,
                                           maxLines: 2,
                                           overflow: TextOverflow.ellipsis,
@@ -153,7 +153,7 @@ class SellView extends StatelessWidget {
                                         padding: const EdgeInsets.only(
                                             left: 5, right: 5),
                                         child: Text(
-                                          '${getSellPropertyController.currentUserSellinglist[index].city[0].toUpperCase()}${getSellPropertyController.currentUserSellinglist[index].city.substring(1).toLowerCase()}',
+                                          '${getSellPropertyController.currentUserSellinglist[index].city![0].toUpperCase()}${getSellPropertyController.currentUserSellinglist[index].city!.substring(1).toLowerCase()}',
                                           style: TextStyle(
                                               fontWeight: FontWeight.bold,
                                               color: CustomColors.blue_color),

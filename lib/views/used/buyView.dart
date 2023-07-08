@@ -1,9 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:haider/controllers/used/currentUserInfoController.dart';
 import 'package:haider/controllers/unused/getSellAndBuyPropertController.dart';
 import 'package:haider/controllers/unused/serachController.dart';
+import 'package:haider/controllers/used/currentUserInfoController.dart';
 import 'package:haider/utills/customColors.dart';
 import 'package:haider/views/test/serchScreen.dart';
 
@@ -111,7 +111,7 @@ class BuyView extends StatelessWidget {
                                           userInfoController.Id.value =
                                               getSellPropertyController
                                                   .allBuyList[index]
-                                                  .currentUserId;
+                                                  .currentUserId!;
                                           // userInfoController.getUserInfo();
                                           Get.to(() => PropertyDetail(
                                               data: getSellPropertyController
@@ -130,7 +130,7 @@ class BuyView extends StatelessWidget {
                                                       imageUrl:
                                                           getSellPropertyController
                                                               .allBuyList[index]
-                                                              .images[0],
+                                                              .images?[0],
                                                       imageBuilder: (context,
                                                               imageProvider) =>
                                                           Container(
@@ -203,7 +203,7 @@ class BuyView extends StatelessWidget {
                                                 child: Text(
                                                   getSellPropertyController
                                                       .allBuyList[index]
-                                                      .address,
+                                                      .address!,
                                                   textAlign: TextAlign.left,
                                                   maxLines: 2,
                                                   overflow:
@@ -216,7 +216,7 @@ class BuyView extends StatelessWidget {
                                                 padding: const EdgeInsets.only(
                                                     left: 5, right: 5),
                                                 child: Text(
-                                                  '${getSellPropertyController.allBuyList[index].city[0].toUpperCase()}${getSellPropertyController.allBuyList[index].city.substring(1).toLowerCase()}',
+                                                  '${getSellPropertyController.allBuyList[index].city![0].toUpperCase()}${getSellPropertyController.allBuyList[index].city!.substring(1).toLowerCase()}',
                                                   style: TextStyle(
                                                       fontWeight:
                                                           FontWeight.bold,
@@ -313,7 +313,7 @@ class BuyView extends StatelessWidget {
                                                                 imageUrl: serachController
                                                                     .buySerachList[
                                                                         index]
-                                                                    .images[0],
+                                                                    .images![0],
                                                                 imageBuilder:
                                                                     (context,
                                                                             imageProvider) =>
@@ -388,7 +388,7 @@ class BuyView extends StatelessWidget {
                                                             serachController
                                                                 .buySerachList[
                                                                     index]
-                                                                .address,
+                                                                .address!,
                                                             textAlign:
                                                                 TextAlign.left,
                                                             maxLines: 2,
@@ -407,7 +407,7 @@ class BuyView extends StatelessWidget {
                                                                   left: 5,
                                                                   right: 5),
                                                           child: Text(
-                                                            '${serachController.buySerachList[index].city[0].toUpperCase()}${serachController.buySerachList[index].city.substring(1).toLowerCase()}',
+                                                            '${serachController.buySerachList[index].city![0].toUpperCase()}${serachController.buySerachList[index].city!.substring(1).toLowerCase()}',
                                                             style: TextStyle(
                                                                 fontWeight:
                                                                     FontWeight

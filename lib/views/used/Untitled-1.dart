@@ -36,7 +36,7 @@ class PropertyDetail extends StatelessWidget {
                         controller.selectedIndex.value = index;
                       },
                       scrollDirection: Axis.horizontal,
-                      children: data.images.map((e) {
+                      children: data.images!.map((e) {
                         return CachedNetworkImage(
                           imageUrl: e,
                           imageBuilder: (context, imageProvider) => Card(
@@ -107,8 +107,8 @@ class PropertyDetail extends StatelessWidget {
               Obx(() {
                 return Row(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children: data.images.map((e) {
-                      int index = data.images.indexOf(e);
+                    children: data.images!.map((e) {
+                      int index = data.images!.indexOf(e);
                       //controller.selectedIndex.value = index;
                       return Padding(
                         padding: const EdgeInsets.all(3.0),
@@ -151,13 +151,13 @@ class PropertyDetail extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               Text(
-                                '${data.city[0].toUpperCase()}${data.city.substring(1).toLowerCase()}',
+                                '${data.city![0].toUpperCase()}${data.city!.substring(1).toLowerCase()}',
                                 style: TextStyle(
                                     fontSize: 18,
                                     fontWeight: FontWeight.bold,
                                     color: Colors.black54),
                               ),
-                              Text(data.area),
+                              Text(data.area!),
                             ],
                           ),
                         ),
@@ -169,7 +169,7 @@ class PropertyDetail extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(left: 15, top: 5, right: 15),
                 child: Text(
-                  data.address,
+                  data.address!,
                   style: TextStyle(
                       fontWeight: FontWeight.bold, color: Colors.black54),
                 ),
@@ -184,7 +184,7 @@ class PropertyDetail extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(left: 15, top: 5, right: 15),
                 child: Text(
-                  data.descr,
+                  data.descr!,
                   textAlign: TextAlign.justify,
                   style: TextStyle(color: Colors.black54),
                 ),

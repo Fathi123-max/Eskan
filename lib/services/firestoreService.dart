@@ -40,14 +40,14 @@ class FirestoreService {
     propertyModel.currentUserId = "currentUser!.uid";
 
     propertyModel.propertyFor = typeFor;
-    for (int i = 0; i < propertyModel.images.length; i++) {
+    for (int i = 0; i < propertyModel.images!.length; i++) {
       //   var fileExtension = path.extension(propertyModel.images[i].path);
       String fileName = DateTime.now().millisecondsSinceEpoch.toString();
       var firebaseStorageRef =
           FirebaseStorage.instance.ref().child('RealState/$fileName');
 
       await firebaseStorageRef
-          .putData((await propertyModel.images[i].getByteData())
+          .putData((await propertyModel.images![i].getByteData())
               .buffer
               .asUint8List())
           .then((result) {
@@ -133,8 +133,18 @@ class FirestoreService {
       querySnapshot.docs.forEach((doc) {
         // print("Document Id is ${doc.id}");
         String docId = doc.id;
-        PropertyModel propertyModel = PropertyModel.getFromServer(
-          doc['username'],
+        PropertyModel propertyModel =
+            PropertyModel.fromJson(doc.data() as String);
+        // if (doc['currentUserId'] == controller.currentUserId.value &&
+        //     doc['propertyFor'] == 'sale') {
+        propertyList.add(propertyModel);
+        // }
+      });
+    });
+    return propertyList;
+  }
+
+/**  doc['username'],
           doc['usernumber'],
           doc['time'],
           doc['propertyAction'],
@@ -151,17 +161,7 @@ class FirestoreService {
           doc['kitchen'],
           doc['des'],
           doc['price'],
-          doc['images'],
-        );
-        // if (doc['currentUserId'] == controller.currentUserId.value &&
-        //     doc['propertyFor'] == 'sale') {
-        propertyList.add(propertyModel);
-        // }
-      });
-    });
-    return propertyList;
-  }
-
+          doc['images'], */
   Future<List<PropertyModel>> getAllBuyingList() async {
     List<PropertyModel> propertyList = [];
     await FirebaseFirestore.instance
@@ -170,26 +170,8 @@ class FirestoreService {
         .get()
         .then((QuerySnapshot querySnapshot) {
       querySnapshot.docs.forEach((doc) {
-        PropertyModel propertyModel = PropertyModel.getFromServer(
-          doc['username'],
-          doc['usernumber'],
-          doc['time'],
-          doc['propertyAction'],
-          doc.id,
-          doc['currentUserId'],
-          doc['propertyType'],
-          doc['propertyFor'],
-          doc['city'],
-          doc['area'],
-          doc['address'],
-          doc['size'],
-          doc['bedrooms'],
-          doc['bathrooms'],
-          doc['kitchen'],
-          doc['des'],
-          doc['price'],
-          doc['images'],
-        );
+        PropertyModel propertyModel =
+            PropertyModel.fromJson(doc.data() as String);
         if (doc['propertyFor'] == 'sale') {
           propertyList.add(propertyModel);
         }
@@ -207,26 +189,8 @@ class FirestoreService {
         .get()
         .then((QuerySnapshot querySnapshot) {
       querySnapshot.docs.forEach((doc) {
-        PropertyModel propertyModel = PropertyModel.getFromServer(
-          doc['username'],
-          doc['usernumber'],
-          doc['time'],
-          doc['propertyAction'],
-          doc.id,
-          doc['currentUserId'],
-          doc['propertyType'],
-          doc['propertyFor'],
-          doc['city'],
-          doc['area'],
-          doc['address'],
-          doc['size'],
-          doc['bedrooms'],
-          doc['bathrooms'],
-          doc['kitchen'],
-          doc['des'],
-          doc['price'],
-          doc['images'],
-        );
+        PropertyModel propertyModel =
+            PropertyModel.fromJson(doc.data() as String);
         if (doc['username'] == box.read("name") &&
             doc['usernumber'] == box.read("phone")) {
           propertyList.add(propertyModel);
@@ -244,26 +208,8 @@ class FirestoreService {
         .get()
         .then((QuerySnapshot querySnapshot) {
       querySnapshot.docs.forEach((doc) {
-        PropertyModel propertyModel = PropertyModel.getFromServer(
-          doc['username'],
-          doc['usernumber'],
-          doc['time'],
-          doc['propertyAction'],
-          doc.id,
-          doc['currentUserId'],
-          doc['propertyType'],
-          doc['propertyFor'],
-          doc['city'],
-          doc['area'],
-          doc['address'],
-          doc['size'],
-          doc['bedrooms'],
-          doc['bathrooms'],
-          doc['kitchen'],
-          doc['des'],
-          doc['price'],
-          doc['images'],
-        );
+        PropertyModel propertyModel =
+            PropertyModel.fromJson(doc.data() as String);
 
         propertyList.add(propertyModel);
       });
@@ -280,26 +226,8 @@ class FirestoreService {
         .get()
         .then((QuerySnapshot querySnapshot) {
       querySnapshot.docs.forEach((doc) {
-        PropertyModel propertyModel = PropertyModel.getFromServer(
-          doc['username'],
-          doc['usernumber'],
-          doc['time'],
-          doc['propertyAction'],
-          doc.id,
-          doc['currentUserId'],
-          doc['propertyType'],
-          doc['propertyFor'],
-          doc['city'],
-          doc['area'],
-          doc['address'],
-          doc['size'],
-          doc['bedrooms'],
-          doc['bathrooms'],
-          doc['kitchen'],
-          doc['des'],
-          doc['price'],
-          doc['images'],
-        );
+        PropertyModel propertyModel =
+            PropertyModel.fromJson(doc.data() as String);
 
         propertyListbycat.add(propertyModel);
       });
@@ -378,26 +306,8 @@ class FirestoreService {
           .get()
           .then((QuerySnapshot querySnapshot) {
         querySnapshot.docs.forEach((doc) {
-          PropertyModel propertyModel = PropertyModel.getFromServer(
-            doc['username'],
-            doc['usernumber'],
-            doc['time'],
-            doc['propertyAction'],
-            doc.id,
-            doc['currentUserId'],
-            doc['propertyType'],
-            doc['propertyFor'],
-            doc['city'],
-            doc['area'],
-            doc['address'],
-            doc['size'],
-            doc['bedrooms'],
-            doc['bathrooms'],
-            doc['kitchen'],
-            doc['des'],
-            doc['price'],
-            doc['images'],
-          );
+          PropertyModel propertyModel =
+              PropertyModel.fromJson(doc.data() as String);
           String city = doc['city'];
 
           propertyList.add(propertyModel);
@@ -410,26 +320,8 @@ class FirestoreService {
           .get()
           .then((QuerySnapshot querySnapshot) {
         querySnapshot.docs.forEach((doc) {
-          PropertyModel propertyModel = PropertyModel.getFromServer(
-            doc['username'],
-            doc['usernumber'],
-            doc['time'],
-            doc['propertyAction'],
-            doc.id,
-            doc['currentUserId'],
-            doc['propertyType'],
-            doc['propertyFor'],
-            doc['city'],
-            doc['area'],
-            doc['address'],
-            doc['size'],
-            doc['bedrooms'],
-            doc['bathrooms'],
-            doc['kitchen'],
-            doc['des'],
-            doc['price'],
-            doc['images'],
-          );
+          PropertyModel propertyModel =
+              PropertyModel.fromJson(doc.data() as String);
           String city = doc['city'];
           int price = int.parse(doc['price']);
           if (doc['propertyFor'] == 'sale' &&
@@ -446,26 +338,8 @@ class FirestoreService {
           .get()
           .then((QuerySnapshot querySnapshot) {
         querySnapshot.docs.forEach((doc) {
-          PropertyModel propertyModel = PropertyModel.getFromServer(
-            doc['username'],
-            doc['usernumber'],
-            doc['time'],
-            doc['propertyAction'],
-            doc.id,
-            doc['currentUserId'],
-            doc['propertyType'],
-            doc['propertyFor'],
-            doc['city'],
-            doc['area'],
-            doc['address'],
-            doc['size'],
-            doc['bedrooms'],
-            doc['bathrooms'],
-            doc['kitchen'],
-            doc['des'],
-            doc['price'],
-            doc['images'],
-          );
+          PropertyModel propertyModel =
+              PropertyModel.fromJson(doc.data() as String);
           String city = doc['city'];
           int price = int.parse(doc['price']);
           if (doc['propertyFor'] == 'sale' &&
@@ -482,26 +356,8 @@ class FirestoreService {
           .get()
           .then((QuerySnapshot querySnapshot) {
         querySnapshot.docs.forEach((doc) {
-          PropertyModel propertyModel = PropertyModel.getFromServer(
-            doc['username'],
-            doc['usernumber'],
-            doc['time'],
-            doc['propertyAction'],
-            doc.id,
-            doc['currentUserId'],
-            doc['propertyType'],
-            doc['propertyFor'],
-            doc['city'],
-            doc['area'],
-            doc['address'],
-            doc['size'],
-            doc['bedrooms'],
-            doc['bathrooms'],
-            doc['kitchen'],
-            doc['des'],
-            doc['price'],
-            doc['images'],
-          );
+          PropertyModel propertyModel =
+              PropertyModel.fromJson(doc.data() as String);
           String city = doc['city'];
           int price = int.parse(doc['price']);
           if (doc['propertyFor'] == 'sale' &&
@@ -519,26 +375,8 @@ class FirestoreService {
           .get()
           .then((QuerySnapshot querySnapshot) {
         querySnapshot.docs.forEach((doc) {
-          PropertyModel propertyModel = PropertyModel.getFromServer(
-            doc['username'],
-            doc['usernumber'],
-            doc['time'],
-            doc['propertyAction'],
-            doc.id,
-            doc['currentUserId'],
-            doc['propertyType'],
-            doc['propertyFor'],
-            doc['city'],
-            doc['area'],
-            doc['address'],
-            doc['size'],
-            doc['bedrooms'],
-            doc['bathrooms'],
-            doc['kitchen'],
-            doc['des'],
-            doc['price'],
-            doc['images'],
-          );
+          PropertyModel propertyModel =
+              PropertyModel.fromJson(doc.data() as String);
           String city = doc['city'];
           int price = int.parse(doc['price']);
           if (doc['propertyFor'] == 'sale' && price >= int.parse(priceFrom)) {
@@ -553,26 +391,8 @@ class FirestoreService {
           .get()
           .then((QuerySnapshot querySnapshot) {
         querySnapshot.docs.forEach((doc) {
-          PropertyModel propertyModel = PropertyModel.getFromServer(
-            doc['username'],
-            doc['usernumber'],
-            doc['time'],
-            doc['propertyAction'],
-            doc.id,
-            doc['currentUserId'],
-            doc['propertyType'],
-            doc['propertyFor'],
-            doc['city'],
-            doc['area'],
-            doc['address'],
-            doc['size'],
-            doc['bedrooms'],
-            doc['bathrooms'],
-            doc['kitchen'],
-            doc['des'],
-            doc['price'],
-            doc['images'],
-          );
+          PropertyModel propertyModel =
+              PropertyModel.fromJson(doc.data() as String);
 
           int price = int.parse(doc['price']);
           if (doc['propertyFor'] == 'sale' && price <= int.parse(priceTo)) {
@@ -587,26 +407,8 @@ class FirestoreService {
           .get()
           .then((QuerySnapshot querySnapshot) {
         querySnapshot.docs.forEach((doc) {
-          PropertyModel propertyModel = PropertyModel.getFromServer(
-            doc['username'],
-            doc['usernumber'],
-            doc['time'],
-            doc['propertyAction'],
-            doc.id,
-            doc['currentUserId'],
-            doc['propertyType'],
-            doc['propertyFor'],
-            doc['city'],
-            doc['area'],
-            doc['address'],
-            doc['size'],
-            doc['bedrooms'],
-            doc['bathrooms'],
-            doc['kitchen'],
-            doc['des'],
-            doc['price'],
-            doc['images'],
-          );
+          PropertyModel propertyModel =
+              PropertyModel.fromJson(doc.data() as String);
           String city = doc['city'];
           int price = int.parse(doc['price']);
           if (doc['propertyFor'] == 'sale' &&
@@ -634,26 +436,8 @@ class FirestoreService {
           .get()
           .then((QuerySnapshot querySnapshot) {
         querySnapshot.docs.forEach((doc) {
-          PropertyModel propertyModel = PropertyModel.getFromServer(
-            doc['username'],
-            doc['usernumber'],
-            doc['time'],
-            doc['propertyAction'],
-            doc.id,
-            doc['currentUserId'],
-            doc['propertyType'],
-            doc['propertyFor'],
-            doc['city'],
-            doc['area'],
-            doc['address'],
-            doc['size'],
-            doc['bedrooms'],
-            doc['bathrooms'],
-            doc['kitchen'],
-            doc['des'],
-            doc['price'],
-            doc['images'],
-          );
+          PropertyModel propertyModel =
+              PropertyModel.fromJson(doc.data() as String);
           String city = doc['city'];
 
           if (doc['propertyFor'] == 'rent' &&
@@ -669,26 +453,8 @@ class FirestoreService {
           .get()
           .then((QuerySnapshot querySnapshot) {
         querySnapshot.docs.forEach((doc) {
-          PropertyModel propertyModel = PropertyModel.getFromServer(
-            doc['username'],
-            doc['usernumber'],
-            doc['time'],
-            doc['propertyAction'],
-            doc.id,
-            doc['currentUserId'],
-            doc['propertyType'],
-            doc['propertyFor'],
-            doc['city'],
-            doc['area'],
-            doc['address'],
-            doc['size'],
-            doc['bedrooms'],
-            doc['bathrooms'],
-            doc['kitchen'],
-            doc['des'],
-            doc['price'],
-            doc['images'],
-          );
+          PropertyModel propertyModel =
+              PropertyModel.fromJson(doc.data() as String);
           String city = doc['city'];
           int price = int.parse(doc['price']);
           if (doc['propertyFor'] == 'rent' &&
@@ -705,26 +471,8 @@ class FirestoreService {
           .get()
           .then((QuerySnapshot querySnapshot) {
         querySnapshot.docs.forEach((doc) {
-          PropertyModel propertyModel = PropertyModel.getFromServer(
-            doc['username'],
-            doc['usernumber'],
-            doc['time'],
-            doc['propertyAction'],
-            doc.id,
-            doc['currentUserId'],
-            doc['propertyType'],
-            doc['propertyFor'],
-            doc['city'],
-            doc['area'],
-            doc['address'],
-            doc['size'],
-            doc['bedrooms'],
-            doc['bathrooms'],
-            doc['kitchen'],
-            doc['des'],
-            doc['price'],
-            doc['images'],
-          );
+          PropertyModel propertyModel =
+              PropertyModel.fromJson(doc.data() as String);
           String city = doc['city'];
           int price = int.parse(doc['price']);
           if (doc['propertyFor'] == 'rent' &&
@@ -741,26 +489,8 @@ class FirestoreService {
           .get()
           .then((QuerySnapshot querySnapshot) {
         querySnapshot.docs.forEach((doc) {
-          PropertyModel propertyModel = PropertyModel.getFromServer(
-            doc['username'],
-            doc['usernumber'],
-            doc['time'],
-            doc['propertyAction'],
-            doc.id,
-            doc['currentUserId'],
-            doc['propertyType'],
-            doc['propertyFor'],
-            doc['city'],
-            doc['area'],
-            doc['address'],
-            doc['size'],
-            doc['bedrooms'],
-            doc['bathrooms'],
-            doc['kitchen'],
-            doc['des'],
-            doc['price'],
-            doc['images'],
-          );
+          PropertyModel propertyModel =
+              PropertyModel.fromJson(doc.data() as String);
           String city = doc['city'];
           int price = int.parse(doc['price']);
           if (doc['propertyFor'] == 'rent' &&
@@ -778,26 +508,8 @@ class FirestoreService {
           .get()
           .then((QuerySnapshot querySnapshot) {
         querySnapshot.docs.forEach((doc) {
-          PropertyModel propertyModel = PropertyModel.getFromServer(
-            doc['username'],
-            doc['usernumber'],
-            doc['time'],
-            doc['propertyAction'],
-            doc.id,
-            doc['currentUserId'],
-            doc['propertyType'],
-            doc['propertyFor'],
-            doc['city'],
-            doc['area'],
-            doc['address'],
-            doc['size'],
-            doc['bedrooms'],
-            doc['bathrooms'],
-            doc['kitchen'],
-            doc['des'],
-            doc['price'],
-            doc['images'],
-          );
+          PropertyModel propertyModel =
+              PropertyModel.fromJson(doc.data() as String);
           String city = doc['city'];
           int price = int.parse(doc['price']);
           if (doc['propertyFor'] == 'rent' && price >= int.parse(priceFrom)) {
@@ -812,26 +524,8 @@ class FirestoreService {
           .get()
           .then((QuerySnapshot querySnapshot) {
         querySnapshot.docs.forEach((doc) {
-          PropertyModel propertyModel = PropertyModel.getFromServer(
-            doc['username'],
-            doc['usernumber'],
-            doc['time'],
-            doc['propertyAction'],
-            doc.id,
-            doc['currentUserId'],
-            doc['propertyType'],
-            doc['propertyFor'],
-            doc['city'],
-            doc['area'],
-            doc['address'],
-            doc['size'],
-            doc['bedrooms'],
-            doc['bathrooms'],
-            doc['kitchen'],
-            doc['des'],
-            doc['price'],
-            doc['images'],
-          );
+          PropertyModel propertyModel =
+              PropertyModel.fromJson(doc.data() as String);
 
           int price = int.parse(doc['price']);
           if (doc['propertyFor'] == 'rent' && price <= int.parse(priceTo)) {
@@ -846,26 +540,8 @@ class FirestoreService {
           .get()
           .then((QuerySnapshot querySnapshot) {
         querySnapshot.docs.forEach((doc) {
-          PropertyModel propertyModel = PropertyModel.getFromServer(
-            doc['username'],
-            doc['usernumber'],
-            doc['time'],
-            doc['propertyAction'],
-            doc.id,
-            doc['currentUserId'],
-            doc['propertyType'],
-            doc['propertyFor'],
-            doc['city'],
-            doc['area'],
-            doc['address'],
-            doc['size'],
-            doc['bedrooms'],
-            doc['bathrooms'],
-            doc['kitchen'],
-            doc['des'],
-            doc['price'],
-            doc['images'],
-          );
+          PropertyModel propertyModel =
+              PropertyModel.fromJson(doc.data() as String);
           String city = doc['city'];
           int price = int.parse(doc['price']);
           if (doc['propertyFor'] == 'rent' &&

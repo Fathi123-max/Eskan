@@ -2,9 +2,9 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:haider/controllers/unused/searchRentController.dart';
 import 'package:haider/controllers/used/currentUserInfoController.dart';
 import 'package:haider/controllers/used/rentAndRentOutController.dart';
-import 'package:haider/controllers/unused/searchRentController.dart';
 import 'package:haider/utills/customColors.dart';
 
 import 'propertyDetailScreen.dart';
@@ -161,7 +161,7 @@ class RentView extends StatelessWidget {
                                                                 imageUrl: searchRentController
                                                                     .rentSerachList[
                                                                         index]
-                                                                    .images[0],
+                                                                    .images![0],
                                                                 imageBuilder:
                                                                     (context,
                                                                             imageProvider) =>
@@ -236,7 +236,7 @@ class RentView extends StatelessWidget {
                                                             searchRentController
                                                                 .rentSerachList[
                                                                     index]
-                                                                .address,
+                                                                .address!,
                                                             textAlign:
                                                                 TextAlign.left,
                                                             maxLines: 2,
@@ -255,7 +255,7 @@ class RentView extends StatelessWidget {
                                                                   left: 5,
                                                                   right: 5),
                                                           child: Text(
-                                                            '${searchRentController.rentSerachList[index].city[0].toUpperCase()}${searchRentController.rentSerachList[index].city.substring(1).toLowerCase()}',
+                                                            '${searchRentController.rentSerachList[index].city![0].toUpperCase()}${searchRentController.rentSerachList[index].city!.substring(1).toLowerCase()}',
                                                             style: TextStyle(
                                                                 fontWeight:
                                                                     FontWeight

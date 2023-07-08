@@ -45,7 +45,7 @@ class CurrentUserPropertyDetail extends StatelessWidget {
                       controller.selectedIndex.value = index;
                     },
                     scrollDirection: Axis.horizontal,
-                    children: data.images.map((e) {
+                    children: data.images!.map((e) {
                       return Hero(
                         tag: e,
                         child: GestureDetector(
@@ -88,8 +88,8 @@ class CurrentUserPropertyDetail extends StatelessWidget {
               Obx(() {
                 return Row(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children: data.images.map((e) {
-                      int index = data.images.indexOf(e);
+                    children: data.images!.map((e) {
+                      int index = data.images!.indexOf(e);
                       //controller.selectedIndex.value = index;
                       return Padding(
                         padding: const EdgeInsets.all(3.0),
@@ -149,7 +149,7 @@ class CurrentUserPropertyDetail extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(left: 15, top: 5, right: 15),
                 child: Text(
-                  data.address,
+                  data.address!,
                   style: TextStyle(
                       fontWeight: FontWeight.bold, color: Colors.black54),
                 ),
@@ -164,7 +164,7 @@ class CurrentUserPropertyDetail extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(left: 15, top: 5, right: 15),
                 child: Text(
-                  data.descr,
+                  data.descr!,
                   textAlign: TextAlign.justify,
                   style: TextStyle(color: Colors.black54),
                 ),
@@ -245,7 +245,7 @@ class CurrentUserPropertyDetail extends StatelessWidget {
                                         await getSellAndBuyPropertyController
                                             .firestoreService
                                             .deleteProperty(
-                                                data.docId, data.images);
+                                                data.docId!, data.images!);
                                     if (response == 'Property Deleted') {
                                       getSellAndBuyPropertyController
                                           .getAllBuyingProperty();
@@ -320,7 +320,7 @@ class CurrentUserPropertyDetail extends StatelessWidget {
                                             await getSellAndBuyPropertyController
                                                 .firestoreService
                                                 .deleteProperty(
-                                                    data.docId, data.images);
+                                                    data.docId!, data.images!);
                                         if (response == 'Property Deleted') {
                                           getSellAndBuyPropertyController
                                               .getAllBuyingProperty();

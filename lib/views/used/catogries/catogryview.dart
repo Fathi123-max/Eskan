@@ -48,7 +48,7 @@ class CategoryViewPage extends StatelessWidget {
                             ),
                             child: CachedNetworkImage(
                               imageUrl: rentAndRentOutController
-                                  .allRentList[index].images[0],
+                                  .allRentList[index].images?[0],
                               placeholder: (context, url) =>
                                   CircularProgressIndicator(),
                               errorWidget: (context, url, error) =>
@@ -67,7 +67,7 @@ class CategoryViewPage extends StatelessWidget {
                               children: <Widget>[
                                 Text(
                                   rentAndRentOutController
-                                      .allRentList[index].address,
+                                      .allRentList[index].address!,
                                   style: TextStyle(
                                     fontSize: 18,
                                     fontWeight: FontWeight.bold,
@@ -84,7 +84,7 @@ class CategoryViewPage extends StatelessWidget {
                                     ),
                                     SizedBox(width: 4),
                                     Text(
-                                      '${rentAndRentOutController.allRentList[index].city[0].toUpperCase()}${rentAndRentOutController.allRentList[index].city.substring(1).toLowerCase()}',
+                                      '${rentAndRentOutController.allRentList[index].city?[0].toUpperCase()}${rentAndRentOutController.allRentList[index].city?.substring(1).toLowerCase()}',
                                       style: TextStyle(
                                         fontSize: 14,
                                         color: Colors.grey[600],
