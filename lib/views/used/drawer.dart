@@ -8,8 +8,8 @@ import '../../controllers/used/pageViewController.dart';
 import '../../utills/customColors.dart';
 import 'choosescreen.dart';
 
-class drawerwidget extends StatelessWidget {
-  drawerwidget({super.key});
+class Drawerwidget extends StatelessWidget {
+  Drawerwidget({super.key});
   final DraweController draweController = Get.put(DraweController());
   final box = GetStorage();
 

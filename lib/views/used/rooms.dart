@@ -90,16 +90,6 @@ class _RoomsPageState extends State<RoomsPage> {
     }
 
     return Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        title: Text("المحادثات"),
-        actions: [
-          IconButton(
-              onPressed: () => Navigator.of(context).pop(),
-              icon: Icon(Icons.arrow_back_ios_new)),
-        ],
-        elevation: 0.0,
-      ),
       body: _user == null
           ? Container(
               alignment: Alignment.center,
@@ -161,7 +151,39 @@ class _RoomsPageState extends State<RoomsPage> {
                         child: Row(
                           children: [
                             _buildAvatar(room),
-                            Text(room.name ?? ''),
+                            SizedBox(width: 16),
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    room.name ?? '',
+                                    style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  SizedBox(height: 8),
+                                  Text(
+                                    "room. ?? ''",
+                                    style: TextStyle(
+                                      fontSize: 14,
+                                      color: Colors.grey[600],
+                                    ),
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                ],
+                              ),
+                            ),
+                            SizedBox(width: 16),
+                            Text(
+                              "room.updatedAt.toString()" ?? '',
+                              style: TextStyle(
+                                fontSize: 12,
+                                color: Colors.grey[600],
+                              ),
+                            ),
                           ],
                         ),
                       ),

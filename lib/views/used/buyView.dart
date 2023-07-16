@@ -130,7 +130,7 @@ class BuyView extends StatelessWidget {
                                                       imageUrl:
                                                           getSellPropertyController
                                                               .allBuyList[index]
-                                                              .images?[0],
+                                                              .images![0],
                                                       imageBuilder: (context,
                                                               imageProvider) =>
                                                           Container(

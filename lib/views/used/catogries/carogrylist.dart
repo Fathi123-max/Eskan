@@ -36,34 +36,6 @@ class catogrylist extends StatelessWidget {
   }
 }
 
-/** GridView.extent(
-      maxCrossAxisExtent: 200,
-      padding: EdgeInsets.all(10),
-      mainAxisSpacing: 10,
-      crossAxisSpacing: 10,
-      children: [
-
-        
-        _buildServiceCategory('Color Man'.tr, "assets/images/naqqash.jpeg"),
-        _buildServiceCategory('Mecanical'.tr, "assets/images/mecancal.jpeg"),
-        _buildServiceCategory('Ground Man'.tr, "assets/images/ballat.jpeg"),
-        _buildServiceCategory('Plumbing'.tr, "assets/images/sabbak.jpeg"),
-        _buildServiceCategory('Electrician'.tr, "assets/images/elctr.jpeg"),
-        _buildServiceCategory('Carpentry'.tr, "assets/images/carpenter.jpeg"),
-        _buildServiceCategory('Gardening'.tr, "assets/images/formar.jpeg"),
-        _buildServiceCategory('Cleaning Houses'.tr, "assets/images/house.jpeg"),
-        _buildServiceCategory('Blacksmith'.tr, "assets/images/hadad.jpeg"),
-        _buildServiceCategory('Tiling'.tr, "assets/images/tarze.jpeg"),
-        _buildServiceCategory('Teacher'.tr, "assets/images/techer.jpeg"),
-        _buildServiceCategory('Chef'.tr, "assets/images/chef.jpeg"),
-        _buildServiceCategory('Driver'.tr, "assets/images/driver.jpeg"),
-        _buildServiceCategory('Nurse'.tr, "assets/images/nurs.jpeg"),
-        _buildServiceCategory(
-            'Baby setter'.tr, "assets/images/babykeeper.jpeg"),
-        _buildServiceCategory('other'.tr, "assets/images/logo.png"),
-      ],
-    ));
-  */
 Widget _buildServiceCategory(String name, String image) {
   return InkWell(
     onTap: () {

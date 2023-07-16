@@ -184,7 +184,7 @@ class PropertyDetail extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(left: 15, top: 5, right: 15),
                 child: Text(
-                  data.descr!,
+                  data.descr ?? " ",
                   textAlign: TextAlign.justify,
                   style: TextStyle(color: Colors.black54),
                 ),

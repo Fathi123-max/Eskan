@@ -48,7 +48,7 @@ class CategoryViewPage extends StatelessWidget {
                             ),
                             child: CachedNetworkImage(
                               imageUrl: rentAndRentOutController
-                                  .allRentList[index].images?[0],
+                                  .allRentList[index].images![0],
                               placeholder: (context, url) =>
                                   CircularProgressIndicator(),
                               errorWidget: (context, url, error) =>

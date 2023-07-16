@@ -7,9 +7,10 @@ import 'package:haider/controllers/used/currentUserInfoController.dart';
 import 'package:haider/controllers/used/rentAndRentOutController.dart';
 import 'package:haider/utills/customColors.dart';
 
+import '../compunants/rentviewcard.dart';
 import 'propertyDetailScreen.dart';
 
-class RentView extends StatelessWidget {
+class HomePage extends StatelessWidget {
   final RentAndRentOutController rentAndRentOutController =
       Get.put(RentAndRentOutController());
   final CurrentUserInfoController userInfoController =
@@ -17,7 +18,6 @@ class RentView extends StatelessWidget {
   final SearchRentController searchRentController =
       Get.put(SearchRentController());
   TextEditingController textController = TextEditingController();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(body: Obx(() {
@@ -69,7 +69,7 @@ class RentView extends StatelessWidget {
                                       .map((property) {
                                     return Builder(
                                       builder: (BuildContext context) {
-                                        return realview(property: property);
+                                        return RealViewCard(property: property);
                                       },
                                     );
                                   }).toList(),
@@ -97,7 +97,7 @@ class RentView extends StatelessWidget {
                                     itemBuilder: (context, index) {
                                       var property = rentAndRentOutController
                                           .allRentList[index];
-                                      return realview(property: property);
+                                      return RealViewCard(property: property);
                                     }),
                               ],
                             )
@@ -309,211 +309,4 @@ class RentView extends StatelessWidget {
       }
     }));
   }
-
-  Widget realview({property}) {
-    return InkWell(
-      onTap: () => Get.to(() => PropertyDetail(
-            data: property,
-          )),
-      child: Container(
-        margin: EdgeInsets.all(10),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(20),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey.withOpacity(0.5),
-              spreadRadius: 2,
-              blurRadius: 5,
-              offset: Offset(0, 3),
-            ),
-          ],
-        ),
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(20),
-          child: Stack(
-            children: [
-              Image.network(
-                property.images[0],
-                fit: BoxFit.cover,
-                width: double.infinity,
-                height: 200,
-              ),
-              Positioned(
-                bottom: 0,
-                left: 0,
-                right: 0,
-                child: Container(
-                  padding: EdgeInsets.all(10),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.vertical(
-                      bottom: Radius.circular(20),
-                    ),
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        property.address,
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 16,
-                        ),
-                      ),
-                      SizedBox(height: 4),
-                      Text(
-                        '${property.city[0].toUpperCase()}${property.city.substring(1).toLowerCase()}',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black54,
-                          fontSize: 14,
-                        ),
-                      ),
-                      SizedBox(height: 4),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Row(
-                            children: [
-                              Icon(Icons.king_bed),
-                              Text(
-                                ' ${property.bedrooms} | ',
-                                style: TextStyle(
-                                  color: Colors.black54,
-                                  fontSize: 14,
-                                ),
-                              ),
-                              Icon(Icons.bathtub),
-                              Text(
-                                ' ${property.bathrooms} | ',
-                                style: TextStyle(
-                                  color: Colors.black54,
-                                  fontSize: 14,
-                                ),
-                              ),
-                              Icon(Icons.aspect_ratio),
-                              Text(
-                                ' ${property.size}',
-                                style: TextStyle(
-                                  color: Colors.black54,
-                                  fontSize: 14,
-                                ),
-                              ),
-                            ],
-                          ),
-                          Text(
-                            '\$${property.price.toString()}',
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 16,
-                                color: CustomColors.coral_Color),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
 }
-
-// class ListViewCategories extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     return GetBuilder<RentAndRentOutController>(
-//       builder: (controller) => Container(
-//         height: 180,
-//         child: ListView(scrollDirection: Axis.horizontal, children: [
-//           cathome( 'Home'.tr, "assets/images/logo.png"),
-//           cathome('Plumbing', "assets/images/logo.png"),
-//           cathome('Cleaning', "assets/images/logo.png"),
-//           cathome('Gardening', "assets/images/logo.png"),
-//         ]),
-//       ),
-//     );
-//   }
-// }
-
-// Widget cathome(String name, String image) {
-//   return GestureDetector(
-//     onTap: () {},
-//     child: Container(
-//       width: 120,
-//       height: 130,
-//       decoration: BoxDecoration(
-//         borderRadius: BorderRadius.circular(12),
-//       ),
-//       child: Column(
-//         mainAxisAlignment: MainAxisAlignment.center,
-//         children: [
-//           CircleAvatar(
-//             radius: 60,
-//             backgroundImage: AssetImage(image),
-//           ),
-//           SizedBox(height: 16),
-//           Row(
-//             mainAxisAlignment: MainAxisAlignment.center,
-//             children: [
-//               Text(name),
-//             ],
-//           ),
-//         ],
-//       ),
-//     ),
-//   );
-// }
-
-// class BannerView extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     return Container(
-//       padding: EdgeInsets.only(bottom: 16.w),
-//       child: Column(
-//         children: [
-//           CustomText(
-//             text: 'Special Offers',
-//             fontSize: 24,
-//             fontWeight: FontWeight.bold,
-//           ),
-//           SizedBox(height: 16),
-//           GetBuilder<RentAndRentOutController>(
-//             builder: (controller) => Container(
-//               height: 220.h,
-//               child: CarouselSlider(
-//                 items: controller.offers.map((offer) {
-//                   return Container(
-//                     width: double.infinity,
-//                     decoration: BoxDecoration(
-//                       image: DecorationImage(
-//                           image: NetworkImage(offer.image!), fit: BoxFit.fill),
-//                       borderRadius: BorderRadius.circular(12.r),
-//                     ),
-//                   );
-//                 }).toList(),
-//                 options: CarouselOptions(
-//                   height: 220.h,
-//                   autoPlay: true,
-//                   autoPlayInterval: Duration(seconds: 3),
-//                   autoPlayAnimationDuration: Duration(milliseconds: 1000),
-//                   autoPlayCurve: Curves.fastOutSlowIn,
-//                   enableInfiniteScroll: true,
-//                   scrollDirection: Axis.horizontal,
-//                   onPageChanged: (index, reason) {
-//                     // Handle page change here
-//                   },
-//                   viewportFraction: 1.0,
-//                   initialPage: 0,
-//                 ),
-//               ),
-//             ),
-//           )
-//         ],
-//       ),
-//     );
-//   }
-// }
