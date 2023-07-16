@@ -676,7 +676,7 @@ class AddDataScreen extends StatelessWidget {
                       children: List.generate(controller.images.value.length,
                           (index) {
                         Asset asset = controller.images.value[index];
-                        print(asset.getByteData(quality: 100));
+                        print(asset.getByteData(quality: 50));
                         return Padding(
                           padding: const EdgeInsets.all(2.0),
                           child: Card(
