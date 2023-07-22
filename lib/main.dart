@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:haider/utills/customColors.dart';
@@ -7,7 +8,9 @@ import 'package:haider/utills/localzation.dart';
 import 'package:haider/views/used/choosescreen.dart';
 import 'package:haider/views/used/homeView.dart';
 import 'package:hive_flutter/adapters.dart';
+import 'package:path_provider/path_provider.dart' as path_provider;
 
+import 'controllers/used/favourateController.dart';
 import 'models/used/propertyModel.dart';
 import 'models/used/timeadapter.dart';
 
@@ -20,9 +23,20 @@ void main() async {
   Hive.registerAdapter(TimestampAdapter());
   Hive.registerAdapter(PropertyModelAdapter());
 
-  // Open the "favorites" box before running the app
+  final appDocumentDirectory =
+      await path_provider.getApplicationDocumentsDirectory();
+  await Hive.initFlutter(appDocumentDirectory.path);
 
-  await Hive.isBoxOpen('favorites') ? null : await Hive.openBox('favorites');
+  // Check if the Hive box is already open
+  if (!Hive.isBoxOpen('favorites')) {
+    // Open the "favorites" box if it's not already open
+    await Hive.openBox<PropertyModel>('favorites');
+  }
+
+  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+    statusBarIconBrightness: Brightness.light,
+    statusBarColor: Colors.white, // status bar color
+  ));
 
   runApp(MyApp());
 }
@@ -38,6 +52,7 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
+    Get.put(FavoriteController());
 
     box = GetStorage().read('name');
   }
@@ -49,6 +64,7 @@ class _MyAppState extends State<MyApp> {
       locale: const Locale('ar', 'EG'),
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
+      onInit: () => FavoriteController(),
       defaultTransition: Transition.cupertino,
       theme: ThemeData(
         secondaryHeaderColor: CustomColors.coral_Color,

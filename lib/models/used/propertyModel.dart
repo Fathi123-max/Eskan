@@ -231,19 +231,24 @@ class PropertyModel {
         images.hashCode;
   }
 
-  final favoritesBox = Hive.box('favorites');
 // Inside PropertyModel class
-  bool isFavorite() {
-    return favoritesBox.containsKey(docId
+  bool isFavorite(property) {
+    final favoritesBox = Hive.box('favorites');
+
+    return favoritesBox.containsKey(property.docId
         .toString()); // Assuming 'docId' is a unique identifier for the property.
   }
 
 // Inside PropertyModel class
-  void addToFavorites() {
-    favoritesBox.put(docId.toString(), this);
+  void addToFavorites(property) {
+    final favoritesBox = Hive.box('favorites');
+
+    favoritesBox.put(property.docId.toString(), this);
   }
 
-  void removeFromFavorites() {
+  void removeFromFavorites(docId) {
+    final favoritesBox = Hive.box('favorites');
+
     favoritesBox.delete(docId.toString());
   }
 }

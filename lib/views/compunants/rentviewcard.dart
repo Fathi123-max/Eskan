@@ -7,11 +7,8 @@ import '../../utills/customColors.dart';
 import '../used/Untitled-1.dart';
 
 class RealViewCard extends GetView {
-  final favoriteController = Get.putOrFind<FavoriteController>(
-    () => FavoriteController(),
-  );
-
-  RealViewCard({required this.property});
+  RealViewCard({required this.property, required this.favoriteController});
+  final FavoriteController favoriteController;
   var colo = Colors.white;
   PropertyModel property;
   @override

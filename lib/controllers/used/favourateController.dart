@@ -9,12 +9,12 @@ class FavoriteController extends GetxController {
   // Add methods to add/remove favorites.
   void addToFavorites(PropertyModel property) {
     favorites.add(property);
-    property.addToFavorites();
+    property.addToFavorites(property);
   }
 
   void removeFromFavorites(PropertyModel property) {
     favorites.remove(property);
-    property.removeFromFavorites();
+    property.removeFromFavorites(property);
   }
 
   bool isFavorite(PropertyModel property) {
