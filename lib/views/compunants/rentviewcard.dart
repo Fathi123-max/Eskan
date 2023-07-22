@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:haider/models/used/propertyModel.dart';
 
-import '../../controllers/used/favourateComtroller.dart';
+import '../../controllers/used/favourateController.dart';
 import '../../utills/customColors.dart';
 import '../used/Untitled-1.dart';
 

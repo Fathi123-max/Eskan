@@ -231,7 +231,7 @@ class PropertyModel {
         images.hashCode;
   }
 
-  final favoritesBox = Hive.box<PropertyModel>('favorites');
+  final favoritesBox = Hive.box('favorites');
 // Inside PropertyModel class
   bool isFavorite() {
     return favoritesBox.containsKey(docId

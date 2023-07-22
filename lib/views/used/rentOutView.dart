@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:haider/controllers/used/rentAndRentOutController.dart';
 import 'package:haider/utills/customColors.dart';
-import 'package:hive/hive.dart';
 
 import '../../controllers/unused/getSellAndBuyPropertController.dart';
 import 'addDataScreen.dart';
@@ -212,13 +211,7 @@ class UserProperties extends StatelessWidget {
                                       top: 10,
                                       right: 10,
                                       child: GestureDetector(
-                                        onTap: () async {
-                                          final favouritesBox =
-                                              await Hive.box('favorites');
-                                          favouritesBox.add(property);
-                                          print(property);
-                                          print("propertyAdded");
-                                        },
+                                        onTap: () async {},
                                         child: Container(
                                           padding: const EdgeInsets.all(10),
                                           decoration: BoxDecoration(
