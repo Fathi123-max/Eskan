@@ -214,7 +214,7 @@ class UserProperties extends StatelessWidget {
                                       child: GestureDetector(
                                         onTap: () async {
                                           final favouritesBox =
-                                              await Hive.box('favourites');
+                                              await Hive.box('favorites');
                                           favouritesBox.add(property);
                                           print(property);
                                           print("propertyAdded");

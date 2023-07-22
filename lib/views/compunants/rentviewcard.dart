@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:haider/models/used/propertyModel.dart';
-import 'package:hive/hive.dart';
 
+import '../../controllers/used/favourateComtroller.dart';
 import '../../utills/customColors.dart';
 import '../used/Untitled-1.dart';
 
 class RealViewCard extends GetView {
+  final favoriteController = Get.putOrFind<FavoriteController>(
+    () => FavoriteController(),
+  );
+
   RealViewCard({required this.property});
   var colo = Colors.white;
-  final favouritesBox = Hive.box('favourites');
   PropertyModel property;
   @override
   Widget build(BuildContext context) {
@@ -158,10 +161,11 @@ class RealViewCard extends GetView {
                 right: 10,
                 child: GestureDetector(
                   onTap: () async {
-                    final favouritesBox = await Hive.box('favourites');
-                    favouritesBox.add(property);
-                    print(property);
-                    print("propertyAdded");
+                    if (favoriteController.isFavorite(property)) {
+                      favoriteController.removeFromFavorites(property);
+                    } else {
+                      favoriteController.addToFavorites(property);
+                    }
                   },
                   child: Container(
                     padding: const EdgeInsets.all(10),
@@ -169,11 +173,19 @@ class RealViewCard extends GetView {
                       color: Colors.white.withOpacity(0.8),
                       shape: BoxShape.circle,
                     ),
-                    child: const Icon(
-                      Icons.favorite_outline,
-                      color: CustomColors.coral_Color,
-                      size: 20,
-                    ),
+                    child: Obx(() {
+                      return favoriteController.isFavorite(property)
+                          ? const Icon(
+                              Icons.favorite_outline,
+                              color: CustomColors.coral_Color,
+                              size: 20,
+                            )
+                          : const Icon(
+                              Icons.favorite_outline,
+                              color: Colors.red,
+                              size: 20,
+                            );
+                    }),
                   ),
                 ),
               ),

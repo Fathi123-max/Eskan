@@ -18,7 +18,7 @@ class _FavoritePageState extends State<FavoritePage> {
   }
 
   Future<List<PropertyModel>> readData() async {
-    var favoritesBox = await Hive.openBox('favourites');
+    var favoritesBox = await Hive.box('favorites');
     return favoritesBox.values.whereType<PropertyModel>().toList();
   }
 

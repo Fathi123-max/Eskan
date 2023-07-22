@@ -230,4 +230,20 @@ class PropertyModel {
         price.hashCode ^
         images.hashCode;
   }
+
+  final favoritesBox = Hive.box<PropertyModel>('favorites');
+// Inside PropertyModel class
+  bool isFavorite() {
+    return favoritesBox.containsKey(docId
+        .toString()); // Assuming 'docId' is a unique identifier for the property.
+  }
+
+// Inside PropertyModel class
+  void addToFavorites() {
+    favoritesBox.put(docId.toString(), this);
+  }
+
+  void removeFromFavorites() {
+    favoritesBox.delete(docId.toString());
+  }
 }
