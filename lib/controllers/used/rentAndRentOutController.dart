@@ -29,7 +29,13 @@ class RentAndRentOutController extends GetxController {
     isLoading(true);
     var newList = await firestoreService.getAllRentList();
     allRentList.value = newList;
+    print(allRentList.value);
+    print("******************************");
     isLoading(false);
+  }
+
+  getAllRentPropertyFirestorePagnation() {
+    return firestoreService.firestorePagnation();
   }
 
   getAllRentPropertyByCatogry(String search) async {
@@ -46,6 +52,8 @@ class RentAndRentOutController extends GetxController {
     super.onInit();
     getRentOutProprtyOfCurrentUser();
     getAllRentProperty();
+    getAllRentPropertyFirestorePagnation();
+    print("-----------------------");
   }
   // @override
   // void refresh() {

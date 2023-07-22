@@ -56,10 +56,6 @@ class _HomeState extends State<Home> {
                 label: 'Home'.tr,
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.chat_bubble),
-                label: 'المحادثات'.tr,
-              ),
-              BottomNavigationBarItem(
                 icon: Icon(Icons.favorite),
                 label: 'Favorite'.tr,
               ),
@@ -68,8 +64,8 @@ class _HomeState extends State<Home> {
                 label: 'My Services'.tr,
               ),
             ],
-            backgroundColor: CustomColors.prime_color,
-            selectedItemColor: Colors.orange,
+            backgroundColor: CustomColors.secondary_color,
+            selectedItemColor: CustomColors.prime_color,
             unselectedItemColor: CustomColors.coral_Color,
           )),
       body: PageView(

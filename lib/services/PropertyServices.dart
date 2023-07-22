@@ -7,10 +7,9 @@ import 'package:haider/models/used/propertyModel.dart';
 import '../models/used/catogrymodel.dart';
 
 class PropertyServices {
+  final box = GetStorage();
   CollectionReference property =
       FirebaseFirestore.instance.collection('property');
-
-  final box = GetStorage();
 
 //? add prop to  firebase
   Future<String> addproprtyToDatabase(
@@ -25,9 +24,9 @@ class PropertyServices {
       String fileName = DateTime.now().millisecondsSinceEpoch.toString();
       var firebaseStorageRef =
           FirebaseStorage.instance.ref().child('RealState/$fileName');
-
+//quality  update
       await firebaseStorageRef
-          .putData((await propertyModel.images![i].getByteData())
+          .putData((await propertyModel.images![i].getByteData(quality: 5))
               .buffer
               .asUint8List())
           .then((result) {
@@ -56,24 +55,6 @@ class PropertyServices {
     return response;
   }
 
-/** "username": box.read('name'),
-      "usernumber": box.read('phone'),
-      'currentUserId': propertyModel.currentUserId.toString(),
-      'propertyFor': propertyModel.propertyFor.toString(),
-      'propertyType': propertyModel.propertyType.toString(),
-      'city': propertyModel.city.toString(),
-      'area': propertyModel.area.toString(),
-      'size': propertyModel.size.toString(),
-      'bedrooms': propertyModel.bedrooms.toString(),
-      'address': propertyModel.address.toString(),
-      'bathrooms': propertyModel.bathrooms.toString(),
-      'kitchen': propertyModel.kitchen.toString(),
-      'des': propertyModel.descr.toString(),
-      'price': propertyModel.price.toString(),
-      'images': imageUrls,
-      'propertyAction': 'None'.toString(),
-      'time': time */
-
 //? get all data fun
   Stream<List<User>> getAllupdaetList() {
     return FirebaseFirestore.instance.collection('catogry').snapshots().map(
@@ -92,7 +73,6 @@ class PropertyServices {
     List<PropertyModel> propertyList = [];
     await FirebaseFirestore.instance
         .collection('property')
-        .orderBy('time', descending: true)
         .get()
         .then((QuerySnapshot querySnapshot) {
       querySnapshot.docs.forEach((doc) {
@@ -106,11 +86,14 @@ class PropertyServices {
     return propertyList;
   }
 
+  firestorePagnation() {
+    return property;
+  }
+
   Future<List<PropertyModel>> getAllRentList() async {
     List<PropertyModel> propertyList = [];
     await FirebaseFirestore.instance
         .collection('property')
-        .orderBy('time', descending: true)
         .get()
         .then((QuerySnapshot querySnapshot) {
       querySnapshot.docs.forEach((doc) {
@@ -118,6 +101,9 @@ class PropertyServices {
             PropertyModel.fromMap(doc.data() as Map<String, dynamic>);
 
         propertyList.add(propertyModel);
+        print("**********************************");
+        print(propertyModel);
+        print("**********************************");
       });
     });
     return propertyList;
@@ -127,7 +113,6 @@ class PropertyServices {
     List<PropertyModel> propertyListbycat = [];
     await FirebaseFirestore.instance
         .collection('property')
-        .orderBy('time', descending: true)
         .where("propertyType", isEqualTo: search)
         .get()
         .then((QuerySnapshot querySnapshot) {
@@ -183,7 +168,6 @@ class PropertyServices {
     List<PropertyModel> propertyList = [];
     await FirebaseFirestore.instance
         .collection('property')
-        .orderBy('time', descending: true)
         .get()
         .then((QuerySnapshot querySnapshot) {
       querySnapshot.docs.forEach((doc) {
@@ -202,7 +186,6 @@ class PropertyServices {
     List<PropertyModel> propertyList = [];
     await FirebaseFirestore.instance
         .collection('property')
-        .orderBy('time', descending: true)
         .get()
         .then((QuerySnapshot querySnapshot) {
       querySnapshot.docs.forEach((doc) {
@@ -229,7 +212,6 @@ class PropertyServices {
       //   CustomToast.showToast('controller.cityEditTextController.text');
       await FirebaseFirestore.instance
           .collection('property')
-          .orderBy('time', descending: true)
           .get()
           .then((QuerySnapshot querySnapshot) {
         querySnapshot.docs.forEach((doc) {
@@ -361,7 +343,6 @@ class PropertyServices {
       //   CustomToast.showToast('controller.cityEditTextController.text');
       await FirebaseFirestore.instance
           .collection('property')
-          .orderBy('time', descending: true)
           .get()
           .then((QuerySnapshot querySnapshot) {
         querySnapshot.docs.forEach((doc) {
@@ -481,4 +462,22 @@ class PropertyServices {
 
     return propertyList;
   }
+
+/** "username": box.read('name'),
+      "usernumber": box.read('phone'),
+      'currentUserId': propertyModel.currentUserId.toString(),
+      'propertyFor': propertyModel.propertyFor.toString(),
+      'propertyType': propertyModel.propertyType.toString(),
+      'city': propertyModel.city.toString(),
+      'area': propertyModel.area.toString(),
+      'size': propertyModel.size.toString(),
+      'bedrooms': propertyModel.bedrooms.toString(),
+      'address': propertyModel.address.toString(),
+      'bathrooms': propertyModel.bathrooms.toString(),
+      'kitchen': propertyModel.kitchen.toString(),
+      'des': propertyModel.descr.toString(),
+      'price': propertyModel.price.toString(),
+      'images': imageUrls,
+      'propertyAction': 'None'.toString(),
+      'time': time */
 }
