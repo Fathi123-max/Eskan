@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:haider/views/screens/signin_page.dart';
 
 import '../../controllers/used/currentUserInfoController.dart';
 import '../../utills/customColors.dart';
+import 'homeView.dart';
 
 class EnterInfo extends StatefulWidget {
   @override
@@ -140,8 +140,8 @@ class _EnterInfoState extends State<EnterInfo> {
                           box.write('name', _nameController.text);
                           box.write('phone', _phoneController.text);
 
-                          // Get.offAll(() => Home());
-                          Get.offAll(() => GoogleLoginScreen());
+                          Get.offAll(() => Home());
+                          // Get.offAll(() => GoogleLoginScreen());
                         }
                       : null,
                   child: Container(
