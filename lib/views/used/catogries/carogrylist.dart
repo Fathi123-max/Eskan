@@ -151,7 +151,8 @@ class _catogryViewState extends State<catogryView> {
                             splashColor: Colors.green,
                             onTap: () {
                               Get.to(() => PropertyDetailScreen(
-                                  data: rentOutController.allcatList[index]));
+                                  property:
+                                      rentOutController.allcatList[index]));
                             },
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,

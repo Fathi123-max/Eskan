@@ -1,6 +1,10 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:haider/models/used/propertyModel.dart';
+import 'package:haider/views/screens/search_results.dart';
+
+import '../../controllers/used/citycontroller.dart';
+import '../../controllers/used/search_controller.dart';
 
 class PropertySearchPage extends StatefulWidget {
   @override
@@ -11,41 +15,54 @@ class _PropertySearchPageState extends State<PropertySearchPage> {
   String? city;
   RangeValues priceRange = RangeValues(0, 1000000);
   RangeValues bedroomsRange = RangeValues(0, 10);
+  RangeValues bathroomsRange = RangeValues(0, 10);
+  RangeValues kitchenRange = RangeValues(0, 10);
+  RangeValues sizeRange = RangeValues(0, 1000);
+  RangeValues hallRange = RangeValues(0, 10);
   bool isFavoriteOnly = false;
+  SearchController searchController = SearchController();
 
   List<PropertyModel> properties = [];
 
   @override
   Widget build(BuildContext context) {
     return Hero(
-      tag: 'advancedSearchText',
-      child: Scaffold(
-        appBar: AppBar(
-          centerTitle: true,
-          title: Text("البحث"),
-          automaticallyImplyLeading: false,
-          actions: [
-            IconButton(
-                onPressed: () => Navigator.of(context).pop(),
-                icon: Icon(Icons.arrow_back_ios_new)),
-          ],
-          elevation: 0.0,
-        ),
-        body: Padding(
-          padding: EdgeInsets.all(16.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
+        tag: 'advancedSearchText',
+        child: Scaffold(
+            appBar: AppBar(
+              centerTitle: true,
+              title: Text("البحث"),
+              automaticallyImplyLeading: false,
+              actions: [
+                IconButton(
+                    onPressed: () => Navigator.of(context).pop(),
+                    icon: Icon(Icons.arrow_back_ios_new)),
+              ],
+              elevation: 0.0,
+            ),
+            body: ListView(children: [
               // Advanced UI elements for search criteria
+
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: SearchBar(controller: searchController, trailing: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Icon(Icons.search),
+                  )
+                ]),
+              ),
+
               Card(
                 elevation: 4,
+                margin: EdgeInsets.all(16),
                 child: Padding(
                   padding: EdgeInsets.all(16),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
                       Text(
-                        'Filter Properties',
+                        'الفلاتر ',
                         style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
@@ -54,10 +71,12 @@ class _PropertySearchPageState extends State<PropertySearchPage> {
                       SizedBox(height: 16),
                       DropdownButtonFormField<String>(
                         value: city,
-                        items: ['City 1', 'City 2', 'City 3']
+                        hint: Text("أدخل اسم المدينه"),
+                        items: Get.put(CityController())
+                            .cityList
                             .map((city) => DropdownMenuItem(
-                                  value: city,
-                                  child: Text(city),
+                                  value: city.cityname,
+                                  child: Text(city.cityname!),
                                 ))
                             .toList(),
                         onChanged: (value) {
@@ -68,7 +87,7 @@ class _PropertySearchPageState extends State<PropertySearchPage> {
                       ),
                       SizedBox(height: 16),
                       Text(
-                        'Price Range',
+                        'السعر',
                         style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
@@ -88,13 +107,39 @@ class _PropertySearchPageState extends State<PropertySearchPage> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text('\$${priceRange.start.toInt()}'),
-                          Text('\$${priceRange.end.toInt()}'),
+                          Text('${priceRange.start.toInt()} جنيه'),
+                          Text('${priceRange.end.toInt()} جنيه'),
                         ],
                       ),
                       SizedBox(height: 16),
                       Text(
-                        'Bedrooms',
+                        'المساحه',
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      RangeSlider(
+                        values: sizeRange,
+                        min: 0,
+                        max: 1000,
+                        divisions: 10,
+                        onChanged: (RangeValues values) {
+                          setState(() {
+                            sizeRange = values;
+                          });
+                        },
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text('${sizeRange.start.toInt()} متر'),
+                          Text('${sizeRange.end.toInt()} متر'),
+                        ],
+                      ),
+                      SizedBox(height: 16),
+                      Text(
+                        'غرف نوم',
                         style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
@@ -114,163 +159,144 @@ class _PropertySearchPageState extends State<PropertySearchPage> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text('${bedroomsRange.start.toInt()} Bedrooms'),
-                          Text('${bedroomsRange.end.toInt()} Bedrooms'),
+                          Text('${bedroomsRange.start.toInt()} غرف نوم'),
+                          Text('${bedroomsRange.end.toInt()} غرف نوم'),
                         ],
                       ),
                       SizedBox(height: 16),
+                      Text(
+                        'الحمامات',
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      RangeSlider(
+                        values: bathroomsRange,
+                        min: 0,
+                        max: 10,
+                        divisions: 10,
+                        onChanged: (RangeValues values) {
+                          setState(() {
+                            bathroomsRange = values;
+                          });
+                        },
+                      ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text('Favorites only'),
-                          Switch(
-                            value: isFavoriteOnly,
-                            onChanged: (value) {
-                              setState(() {
-                                isFavoriteOnly = value;
-                              });
-                            },
-                          ),
+                          Text('${bathroomsRange.start.toInt()} الحمامات'),
+                          Text('${bathroomsRange.end.toInt()} الحمامات'),
                         ],
                       ),
                       SizedBox(height: 16),
-                      ElevatedButton(
-                        onPressed: () {
-                          // Call the search function to retrieve properties
-                          searchProperties();
+                      Text(
+                        'الصالات',
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      RangeSlider(
+                        values: hallRange,
+                        min: 0,
+                        max: 10,
+                        divisions: 10,
+                        onChanged: (RangeValues values) {
+                          setState(() {
+                            hallRange = values;
+                          });
                         },
-                        child: Text('Search'),
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text('${hallRange.start.toInt()} الصالات'),
+                          Text('${hallRange.end.toInt()} الصالات'),
+                        ],
+                      ),
+                      SizedBox(height: 16),
+                      // Row(
+                      //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      //   children: [
+                      //     Text('المفضله'),
+                      //     Switch(
+                      //       value: isFavoriteOnly,
+                      //       onChanged: (value) {
+                      //         setState(() {
+                      //           isFavoriteOnly = value;
+                      //         });
+                      //       },
+                      //     ),
+                      //   ],
+                      // ),
+                      // SizedBox(height: 16),
+                      ElevatedButton(
+                        onPressed: () async {
+                          // Call the search function to retrieve properties
+                          List<PropertyModel> properties =
+                              await Get.put(SearchControllerCustom())
+                                  .performSearch(
+                                      bathroomsRange: bathroomsRange,
+                                      bedroomsRange: bedroomsRange,
+                                      city: city,
+                                      hallRange: hallRange,
+                                      kitchenRange: kitchenRange,
+                                      priceRange: priceRange,
+                                      searchText: searchController.text,
+                                      sizeRange: sizeRange);
+                          Get.to(() => SearchResultPage(
+                                propertyModelList: properties,
+                              ));
+                        },
+                        child: Text('ابحث'),
                       ),
                     ],
                   ),
                 ),
               ),
-              SizedBox(height: 16),
-              Expanded(
-                child: ListView.builder(
-                  itemCount: properties.length,
-                  itemBuilder: (context, index) {
-                    return GestureDetector(
-                      onTap: () {
-                        // Show property details page on tap
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => PropertyDetailsPage(
-                              property: properties[index],
-                            ),
-                          ),
-                        );
-                      },
-                      child: Card(
-                        elevation: 2,
-                        child: Padding(
-                          padding: EdgeInsets.all(16),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.stretch,
-                            children: [
-                              Text(
-                                properties[index].address ?? '',
-                                style: TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                              SizedBox(height: 8),
-                              // Display other relevant property information
-                              Text('Price: \$${properties[index].price}'),
-                              Text('Bedrooms: ${properties[index].bedrooms}'),
-                              // You can show an icon if it's a favorite property, etc.
-                            ],
-                          ),
-                        ),
-                      ),
-                    );
-                  },
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-
-  // Function to perform the search and update the properties list
-  Future<void> searchProperties() async {
-    // Perform the search based on the selected criteria and update the 'properties' list
-    List<PropertyModel> searchResults = await _performSearch();
-    setState(() {
-      properties = searchResults;
-    });
-  }
-
-  Future<List<PropertyModel>> _performSearch() async {
-    CollectionReference propertiesCollection =
-        FirebaseFirestore.instance.collection('properties');
-
-    try {
-      // Build the query based on the search parameters
-      Query query = propertiesCollection;
-      if (city != null) {
-        query = query.where('city', isEqualTo: city);
-      }
-      if (isFavoriteOnly) {
-        // You can retrieve favorites from Hive or Firebase based on the user
-        // and then filter properties here
-      }
-      // Additional filter for price
-      query = query.where('price', isGreaterThanOrEqualTo: priceRange.start);
-      query = query.where('price', isLessThanOrEqualTo: priceRange.end);
-
-      // Execute the query
-      QuerySnapshot querySnapshot = await query.get();
-
-      // Convert the query snapshot to a list of PropertyModel objects
-      List<PropertyModel> searchResults = querySnapshot.docs
-          .map((documentSnapshot) => PropertyModel.fromMap(
-              documentSnapshot.data() as Map<String, dynamic>))
-          .toList();
-
-      // Perform the 'bedrooms' filter on the client-side
-      searchResults = searchResults
-          .where((property) =>
-              int.parse(property.bedrooms!) >= bedroomsRange.start &&
-              int.parse(property.bedrooms!) <= bedroomsRange.end)
-          .toList();
-
-      return searchResults;
-    } catch (e) {
-      print('Error searching properties: $e');
-      return [];
-    }
-  }
-}
-
-// Property details page
-class PropertyDetailsPage extends StatelessWidget {
-  final PropertyModel property;
-
-  PropertyDetailsPage({required this.property});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Property Details'),
-      ),
-      body: Padding(
-        padding: EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            // Display property details, images, description, etc.
-            // You can use ListView, GridView, or any other layout as per your design.
-            Text(property.address ?? ''),
-            // Display other property details
-          ],
-        ),
-      ),
-    );
+              //   SizedBox(height: 16),
+              //   ListView.builder(
+              //     itemCount: properties.length,
+              //     itemBuilder: (context, index) {
+              //       return GestureDetector(
+              //         onTap: () {
+              //           // Show property details page on tap
+              //           Navigator.push(
+              //             context,
+              //             MaterialPageRoute(
+              //               builder: (context) => PropertyDetailScreen(
+              //                 property: properties[index],
+              //               ),
+              //             ),
+              //           );
+              //         },
+              //         child: Card(
+              //           elevation: 2,
+              //           child: Padding(
+              //             padding: EdgeInsets.all(16),
+              //             child: Column(
+              //               crossAxisAlignment: CrossAxisAlignment.stretch,
+              //               children: [
+              //                 Text(
+              //                   properties[index].address ?? '',
+              //                   style: TextStyle(
+              //                     fontSize: 18,
+              //                     fontWeight: FontWeight.bold,
+              //                   ),
+              //                 ),
+              //                 SizedBox(height: 8),
+              //                 // Display other relevant property information
+              //                 Text('Price: \$${properties[index].price}'),
+              //                 Text('Bedrooms: ${properties[index].bedrooms}'),
+              //                 // You can show an icon if it's a favorite property, etc.
+              //               ],
+              //             ),
+              //           ),
+              //         ),
+              //       );
+              //     },
+              //   )
+            ])));
   }
 }

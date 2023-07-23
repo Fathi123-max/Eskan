@@ -18,9 +18,9 @@ import '../chat/chats.dart';
 import '../chat/users.dart';
 
 class PropertyDetailScreen extends StatelessWidget {
-  final PropertyModel data;
+  final PropertyModel property;
 
-  PropertyDetailScreen({required this.data});
+  PropertyDetailScreen({required this.property});
   var firebaseuser = FirebaseAuth.instance.currentUser;
   final CurrentUserInfoController controller =
       Get.put(CurrentUserInfoController());
@@ -31,10 +31,10 @@ class PropertyDetailScreen extends StatelessWidget {
 
   launchWhatsApp() async {
     try {
-      print(data.usernumber);
+      print(property.usernumber);
       print("***********************************");
       final link =
-          WhatsAppUnilink(phoneNumber: "+2${data.usernumber}", text: "");
+          WhatsAppUnilink(phoneNumber: "+2${property.usernumber}", text: "");
       await launch('$link');
     } catch (e) {
       print(e);
@@ -43,7 +43,7 @@ class PropertyDetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Get.put(RentAndRentOutController()).username.value = data.username!;
+    Get.put(RentAndRentOutController()).username.value = property.username!;
     // sqfliliteController.getLIkiedOnly(data.docId);
     return Scaffold(
         bottomSheet: Container(
@@ -55,7 +55,7 @@ class PropertyDetailScreen extends StatelessWidget {
               Expanded(
                 child: InkWell(
                   onTap: () =>
-                      FlutterPhoneDirectCaller.callNumber(data.usernumber!),
+                      FlutterPhoneDirectCaller.callNumber(property.usernumber!),
                   child: Container(
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.only(
@@ -89,7 +89,7 @@ class PropertyDetailScreen extends StatelessWidget {
         ),
         appBar: AppBar(
           centerTitle: true,
-          title: Text(data.address!),
+          title: Text(property.address!),
           automaticallyImplyLeading: false,
           actions: [
             IconButton(
@@ -113,7 +113,7 @@ class PropertyDetailScreen extends StatelessWidget {
                           controller.selectedIndex.value = index;
                         },
                         scrollDirection: Axis.horizontal,
-                        children: data.images!.map((e) {
+                        children: property.images!.map((e) {
                           return Hero(
                             tag: e,
                             child: GestureDetector(
@@ -162,8 +162,8 @@ class PropertyDetailScreen extends StatelessWidget {
                 Obx(() {
                   return Row(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children: data.images!.map((e) {
-                      int index = data.images!.indexOf(e);
+                    children: property.images!.map((e) {
+                      int index = property.images!.indexOf(e);
                       return Padding(
                         padding: const EdgeInsets.all(3.0),
                         child: Container(
@@ -187,7 +187,7 @@ class PropertyDetailScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        '${data.price} جنيه',
+                        '${property.price} جنيه',
                         style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 22,
@@ -208,13 +208,13 @@ class PropertyDetailScreen extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                                 Text(
-                                  '${data.city![0].toUpperCase()}${data.city!.substring(1).toLowerCase()}',
+                                  '${property.city![0].toUpperCase()}${property.city!.substring(1).toLowerCase()}',
                                   style: TextStyle(
                                       fontSize: 18,
                                       fontWeight: FontWeight.bold,
                                       color: Colors.black54),
                                 ),
-                                Text(data.area!),
+                                Text(property.area!),
                               ],
                             ),
                           ),
@@ -227,7 +227,7 @@ class PropertyDetailScreen extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.only(left: 15, top: 5, right: 15),
                   child: Text(
-                    data.address!,
+                    property.address!,
                     style: TextStyle(
                         fontWeight: FontWeight.bold,
                         color: Colors.black,
@@ -246,7 +246,7 @@ class PropertyDetailScreen extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.only(left: 15, top: 5, right: 15),
                   child: Text(
-                    data.descr ?? "",
+                    property.descr ?? "",
                     textAlign: TextAlign.justify,
                     style: TextStyle(color: Colors.black54),
                   ),
@@ -263,7 +263,7 @@ class PropertyDetailScreen extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.only(left: 15, top: 5, right: 15),
                   child: Text(
-                    data.area!,
+                    property.area!,
                     textAlign: TextAlign.justify,
                     style: TextStyle(color: Colors.black54),
                   ),
@@ -282,7 +282,7 @@ class PropertyDetailScreen extends StatelessWidget {
                     children: [
                       Icon(Icons.bed_outlined),
                       Text(
-                        ' ${data.bedrooms} غرف نوم ',
+                        ' ${property.bedrooms} غرف نوم ',
                         style: TextStyle(
                             fontWeight: FontWeight.bold, color: Colors.black54),
                       )
@@ -295,7 +295,7 @@ class PropertyDetailScreen extends StatelessWidget {
                     children: [
                       Icon(Icons.bathtub_outlined),
                       Text(
-                        ' ${data.bathrooms} حمام',
+                        ' ${property.bathrooms} حمام',
                         style: TextStyle(
                             fontWeight: FontWeight.bold, color: Colors.black54),
                       )
@@ -308,7 +308,7 @@ class PropertyDetailScreen extends StatelessWidget {
                     children: [
                       Icon(Icons.kitchen_outlined),
                       Text(
-                        ' ${data.kitchen} مطبخ',
+                        ' ${property.kitchen} مطبخ',
                         style: TextStyle(
                             fontWeight: FontWeight.bold, color: Colors.black54),
                       )
@@ -321,7 +321,7 @@ class PropertyDetailScreen extends StatelessWidget {
                     children: [
                       Icon(Icons.crop_square_outlined),
                       Text(
-                        ' ${data.size} متر',
+                        ' ${property.size} متر',
                         style: TextStyle(
                             fontWeight: FontWeight.bold, color: Colors.black54),
                       )
@@ -363,7 +363,7 @@ class PropertyDetailScreen extends StatelessWidget {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
-                                    data.username!,
+                                    property.username!,
                                     style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       color: Colors.black54,
@@ -371,12 +371,12 @@ class PropertyDetailScreen extends StatelessWidget {
                                   ),
                                 ],
                               ),
-                              Text(data.usernumber!),
+                              Text(property.usernumber!),
                             ],
                           ),
                           IconButton(
                             onPressed: () {
-                              print(data.usernumber);
+                              print(property.usernumber);
                               print("***********************************");
                             },
                             icon: Icon(Icons.phone),

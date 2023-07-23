@@ -15,7 +15,7 @@ class RealViewCard extends GetView {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () => Get.to(() => PropertyDetailScreen(
-            data: property,
+            property: property,
           )),
       child: Container(
         margin: const EdgeInsets.all(10),

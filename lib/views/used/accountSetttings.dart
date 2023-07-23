@@ -40,7 +40,7 @@ class AccountSettings extends StatelessWidget {
           return ListView(
             children: [
               Image.asset(
-                'assets/images/logo.png',
+                'assets/images/logo.gif',
                 // color: Colors.white,
                 height: 200,
               ),

@@ -140,7 +140,7 @@ class _EnterInfoState extends State<EnterInfo> {
                   width: 300,
                   decoration: BoxDecoration(
                     image: DecorationImage(
-                      image: AssetImage('assets/images/logo.png'),
+                      image: AssetImage('assets/images/logo.gif'),
                       fit: BoxFit.fill,
                     ),
                   ),

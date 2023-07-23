@@ -114,8 +114,9 @@ class BuyView extends StatelessWidget {
                                                   .currentUserId!;
                                           // userInfoController.getUserInfo();
                                           Get.to(() => PropertyDetailScreen(
-                                              data: getSellPropertyController
-                                                  .allBuyList[index]));
+                                              property:
+                                                  getSellPropertyController
+                                                      .allBuyList[index]));
                                         },
                                         child: Column(
                                             crossAxisAlignment:
@@ -295,9 +296,10 @@ class BuyView extends StatelessWidget {
                                                   onTap: () {
                                                     Get.to(() =>
                                                         PropertyDetailScreen(
-                                                            data: serachController
-                                                                    .buySerachList[
-                                                                index]));
+                                                            property:
+                                                                serachController
+                                                                        .buySerachList[
+                                                                    index]));
                                                   },
                                                   child: Column(
                                                       crossAxisAlignment:
