@@ -544,7 +544,7 @@ class AddDataScreen extends StatelessWidget {
                       labelText: 'عدد اماكن الاستقبال',
                       labelStyle: TextStyle(color: Colors.grey),
                       prefixIcon: Icon(
-                        Icons.kitchen_outlined,
+                        Icons.chair_outlined,
                         color: Colors.grey,
                       ),
                     ),
@@ -553,7 +553,7 @@ class AddDataScreen extends StatelessWidget {
                         return 'No of Kitchens required';
                     },
                     onSaved: (value) {
-                      controller.propertyModel.kitchen = value.toString();
+                      controller.propertyModel.propertyFor = value.toString();
                       //authController.userModel.userEmail = value.toString();
                     },
                   ),

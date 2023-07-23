@@ -31,7 +31,7 @@ class AddPropertyController extends GetxController {
     'Ground Man'.tr,
     'other'.tr,
   ].obs;
-  var selectedValue = 'Carpentry'.obs;
+  var selectedValue = 'اختار نوع العقار'.obs;
   var selectedColor = CustomColors.prime_color.obs;
   var unSelectedColor = CustomColors.secondary_color.obs;
   var images = <Asset>[].obs;

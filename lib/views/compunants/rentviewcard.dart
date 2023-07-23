@@ -102,6 +102,20 @@ class RealViewCard extends GetView {
                                 ),
                                 const SizedBox(width: 4),
                                 Text(
+                                  '${property.propertyFor} صاله',
+                                  style: const TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 10,
+                                  ),
+                                ),
+                                const SizedBox(width: 10),
+                                Icon(
+                                  Icons.chair,
+                                  color: Colors.white,
+                                  size: 10,
+                                ),
+                                const SizedBox(width: 4),
+                                Text(
                                   '${property.bedrooms} غرف نوم',
                                   style: const TextStyle(
                                     color: Colors.white,
@@ -116,7 +130,7 @@ class RealViewCard extends GetView {
                                 ),
                                 const SizedBox(width: 4),
                                 Text(
-                                  '${property.bathrooms} حمامات',
+                                  '${property.bathrooms} حمام',
                                   style: const TextStyle(
                                     color: Colors.white,
                                     fontSize: 10,
@@ -130,7 +144,7 @@ class RealViewCard extends GetView {
                                 ),
                                 const SizedBox(width: 4),
                                 Text(
-                                  '${property.size} قدم مربع',
+                                  '${property.size} متر ',
                                   style: const TextStyle(
                                     color: Colors.white,
                                     fontSize: 10,
@@ -140,7 +154,7 @@ class RealViewCard extends GetView {
                             ),
                           ),
                           Text(
-                            '${property.price.toString()}',
+                            '${property.price.toString()}جنيه',
                             style: const TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 16,
@@ -217,7 +231,7 @@ class RealViewCard extends GetView {
                     borderRadius: BorderRadius.circular(10),
                   ),
                   child: Text(
-                    property.propertyFor!,
+                    property.propertyType!,
                     style: const TextStyle(
                       color: CustomColors.coral_Color,
                       fontWeight: FontWeight.bold,
