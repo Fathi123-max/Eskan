@@ -173,13 +173,13 @@ class RealViewCard extends GetView {
                     child: Obx(() {
                       return favoriteController.isFavorite(property)
                           ? const Icon(
-                              Icons.favorite_outline,
-                              color: CustomColors.coral_Color,
+                              Icons.favorite_rounded,
+                              color: Colors.red,
                               size: 20,
                             )
                           : const Icon(
                               Icons.favorite_outline,
-                              color: Colors.red,
+                              color: CustomColors.coral_Color,
                               size: 20,
                             );
                     }),
@@ -198,6 +198,26 @@ class RealViewCard extends GetView {
                   ),
                   child: Text(
                     property.area!,
+                    style: const TextStyle(
+                      color: CustomColors.coral_Color,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 12,
+                    ),
+                  ),
+                ),
+              ),
+              Positioned(
+                top: 10,
+                left: 10,
+                child: Container(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                  decoration: BoxDecoration(
+                    color: Colors.white.withOpacity(0.7),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: Text(
+                    property.propertyFor!,
                     style: const TextStyle(
                       color: CustomColors.coral_Color,
                       fontWeight: FontWeight.bold,

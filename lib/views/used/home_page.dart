@@ -40,14 +40,14 @@ class HomePage extends StatelessWidget {
             return rentAndRentOutController.allRentList.value.length == 0
                 ? Center(
                     child: Text(
-                      "No Data Found",
+                      "لم تضف عقارات بعد ",
                       style: TextStyle(
                           fontWeight: FontWeight.bold,
                           color: CustomColors.prime_color),
                     ),
                   )
                 : Padding(
-                    padding: const EdgeInsets.all(5.0),
+                    padding: const EdgeInsets.all(0.0),
                     child: SingleChildScrollView(
                         child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
