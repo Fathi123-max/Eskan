@@ -8,7 +8,7 @@ import 'package:haider/utills/customColors.dart';
 import 'package:haider/views/test/serchScreen.dart';
 
 // import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
-import 'propertyDetailScreen.dart';
+import '../screens/propertyDetailScreen.dart';
 
 class BuyView extends StatelessWidget {
   final GetSellAndBuyPropertyController getSellPropertyController =

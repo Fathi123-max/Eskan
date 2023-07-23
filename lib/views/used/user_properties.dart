@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:haider/controllers/used/rentAndRentOutController.dart';
 import 'package:haider/utills/customColors.dart';
 
 import '../../controllers/unused/getSellAndBuyPropertController.dart';
 import '../compunants/fab.dart';
-import 'addDataScreen.dart';
+import '../screens/addDataScreen.dart';
 import 'currentUserPropertyDetail.dart';
 
 class UserProperties extends StatelessWidget {
@@ -26,6 +27,7 @@ class UserProperties extends StatelessWidget {
           child: Material(
               type: MaterialType.transparency,
               child: SearchButton(
+                icon: FontAwesomeIcons.house,
                 text: "أضف عقار",
                 onTap: () {
                   Navigator.of(context).push(MaterialPageRoute(

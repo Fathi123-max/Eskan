@@ -1,6 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:firebase_ui_firestore/firebase_ui_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:haider/controllers/used/rentAndRentOutController.dart';
 import 'package:haider/models/used/propertyModel.dart';
@@ -27,6 +28,7 @@ class HomePage extends StatelessWidget {
               type: MaterialType.transparency,
               child: SearchButton(
                 text: "البحث",
+                icon: FontAwesomeIcons.searchengin,
                 onTap: () {
                   Navigator.of(context).push(MaterialPageRoute(
                       builder: (context) => PropertySearchPage()));

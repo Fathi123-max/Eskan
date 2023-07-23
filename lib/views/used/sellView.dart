@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:haider/controllers/unused/getSellAndBuyPropertController.dart';
 import 'package:haider/utills/customColors.dart';
-import 'package:haider/views/used/addDataScreen.dart';
+import 'package:haider/views/screens/addDataScreen.dart';
 
 import 'currentUserPropertyDetail.dart';
 

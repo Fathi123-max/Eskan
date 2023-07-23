@@ -6,7 +6,7 @@ class Languages extends Translations {
         'ar_EG': {
           'Service Name': 'اسم العقار',
           'Add Service': 'إضافة العقار',
-          'Services': 'اسكان',
+          'Services': 'إسكان',
           'Home': ' الرئيسية',
           'Description': ' الوصف',
           'address': 'العنوان ',

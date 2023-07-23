@@ -4,21 +4,25 @@ import 'package:get/get.dart';
 import 'package:haider/models/used/propertyModel.dart';
 
 class SearchControllerCustom extends GetxController {
-  Future<List<PropertyModel>> performSearch(
-      {String? city,
-      RangeValues? priceRange,
-      RangeValues? bedroomsRange,
-      RangeValues? bathroomsRange,
-      RangeValues? kitchenRange,
-      RangeValues? sizeRange,
-      RangeValues? hallRange,
-      String? searchText}) async {
+  Future<List<PropertyModel>> performSearch({
+    String? city,
+    RangeValues? priceRange,
+    RangeValues? bedroomsRange,
+    RangeValues? bathroomsRange,
+    RangeValues? kitchenRange,
+    RangeValues? sizeRange,
+    RangeValues? hallRange,
+    String? searchText,
+  }) async {
     CollectionReference propertiesCollection =
         FirebaseFirestore.instance.collection('property');
 
     try {
-      // Build the query based on the search parameters
-      Query query = propertiesCollection;
+      // Create a list to store the results from different queries
+      List<PropertyModel> searchResults = [];
+
+      // Perform the main query based on the search text
+      Query mainQuery = propertiesCollection;
       if (searchText != null) {
         // Convert the search text to lowercase for case-insensitive search
         String searchTextLower = searchText.toLowerCase();
@@ -32,50 +36,59 @@ class SearchControllerCustom extends GetxController {
             String.fromCharCode(
                 searchTextLower.codeUnitAt(searchTextLength - 1) + 1);
 
-        // Perform the query
-        query = query
+        // Add the inequality filters for 'address' field
+        mainQuery = mainQuery
             .where('address', isGreaterThanOrEqualTo: startAtText)
             .where('address', isLessThan: endAtText);
       }
 
-      if (city != null) {
-        query = query.where('city', isEqualTo: city);
-      }
-      if (priceRange != null) {
-        query = query.where('price', isGreaterThanOrEqualTo: priceRange.start);
-        query = query.where('price', isLessThanOrEqualTo: priceRange.end);
-      }
+      // Perform the main query and add the results to the searchResults list
+      QuerySnapshot mainSnapshot = await mainQuery.get();
+      searchResults.addAll(mainSnapshot.docs.map((documentSnapshot) =>
+          PropertyModel.fromMap(
+              documentSnapshot.data() as Map<String, dynamic>)));
 
-      if (bathroomsRange != null) {
-        query =
-            query.where('price', isGreaterThanOrEqualTo: bathroomsRange.start);
-        query = query.where('price', isLessThanOrEqualTo: bathroomsRange.end);
+      // Perform the other queries based on the range filters (price, bedrooms, bathrooms, size, hall)
+      Query rangeQuery = propertiesCollection;
+
+      if (priceRange != null) {
+        rangeQuery = rangeQuery.where('price',
+            isGreaterThanOrEqualTo: priceRange.start.toInt(),
+            isLessThanOrEqualTo: priceRange.end.toInt());
+      }
+      if (city != null) {
+        rangeQuery = rangeQuery.where('city', isEqualTo: city);
       }
 
       if (bedroomsRange != null) {
-        query =
-            query.where('price', isGreaterThanOrEqualTo: bedroomsRange.start);
-        query = query.where('price', isLessThanOrEqualTo: bedroomsRange.end);
+        rangeQuery = rangeQuery.where('bedrooms',
+            isGreaterThanOrEqualTo: bedroomsRange.start.toInt(),
+            isLessThanOrEqualTo: bedroomsRange.end.toInt());
       }
-
+      if (bathroomsRange != null) {
+        rangeQuery = rangeQuery.where('bathrooms',
+            isGreaterThanOrEqualTo: bathroomsRange.start.toInt(),
+            isLessThanOrEqualTo: bathroomsRange.end.toInt());
+      }
       if (sizeRange != null) {
-        query = query.where('price', isGreaterThanOrEqualTo: sizeRange.start);
-        query = query.where('price', isLessThanOrEqualTo: sizeRange.end);
+        rangeQuery = rangeQuery.where('size',
+            isGreaterThanOrEqualTo: sizeRange.start.toInt(),
+            isLessThanOrEqualTo: sizeRange.end.toInt());
       }
       if (hallRange != null) {
-        query = query.where('price', isGreaterThanOrEqualTo: hallRange.start);
-        query = query.where('price', isLessThanOrEqualTo: hallRange.end);
+        rangeQuery = rangeQuery.where('hall',
+            isGreaterThanOrEqualTo: hallRange.start.toInt(),
+            isLessThanOrEqualTo: hallRange.end.toInt());
       }
 
-      QuerySnapshot querySnapshot = await query.get();
+      // Perform the range query and add the results to the searchResults list
+      QuerySnapshot rangeSnapshot = await rangeQuery.get();
+      searchResults.addAll(rangeSnapshot.docs.map((documentSnapshot) =>
+          PropertyModel.fromMap(
+              documentSnapshot.data() as Map<String, dynamic>)));
 
-      // Convert the query snapshot to a list of PropertyModel objects
-      List<PropertyModel> searchResults = querySnapshot.docs
-          .map((documentSnapshot) => PropertyModel.fromMap(
-              documentSnapshot.data() as Map<String, dynamic>))
-          .toList();
-
-      // Perform the 'bedrooms' filter on the client-side
+      // Remove duplicates if the same document is returned from both queries
+      searchResults = searchResults.toSet().toList();
 
       return searchResults;
     } catch (e) {

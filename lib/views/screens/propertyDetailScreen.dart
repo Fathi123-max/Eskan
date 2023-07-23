@@ -44,11 +44,10 @@ class PropertyDetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Get.put(RentAndRentOutController()).username.value = property.username!;
-    // sqfliliteController.getLIkiedOnly(data.docId);
+
     return Scaffold(
         bottomSheet: Container(
           height: 50,
-          decoration: BoxDecoration(borderRadius: BorderRadius.circular(30)),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -59,8 +58,8 @@ class PropertyDetailScreen extends StatelessWidget {
                   child: Container(
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.only(
-                          topRight: Radius.circular(30),
-                          bottomRight: Radius.circular(30)),
+                        topRight: Radius.circular(20),
+                      ),
                       color: CustomColors.green_color,
                     ),
                     child: Center(
@@ -75,8 +74,8 @@ class PropertyDetailScreen extends StatelessWidget {
                 child: Container(
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(30),
-                        bottomLeft: Radius.circular(30)),
+                      topLeft: Radius.circular(20),
+                    ),
                   ),
                   child: Center(
                       child: Container(
@@ -214,7 +213,6 @@ class PropertyDetailScreen extends StatelessWidget {
                                       fontWeight: FontWeight.bold,
                                       color: Colors.black54),
                                 ),
-                                Text(property.area!),
                               ],
                             ),
                           ),
@@ -264,6 +262,21 @@ class PropertyDetailScreen extends StatelessWidget {
                   padding: const EdgeInsets.only(left: 15, top: 5, right: 15),
                   child: Text(
                     property.area!,
+                    textAlign: TextAlign.justify,
+                    style: TextStyle(color: Colors.black54),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 15, top: 5, right: 15),
+                  child: Text(
+                    'نوع العقار'.tr,
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 15, top: 5, right: 15),
+                  child: Text(
+                    property.propertyType!,
                     textAlign: TextAlign.justify,
                     style: TextStyle(color: Colors.black54),
                   ),
@@ -328,6 +341,19 @@ class PropertyDetailScreen extends StatelessWidget {
                     ],
                   ),
                 ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 15, top: 5, right: 15),
+                  child: Row(
+                    children: [
+                      Icon(Icons.chair_outlined),
+                      Text(
+                        ' ${property.propertyFor} صاله',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, color: Colors.black54),
+                      )
+                    ],
+                  ),
+                ),
 
                 //service provider
                 Padding(
@@ -374,13 +400,9 @@ class PropertyDetailScreen extends StatelessWidget {
                               Text(property.usernumber!),
                             ],
                           ),
-                          IconButton(
-                            onPressed: () {
-                              print(property.usernumber);
-                              print("***********************************");
-                            },
-                            icon: Icon(Icons.phone),
-                          ),
+                          Container(
+                            width: 300,
+                          )
                         ],
                       ),
                     );

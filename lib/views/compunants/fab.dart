@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 class SearchButton extends StatelessWidget {
   final String text;
   final VoidCallback onTap;
-
-  const SearchButton({required this.text, required this.onTap});
+  final IconData? icon;
+  const SearchButton(
+      {required this.text, required this.onTap, required this.icon});
 
   @override
   Widget build(BuildContext context) {
@@ -12,18 +13,17 @@ class SearchButton extends StatelessWidget {
       onTap: onTap,
       child: Container(
         height: 50,
-        width: 100, // Set the width of the Container
+        width: 150, // Set the width of the Container
         decoration: BoxDecoration(
           color:
               Colors.white, // Replace this with your desired background color
           borderRadius:
               BorderRadius.circular(30), // Add a rounded rectangle shape
         ),
-        child: Column(
+        child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            // Icon(Icons.search,
-            //     color: Colors.blue), // Replace this with your icon
+            Icon(this.icon, color: Colors.blue), // Replace this with your icon
             SizedBox(width: 8), // Add some spacing between icon and text
             Text(
               text,

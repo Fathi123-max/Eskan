@@ -4,7 +4,7 @@ import 'package:haider/controllers/used/rentAndRentOutController.dart';
 
 import '../../../controllers/used/catogryconroller.dart';
 import '../../../utills/customColors.dart';
-import '../propertyDetailScreen.dart';
+import '../../screens/propertyDetailScreen.dart';
 
 class catogrylist extends StatelessWidget {
   // const RentOutView({Key key}) : super(key: key);

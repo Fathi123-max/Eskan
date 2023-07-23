@@ -2,12 +2,12 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:haider/views/used/rooms.dart';
+import 'package:haider/views/screens/rooms.dart';
 
 import '../../controllers/used/draweController.dart';
 import '../../controllers/used/pageViewController.dart';
 import '../../utills/customColors.dart';
-import 'choosescreen.dart';
+import '../screens/add_information.dart';
 
 class Drawerwidget extends StatelessWidget {
   Drawerwidget({super.key});

@@ -82,8 +82,8 @@ class UsersPage extends StatelessWidget {
                     height: 50,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(30),
-                          bottomLeft: Radius.circular(30)),
+                        topLeft: Radius.circular(30),
+                      ),
                       color: Colors.green,
                     ),
                     child: Center(

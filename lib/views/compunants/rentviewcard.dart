@@ -4,7 +4,7 @@ import 'package:haider/models/used/propertyModel.dart';
 
 import '../../controllers/used/favourateController.dart';
 import '../../utills/customColors.dart';
-import '../used/propertyDetailScreen.dart';
+import '../screens/propertyDetailScreen.dart';
 
 class RealViewCard extends GetView {
   RealViewCard({required this.property, required this.favoriteController});
@@ -13,7 +13,7 @@ class RealViewCard extends GetView {
   PropertyModel property;
   @override
   Widget build(BuildContext context) {
-    return InkWell(
+    return GestureDetector(
       onTap: () => Get.to(() => PropertyDetailScreen(
             property: property,
           )),

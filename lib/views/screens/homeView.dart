@@ -5,8 +5,8 @@ import 'package:haider/controllers/used/pageViewController.dart';
 import 'package:haider/utills/customColors.dart';
 
 import '../../controllers/used/draweController.dart';
-import 'drawer.dart';
-import 'info.dart';
+import '../used/drawer.dart';
+import '../used/info.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -44,6 +44,7 @@ class _HomeState extends State<Home> {
         ],
       ),
       bottomNavigationBar: Obx(() => BottomNavigationBar(
+            type: BottomNavigationBarType.shifting,
             currentIndex: selectedIndex.value,
             onTap: (index) {
               selectedIndex.value = index; // Update the selected index
@@ -67,7 +68,7 @@ class _HomeState extends State<Home> {
                 label: 'My Services'.tr,
               ),
             ],
-            backgroundColor: CustomColors.secondary_color,
+            backgroundColor: Colors.white,
             selectedItemColor: CustomColors.prime_color,
             unselectedItemColor: CustomColors.coral_Color,
           )),

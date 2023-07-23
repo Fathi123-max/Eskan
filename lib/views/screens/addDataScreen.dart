@@ -10,7 +10,7 @@ import 'package:haider/controllers/used/currentUserInfoController.dart';
 import 'package:haider/controllers/used/rentAndRentOutController.dart';
 import 'package:haider/utills/customColors.dart';
 import 'package:haider/utills/customToast.dart';
-import 'package:haider/views/used/homeView.dart';
+import 'package:haider/views/screens/homeView.dart';
 import 'package:multi_image_picker/multi_image_picker.dart';
 
 import '../../controllers/used/citycontroller.dart';
