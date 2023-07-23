@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:haider/views/used/home_page.dart';
-import 'package:haider/views/used/rentOutView.dart';
+import 'package:haider/views/used/user_properties.dart';
 
 import '../../views/screens/favscreen.dart';
 
