@@ -5,8 +5,8 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:haider/utills/customColors.dart';
 import 'package:haider/utills/localzation.dart';
-import 'package:haider/views/screens/add_information.dart';
 import 'package:haider/views/screens/homeView.dart';
+import 'package:haider/views/screens/signin_page.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:path_provider/path_provider.dart' as path_provider;
 
@@ -73,7 +73,7 @@ class _MyAppState extends State<MyApp> {
         brightness: Brightness.light,
         useMaterial3: true,
       ),
-      home: box == null ? EnterInfo() : Home(),
+      home: box == null ? GoogleLoginScreen() : Home(),
     );
   }
 }

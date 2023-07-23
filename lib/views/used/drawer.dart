@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:haider/views/screens/rooms.dart';
+import 'package:haider/views/screens/signin_page.dart';
 
 import '../../controllers/used/draweController.dart';
 import '../../controllers/used/pageViewController.dart';
 import '../../utills/customColors.dart';
-import '../screens/add_information.dart';
 
 class Drawerwidget extends StatelessWidget {
   Drawerwidget({super.key});
@@ -92,7 +92,7 @@ class Drawerwidget extends StatelessWidget {
                     box.remove('name');
                     box.remove('phone');
                     await FirebaseAuth.instance.signOut();
-                    Get.offAll(() => EnterInfo());
+                    Get.offAll(() => GoogleLoginScreen());
                   },
                 ),
               ),
