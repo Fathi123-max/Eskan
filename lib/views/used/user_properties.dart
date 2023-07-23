@@ -4,6 +4,7 @@ import 'package:haider/controllers/used/rentAndRentOutController.dart';
 import 'package:haider/utills/customColors.dart';
 
 import '../../controllers/unused/getSellAndBuyPropertController.dart';
+import '../compunants/fab.dart';
 import 'addDataScreen.dart';
 import 'currentUserPropertyDetail.dart';
 
@@ -20,17 +21,19 @@ class UserProperties extends StatelessWidget {
     return Scaffold(
         floatingActionButtonAnimator: FloatingActionButtonAnimator.scaling,
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-        floatingActionButton: FloatingActionButton(
-          onPressed: () async {
-            Get.to(() => AddDataScreen(
-                  value: '',
-                ));
-          },
-          child: Icon(
-            Icons.add,
-            color: Colors.white,
-          ),
-          backgroundColor: Colors.blue,
+        floatingActionButton: Hero(
+          tag: 'addProperty',
+          child: Material(
+              type: MaterialType.transparency,
+              child: SearchButton(
+                text: "أضف عقار",
+                onTap: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => AddDataScreen(
+                            value: '',
+                          )));
+                },
+              )),
         ),
         body: Obx(() {
           if (rentOutController.isLoading == true) {

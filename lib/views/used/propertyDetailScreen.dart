@@ -88,6 +88,8 @@ class PropertyDetailScreen extends StatelessWidget {
           ),
         ),
         appBar: AppBar(
+          centerTitle: true,
+          title: Text(data.address!),
           automaticallyImplyLeading: false,
           actions: [
             IconButton(
@@ -384,25 +386,15 @@ class PropertyDetailScreen extends StatelessWidget {
                     );
                   }
                 }),
+                SizedBox(
+                  height: 25,
+                )
               ],
             ),
           ),
         ));
   }
 
-/**ListTile(
-                          title: Text(chasusercontroller
-                              .userchatlist[index].firstName!),
-                          leading: IconButton(
-                            onPressed: () => _handlePressed(
-                                chasusercontroller.userchatlist[index]),
-                            icon: FaIcon(
-                              color: Colors.green,
-                              FontAwesomeIcons.whatsapp,
-                              size: 30,
-                            ),
-                          ),
-                        ), */
   void _handlePressed(types.User otherUser) async {
     final room = await FirebaseChatCore.instance.createRoom(otherUser);
     Get.to(

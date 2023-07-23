@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:haider/views/used/rooms.dart';
 
 import '../../controllers/used/draweController.dart';
 import '../../controllers/used/pageViewController.dart';
@@ -60,6 +61,7 @@ class Drawerwidget extends StatelessWidget {
                       draweController.update();
                       pageViewController.pageViewIndex.value = 0;
 
+                      index == 2 ? Get.to(() => RoomsPage()) : Get.back();
                       Navigator.pop(context);
                     },
                   );

@@ -30,7 +30,7 @@ class _HomeState extends State<Home> {
           'Services'.tr,
           style: TextStyle(
             fontWeight: FontWeight.bold,
-            color: CustomColors.secondary_color,
+            color: CustomColors.coral_Color,
             fontSize: 22,
           ),
         ),
@@ -52,15 +52,18 @@ class _HomeState extends State<Home> {
             },
             items: [
               BottomNavigationBarItem(
-                icon: Icon(Icons.home),
+                activeIcon: Icon(Icons.home_rounded),
+                icon: Icon(Icons.home_outlined),
                 label: 'Home'.tr,
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.favorite),
-                label: 'Favorite'.tr,
+                activeIcon: Icon(Icons.favorite_rounded),
+                icon: Icon(Icons.favorite_outline),
+                label: 'المفضله'.tr,
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.people),
+                activeIcon: Icon(Icons.people_rounded),
+                icon: Icon(Icons.people_outline),
                 label: 'My Services'.tr,
               ),
             ],

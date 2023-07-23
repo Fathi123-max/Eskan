@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
 import 'package:flutter_firebase_chat_core/flutter_firebase_chat_core.dart';
+import 'package:get/get.dart';
 
 import '../../utills/chatutlies.dart';
 import '../chat/chats.dart';
@@ -90,6 +91,17 @@ class _RoomsPageState extends State<RoomsPage> {
     }
 
     return Scaffold(
+      appBar: AppBar(
+        centerTitle: true,
+        title: Text("المحادثات"),
+        automaticallyImplyLeading: false,
+        actions: [
+          IconButton(
+              onPressed: () => Get.back(),
+              icon: Icon(Icons.arrow_back_ios_new)),
+        ],
+        elevation: 0.0,
+      ),
       body: _user == null
           ? Container(
               alignment: Alignment.center,

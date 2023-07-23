@@ -3,7 +3,6 @@ import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
 import 'package:flutter_firebase_chat_core/flutter_firebase_chat_core.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
-import 'package:haider/utills/customColors.dart';
 
 import '../../controllers/used/rentAndRentOutController.dart';
 import '../../utills/chatutlies.dart';
@@ -85,7 +84,7 @@ class UsersPage extends StatelessWidget {
                       borderRadius: BorderRadius.only(
                           topLeft: Radius.circular(30),
                           bottomLeft: Radius.circular(30)),
-                      color: CustomColors.secondary_color,
+                      color: Colors.green,
                     ),
                     child: Center(
                       child: FaIcon(

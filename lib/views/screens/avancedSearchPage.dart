@@ -17,169 +17,180 @@ class _PropertySearchPageState extends State<PropertySearchPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Property Search'),
-      ),
-      body: Padding(
-        padding: EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            // Advanced UI elements for search criteria
-            Card(
-              elevation: 4,
-              child: Padding(
-                padding: EdgeInsets.all(16),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    Text(
-                      'Filter Properties',
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    SizedBox(height: 16),
-                    DropdownButtonFormField<String>(
-                      value: city,
-                      items: ['City 1', 'City 2', 'City 3']
-                          .map((city) => DropdownMenuItem(
-                                value: city,
-                                child: Text(city),
-                              ))
-                          .toList(),
-                      onChanged: (value) {
-                        setState(() {
-                          city = value;
-                        });
-                      },
-                    ),
-                    SizedBox(height: 16),
-                    Text(
-                      'Price Range',
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    RangeSlider(
-                      values: priceRange,
-                      min: 0,
-                      max: 1000000,
-                      divisions: 100,
-                      onChanged: (RangeValues values) {
-                        setState(() {
-                          priceRange = values;
-                        });
-                      },
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text('\$${priceRange.start.toInt()}'),
-                        Text('\$${priceRange.end.toInt()}'),
-                      ],
-                    ),
-                    SizedBox(height: 16),
-                    Text(
-                      'Bedrooms',
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    RangeSlider(
-                      values: bedroomsRange,
-                      min: 0,
-                      max: 10,
-                      divisions: 10,
-                      onChanged: (RangeValues values) {
-                        setState(() {
-                          bedroomsRange = values;
-                        });
-                      },
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text('${bedroomsRange.start.toInt()} Bedrooms'),
-                        Text('${bedroomsRange.end.toInt()} Bedrooms'),
-                      ],
-                    ),
-                    SizedBox(height: 16),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text('Favorites only'),
-                        Switch(
-                          value: isFavoriteOnly,
-                          onChanged: (value) {
-                            setState(() {
-                              isFavoriteOnly = value;
-                            });
-                          },
+    return Hero(
+      tag: 'advancedSearchText',
+      child: Scaffold(
+        appBar: AppBar(
+          centerTitle: true,
+          title: Text("البحث"),
+          automaticallyImplyLeading: false,
+          actions: [
+            IconButton(
+                onPressed: () => Navigator.of(context).pop(),
+                icon: Icon(Icons.arrow_back_ios_new)),
+          ],
+          elevation: 0.0,
+        ),
+        body: Padding(
+          padding: EdgeInsets.all(16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              // Advanced UI elements for search criteria
+              Card(
+                elevation: 4,
+                child: Padding(
+                  padding: EdgeInsets.all(16),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      Text(
+                        'Filter Properties',
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
                         ),
-                      ],
-                    ),
-                    SizedBox(height: 16),
-                    ElevatedButton(
-                      onPressed: () {
-                        // Call the search function to retrieve properties
-                        searchProperties();
-                      },
-                      child: Text('Search'),
-                    ),
-                  ],
+                      ),
+                      SizedBox(height: 16),
+                      DropdownButtonFormField<String>(
+                        value: city,
+                        items: ['City 1', 'City 2', 'City 3']
+                            .map((city) => DropdownMenuItem(
+                                  value: city,
+                                  child: Text(city),
+                                ))
+                            .toList(),
+                        onChanged: (value) {
+                          setState(() {
+                            city = value;
+                          });
+                        },
+                      ),
+                      SizedBox(height: 16),
+                      Text(
+                        'Price Range',
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      RangeSlider(
+                        values: priceRange,
+                        min: 0,
+                        max: 1000000,
+                        divisions: 100,
+                        onChanged: (RangeValues values) {
+                          setState(() {
+                            priceRange = values;
+                          });
+                        },
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text('\$${priceRange.start.toInt()}'),
+                          Text('\$${priceRange.end.toInt()}'),
+                        ],
+                      ),
+                      SizedBox(height: 16),
+                      Text(
+                        'Bedrooms',
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      RangeSlider(
+                        values: bedroomsRange,
+                        min: 0,
+                        max: 10,
+                        divisions: 10,
+                        onChanged: (RangeValues values) {
+                          setState(() {
+                            bedroomsRange = values;
+                          });
+                        },
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text('${bedroomsRange.start.toInt()} Bedrooms'),
+                          Text('${bedroomsRange.end.toInt()} Bedrooms'),
+                        ],
+                      ),
+                      SizedBox(height: 16),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text('Favorites only'),
+                          Switch(
+                            value: isFavoriteOnly,
+                            onChanged: (value) {
+                              setState(() {
+                                isFavoriteOnly = value;
+                              });
+                            },
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 16),
+                      ElevatedButton(
+                        onPressed: () {
+                          // Call the search function to retrieve properties
+                          searchProperties();
+                        },
+                        child: Text('Search'),
+                      ),
+                    ],
+                  ),
                 ),
               ),
-            ),
-            SizedBox(height: 16),
-            Expanded(
-              child: ListView.builder(
-                itemCount: properties.length,
-                itemBuilder: (context, index) {
-                  return GestureDetector(
-                    onTap: () {
-                      // Show property details page on tap
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => PropertyDetailsPage(
-                            property: properties[index],
+              SizedBox(height: 16),
+              Expanded(
+                child: ListView.builder(
+                  itemCount: properties.length,
+                  itemBuilder: (context, index) {
+                    return GestureDetector(
+                      onTap: () {
+                        // Show property details page on tap
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => PropertyDetailsPage(
+                              property: properties[index],
+                            ),
+                          ),
+                        );
+                      },
+                      child: Card(
+                        elevation: 2,
+                        child: Padding(
+                          padding: EdgeInsets.all(16),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: [
+                              Text(
+                                properties[index].address ?? '',
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              SizedBox(height: 8),
+                              // Display other relevant property information
+                              Text('Price: \$${properties[index].price}'),
+                              Text('Bedrooms: ${properties[index].bedrooms}'),
+                              // You can show an icon if it's a favorite property, etc.
+                            ],
                           ),
                         ),
-                      );
-                    },
-                    child: Card(
-                      elevation: 2,
-                      child: Padding(
-                        padding: EdgeInsets.all(16),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.stretch,
-                          children: [
-                            Text(
-                              properties[index].address ?? '',
-                              style: TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            SizedBox(height: 8),
-                            // Display other relevant property information
-                            Text('Price: \$${properties[index].price}'),
-                            Text('Bedrooms: ${properties[index].bedrooms}'),
-                            // You can show an icon if it's a favorite property, etc.
-                          ],
-                        ),
                       ),
-                    ),
-                  );
-                },
+                    );
+                  },
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

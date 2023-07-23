@@ -26,7 +26,7 @@ class HomePage extends StatelessWidget {
           child: Material(
               type: MaterialType.transparency,
               child: SearchButton(
-                text: "Search",
+                text: "البحث",
                 onTap: () {
                   Navigator.of(context).push(MaterialPageRoute(
                       builder: (context) => PropertySearchPage()));
