@@ -150,7 +150,7 @@ class _catogryViewState extends State<catogryView> {
                           child: InkWell(
                             splashColor: Colors.green,
                             onTap: () {
-                              Get.to(() => PropertyDetail(
+                              Get.to(() => PropertyDetailScreen(
                                   data: rentOutController.allcatList[index]));
                             },
                             child: Column(

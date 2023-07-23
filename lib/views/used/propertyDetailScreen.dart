@@ -17,10 +17,10 @@ import '../../controllers/used/rentAndRentOutController.dart';
 import '../chat/chats.dart';
 import '../chat/users.dart';
 
-class PropertyDetail extends StatelessWidget {
+class PropertyDetailScreen extends StatelessWidget {
   final PropertyModel data;
 
-  PropertyDetail({required this.data});
+  PropertyDetailScreen({required this.data});
   var firebaseuser = FirebaseAuth.instance.currentUser;
   final CurrentUserInfoController controller =
       Get.put(CurrentUserInfoController());

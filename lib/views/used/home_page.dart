@@ -108,9 +108,13 @@ class HomePage extends StatelessWidget {
                           query: rentAndRentOutController
                               .getAllRentPropertyFirestorePagnation(),
                           itemBuilder: (context, snapshot) {
-                            return RealViewCard(
-                              property: PropertyModel.fromMap(snapshot.data()),
-                              favoriteController: favoriteController,
+                            return SizedBox(
+                              height: 300,
+                              child: RealViewCard(
+                                property:
+                                    PropertyModel.fromMap(snapshot.data()),
+                                favoriteController: favoriteController,
+                              ),
                             );
                           },
                         ),

@@ -113,7 +113,7 @@ class BuyView extends StatelessWidget {
                                                   .allBuyList[index]
                                                   .currentUserId!;
                                           // userInfoController.getUserInfo();
-                                          Get.to(() => PropertyDetail(
+                                          Get.to(() => PropertyDetailScreen(
                                               data: getSellPropertyController
                                                   .allBuyList[index]));
                                         },
@@ -293,10 +293,11 @@ class BuyView extends StatelessWidget {
                                               child: InkWell(
                                                   splashColor: Colors.green,
                                                   onTap: () {
-                                                    Get.to(() => PropertyDetail(
-                                                        data: serachController
-                                                                .buySerachList[
-                                                            index]));
+                                                    Get.to(() =>
+                                                        PropertyDetailScreen(
+                                                            data: serachController
+                                                                    .buySerachList[
+                                                                index]));
                                                   },
                                                   child: Column(
                                                       crossAxisAlignment:

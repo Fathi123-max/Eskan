@@ -4,7 +4,7 @@ import 'package:haider/models/used/propertyModel.dart';
 
 import '../../controllers/used/favourateController.dart';
 import '../../utills/customColors.dart';
-import '../used/Untitled-1.dart';
+import '../used/propertyDetailScreen.dart';
 
 class RealViewCard extends GetView {
   RealViewCard({required this.property, required this.favoriteController});
@@ -14,7 +14,7 @@ class RealViewCard extends GetView {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => Get.to(() => PropertyDetail(
+      onTap: () => Get.to(() => PropertyDetailScreen(
             data: property,
           )),
       child: Container(
@@ -76,14 +76,14 @@ class RealViewCard extends GetView {
                           Icon(
                             Icons.location_on,
                             color: CustomColors.coral_Color,
-                            size: 14,
+                            size: 10,
                           ),
                           const SizedBox(width: 4),
                           Text(
                             '${property.city![0].toUpperCase()}${property.city!.substring(1).toLowerCase()}',
                             style: const TextStyle(
                               color: Colors.white,
-                              fontSize: 14,
+                              fontSize: 10,
                             ),
                           ),
                         ],
@@ -98,42 +98,42 @@ class RealViewCard extends GetView {
                                 Icon(
                                   Icons.king_bed,
                                   color: Colors.white,
-                                  size: 14,
+                                  size: 10,
                                 ),
                                 const SizedBox(width: 4),
                                 Text(
                                   '${property.bedrooms} غرف نوم',
                                   style: const TextStyle(
                                     color: Colors.white,
-                                    fontSize: 14,
+                                    fontSize: 10,
                                   ),
                                 ),
                                 const SizedBox(width: 10),
                                 Icon(
                                   Icons.bathtub,
                                   color: Colors.white,
-                                  size: 14,
+                                  size: 10,
                                 ),
                                 const SizedBox(width: 4),
                                 Text(
                                   '${property.bathrooms} حمامات',
                                   style: const TextStyle(
                                     color: Colors.white,
-                                    fontSize: 14,
+                                    fontSize: 10,
                                   ),
                                 ),
                                 const SizedBox(width: 10),
                                 Icon(
                                   Icons.aspect_ratio,
                                   color: Colors.white,
-                                  size: 14,
+                                  size: 10,
                                 ),
                                 const SizedBox(width: 4),
                                 Text(
                                   '${property.size} قدم مربع',
                                   style: const TextStyle(
                                     color: Colors.white,
-                                    fontSize: 14,
+                                    fontSize: 10,
                                   ),
                                 ),
                               ],

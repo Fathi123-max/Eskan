@@ -26,9 +26,6 @@ class _FavoritePageState extends State<FavoritePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Favorites'),
-      ),
       body: _favoriteProperties.isEmpty
           ? Center(child: Text('No favorite properties'))
           : ListView.builder(
