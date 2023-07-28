@@ -66,7 +66,7 @@ class _MyAppState extends State<MyApp> {
       translations: Languages(),
       locale: const Locale('ar', 'EG'),
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
+      title: 'إسكان',
       onInit: () => FavoriteController(),
       defaultTransition: Transition.cupertino,
       darkTheme: ThemeData(

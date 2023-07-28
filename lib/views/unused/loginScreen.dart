@@ -39,7 +39,7 @@
 //                         width: 300,
 //                         decoration: BoxDecoration(
 //                             image: DecorationImage(
-//                                 image: AssetImage('assets/images/logo.gif'),
+//                                 image: AssetImage('assets/images/icon.png'),
 //                                 fit: BoxFit.fill))),
 //                   ),
 //                   Padding(

@@ -176,26 +176,26 @@ class _RoomsPageState extends State<RoomsPage> {
                                     ),
                                   ),
                                   SizedBox(height: 8),
-                                  Text(
-                                    "room. ?? ''",
-                                    style: TextStyle(
-                                      fontSize: 14,
-                                      color: Colors.grey[600],
-                                    ),
-                                    maxLines: 1,
-                                    overflow: TextOverflow.ellipsis,
-                                  ),
+                                  // Text(
+                                  //   "room. ?? ''",
+                                  //   style: TextStyle(
+                                  //     fontSize: 14,
+                                  //     color: Colors.grey[600],
+                                  //   ),
+                                  //   maxLines: 1,
+                                  //   overflow: TextOverflow.ellipsis,
+                                  // ),
                                 ],
                               ),
                             ),
                             SizedBox(width: 16),
-                            Text(
-                              "room.updatedAt.toString()" ?? '',
-                              style: TextStyle(
-                                fontSize: 12,
-                                color: Colors.grey[600],
-                              ),
-                            ),
+                            // Text(
+                            //   room.id ?? '',
+                            //   style: TextStyle(
+                            //     fontSize: 12,
+                            //     color: Colors.grey[600],
+                            //   ),
+                            // ),
                           ],
                         ),
                       ),

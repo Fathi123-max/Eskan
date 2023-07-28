@@ -82,6 +82,7 @@ dependencies:
   firebase_ui_firestore: ^1.5.5
   animated_splash_screen: ^1.3.0
   flutter_xlider: ^3.5.0
+  flutter_login: ^4.2.0
   
     
 dev_dependencies:
@@ -92,7 +93,7 @@ dev_dependencies:
 flutter_launcher_icons:
   android: "launcher_icon"
   ios: true
-  image_path: "assets/images/logo.gif"
+  image_path: "assets/images/icon.png"
   min_sdk_android: 21 # android min sdk min:16, default 21
   web:
     generate: true
@@ -120,14 +121,14 @@ flutter_native_splash:
   # splash screen to a png image.  This is useful for gradients. The image will be stretch to the
   # size of the app. Only one parameter can be used, color and background_image cannot both be set.
   # color: "#FFFFFF"
-  # background_image: "assets/images/logo.gif"
+  # background_image: "assets/images/icon.png"
 
   # Optional parameters are listed below.  To enable a parameter, uncomment the line by removing
   # the leading # character.
 
   # The image parameter allows you to specify an image used in the splash screen.  It must be a
   # png file and should be sized for 4x pixel density.
-  # image: assets/images/logo.gif
+  # image: assets/images/icon.png
 
   # The branding property allows you to specify an image used as branding in the splash screen.
   # It must be a png file. It is supported for Android, iOS and the Web.  For Android 12,
@@ -144,7 +145,7 @@ flutter_native_splash:
   # background_image_dark must be specified.  color_dark and background_image_dark cannot both be
   # set.
   #color_dark: "#042a49"
-  background_image: "assets/images/logo.gif"
+  background_image: "assets/images/icon.png"
   #image_dark: assets/splash-invert.png
   #branding_dark: assets/dart_dark.png
 
@@ -161,7 +162,7 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    - assets/images/logo.gif
+    - assets/images/icon.png
     - assets/search.png
 
   # An image asset can refer to one or more resolution-specific "variants", see

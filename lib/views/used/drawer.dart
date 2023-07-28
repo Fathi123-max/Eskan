@@ -26,7 +26,7 @@ class Drawerwidget extends StatelessWidget {
             child: Column(
               children: [
                 Image.asset(
-                  'assets/images/logo.gif',
+                  'assets/images/icon.png',
                   height: 200,
                 ),
               ],

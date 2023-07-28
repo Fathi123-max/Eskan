@@ -16,15 +16,6 @@ class _GoogleLoginScreenState extends State<GoogleLoginScreen>
     with SingleTickerProviderStateMixin {
   AnimationController? _animationController;
 
-  @override
-  void initState() {
-    super.initState();
-    _animationController = AnimationController(
-      vsync: this,
-      duration: Duration(seconds: 30),
-    )..repeat();
-  }
-
   void _handleSignIn(BuildContext context) async {
     try {
       // Trigger the authentication flow
@@ -72,42 +63,68 @@ class _GoogleLoginScreenState extends State<GoogleLoginScreen>
     return Scaffold(
       body: Stack(
         children: [
-          AnimatedBuilder(
-            animation: _animationController!,
-            builder: (context, child) {
-              return Container(
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                    colors: [
-                      Colors.blue.withOpacity(_animationController!.value),
-                      Colors.white.withOpacity(_animationController!.value),
-                    ],
-                  ),
-                ),
-              );
-            },
+          Container(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                colors: [Color(0xFF4FC3F7), Color(0xFF039BE5)],
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+              ),
+
+              /** decoration: BoxDecoration(
+              gradient: LinearGradient(
+                colors: [Color(0xFF4FC3F7), Color(0xFF039BE5)],
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+              ), */
+            ),
           ),
           Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Image.asset(
-                  'assets/search.png', // Replace with your Google logo asset
+                  'assets/images/icon.png', // Replace with the path to your logo image
                   height: 120,
-                  width: 120,
-                ),
-                SizedBox(height: 30),
-                Text(
-                  'Sign in with Google',
-                  style: TextStyle(fontSize: 20),
                 ),
                 SizedBox(height: 20),
-                ElevatedButton.icon(
-                  onPressed: () => _handleSignIn(context),
-                  icon: Icon(Icons.login),
-                  label: Text('Sign In'),
+                Text(
+                  'أهلا بكم فى إسكان',
+                  style: TextStyle(
+                    fontSize: 32,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
+                ),
+                SizedBox(height: 30),
+                ElevatedButton(
+                  onPressed: () async {
+                    _handleSignIn(context);
+                  },
+                  style: ElevatedButton.styleFrom(
+                    foregroundColor: Colors.black,
+                    backgroundColor: Colors.white,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                    elevation: 2,
+                  ),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Image.asset(
+                        'assets/search.png',
+                        height: 24.0,
+                      ),
+                      SizedBox(width: 12.0),
+                      Text(
+                        'Sign in with Google',
+                        style: TextStyle(fontSize: 16),
+                      ),
+                    ],
+                  ),
                 ),
               ],
             ),

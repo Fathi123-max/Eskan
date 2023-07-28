@@ -40,7 +40,7 @@ class _EnterInfoState extends State<EnterInfo> {
                   width: 300,
                   decoration: BoxDecoration(
                     image: DecorationImage(
-                      image: AssetImage('assets/images/logo.gif'),
+                      image: AssetImage('assets/images/icon.png'),
                       fit: BoxFit.fill,
                     ),
                   ),
@@ -157,7 +157,7 @@ class _EnterInfoState extends State<EnterInfo> {
                     child: Center(
                       child: Text(
                         'الى الشاشه الرئيسيه'.tr,
-                        style: TextStyle(color: CustomColors.secondary_color),
+                        style: TextStyle(color: Colors.white),
                       ),
                     ),
                   ),
