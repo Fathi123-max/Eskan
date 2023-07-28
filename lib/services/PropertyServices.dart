@@ -18,7 +18,6 @@ class PropertyServices {
   ) async {
     List imageUrls = [];
     propertyModel.images = images;
-    propertyModel.currentUserId = "currentUser!.uid";
 
     for (int i = 0; i < propertyModel.images!.length; i++) {
       //   var fileExtension = path.extension(propertyModel.images[i].path);

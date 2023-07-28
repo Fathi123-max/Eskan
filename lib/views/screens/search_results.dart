@@ -3,8 +3,6 @@ import 'package:get/get.dart';
 import 'package:haider/models/used/propertyModel.dart';
 import 'package:haider/views/compunants/rentviewcard.dart';
 
-import '../../controllers/used/favourateController.dart';
-
 class SearchResultPage extends GetView {
   SearchResultPage({required this.propertyModelList});
 
@@ -12,8 +10,6 @@ class SearchResultPage extends GetView {
 
   @override
   Widget build(BuildContext context) {
-    final favoriteController = Get.find<FavoriteController>();
-
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -30,8 +26,8 @@ class SearchResultPage extends GetView {
         itemCount: propertyModelList.length,
         itemBuilder: (BuildContext context, int index) {
           return RealViewCard(
-              property: propertyModelList[index],
-              favoriteController: favoriteController);
+            property: propertyModelList[index],
+          );
         },
       ),
     );

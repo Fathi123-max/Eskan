@@ -7,8 +7,12 @@ import '../../utills/customColors.dart';
 import '../screens/propertyDetailScreen.dart';
 
 class RealViewCard extends GetView {
-  RealViewCard({required this.property, required this.favoriteController});
-  final FavoriteController favoriteController;
+  final FavoritesController favoritesController =
+      Get.find(); // Get the controller instance
+
+  RealViewCard({
+    required this.property,
+  });
   var colo = Colors.white;
   PropertyModel property;
   @override
@@ -172,10 +176,18 @@ class RealViewCard extends GetView {
                 right: 10,
                 child: GestureDetector(
                   onTap: () async {
-                    if (favoriteController.isFavorite(property)) {
-                      favoriteController.removeFromFavorites(property);
+                    // Replace this with your method to get the PropertyModel instance
+
+                    // Check if the property is already in favorites
+                    final isFav =
+                        favoritesController.isFavorite(property.currentUserId!);
+
+                    if (isFav) {
+                      // If already in favorites, remove it
+                      favoritesController.removeFromFavorites(property);
                     } else {
-                      favoriteController.addToFavorites(property);
+                      // If not in favorites, add it
+                      favoritesController.addToFavorites(property);
                     }
                   },
                   child: Container(
@@ -185,7 +197,8 @@ class RealViewCard extends GetView {
                       shape: BoxShape.circle,
                     ),
                     child: Obx(() {
-                      return favoriteController.isFavorite(property)
+                      return favoritesController
+                              .isFavorite(property.currentUserId!)
                           ? const Icon(
                               Icons.favorite_rounded,
                               color: Colors.red,

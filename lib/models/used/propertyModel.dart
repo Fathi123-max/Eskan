@@ -2,64 +2,42 @@
 import 'dart:convert';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:hive/hive.dart';
 
-part 'propertyModel.g.dart';
-
-@HiveType(typeId: 1)
 class PropertyModel {
-  @HiveField(0)
   String? username;
 
-  @HiveField(1)
   String? usernumber;
 
-  @HiveField(2)
   Timestamp? timestamp;
 
-  @HiveField(3)
   String? action;
 
-  @HiveField(4)
   String? docId;
 
-  @HiveField(5)
   String? currentUserId;
 
-  @HiveField(6)
   String? propertyType;
 
-  @HiveField(7)
   String? propertyFor;
 
-  @HiveField(8)
   String? city;
 
-  @HiveField(9)
   String? area;
 
-  @HiveField(10)
   String? address;
 
-  @HiveField(11)
   String? size;
 
-  @HiveField(12)
   String? bedrooms;
 
-  @HiveField(13)
   String? bathrooms;
 
-  @HiveField(14)
   String? kitchen;
 
-  @HiveField(15)
   String? descr;
 
-  @HiveField(16)
   String? price;
 
-  @HiveField(17)
   List? images;
 
   PropertyModel({
@@ -231,24 +209,18 @@ class PropertyModel {
         images.hashCode;
   }
 
-// Inside PropertyModel class
-  bool isFavorite(property) {
-    final favoritesBox = Hive.box('favorites');
-
-    return favoritesBox.containsKey(property.docId
-        .toString()); // Assuming 'docId' is a unique identifier for the property.
+  // Convert the list of PropertyModel objects to a JSON string
+  static String toListJson(List<PropertyModel> list) {
+    final List<Map<String, dynamic>> jsonList =
+        list.map((item) => item.toMap()).toList();
+    return json.encode(jsonList);
   }
 
-// Inside PropertyModel class
-  void addToFavorites(property) {
-    final favoritesBox = Hive.box('favorites');
-
-    favoritesBox.put(property.docId.toString(), this);
-  }
-
-  void removeFromFavorites(docId) {
-    final favoritesBox = Hive.box('favorites');
-
-    favoritesBox.delete(docId.toString());
+  // Convert a JSON string to a list of PropertyModel objects
+  static List<PropertyModel> fromListJson(String jsonList) {
+    final List<dynamic> dynamicList = json.decode(jsonList);
+    return dynamicList
+        .map((item) => PropertyModel.fromMap(item as Map<String, dynamic>))
+        .toList();
   }
 }

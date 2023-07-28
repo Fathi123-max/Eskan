@@ -1,42 +1,40 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:haider/models/used/propertyModel.dart';
 import 'package:haider/views/compunants/rentviewcard.dart';
-import 'package:hive/hive.dart';
 
 import '../../controllers/used/favourateController.dart';
 
-class FavoritePage extends StatefulWidget {
-  @override
-  State<FavoritePage> createState() => _FavoritePageState();
-}
-
-class _FavoritePageState extends State<FavoritePage> {
-  late Box<PropertyModel> _favoritesBox;
-  List<PropertyModel> _favoriteProperties = []; // Initialize the list here
-  final FavoriteController favoriteController = Get.find();
-
-  @override
-  void initState() {
-    super.initState();
-    _favoritesBox = Hive.box<PropertyModel>('favorites');
-    _favoriteProperties = _favoritesBox.values.toList().cast<PropertyModel>();
-  }
+class FavoritesPage extends StatelessWidget {
+  final FavoritesController favoritesController =
+      Get.find(); // Get the controller instance
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _favoriteProperties.isEmpty
-          ? Center(child: Text('No favorite properties'))
-          : ListView.builder(
-              itemCount: _favoriteProperties.length,
-              itemBuilder: (context, index) {
-                return RealViewCard(
-                  property: _favoriteProperties[index],
-                  favoriteController: favoriteController,
-                );
-              },
-            ),
+      body: Obx(() {
+        final favorites = favoritesController
+            .favorites; // Get the list of favorite properties
+
+        if (favorites.isEmpty) {
+          // Display a message when there are no favorite properties
+          return Center(
+            child: Text('المفضله'),
+          );
+        }
+
+        // Display the list of favorite properties using ListView.builder
+        return ListView.builder(
+          itemCount: favorites.length,
+          itemBuilder: (context, index) {
+            final property = favorites[index];
+
+            // Replace this with your custom UI to display each property
+            return SizedBox(
+                height: 300, child: RealViewCard(property: property));
+            // Add other details you want to display for each property
+          },
+        );
+      }),
     );
   }
 }

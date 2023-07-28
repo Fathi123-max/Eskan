@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
-import 'package:flutter_firebase_chat_core/flutter_firebase_chat_core.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:haider/controllers/unused/getSellAndBuyPropertController.dart';
@@ -11,7 +9,9 @@ import 'package:haider/controllers/used/rentAndRentOutController.dart';
 import 'package:haider/utills/customColors.dart';
 import 'package:haider/utills/customToast.dart';
 import 'package:haider/views/screens/homeView.dart';
+import 'package:haider/views/screens/screen_added_page.dart';
 import 'package:multi_image_picker/multi_image_picker.dart';
+import 'package:uuid/uuid.dart';
 
 import '../../controllers/used/citycontroller.dart';
 
@@ -738,70 +738,63 @@ class AddDataScreen extends StatelessWidget {
                                 if (!controller.propertyFormKey.currentState!
                                     .validate()) {
                                   return;
+                                }
+
+                                controller.propertyModel.city =
+                                    controller.selectedCity.value;
+                                // Generate a new UUID
+                                var uuid = Uuid();
+                                String uniqueId = uuid.v4();
+
+// Set the uniqueId to the currentUserId field
+                                controller.propertyModel.currentUserId =
+                                    uniqueId;
+                                controller.propertyModel.propertyType =
+                                    controller.selectedValue.value;
+                                controller.propertyFormKey.currentState!.save();
+                                controller.showLoadingBar(true);
+                                String response = await controller
+                                    .firestoreService
+                                    .addproprtyToDatabase(
+                                  controller.propertyModel,
+                                  controller.images.value,
+                                );
+                                if (response == 'Data added') {
+                                  Get.off(() => SuccessScreen(
+                                      property: controller.propertyModel));
+
+                                  controller.showLoadingBar(false);
+                                  // CustomToast.showToast('Proprty Added');
+                                  Get.showSnackbar(GetSnackBar(
+                                    message: 'Proprty Added',
+                                    duration: Duration(milliseconds: 300),
+                                  ));
+                                  sellPropertyController
+                                      .getSellProprtyOfCurrentUser();
+
+                                  rentAndRentOutController.getAllRentProperty();
+
+                                  rentAndRentOutController
+                                      .getRentOutProprtyOfCurrentUser();
+
+                                  sellPropertyController.getAllBuyingProperty();
+                                  // currentUserInfoController.getUserInfo();
+                                  controller.areaEditTextController.clear();
+                                  controller.addressEditTextController.clear();
+                                  controller.sizeEditTextController.clear();
+                                  controller.bedroomsEditTextController.clear();
+                                  controller.bathroomsTextController.clear();
+                                  controller.kitchenEditTextController.clear();
+                                  controller.desEditTextController.clear();
+                                  controller.priceEditTextController.clear();
+                                  controller.images.value = [];
+                                  Get.offAll(() => Home());
                                 } else {
-                                  await FirebaseChatCore.instance
-                                      .createUserInFirestore(
-                                    types.User(
-                                      firstName: box.read("name"),
-                                      id: await box.read(
-                                          "phone"), // UID from Firebase Authentication
-                                      imageUrl:
-                                          'https://images.unsplash.com/photo-1599566147214-ce487862ea4f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MzV8fGF2YXRhcnxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=400&q=60',
-                                    ),
-                                  );
-
-                                  controller.propertyModel.city =
-                                      controller.selectedCity.value;
-                                  controller.propertyModel.propertyType =
-                                      controller.selectedValue.value;
-                                  controller.propertyFormKey.currentState!
-                                      .save();
-                                  controller.showLoadingBar(true);
-                                  String response = await controller
-                                      .firestoreService
-                                      .addproprtyToDatabase(
-                                    controller.propertyModel,
-                                    controller.images.value,
-                                  );
-                                  if (response == 'Data added') {
-                                    controller.showLoadingBar(false);
-                                    // CustomToast.showToast('Proprty Added');
-                                    Get.showSnackbar(GetSnackBar(
-                                      message: 'Proprty Added',
-                                      duration: Duration(milliseconds: 300),
-                                    ));
-                                    sellPropertyController
-                                        .getSellProprtyOfCurrentUser();
-
-                                    rentAndRentOutController
-                                        .getAllRentProperty();
-
-                                    rentAndRentOutController
-                                        .getRentOutProprtyOfCurrentUser();
-
-                                    sellPropertyController
-                                        .getAllBuyingProperty();
-                                    // currentUserInfoController.getUserInfo();
-                                    controller.areaEditTextController.clear();
-                                    controller.addressEditTextController
-                                        .clear();
-                                    controller.sizeEditTextController.clear();
-                                    controller.bedroomsEditTextController
-                                        .clear();
-                                    controller.bathroomsTextController.clear();
-                                    controller.kitchenEditTextController
-                                        .clear();
-                                    controller.desEditTextController.clear();
-                                    controller.priceEditTextController.clear();
-                                    controller.images.value = [];
-                                    Get.offAll(() => Home());
-                                  } else {
-                                    controller.showLoadingBar(false);
-                                    Get.showSnackbar(GetSnackBar(
-                                      message: 'Something went wrong',
-                                    ));
-                                    // CustomToast.showToast('Something went wrong');
-                                  }
+                                  controller.showLoadingBar(false);
+                                  Get.showSnackbar(GetSnackBar(
+                                    message: 'Something went wrong',
+                                  ));
+                                  // CustomToast.showToast('Something went wrong');
                                 }
                               }
                             })

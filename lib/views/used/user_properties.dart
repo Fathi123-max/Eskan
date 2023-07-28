@@ -44,7 +44,7 @@ class UserProperties extends StatelessWidget {
             return rentOutController.currentUserRentOutlist.value.length == 0
                 ? Center(
                     child: Text(
-                      "No Data Found",
+                      "لم تضف عقارات بعد",
                       style: TextStyle(
                           fontWeight: FontWeight.bold,
                           color: CustomColors.prime_color),

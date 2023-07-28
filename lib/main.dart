@@ -7,31 +7,14 @@ import 'package:haider/utills/localzation.dart';
 import 'package:haider/utills/themes.dart';
 import 'package:haider/views/screens/homeView.dart';
 import 'package:haider/views/screens/signin_page.dart';
-import 'package:hive_flutter/adapters.dart';
-import 'package:path_provider/path_provider.dart' as path_provider;
 
 import 'controllers/used/favourateController.dart';
 import 'controllers/used/themeControllers.dart';
-import 'models/used/propertyModel.dart';
-import 'models/used/timeadapter.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   await GetStorage.init();
-
-  Hive.registerAdapter(TimestampAdapter());
-  Hive.registerAdapter(PropertyModelAdapter());
-
-  final appDocumentDirectory =
-      await path_provider.getApplicationDocumentsDirectory();
-  await Hive.initFlutter(appDocumentDirectory.path);
-
-  // Check if the Hive box is already open
-  if (!Hive.isBoxOpen('favorites')) {
-    // Open the "favorites" box if it's not already open
-    await Hive.openBox<PropertyModel>('favorites');
-  }
 
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
     statusBarIconBrightness: Brightness.light,
@@ -54,7 +37,7 @@ class _MyAppState extends State<MyApp> {
   void initState() {
     super.initState();
     themeController = Get.put(ThemeController());
-    Get.put(FavoriteController());
+    Get.put(FavoritesController());
 
     box = GetStorage().read('name');
   }
@@ -66,7 +49,6 @@ class _MyAppState extends State<MyApp> {
       locale: const Locale('ar', 'EG'),
       debugShowCheckedModeBanner: false,
       title: 'إسكان',
-      onInit: () => FavoriteController(),
       defaultTransition: Transition.cupertino,
       darkTheme: ThemeData(
         useMaterial3: true,

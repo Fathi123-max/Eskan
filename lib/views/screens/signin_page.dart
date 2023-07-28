@@ -14,8 +14,6 @@ class GoogleLoginScreen extends StatefulWidget {
 
 class _GoogleLoginScreenState extends State<GoogleLoginScreen>
     with SingleTickerProviderStateMixin {
-  AnimationController? _animationController;
-
   void _handleSignIn(BuildContext context) async {
     try {
       // Trigger the authentication flow
@@ -53,12 +51,6 @@ class _GoogleLoginScreenState extends State<GoogleLoginScreen>
   }
 
   @override
-  void dispose() {
-    _animationController!.dispose();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(
@@ -70,13 +62,6 @@ class _GoogleLoginScreenState extends State<GoogleLoginScreen>
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
               ),
-
-              /** decoration: BoxDecoration(
-              gradient: LinearGradient(
-                colors: [Color(0xFF4FC3F7), Color(0xFF039BE5)],
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-              ), */
             ),
           ),
           Center(

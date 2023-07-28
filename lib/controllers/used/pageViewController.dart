@@ -10,8 +10,7 @@ class PageViewController extends GetxController {
   var pageViewItems = [
     HomePage(),
 
-    FavoritePage(),
-    UserProperties(),
+    FavoritesPage(), UserProperties(),
 
     // SellView(),
   ];

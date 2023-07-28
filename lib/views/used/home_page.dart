@@ -9,14 +9,12 @@ import 'package:haider/utills/customColors.dart';
 import 'package:haider/views/compunants/fab.dart';
 
 import '../../controllers/used/citycontroller.dart';
-import '../../controllers/used/favourateController.dart';
 import '../compunants/rentviewcard.dart';
 import '../screens/avancedSearchPage.dart';
 
 class HomePage extends StatelessWidget {
   final RentAndRentOutController rentAndRentOutController =
       Get.put(RentAndRentOutController());
-  final FavoriteController favoriteController = Get.find();
 
   TextEditingController textController = TextEditingController();
   @override
@@ -85,7 +83,6 @@ class HomePage extends StatelessWidget {
                               builder: (BuildContext context) {
                                 return RealViewCard(
                                   property: property,
-                                  favoriteController: favoriteController,
                                 );
                               },
                             );
@@ -117,7 +114,6 @@ class HomePage extends StatelessWidget {
                               child: RealViewCard(
                                 property:
                                     PropertyModel.fromMap(snapshot.data()),
-                                favoriteController: favoriteController,
                               ),
                             );
                           },

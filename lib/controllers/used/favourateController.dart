@@ -1,23 +1,44 @@
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../models/used/propertyModel.dart';
 
-class FavoriteController extends GetxController {
-  // Add an observable property to track favorites.
-  var favorites = <PropertyModel>[].obs;
+class FavoritesController extends GetxController {
+  final String _favoritesKey = 'favorites';
+  final RxList<PropertyModel> favorites = <PropertyModel>[].obs;
 
-  // Add methods to add/remove favorites.
-  void addToFavorites(PropertyModel property) {
+  @override
+  void onInit() {
+    super.onInit();
+    loadFavorites();
+  }
+
+  Future<void> loadFavorites() async {
+    final prefs = await SharedPreferences.getInstance();
+    final favoritesJson = prefs.getString(_favoritesKey);
+    if (favoritesJson != null) {
+      final favoritesList = PropertyModel.fromListJson(favoritesJson);
+      favorites.assignAll(favoritesList);
+    }
+  }
+
+  bool isFavorite(String docId) {
+    return favorites.any((model) => model.currentUserId == docId);
+  }
+
+  void addToFavorites(PropertyModel property) async {
     favorites.add(property);
-    property.addToFavorites(property);
+    await saveFavorites();
   }
 
-  void removeFromFavorites(PropertyModel property) {
+  void removeFromFavorites(PropertyModel property) async {
     favorites.remove(property);
-    property.removeFromFavorites(property);
+    await saveFavorites();
   }
 
-  bool isFavorite(PropertyModel property) {
-    return favorites.contains(property);
+  Future<void> saveFavorites() async {
+    final prefs = await SharedPreferences.getInstance();
+    final favoritesJson = PropertyModel.toListJson(favorites);
+    prefs.setString(_favoritesKey, favoritesJson);
   }
 }
