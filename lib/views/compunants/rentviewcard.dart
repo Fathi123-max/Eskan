@@ -162,7 +162,7 @@ class RealViewCard extends GetView {
                             style: const TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 16,
-                              color: CustomColors.coral_Color,
+                              color: Colors.orange,
                             ),
                           ),
                         ],

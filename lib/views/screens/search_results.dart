@@ -25,8 +25,11 @@ class SearchResultPage extends GetView {
       body: ListView.builder(
         itemCount: propertyModelList.length,
         itemBuilder: (BuildContext context, int index) {
-          return RealViewCard(
-            property: propertyModelList[index],
+          return SizedBox(
+            height: 300,
+            child: RealViewCard(
+              property: propertyModelList[index],
+            ),
           );
         },
       ),

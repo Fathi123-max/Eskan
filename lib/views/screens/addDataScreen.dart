@@ -746,7 +746,6 @@ class AddDataScreen extends StatelessWidget {
                                 var uuid = Uuid();
                                 String uniqueId = uuid.v4();
 
-// Set the uniqueId to the currentUserId field
                                 controller.propertyModel.currentUserId =
                                     uniqueId;
                                 controller.propertyModel.propertyType =
