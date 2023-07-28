@@ -27,7 +27,7 @@ class _PropertySearchPageState extends State<PropertySearchPage> {
 
   @override
   Widget build(BuildContext context) {
-    List<DropdownMenuItem<String>>? drop = Get.put(CityController())
+    List<DropdownMenuItem<String>>? drop = Get.find<CityController>()
         .cityList
         .map((city) => DropdownMenuItem(
               value: city.cityname,

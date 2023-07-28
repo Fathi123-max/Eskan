@@ -19,7 +19,6 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   await GetStorage.init();
-  await Hive.initFlutter();
 
   Hive.registerAdapter(TimestampAdapter());
   Hive.registerAdapter(PropertyModelAdapter());

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
 import 'package:flutter_firebase_chat_core/flutter_firebase_chat_core.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:haider/controllers/used/currentUserInfoController.dart';
 import 'package:haider/models/used/propertyModel.dart';
@@ -15,7 +16,6 @@ import 'package:whatsapp_unilink/whatsapp_unilink.dart';
 import '../../controllers/unused/usrechatcontroller.dart';
 import '../../controllers/used/rentAndRentOutController.dart';
 import '../chat/chats.dart';
-import '../chat/users.dart';
 
 class PropertyDetailScreen extends StatelessWidget {
   final PropertyModel property;
@@ -71,18 +71,23 @@ class PropertyDetailScreen extends StatelessWidget {
                 ),
               ),
               Expanded(
+                  child: InkWell(
+                onTap: () => launchWhatsApp(),
                 child: Container(
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(20),
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(20),
+                      ),
+                      color: Colors.green),
+                  child: Center(
+                    child: FaIcon(
+                      color: Colors.white,
+                      FontAwesomeIcons.whatsapp,
+                      size: 30,
                     ),
                   ),
-                  child: Center(
-                      child: Container(
-                          width: MediaQuery.of(context).size.width * .5,
-                          child: UsersPage())),
                 ),
-              )
+              ))
             ],
           ),
         ),
@@ -113,72 +118,38 @@ class PropertyDetailScreen extends StatelessWidget {
                         },
                         scrollDirection: Axis.horizontal,
                         children: property.images!.map((e) {
-                          return Hero(
-                            tag: e,
-                            child: GestureDetector(
-                              onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => Scaffold(
-                                      backgroundColor: Colors.black,
-                                      body: PhotoView(
-                                        imageProvider: NetworkImage(e),
-                                        backgroundDecoration:
-                                            BoxDecoration(color: Colors.black),
-                                        loadingBuilder: (context, event) =>
-                                            Center(
-                                                child:
-                                                    CircularProgressIndicator()),
-                                      ),
-                                    ),
-                                  ),
-                                );
-                              },
-                              child: CachedNetworkImage(
-                                imageUrl: e,
-                                imageBuilder: (context, imageProvider) =>
-                                    Container(
-                                  decoration: BoxDecoration(
-                                    image: DecorationImage(
-                                      image: imageProvider,
-                                      fit: BoxFit.cover,
-                                    ),
-                                  ),
-                                ),
-                                placeholder: (context, url) =>
-                                    Center(child: CircularProgressIndicator()),
-                                errorWidget: (context, url, error) =>
-                                    Center(child: Icon(Icons.error)),
-                              ),
-                            ),
-                          );
+                          return ViewPhoto(e, property);
                         }).toList(),
                       ),
+                      Obx(() {
+                        return Align(
+                          alignment: Alignment.bottomCenter,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: property.images!.map((e) {
+                              int index = property.images!.indexOf(e);
+                              return Padding(
+                                padding: const EdgeInsets.all(3.0),
+                                child: Container(
+                                  height: 10,
+                                  width: 10,
+                                  decoration: BoxDecoration(
+                                    color:
+                                        controller.selectedIndex.value == index
+                                            ? CustomColors.prime_color
+                                            : Colors.black54,
+                                    shape: BoxShape.circle,
+                                  ),
+                                ),
+                              );
+                            }).toList(),
+                          ),
+                        );
+                      }),
                     ],
                   ),
                 ),
-                Obx(() {
-                  return Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: property.images!.map((e) {
-                      int index = property.images!.indexOf(e);
-                      return Padding(
-                        padding: const EdgeInsets.all(3.0),
-                        child: Container(
-                          height: 10,
-                          width: 10,
-                          decoration: BoxDecoration(
-                            color: controller.selectedIndex.value == index
-                                ? CustomColors.prime_color
-                                : Colors.black54,
-                            shape: BoxShape.circle,
-                          ),
-                        ),
-                      );
-                    }).toList(),
-                  );
-                }),
+
                 // price
                 Padding(
                   padding: const EdgeInsets.only(left: 15, top: 5, right: 15),
@@ -422,6 +393,65 @@ class PropertyDetailScreen extends StatelessWidget {
     Get.to(
       () => ChatPage(
         room: room,
+      ),
+    );
+  }
+}
+
+class ViewPhoto extends GetView {
+  ViewPhoto(this.e, this.property);
+  var e;
+  PropertyModel property;
+  @override
+  Widget build(BuildContext context) {
+    return Hero(
+      tag: e,
+      child: GestureDetector(
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => Scaffold(
+                appBar: AppBar(
+                  backgroundColor: Colors.black,
+                  centerTitle: true,
+                  automaticallyImplyLeading: false,
+                  actions: [
+                    IconButton(
+                        onPressed: () => Navigator.of(context).pop(),
+                        icon: Icon(
+                          Icons.arrow_back_ios_new,
+                          color: Colors.white,
+                        )),
+                  ],
+                  elevation: 0.0,
+                ),
+                backgroundColor: Colors.black,
+                body: PhotoView(
+                  imageProvider: NetworkImage(e),
+                  backgroundDecoration: BoxDecoration(color: Colors.black),
+                  loadingBuilder: (context, event) =>
+                      Center(child: CircularProgressIndicator()),
+                ),
+              ),
+            ),
+          );
+        },
+        child: CachedNetworkImage(
+          imageUrl: e,
+          imageBuilder: (context, imageProvider) => Container(
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: imageProvider,
+                fit: BoxFit.cover,
+              ),
+            ),
+          ),
+          placeholder: (context, url) =>
+              Center(child: CircularProgressIndicator()),
+          errorWidget: (context, url, error) =>
+              Center(child: Icon(Icons.error)),
+        ),
       ),
     );
   }
