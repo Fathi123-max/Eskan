@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:haider/models/used/propertyModel.dart';
@@ -38,11 +39,15 @@ class RealViewCard extends GetView {
           borderRadius: const BorderRadius.all(Radius.circular(20)),
           child: Stack(
             children: [
-              Image.network(
-                property.images![0],
+              CachedNetworkImage(
+                imageUrl: property.images![0], // URL of the image
                 fit: BoxFit.cover,
                 width: double.infinity,
                 height: 500,
+                placeholder: (context, url) =>
+                    CircularProgressIndicator(), // Placeholder widget while the image is loading
+                errorWidget: (context, url, error) =>
+                    Icon(Icons.error), // Widget to display in case of an error
               ),
               Positioned(
                 bottom: 0,

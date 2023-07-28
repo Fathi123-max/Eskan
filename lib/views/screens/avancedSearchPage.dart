@@ -260,7 +260,7 @@ class _PropertySearchPageState extends State<PropertySearchPage> {
                         },
                         style: ElevatedButton.styleFrom(
                           elevation: 0,
-                          backgroundColor: Colors.amber,
+                          backgroundColor: Colors.white,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(
                                 25), // Adjust the value to control the rounding

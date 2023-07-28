@@ -156,56 +156,69 @@ class UserProperties extends StatelessWidget {
                                                       Icon(
                                                         Icons.king_bed,
                                                         color: Colors.white,
-                                                        size: 14,
+                                                        size: 10,
+                                                      ),
+                                                      const SizedBox(width: 4),
+                                                      Text(
+                                                        '${property.propertyFor} صاله',
+                                                        style: const TextStyle(
+                                                          color: Colors.white,
+                                                          fontSize: 10,
+                                                        ),
+                                                      ),
+                                                      const SizedBox(width: 10),
+                                                      Icon(
+                                                        Icons.chair,
+                                                        color: Colors.white,
+                                                        size: 10,
                                                       ),
                                                       const SizedBox(width: 4),
                                                       Text(
                                                         '${property.bedrooms} غرف نوم',
                                                         style: const TextStyle(
                                                           color: Colors.white,
-                                                          fontSize: 14,
+                                                          fontSize: 10,
                                                         ),
                                                       ),
                                                       const SizedBox(width: 10),
                                                       Icon(
                                                         Icons.bathtub,
                                                         color: Colors.white,
-                                                        size: 14,
+                                                        size: 10,
                                                       ),
                                                       const SizedBox(width: 4),
                                                       Text(
-                                                        '${property.bathrooms} حمامات',
+                                                        '${property.bathrooms} حمام',
                                                         style: const TextStyle(
                                                           color: Colors.white,
-                                                          fontSize: 14,
+                                                          fontSize: 10,
                                                         ),
                                                       ),
                                                       const SizedBox(width: 10),
                                                       Icon(
                                                         Icons.aspect_ratio,
                                                         color: Colors.white,
-                                                        size: 14,
+                                                        size: 10,
                                                       ),
                                                       const SizedBox(width: 4),
                                                       Text(
-                                                        '${property.size} قدم مربع',
+                                                        '${property.size} متر ',
                                                         style: const TextStyle(
                                                           color: Colors.white,
-                                                          fontSize: 14,
+                                                          fontSize: 10,
                                                         ),
                                                       ),
                                                     ],
                                                   ),
                                                 ),
-                                                // Text(
-                                                //   '${property.price.toString()}',
-                                                //   style: const TextStyle(
-                                                //     fontWeight: FontWeight.bold,
-                                                //     fontSize: 16,
-                                                //     color: CustomColors
-                                                //         .coral_Color,
-                                                //   ),
-                                                // ),
+                                                Text(
+                                                  '${property.price.toString()}جنيه',
+                                                  style: const TextStyle(
+                                                    fontWeight: FontWeight.bold,
+                                                    fontSize: 16,
+                                                    color: Colors.orange,
+                                                  ),
+                                                ),
                                               ],
                                             ),
                                           ],
@@ -214,20 +227,21 @@ class UserProperties extends StatelessWidget {
                                     ),
                                     Positioned(
                                       top: 10,
-                                      right: 10,
-                                      child: GestureDetector(
-                                        onTap: () async {},
-                                        child: Container(
-                                          padding: const EdgeInsets.all(10),
-                                          decoration: BoxDecoration(
-                                            color:
-                                                Colors.white.withOpacity(0.8),
-                                            shape: BoxShape.circle,
-                                          ),
-                                          child: const Icon(
-                                            Icons.favorite_outline,
+                                      left: 10,
+                                      child: Container(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 10, vertical: 5),
+                                        decoration: BoxDecoration(
+                                          color: Colors.white.withOpacity(0.7),
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                        ),
+                                        child: Text(
+                                          property.propertyType!,
+                                          style: const TextStyle(
                                             color: CustomColors.coral_Color,
-                                            size: 20,
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 12,
                                           ),
                                         ),
                                       ),
