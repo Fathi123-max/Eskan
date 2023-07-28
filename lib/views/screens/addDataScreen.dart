@@ -118,6 +118,7 @@ class AddDataScreen extends StatelessWidget {
                     validator: (value) {
                       if (value == '' || value == null)
                         return 'Address  required';
+                      return null;
                     },
                     onSaved: (value) {
                       controller.propertyModel.address = value.toString();
@@ -274,6 +275,7 @@ class AddDataScreen extends StatelessWidget {
                     ),
                     validator: (value) {
                       if (value == '' || value == null) return 'Area  required';
+                      return null;
                     },
                     onSaved: (value) {
                       controller.propertyModel.area = value.toString();
@@ -332,6 +334,7 @@ class AddDataScreen extends StatelessWidget {
                         validator: (value) {
                           if (value == '' || value == null)
                             return 'Area  required';
+                          return null;
                         },
                         onSaved: (value) {
                           controller.propertyModel.size = value.toString();
@@ -388,6 +391,7 @@ class AddDataScreen extends StatelessWidget {
                     validator: (value) {
                       if (value == '' || value == null)
                         return 'No of Bedrooms  required';
+                      return null;
                     },
                     onSaved: (value) {
                       controller.propertyModel.bedrooms = value.toString();
@@ -442,6 +446,7 @@ class AddDataScreen extends StatelessWidget {
                     validator: (value) {
                       if (value == '' || value == null)
                         return 'No of Bathrooms required';
+                      return null;
                     },
                     onSaved: (value) {
                       controller.propertyModel.bathrooms = value.toString();
@@ -496,6 +501,7 @@ class AddDataScreen extends StatelessWidget {
                     validator: (value) {
                       if (value == '' || value == null)
                         return 'No of Kitchens required';
+                      return null;
                     },
                     onSaved: (value) {
                       controller.propertyModel.kitchen = value.toString();
@@ -551,6 +557,7 @@ class AddDataScreen extends StatelessWidget {
                     validator: (value) {
                       if (value == '' || value == null)
                         return 'No of Kitchens required';
+                      return null;
                     },
                     onSaved: (value) {
                       controller.propertyModel.propertyFor = value.toString();
@@ -605,6 +612,7 @@ class AddDataScreen extends StatelessWidget {
                     ),
                     validator: (value) {
                       if (value == '' || value == null) return 'Price required';
+                      return null;
                     },
                     onSaved: (value) {
                       controller.propertyModel.price = value.toString();
@@ -657,6 +665,7 @@ class AddDataScreen extends StatelessWidget {
                     validator: (value) {
                       if (value == '' || value == null)
                         return 'Detailed Description required';
+                      return null;
                     },
                     onSaved: (value) {
                       controller.propertyModel.descr = value.toString();
@@ -669,8 +678,7 @@ class AddDataScreen extends StatelessWidget {
                   padding: const EdgeInsets.all(8.0),
                   child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                          minimumSize: Size(100, 40),
-                          primary: CustomColors.prime_color),
+                          minimumSize: Size(100, 40), backgroundColor: CustomColors.prime_color),
                       child: Text("Select Images".tr),
                       onPressed: () {
                         controller.getImage();

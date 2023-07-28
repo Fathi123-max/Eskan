@@ -36,9 +36,7 @@ class PropertyServices {
       });
 
       String url = await firebaseStorageRef.getDownloadURL();
-      if (url != null) {
-        print(url);
-      }
+      print(url);
       imageUrls.add(url);
     }
     String response = '';
