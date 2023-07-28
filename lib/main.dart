@@ -3,14 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:haider/utills/customColors.dart';
 import 'package:haider/utills/localzation.dart';
+import 'package:haider/utills/themes.dart';
 import 'package:haider/views/screens/homeView.dart';
 import 'package:haider/views/screens/signin_page.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:path_provider/path_provider.dart' as path_provider;
 
 import 'controllers/used/favourateController.dart';
+import 'controllers/used/themeControllers.dart';
 import 'models/used/propertyModel.dart';
 import 'models/used/timeadapter.dart';
 
@@ -48,10 +49,12 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   var box;
+  ThemeController? themeController;
 
   @override
   void initState() {
     super.initState();
+    themeController = Get.put(ThemeController());
     Get.put(FavoriteController());
 
     box = GetStorage().read('name');
@@ -66,13 +69,16 @@ class _MyAppState extends State<MyApp> {
       title: 'Flutter Demo',
       onInit: () => FavoriteController(),
       defaultTransition: Transition.cupertino,
+      darkTheme: ThemeData(
+        useMaterial3: true,
+        colorScheme: darkColorScheme,
+      ),
       theme: ThemeData(
-        secondaryHeaderColor: CustomColors.coral_Color,
-        primaryColor: CustomColors.prime_color,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-        brightness: Brightness.light,
+        colorScheme: lightColorScheme,
         useMaterial3: true,
       ),
+      themeMode:
+          themeController!.isDarkTheme ? ThemeMode.dark : ThemeMode.light,
       home: box == null ? GoogleLoginScreen() : Home(),
     );
   }

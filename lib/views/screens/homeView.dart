@@ -5,8 +5,8 @@ import 'package:haider/controllers/used/pageViewController.dart';
 import 'package:haider/utills/customColors.dart';
 
 import '../../controllers/used/draweController.dart';
+import '../../controllers/used/themeControllers.dart';
 import '../used/drawer.dart';
-import '../used/info.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -18,7 +18,7 @@ class _HomeState extends State<Home> {
   final DraweController draweController = Get.put(DraweController());
   final box = GetStorage();
   var selectedIndex = 0.obs; // Use Rx variable for state management
-
+  ThemeController _themeController = Get.put(ThemeController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,10 +36,8 @@ class _HomeState extends State<Home> {
         ),
         actions: [
           IconButton(
-            onPressed: () {
-              Get.to(() => Info());
-            },
-            icon: Icon(Icons.info),
+            icon: Icon(Icons.brightness_4),
+            onPressed: () => _themeController.toggleTheme(),
           ),
         ],
       ),

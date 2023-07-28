@@ -45,6 +45,7 @@ class AddPropertyController extends GetxController {
   var bedroomsEditTextController = TextEditingController();
   var bathroomsTextController = TextEditingController();
   var kitchenEditTextController = TextEditingController();
+  var hallEditTextController = TextEditingController();
   var desEditTextController = TextEditingController();
   var priceEditTextController = TextEditingController();
 

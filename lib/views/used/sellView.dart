@@ -60,7 +60,7 @@ class SellView extends StatelessWidget {
                                 splashColor: Colors.green,
                                 onTap: () {
                                   Get.to(() => CurrentUserPropertyDetail(
-                                      data: getSellPropertyController
+                                      property: getSellPropertyController
                                           .currentUserSellinglist[index]));
                                 },
                                 child: Column(

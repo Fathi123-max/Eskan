@@ -401,7 +401,7 @@ class PropertyDetailScreen extends StatelessWidget {
                             ],
                           ),
                           Container(
-                            width: 300,
+                            width: 100,
                           )
                         ],
                       ),

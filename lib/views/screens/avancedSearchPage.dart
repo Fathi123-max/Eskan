@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:haider/models/used/propertyModel.dart';
 import 'package:haider/utills/customColors.dart';
+import 'package:haider/views/screens/search_results.dart';
 
 import '../../controllers/used/citycontroller.dart';
+import '../../controllers/used/search_controller.dart';
 
 class PropertySearchPage extends StatefulWidget {
   @override
@@ -242,16 +244,19 @@ class _PropertySearchPageState extends State<PropertySearchPage> {
                           // Call the performSearch function and navigate to the results page
 
                           // Example:
-                          // List<PropertyModel> properties = await Get.put(SearchControllerCustom()).performSearch(
-                          //   // Set your filter variables here
-                          //   city: city,
-                          //   priceRange: priceRange,
-                          //   searchText: searchController.text.toLowerCase(),
-                          //   // Add more filter parameters as needed
-                          // );
+                          List<PropertyModel> properties =
+                              await Get.put(SearchControllerCustom())
+                                  .performSearch(
+                            // Set your filter variables here
+                            city: city,
+                            priceRange: priceRange,
+                            searchText: searchController.text.toLowerCase(),
+                            // Add more filter parameters as needed
+                          );
 
                           // Navigate to the results page
-                          // Get.to(() => SearchResultPage(propertyModelList: properties));
+                          Get.to(() =>
+                              SearchResultPage(propertyModelList: properties));
                         },
                         style: ElevatedButton.styleFrom(
                           elevation: 0,

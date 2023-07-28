@@ -1,4 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
+import 'package:flutter_firebase_chat_core/flutter_firebase_chat_core.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
@@ -11,8 +14,6 @@ class GoogleLoginScreen extends StatefulWidget {
 
 class _GoogleLoginScreenState extends State<GoogleLoginScreen>
     with SingleTickerProviderStateMixin {
-  final GoogleSignIn _googleSignIn = GoogleSignIn(scopes: ['email']);
-
   AnimationController? _animationController;
 
   @override
@@ -26,7 +27,32 @@ class _GoogleLoginScreenState extends State<GoogleLoginScreen>
 
   void _handleSignIn(BuildContext context) async {
     try {
-      await _googleSignIn.signIn();
+      // Trigger the authentication flow
+      final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+
+      // Obtain the auth details from the request
+      final GoogleSignInAuthentication? googleAuth =
+          await googleUser?.authentication;
+
+      // Create a new credential
+      final credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth?.accessToken,
+        idToken: googleAuth?.idToken,
+      );
+
+      // Once signed in, return the UserCredential
+      UserCredential userCredential =
+          await FirebaseAuth.instance.signInWithCredential(credential);
+
+      await FirebaseChatCore.instance.createUserInFirestore(
+        types.User(
+          firstName: userCredential.user!.displayName,
+          id: userCredential.user!.uid, // UID from Firebase Authentication
+          imageUrl: userCredential.user!.photoURL,
+          lastName: "",
+        ),
+      );
+
       // Handle successful sign-in here
       Get.off(() => EnterInfo()); // Replace with your home screen route
     } catch (error) {

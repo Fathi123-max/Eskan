@@ -13,12 +13,13 @@ class PropertyServices {
 
 //? add prop to  firebase
   Future<String> addproprtyToDatabase(
-      PropertyModel propertyModel, List images, String typeFor) async {
+    PropertyModel propertyModel,
+    List images,
+  ) async {
     List imageUrls = [];
     propertyModel.images = images;
     propertyModel.currentUserId = "currentUser!.uid";
 
-    propertyModel.propertyFor = typeFor;
     for (int i = 0; i < propertyModel.images!.length; i++) {
       //   var fileExtension = path.extension(propertyModel.images[i].path);
       String fileName = DateTime.now().millisecondsSinceEpoch.toString();
@@ -48,7 +49,7 @@ class PropertyServices {
     await property.add(propertyModel.toMap()).then((value) {
       response = 'Data added';
     }).catchError((error) {
-      response = 'error occured';
+      response = 'error occurred';
     });
     return response;
   }

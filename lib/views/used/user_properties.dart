@@ -66,7 +66,7 @@ class UserProperties extends StatelessWidget {
                               rentOutController.currentUserRentOutlist[index];
                           return InkWell(
                             onTap: () => Get.to(() => CurrentUserPropertyDetail(
-                                data: rentOutController
+                                property: rentOutController
                                     .currentUserRentOutlist[index])),
                             child: Container(
                               margin: const EdgeInsets.all(10),
@@ -197,15 +197,15 @@ class UserProperties extends StatelessWidget {
                                                     ],
                                                   ),
                                                 ),
-                                                Text(
-                                                  '${property.price.toString()}',
-                                                  style: const TextStyle(
-                                                    fontWeight: FontWeight.bold,
-                                                    fontSize: 16,
-                                                    color: CustomColors
-                                                        .coral_Color,
-                                                  ),
-                                                ),
+                                                // Text(
+                                                //   '${property.price.toString()}',
+                                                //   style: const TextStyle(
+                                                //     fontWeight: FontWeight.bold,
+                                                //     fontSize: 16,
+                                                //     color: CustomColors
+                                                //         .coral_Color,
+                                                //   ),
+                                                // ),
                                               ],
                                             ),
                                           ],

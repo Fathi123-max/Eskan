@@ -108,7 +108,7 @@ class AddDataScreen extends StatelessWidget {
                           borderRadius: new BorderRadius.circular(10.0),
                           borderSide:
                               new BorderSide(color: CustomColors.prime_color)),
-                      labelText: 'Enter your Service'.tr,
+                      labelText: 'أدخل اسم العقار'.tr,
                       labelStyle: TextStyle(color: Colors.grey),
                       prefixIcon: Icon(
                         Icons.work,
@@ -525,7 +525,7 @@ class AddDataScreen extends StatelessWidget {
                       left: 25, right: 25, top: 8, bottom: 2),
                   child: TextFormField(
                     autovalidateMode: AutovalidateMode.onUserInteraction,
-                    controller: controller.kitchenEditTextController,
+                    controller: controller.hallEditTextController,
                     keyboardType: TextInputType.number,
                     cursorColor: CustomColors.prime_color,
                     textInputAction: TextInputAction.next,
@@ -555,8 +555,7 @@ class AddDataScreen extends StatelessWidget {
                       ),
                     ),
                     validator: (value) {
-                      if (value == '' || value == null)
-                        return 'No of Kitchens required';
+                      if (value == '' || value == null) return 'hall required';
                       return null;
                     },
                     onSaved: (value) {
@@ -678,8 +677,12 @@ class AddDataScreen extends StatelessWidget {
                   padding: const EdgeInsets.all(8.0),
                   child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                          minimumSize: Size(100, 40), backgroundColor: CustomColors.prime_color),
-                      child: Text("Select Images".tr),
+                          minimumSize: Size(100, 40),
+                          backgroundColor: CustomColors.prime_color),
+                      child: Text(
+                        "Select Images".tr,
+                        style: TextStyle(color: CustomColors.Lite_color),
+                      ),
                       onPressed: () {
                         controller.getImage();
                       }),
@@ -724,7 +727,10 @@ class AddDataScreen extends StatelessWidget {
                             style: ElevatedButton.styleFrom(
                                 minimumSize: Size(200, 50),
                                 backgroundColor: CustomColors.green_color),
-                            child: Text("Save Property".tr),
+                            child: Text(
+                              "Save Property".tr,
+                              style: TextStyle(color: CustomColors.Lite_color),
+                            ),
                             onPressed: () async {
                               if (controller.images.value.isEmpty) {
                                 CustomToast.showToast('Please Select images');
@@ -754,9 +760,9 @@ class AddDataScreen extends StatelessWidget {
                                   String response = await controller
                                       .firestoreService
                                       .addproprtyToDatabase(
-                                          controller.propertyModel,
-                                          controller.images.value,
-                                          value);
+                                    controller.propertyModel,
+                                    controller.images.value,
+                                  );
                                   if (response == 'Data added') {
                                     controller.showLoadingBar(false);
                                     // CustomToast.showToast('Proprty Added');
