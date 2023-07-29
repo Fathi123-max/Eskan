@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:haider/controllers/used/rentAndRentOutController.dart';
 import 'package:haider/utills/customColors.dart';
 
 import '../../controllers/unused/getSellAndBuyPropertController.dart';
+import '../compunants/add_information_dialog.dart';
 import '../compunants/fab.dart';
 import '../screens/addDataScreen.dart';
 import 'currentUserPropertyDetail.dart';
@@ -17,6 +19,8 @@ class UserProperties extends StatelessWidget {
 /* CurrentUserPropertyDetail(
                                     data: rentOutController
                                         .currentUserRentOutlist[index])*/
+  final box = GetStorage();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,10 +34,15 @@ class UserProperties extends StatelessWidget {
                 icon: FontAwesomeIcons.house,
                 text: "أضف عقار",
                 onTap: () {
-                  Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => AddDataScreen(
-                            value: '',
-                          )));
+                  box.read('name') == null
+                      ? showDialog(
+                          context: context,
+                          builder: (BuildContext context) => EnterInfoDialog(),
+                        )
+                      : Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => AddDataScreen(
+                                value: '',
+                              )));
                 },
               )),
         ),

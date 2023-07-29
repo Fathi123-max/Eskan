@@ -5,14 +5,15 @@ import 'package:get_storage/get_storage.dart';
 
 import '../../controllers/used/currentUserInfoController.dart';
 import '../../utills/customColors.dart';
-import 'homeView.dart';
+import '../screens/addDataScreen.dart';
 
-class EnterInfo extends StatefulWidget {
+class EnterInfoDialog extends StatefulWidget {
   @override
-  State<EnterInfo> createState() => _EnterInfoState();
+  State<EnterInfoDialog> createState() => _EnterInfoDialogState();
 }
 
-class _EnterInfoState extends State<EnterInfo> {
+class _EnterInfoDialogState extends State<EnterInfoDialog> {
+  // ... Same code as before ...
   final box = GetStorage();
 
   final controller = Get.put(CurrentUserInfoController());
@@ -27,12 +28,13 @@ class _EnterInfoState extends State<EnterInfo> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SingleChildScrollView(
+    return AlertDialog(
+      content: SingleChildScrollView(
         child: Form(
           key: _formKey,
           child: Column(
             children: [
+              // ... Existing code ...
               Padding(
                 padding: const EdgeInsets.only(left: 20, right: 20, top: 40),
                 child: Container(
@@ -58,7 +60,7 @@ class _EnterInfoState extends State<EnterInfo> {
                 padding: const EdgeInsets.only(
                     left: 25, right: 25, top: 8, bottom: 2),
                 child: TextFormField(
-                  autovalidateMode: AutovalidateMode.onUserInteraction,
+                  // autovalidateMode: AutovalidateMode.onUserInteraction,
                   controller: _nameController,
                   keyboardType: TextInputType.name,
                   cursorColor: CustomColors.prime_color,
@@ -87,17 +89,14 @@ class _EnterInfoState extends State<EnterInfo> {
                       color: Colors.grey,
                     ),
                   ),
-                  validator: (value) {
-                    if (value == '' || value == null) ;
-                    return null;
-                  },
+                  validator: _validateName,
                 ),
               ),
               Padding(
                 padding: const EdgeInsets.only(
                     left: 25, right: 25, top: 8, bottom: 2),
                 child: TextFormField(
-                  autovalidateMode: AutovalidateMode.onUserInteraction,
+                  // autovalidateMode: AutovalidateMode.onUserInteraction,
                   controller: _phoneController,
                   keyboardType: TextInputType.phone,
                   cursorColor: CustomColors.prime_color,
@@ -126,10 +125,7 @@ class _EnterInfoState extends State<EnterInfo> {
                       color: Colors.grey,
                     ),
                   ),
-                  validator: (value) {
-                    if (value == '' || value == null) ;
-                    return null;
-                  },
+                  validator: _validatePhone,
                 ),
               ),
               Padding(
@@ -140,8 +136,15 @@ class _EnterInfoState extends State<EnterInfo> {
                           box.write('name', _nameController.text);
                           box.write('phone', _phoneController.text);
 
-                          Get.offAll(() => Home());
-                          // Get.offAll(() => GoogleLoginScreen());
+                          // Close the dialog when the button is tapped
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => AddDataScreen(
+                                    value: '',
+                                  )));
+
+                          // Navigate to the Home view or any other view you desire.
+                          // For example:
+                          // Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => Home()));
                         }
                       : null,
                   child: Container(
@@ -156,7 +159,7 @@ class _EnterInfoState extends State<EnterInfo> {
                     width: MediaQuery.of(context).size.width,
                     child: Center(
                       child: Text(
-                        'الى الشاشه الرئيسيه'.tr,
+                        'حفظ'.tr,
                         style: TextStyle(color: Colors.white),
                       ),
                     ),
@@ -189,4 +192,29 @@ class _EnterInfoState extends State<EnterInfo> {
       _isButtonEnabled = _formKey.currentState?.validate() ?? false;
     });
   }
+
+  String? _validateName(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Please enter your name';
+    }
+    return null; // Return null when the input is valid.
+  }
+
+  String? _validatePhone(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Please enter your phone number';
+    }
+
+    // Remove any non-numeric characters from the input
+    final numericValue = value.replaceAll(RegExp(r'[^0-9]'), '');
+
+    // Check if the numericValue has exactly 11 digits and starts with '01'
+    if (numericValue.length != 10 || !numericValue.startsWith('01')) {
+      return 'Please enter a valid phone number with 11 digits starting with 01';
+    }
+
+    return null; // Return null when the input is valid.
+  }
+
+  // ... Same code as before ...
 }

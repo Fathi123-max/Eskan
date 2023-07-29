@@ -4,8 +4,7 @@ import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
 import 'package:flutter_firebase_chat_core/flutter_firebase_chat_core.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-
-import 'add_information.dart';
+import 'package:haider/views/screens/homeView.dart';
 
 class GoogleLoginScreen extends StatefulWidget {
   @override
@@ -43,7 +42,7 @@ class _GoogleLoginScreenState extends State<GoogleLoginScreen>
       );
 
       // Handle successful sign-in here
-      Get.off(() => EnterInfo()); // Replace with your home screen route
+      Get.off(() => Home()); // Replace with your home screen route
     } catch (error) {
       // Handle sign-in error here
       print(error);

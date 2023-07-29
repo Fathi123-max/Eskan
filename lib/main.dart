@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -5,8 +6,8 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:haider/utills/localzation.dart';
 import 'package:haider/utills/themes.dart';
+import 'package:haider/views/screens/google_signin_page.dart';
 import 'package:haider/views/screens/homeView.dart';
-import 'package:haider/views/screens/signin_page.dart';
 
 import 'controllers/used/favourateController.dart';
 import 'controllers/used/themeControllers.dart';
@@ -60,7 +61,9 @@ class _MyAppState extends State<MyApp> {
       ),
       themeMode:
           themeController!.isDarkTheme ? ThemeMode.dark : ThemeMode.light,
-      home: box == null ? GoogleLoginScreen() : Home(),
+      home: FirebaseAuth.instance.currentUser == null
+          ? GoogleLoginScreen()
+          : Home(),
     );
   }
 }

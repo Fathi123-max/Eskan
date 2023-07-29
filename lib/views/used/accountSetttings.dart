@@ -4,8 +4,6 @@ import 'package:get_storage/get_storage.dart';
 import 'package:haider/controllers/used/currentUserInfoController.dart';
 import 'package:haider/utills/customColors.dart';
 
-import '../screens/add_information.dart';
-
 class AccountSettings extends StatelessWidget {
   final CurrentUserInfoController currentUserInfoController =
       Get.put(CurrentUserInfoController());
@@ -25,7 +23,7 @@ class AccountSettings extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Get.to(() => EnterInfo());
+          // Get.to(() => EnterInfo());
         },
         heroTag: "hellofrom 2dfdsjhfj",
         backgroundColor: CustomColors.prime_color,

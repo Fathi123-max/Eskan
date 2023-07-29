@@ -5,7 +5,7 @@ class Languages extends Translations {
   Map<String, Map<String, String>> get keys => {
         'ar_EG': {
           'Service Name': 'اسم العقار',
-          'Add Service': 'إضافة العقار',
+          'Add Service': 'إضافة عقار',
           'Services': 'إسكان',
           'Home': ' الرئيسية',
           'Description': ' الوصف',
