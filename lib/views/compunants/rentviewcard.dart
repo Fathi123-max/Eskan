@@ -44,10 +44,10 @@ class RealViewCard extends GetView {
                 fit: BoxFit.cover,
                 width: double.infinity,
                 height: 500,
-                placeholder: (context, url) =>
-                    CircularProgressIndicator(), // Placeholder widget while the image is loading
-                errorWidget: (context, url, error) =>
-                    Icon(Icons.error), // Widget to display in case of an error
+                // placeholder: (context, url) =>
+                //     CircularProgressIndicator(), // Placeholder widget while the image is loading
+                // errorWidget: (context, url, error) =>
+                //     Icon(Icons.error), // Widget to display in case of an error
               ),
               Positioned(
                 bottom: 0,

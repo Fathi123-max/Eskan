@@ -84,10 +84,10 @@ class CurrentUserPropertyDetail extends StatelessWidget {
                                     ),
                                   ),
                                 ),
-                                placeholder: (context, url) =>
-                                    Center(child: CircularProgressIndicator()),
-                                errorWidget: (context, url, error) =>
-                                    Center(child: Icon(Icons.error)),
+                                // placeholder: (context, url) =>
+                                //     Center(child: CircularProgressIndicator()),
+                                // errorWidget: (context, url, error) =>
+                                //     Center(child: Icon(Icons.error)),
                               ),
                             ),
                           );

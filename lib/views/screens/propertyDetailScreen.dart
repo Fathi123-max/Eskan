@@ -118,7 +118,10 @@ class PropertyDetailScreen extends StatelessWidget {
                         },
                         scrollDirection: Axis.horizontal,
                         children: property.images!.map((e) {
-                          return ViewPhoto(e, property);
+                          return RoundedImageView(
+                            imageUrl: e,
+                            property: property,
+                          );
                         }).toList(),
                       ),
                       Obx(() {
@@ -398,59 +401,78 @@ class PropertyDetailScreen extends StatelessWidget {
   }
 }
 
-class ViewPhoto extends GetView {
-  ViewPhoto(this.e, this.property);
+class ViewPhotoPage extends GetView {
+  ViewPhotoPage({this.e, required this.property});
   var e;
   PropertyModel property;
   @override
   Widget build(BuildContext context) {
-    return Hero(
-      tag: e,
-      child: GestureDetector(
-        onTap: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => Scaffold(
-                appBar: AppBar(
-                  backgroundColor: Colors.black,
-                  centerTitle: true,
-                  automaticallyImplyLeading: false,
-                  actions: [
-                    IconButton(
-                        onPressed: () => Navigator.of(context).pop(),
-                        icon: Icon(
-                          Icons.arrow_back_ios_new,
-                          color: Colors.white,
-                        )),
-                  ],
-                  elevation: 0.0,
-                ),
-                backgroundColor: Colors.black,
-                body: PhotoView(
-                  imageProvider: NetworkImage(e),
-                  backgroundDecoration: BoxDecoration(color: Colors.black),
-                  loadingBuilder: (context, event) =>
-                      Center(child: CircularProgressIndicator()),
-                ),
-              ),
-            ),
-          );
-        },
-        child: CachedNetworkImage(
-          imageUrl: e,
-          imageBuilder: (context, imageProvider) => Container(
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: imageProvider,
-                fit: BoxFit.cover,
-              ),
-            ),
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.black,
+        centerTitle: true,
+        automaticallyImplyLeading: false,
+        actions: [
+          IconButton(
+              onPressed: () => Navigator.of(context).pop(),
+              icon: Icon(
+                Icons.arrow_back_ios_new,
+                color: Colors.white,
+              )),
+        ],
+        elevation: 0.0,
+      ),
+      backgroundColor: Colors.black,
+      body: PhotoView(
+        imageProvider: CachedNetworkImageProvider(e),
+        backgroundDecoration: BoxDecoration(color: Colors.black),
+        loadingBuilder: (context, event) =>
+            Center(child: CircularProgressIndicator()),
+      ),
+    );
+  }
+}
+// import 'package:flutter/material.dart';
+
+class RoundedImageView extends StatelessWidget {
+  String imageUrl;
+  PropertyModel property;
+
+  RoundedImageView({required this.imageUrl, required this.property});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(
+            20.0), // Adjust the radius as per your preference
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black12,
+            offset: Offset(0, 2),
+            blurRadius: 4.0,
           ),
-          placeholder: (context, url) =>
-              Center(child: CircularProgressIndicator()),
-          errorWidget: (context, url, error) =>
-              Center(child: Icon(Icons.error)),
+        ], // Add shadow for elevation effect
+      ),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(8.0),
+        child: GestureDetector(
+          onTap: () {
+            Get.to(() => ViewPhotoPage(
+                  e: imageUrl,
+                  property: property,
+                ));
+          },
+          child: CachedNetworkImage(
+            imageUrl: imageUrl, // URL of the image
+            fit: BoxFit.cover,
+            width: double.infinity,
+            height: 500,
+            // placeholder: (context, url) =>
+            //     CircularProgressIndicator(), // Placeholder widget while the image is loading
+            // errorWidget: (context, url, error) =>
+            //     Icon(Icons.error), // Widget to display in case of an error
+          ),
         ),
       ),
     );

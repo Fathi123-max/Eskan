@@ -51,7 +51,7 @@ class _EnterInfoDialogState extends State<EnterInfoDialog> {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Text(
-                  "أدخل بياناتك ",
+                  "أدخل بياناتك لاضافه العقار",
                   style: TextStyle(
                       fontWeight: FontWeight.bold, color: Colors.grey),
                 ),
