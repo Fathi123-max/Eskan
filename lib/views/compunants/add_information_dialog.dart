@@ -35,19 +35,19 @@ class _EnterInfoDialogState extends State<EnterInfoDialog> {
           child: Column(
             children: [
               // ... Existing code ...
-              Padding(
-                padding: const EdgeInsets.only(left: 20, right: 20, top: 40),
-                child: Container(
-                  height: 300,
-                  width: 300,
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                      image: AssetImage('assets/images/icon.png'),
-                      fit: BoxFit.fill,
-                    ),
-                  ),
-                ),
-              ),
+              // Padding(
+              //   padding: const EdgeInsets.only(left: 20, right: 20, top: 40),
+              //   child: Container(
+              //     height: 300,
+              //     width: 300,
+              //     decoration: BoxDecoration(
+              //       image: DecorationImage(
+              //         image: AssetImage('assets/images/icon.png'),
+              //         fit: BoxFit.fill,
+              //       ),
+              //     ),
+              //   ),
+              // ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Text(
@@ -137,10 +137,11 @@ class _EnterInfoDialogState extends State<EnterInfoDialog> {
                           box.write('phone', _phoneController.text);
 
                           // Close the dialog when the button is tapped
-                          Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => AddDataScreen(
-                                    value: '',
-                                  )));
+                          Navigator.of(context)
+                              .pushReplacement(MaterialPageRoute(
+                                  builder: (context) => AddDataScreen(
+                                        value: '',
+                                      )));
 
                           // Navigate to the Home view or any other view you desire.
                           // For example:
