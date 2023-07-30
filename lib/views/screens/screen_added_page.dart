@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../../models/used/propertyModel.dart';
+import 'homeView.dart';
 
 class SuccessScreen extends StatelessWidget {
   final PropertyModel property;
@@ -10,9 +12,10 @@ class SuccessScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Success'),
-      ),
+      // appBar: AppBar(
+      //   title: Text('تم رفع العقار بنجاح '),
+      //   centerTitle: true,
+      // ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -24,7 +27,7 @@ class SuccessScreen extends StatelessWidget {
             ),
             SizedBox(height: 20),
             Text(
-              'Property Added Successfully!',
+              'تم رفع العقار بنجاح ',
               style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
@@ -32,8 +35,11 @@ class SuccessScreen extends StatelessWidget {
             ),
             SizedBox(height: 10),
             // Display property details
-            Text('Property Type: ${property.propertyType ?? ''}'),
-            Text('Address: ${property.address ?? ''}'),
+            ElevatedButton(
+                onPressed: () {
+                  Get.offAll(() => Home());
+                },
+                child: Text("الرئيسية"))
             // Add other details you want to display
             // You can customize the UI as per your requirements
           ],

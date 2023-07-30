@@ -4,6 +4,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:haider/controllers/used/pageViewController.dart';
 import 'package:haider/utills/customColors.dart';
 
+import '../../controllers/used/citycontroller.dart';
 import '../../controllers/used/draweController.dart';
 import '../../controllers/used/themeControllers.dart';
 import '../used/drawer.dart';
@@ -16,6 +17,7 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   final PageViewController pageViewController = Get.put(PageViewController());
   final DraweController draweController = Get.put(DraweController());
+  final CityController cityController = Get.put(CityController());
   final box = GetStorage();
   var selectedIndex = 0.obs; // Use Rx variable for state management
   ThemeController _themeController = Get.put(ThemeController());

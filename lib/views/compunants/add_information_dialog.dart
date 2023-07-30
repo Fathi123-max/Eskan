@@ -196,14 +196,14 @@ class _EnterInfoDialogState extends State<EnterInfoDialog> {
 
   String? _validateName(String? value) {
     if (value == null || value.isEmpty) {
-      return 'Please enter your name';
+      return 'من فضلك، أدخل اسمك';
     }
     return null; // Return null when the input is valid.
   }
 
   String? _validatePhone(String? value) {
     if (value == null || value.isEmpty) {
-      return 'Please enter your phone number';
+      return 'من فضلك، أدخل رقم هاتفك';
     }
 
     // Remove any non-numeric characters from the input
@@ -211,7 +211,7 @@ class _EnterInfoDialogState extends State<EnterInfoDialog> {
 
     // Check if the numericValue has exactly 11 digits and starts with '01'
     if (numericValue.length != 10 || !numericValue.startsWith('01')) {
-      return 'Please enter a valid phone number with 11 digits starting with 01';
+      return "يرجى إدخال رقم هاتف صحيح مكون من 11 رقمًا ويبدأ بـ 01";
     }
 
     return null; // Return null when the input is valid.

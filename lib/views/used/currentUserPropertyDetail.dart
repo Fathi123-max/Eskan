@@ -384,6 +384,7 @@ class CurrentUserPropertyDetail extends StatelessWidget {
                                                 CustomColors.secondary_color),
                                         onPressed: () async {
                                           controller.showLoadingBar(true);
+
                                           String response =
                                               await getSellAndBuyPropertyController
                                                   .firestoreService
@@ -415,7 +416,7 @@ class CurrentUserPropertyDetail extends StatelessWidget {
                                             Get.back();
                                           }
                                         },
-                                        child: Text('Delete Property'),
+                                        child: Text('حذف العقار'),
                                       ),
                               );
                             }))

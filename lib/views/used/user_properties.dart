@@ -55,8 +55,7 @@ class UserProperties extends StatelessWidget {
                     child: Text(
                       "لم تضف عقارات بعد",
                       style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: CustomColors.prime_color),
+                          fontWeight: FontWeight.bold, color: Colors.black),
                     ),
                   )
                 : Padding(

@@ -8,7 +8,6 @@ import 'package:haider/controllers/used/currentUserInfoController.dart';
 import 'package:haider/controllers/used/rentAndRentOutController.dart';
 import 'package:haider/utills/customColors.dart';
 import 'package:haider/utills/customToast.dart';
-import 'package:haider/views/screens/homeView.dart';
 import 'package:haider/views/screens/screen_added_page.dart';
 import 'package:multi_image_picker/multi_image_picker.dart';
 import 'package:uuid/uuid.dart';
@@ -758,10 +757,9 @@ class AddDataScreen extends StatelessWidget {
                                   controller.propertyModel,
                                   controller.images.value,
                                 );
+                                Get.off(() => SuccessScreen(
+                                    property: controller.propertyModel));
                                 if (response == 'Data added') {
-                                  Get.off(() => SuccessScreen(
-                                      property: controller.propertyModel));
-
                                   controller.showLoadingBar(false);
                                   // CustomToast.showToast('Proprty Added');
                                   Get.showSnackbar(GetSnackBar(
@@ -787,7 +785,6 @@ class AddDataScreen extends StatelessWidget {
                                   controller.desEditTextController.clear();
                                   controller.priceEditTextController.clear();
                                   controller.images.value = [];
-                                  Get.offAll(() => Home());
                                 } else {
                                   controller.showLoadingBar(false);
                                   Get.showSnackbar(GetSnackBar(

@@ -11,7 +11,6 @@ import 'package:haider/models/used/propertyModel.dart';
 import 'package:haider/utills/customColors.dart';
 import 'package:haider/views/compunants/fab.dart';
 
-import '../../controllers/used/citycontroller.dart';
 import '../compunants/rentviewcard.dart';
 import '../screens/avancedSearchPage.dart';
 import '../screens/google_signin_page.dart';
@@ -42,13 +41,13 @@ class HomePage extends StatelessWidget {
             ],
           ),
           content: Column(
-            crossAxisAlignment: CrossAxisAlignment.end,
+            crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
             children: [
-              Text('Email: ${user.email ?? 'N/A'}'),
+              Text(' الايميل :${user.email ?? 'N/A'} '),
               SizedBox(height: 8),
               Text(
-                  'Phone: ${GetStorage().read("phone") ?? '${user.phoneNumber} '}'),
+                  'الهاتف  :${GetStorage().read("phone") ?? '${user.phoneNumber} '}'),
             ],
           ),
           actions: [
@@ -58,7 +57,7 @@ class HomePage extends StatelessWidget {
                   // Add logout functionality here
                   _logoutUser(context);
                 },
-                child: Text('Logout'),
+                child: Text('تسجبل الخروج '),
               ),
             ),
           ],
@@ -99,7 +98,6 @@ class HomePage extends StatelessWidget {
                   text: "البحث",
                   icon: FontAwesomeIcons.searchengin,
                   onTap: () {
-                    Get.put(CityController());
                     Navigator.of(context).push(MaterialPageRoute(
                         builder: (context) => PropertySearchPage()));
                   },

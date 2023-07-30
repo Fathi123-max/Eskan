@@ -18,7 +18,10 @@ class FavoritesPage extends StatelessWidget {
         if (favorites.isEmpty) {
           // Display a message when there are no favorite properties
           return Center(
-            child: Text('المفضله'),
+            child: Text(
+              'المفضله',
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
           );
         }
 
