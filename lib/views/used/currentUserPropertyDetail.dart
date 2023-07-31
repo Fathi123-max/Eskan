@@ -380,8 +380,7 @@ class CurrentUserPropertyDetail extends StatelessWidget {
                                     ? Center(child: CircularProgressIndicator())
                                     : ElevatedButton(
                                         style: ElevatedButton.styleFrom(
-                                            backgroundColor:
-                                                CustomColors.secondary_color),
+                                            backgroundColor: Colors.red),
                                         onPressed: () async {
                                           controller.showLoadingBar(true);
 
@@ -392,10 +391,10 @@ class CurrentUserPropertyDetail extends StatelessWidget {
                                                       property.currentUserId!,
                                                       property.images!);
                                           if (response == 'Property Deleted') {
-                                            getSellAndBuyPropertyController
-                                                .getAllBuyingProperty();
-                                            getSellAndBuyPropertyController
-                                                .getSellProprtyOfCurrentUser();
+                                            // getSellAndBuyPropertyController
+                                            //     .getAllBuyingProperty();
+                                            // getSellAndBuyPropertyController
+                                            //     .getSellProprtyOfCurrentUser();
                                             rentAndRentOutController
                                                 .getAllRentProperty();
                                             rentAndRentOutController
@@ -416,7 +415,10 @@ class CurrentUserPropertyDetail extends StatelessWidget {
                                             Get.back();
                                           }
                                         },
-                                        child: Text('حذف العقار'),
+                                        child: Text(
+                                          'حذف العقار',
+                                          style: TextStyle(color: Colors.white),
+                                        ),
                                       ),
                               );
                             }))

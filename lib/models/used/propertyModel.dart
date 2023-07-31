@@ -114,7 +114,7 @@ class PropertyModel {
       'city': city,
       'area': area,
       'address': address,
-      'ize': size,
+      'size': size,
       'bedrooms': bedrooms,
       'bathrooms': bathrooms,
       'kitchen': kitchen,

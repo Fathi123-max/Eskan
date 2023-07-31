@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
 import 'package:flutter_firebase_chat_core/flutter_firebase_chat_core.dart';
 import 'package:get/get.dart';
@@ -52,6 +53,14 @@ class _GoogleLoginScreenState extends State<GoogleLoginScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        foregroundColor: Color(0xFF4FC3F7),
+        backgroundColor: Color(0xFF4FC3F7),
+        systemOverlayStyle: SystemUiOverlayStyle(
+          statusBarIconBrightness: Brightness.light,
+          statusBarColor: Color(0xFF4FC3F7), // status bar color
+        ),
+      ),
       body: Stack(
         children: [
           Container(
@@ -80,7 +89,7 @@ class _GoogleLoginScreenState extends State<GoogleLoginScreen>
                     color: Colors.white,
                   ),
                 ),
-                SizedBox(height: 30),
+                SizedBox(height: 50),
                 ElevatedButton(
                   onPressed: () async {
                     _handleSignIn(context);

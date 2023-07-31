@@ -766,15 +766,15 @@ class AddDataScreen extends StatelessWidget {
                                     message: 'Proprty Added',
                                     duration: Duration(milliseconds: 300),
                                   ));
-                                  sellPropertyController
-                                      .getSellProprtyOfCurrentUser();
+                                  // sellPropertyController
+                                  //     .getSellProprtyOfCurrentUser();
 
                                   rentAndRentOutController.getAllRentProperty();
 
                                   rentAndRentOutController
                                       .getRentOutProprtyOfCurrentUser();
 
-                                  sellPropertyController.getAllBuyingProperty();
+                                  // sellPropertyController.getAllBuyingProperty();
                                   // currentUserInfoController.getUserInfo();
                                   controller.areaEditTextController.clear();
                                   controller.addressEditTextController.clear();
