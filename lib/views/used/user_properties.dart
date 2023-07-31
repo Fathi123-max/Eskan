@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
@@ -67,7 +68,7 @@ class UserProperties extends StatelessWidget {
                             .currentUserRentOutlist.value.length,
                         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 1,
-                          childAspectRatio: 1.07,
+                          childAspectRatio: 1.19,
                         ),
                         itemBuilder: (context, index) {
                           var property =
@@ -95,11 +96,16 @@ class UserProperties extends StatelessWidget {
                                     const BorderRadius.all(Radius.circular(20)),
                                 child: Stack(
                                   children: [
-                                    Image.network(
-                                      property.images![0],
+                                    CachedNetworkImage(
+                                      imageUrl: property
+                                          .images![0], // URL of the image
                                       fit: BoxFit.cover,
                                       width: double.infinity,
                                       height: 500,
+                                      // placeholder: (context, url) =>
+                                      //     CircularProgressIndicator(), // Placeholder widget while the image is loading
+                                      // errorWidget: (context, url, error) =>
+                                      //     Icon(Icons.error), // Widget to display in case of an error
                                     ),
                                     Positioned(
                                       bottom: 0,

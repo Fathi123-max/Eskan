@@ -26,7 +26,7 @@ class PropertyServices {
           FirebaseStorage.instance.ref().child('RealState/$fileName');
 //quality  update
       await firebaseStorageRef
-          .putData((await propertyModel.images![i].getByteData(quality: 5))
+          .putData((await propertyModel.images![i].getByteData(quality: 20))
               .buffer
               .asUint8List())
           .then((result) {
@@ -43,9 +43,11 @@ class PropertyServices {
     propertyModel.images = imageUrls;
     propertyModel.username = box.read('name');
     propertyModel.usernumber = box.read('phone');
-    propertyModel.timestamp = Timestamp.now();
-
-    await property.add(propertyModel.toMap()).then((value) {
+    propertyModel.date = Timestamp.now().toDate().toString();
+    ;
+    var addPropertyPath = FirebaseFirestore.instance
+        .doc('property/${propertyModel.currentUserId}');
+    await addPropertyPath.set(propertyModel.toMap()).then((value) {
       response = 'Data added';
     }).catchError((error) {
       response = 'error occurred';
@@ -139,7 +141,7 @@ class PropertyServices {
     return response;
   }
 
-  Future<String> deleteProperty(String docID, List images) async {
+  Future<String> deleteProperty(String currentUserId, List images) async {
     CollectionReference collectionReference =
         FirebaseFirestore.instance.collection('property');
     String response = '';
@@ -152,8 +154,9 @@ class PropertyServices {
 
       print('image deleted');
     }
+
     await collectionReference
-        .doc(docID)
+        .doc(currentUserId)
         .delete()
         .then((value) => response = 'Property Deleted')
         .catchError((error) => response = "Failed to Delete Property: $error");
@@ -167,15 +170,17 @@ class PropertyServices {
     List<PropertyModel> propertyList = [];
     await FirebaseFirestore.instance
         .collection('property')
+        .where('username', isEqualTo: box.read("name"))
+        .where('usernumber', isEqualTo: box.read("phone"))
         .get()
         .then((QuerySnapshot querySnapshot) {
       querySnapshot.docs.forEach((doc) {
         PropertyModel propertyModel =
             PropertyModel.fromMap(doc.data() as Map<String, dynamic>);
-        if (doc['username'] == box.read("name") &&
-            doc['usernumber'] == box.read("phone")) {
-          propertyList.add(propertyModel);
-        }
+        // if (doc['username'] == box.read("name") &&
+        //     doc['usernumber'] == box.read("phone")) {
+        propertyList.add(propertyModel);
+        // }
       });
     });
     return propertyList;

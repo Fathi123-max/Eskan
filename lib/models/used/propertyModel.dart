@@ -1,14 +1,12 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
-
 class PropertyModel {
   String? username;
 
   String? usernumber;
 
-  Timestamp? timestamp;
+  String? date;
 
   String? action;
 
@@ -43,7 +41,7 @@ class PropertyModel {
   PropertyModel({
     this.username,
     this.usernumber,
-    this.timestamp,
+    this.date,
     this.action,
     this.docId,
     this.currentUserId,
@@ -64,7 +62,7 @@ class PropertyModel {
   PropertyModel copyWith({
     String? username,
     String? usernumber,
-    Timestamp? timestamp,
+    String? date,
     String? action,
     String? docId,
     String? currentUserId,
@@ -84,7 +82,7 @@ class PropertyModel {
     return PropertyModel(
       username: username ?? this.username,
       usernumber: usernumber ?? this.usernumber,
-      timestamp: timestamp ?? this.timestamp,
+      date: date ?? this.date,
       action: action ?? this.action,
       docId: docId ?? this.docId,
       currentUserId: currentUserId ?? this.currentUserId,
@@ -107,7 +105,7 @@ class PropertyModel {
     return <String, dynamic>{
       'username': username,
       'usernumber': usernumber,
-      'timestamp': timestamp,
+      'date': date,
       'action': action,
       'docId': docId,
       'currentUserId': currentUserId,
@@ -116,7 +114,7 @@ class PropertyModel {
       'city': city,
       'area': area,
       'address': address,
-      'size': size,
+      'ize': size,
       'bedrooms': bedrooms,
       'bathrooms': bathrooms,
       'kitchen': kitchen,
@@ -128,27 +126,23 @@ class PropertyModel {
 
   factory PropertyModel.fromMap(Map<String, dynamic> map) {
     return PropertyModel(
-      username: map['username'] != null ? map['username'] as String : null,
-      usernumber:
-          map['usernumber'] != null ? map['usernumber'] as String : null,
-      timestamp: map['timestamp'] != null ? map['timestamp'] : null,
-      action: map['action'] != null ? map['action'] as String : null,
-      docId: map['docId'] != null ? map['docId'] as String : null,
-      currentUserId:
-          map['currentUserId'] != null ? map['currentUserId'] as String : null,
-      propertyType:
-          map['propertyType'] != null ? map['propertyType'] as String : null,
-      propertyFor:
-          map['propertyFor'] != null ? map['propertyFor'] as String : null,
-      city: map['city'] != null ? map['city'] as String : null,
-      area: map['area'] != null ? map['area'] as String : null,
-      address: map['address'] != null ? map['address'] as String : null,
-      size: map['size'] != null ? map['size'] as String : null,
-      bedrooms: map['bedrooms'] != null ? map['bedrooms'] as String : null,
-      bathrooms: map['bathrooms'] != null ? map['bathrooms'] as String : null,
-      kitchen: map['kitchen'] != null ? map['kitchen'] as String : null,
-      descr: map['descr'] != null ? map['descr'] as String : null,
-      price: map['price'] != null ? map['price'] as String : null,
+      username: map['username'] != null ? map['username'] : null,
+      usernumber: map['usernumber'] != null ? map['usernumber'] : null,
+      date: map['date'] != null ? map['date'] : null,
+      action: map['action'] != null ? map['action'] : null,
+      docId: map['docId'] != null ? map['docId'] : null,
+      currentUserId: map['currentUserId'] != null ? map['currentUserId'] : null,
+      propertyType: map['propertyType'] != null ? map['propertyType'] : null,
+      propertyFor: map['propertyFor'] != null ? map['propertyFor'] : null,
+      city: map['city'] != null ? map['city'] : null,
+      area: map['area'] != null ? map['area'] : null,
+      address: map['address'] != null ? map['address'] : null,
+      size: map['size'] != null ? map['size'] : null,
+      bedrooms: map['bedrooms'] != null ? map['bedrooms'] : null,
+      bathrooms: map['bathrooms'] != null ? map['bathrooms'] : null,
+      kitchen: map['kitchen'] != null ? map['kitchen'] : null,
+      descr: map['descr'] != null ? map['descr'] : null,
+      price: map['price'] != null ? map['price'] : null,
       images: map['images'] != null ? map['images'] : null,
     );
   }
@@ -160,7 +154,7 @@ class PropertyModel {
 
   @override
   String toString() {
-    return 'PropertyModel(username: $username, usernumber: $usernumber, timestamp: $timestamp, action: $action, docId: $docId, currentUserId: $currentUserId, propertyType: $propertyType, propertyFor: $propertyFor, city: $city, area: $area, address: $address, size: $size, bedrooms: $bedrooms, bathrooms: $bathrooms, kitchen: $kitchen, descr: $descr, price: $price, images: $images)';
+    return 'PropertyModel(username: $username, usernumber: $usernumber, timestamp: $date, action: $action, docId: $docId, currentUserId: $currentUserId, propertyType: $propertyType, propertyFor: $propertyFor, city: $city, area: $area, address: $address, size: $size, bedrooms: $bedrooms, bathrooms: $bathrooms, kitchen: $kitchen, descr: $descr, price: $price, images: $images)';
   }
 
   @override
@@ -169,7 +163,7 @@ class PropertyModel {
 
     return other.username == username &&
         other.usernumber == usernumber &&
-        other.timestamp == timestamp &&
+        other.date == date &&
         other.action == action &&
         other.docId == docId &&
         other.currentUserId == currentUserId &&
@@ -191,7 +185,7 @@ class PropertyModel {
   int get hashCode {
     return username.hashCode ^
         usernumber.hashCode ^
-        timestamp.hashCode ^
+        date.hashCode ^
         action.hashCode ^
         docId.hashCode ^
         currentUserId.hashCode ^
@@ -211,8 +205,10 @@ class PropertyModel {
 
   // Convert the list of PropertyModel objects to a JSON string
   static String toListJson(List<PropertyModel> list) {
-    final List<Map<String, dynamic>> jsonList =
-        list.map((item) => item.toMap()).toList();
+    final List<Map<String, dynamic>> jsonList = list.map((item) {
+      return item.toMap();
+    }).toList();
+
     return json.encode(jsonList);
   }
 
@@ -220,7 +216,7 @@ class PropertyModel {
   static List<PropertyModel> fromListJson(String jsonList) {
     final List<dynamic> dynamicList = json.decode(jsonList);
     return dynamicList
-        .map((item) => PropertyModel.fromMap(item as Map<String, dynamic>))
+        .map((item) => PropertyModel.fromJson(json.encode(item)))
         .toList();
   }
 }

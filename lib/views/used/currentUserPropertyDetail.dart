@@ -389,7 +389,7 @@ class CurrentUserPropertyDetail extends StatelessWidget {
                                               await getSellAndBuyPropertyController
                                                   .firestoreService
                                                   .deleteProperty(
-                                                      property.docId!,
+                                                      property.currentUserId!,
                                                       property.images!);
                                           if (response == 'Property Deleted') {
                                             getSellAndBuyPropertyController

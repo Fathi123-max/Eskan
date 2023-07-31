@@ -2,13 +2,11 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_ui_firestore/firebase_ui_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:haider/controllers/used/rentAndRentOutController.dart';
 import 'package:haider/models/used/propertyModel.dart';
-import 'package:haider/utills/customColors.dart';
 import 'package:haider/views/compunants/fab.dart';
 
 import '../compunants/rentviewcard.dart';
@@ -44,7 +42,7 @@ class HomePage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
             children: [
-              Text(' الايميل :${user.email ?? 'N/A'} '),
+              Text('الايميل :${user.email ?? 'N/A'} '),
               SizedBox(height: 8),
               Text(
                   'الهاتف  :${GetStorage().read("phone") ?? '${user.phoneNumber} '}'),
@@ -96,7 +94,7 @@ class HomePage extends StatelessWidget {
                 type: MaterialType.transparency,
                 child: SearchButton(
                   text: "البحث",
-                  icon: FontAwesomeIcons.searchengin,
+                  icon: Icons.location_city_sharp,
                   onTap: () {
                     Navigator.of(context).push(MaterialPageRoute(
                         builder: (context) => PropertySearchPage()));
@@ -112,8 +110,8 @@ class HomePage extends StatelessWidget {
                   child: Text(
                     "لم تضف عقارات بعد ",
                     style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: CustomColors.prime_color),
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 );
               } else {

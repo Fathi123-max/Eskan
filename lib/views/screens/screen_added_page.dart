@@ -33,13 +33,40 @@ class SuccessScreen extends StatelessWidget {
                 fontWeight: FontWeight.bold,
               ),
             ),
-            SizedBox(height: 10),
+            SizedBox(height: 50),
             // Display property details
-            ElevatedButton(
-                onPressed: () {
-                  Get.offAll(() => Home());
-                },
-                child: Text("الرئيسية"))
+            GestureDetector(
+              onTap: () {
+                Get.offAll(() => Home());
+              },
+              child: Container(
+                margin: EdgeInsets.all(60),
+                width: double.infinity,
+                height: 50,
+                decoration: BoxDecoration(
+                  color: Colors.blue,
+                  borderRadius: BorderRadius.circular(10),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.5),
+                      spreadRadius: 2,
+                      blurRadius: 5,
+                      offset: Offset(0, 3),
+                    ),
+                  ],
+                ),
+                child: Center(
+                  child: Text(
+                    "الرئيسية",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+              ),
+            )
             // Add other details you want to display
             // You can customize the UI as per your requirements
           ],

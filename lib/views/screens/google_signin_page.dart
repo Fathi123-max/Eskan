@@ -98,14 +98,15 @@ class _GoogleLoginScreenState extends State<GoogleLoginScreen>
                     mainAxisSize: MainAxisSize.min,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
+                      Text(
+                        'سجل الدخول بجوجل',
+                        style: TextStyle(
+                            fontSize: 16, fontWeight: FontWeight.w700),
+                      ),
+                      SizedBox(width: 12.0),
                       Image.asset(
                         'assets/search.png',
                         height: 24.0,
-                      ),
-                      SizedBox(width: 12.0),
-                      Text(
-                        'Sign in with Google',
-                        style: TextStyle(fontSize: 16),
                       ),
                     ],
                   ),
