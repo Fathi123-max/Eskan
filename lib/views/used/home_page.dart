@@ -45,7 +45,7 @@ class HomePage extends StatelessWidget {
               Text('الايميل :${user.email ?? 'N/A'} '),
               SizedBox(height: 8),
               Text(
-                  'الهاتف  :${GetStorage().read("phone") ?? '${user.phoneNumber} '}'),
+                  'الهاتف  :${GetStorage().read("phone") ?? '${user.phoneNumber} '} '),
             ],
           ),
           actions: [

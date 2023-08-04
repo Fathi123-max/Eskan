@@ -19,7 +19,7 @@ class FavoritesPage extends StatelessWidget {
           // Display a message when there are no favorite properties
           return Center(
             child: Text(
-              'المفضله',
+              'لم تفضل عقار بعد',
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
           );
