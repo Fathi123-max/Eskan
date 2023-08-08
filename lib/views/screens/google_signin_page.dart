@@ -14,7 +14,8 @@ class GoogleLoginScreen extends StatefulWidget {
 
 class _GoogleLoginScreenState extends State<GoogleLoginScreen>
     with SingleTickerProviderStateMixin {
-  void _handleSignIn(BuildContext context) async {
+  bool signed = false;
+  Future<bool> _handleSignIn(BuildContext context) async {
     try {
       // Trigger the authentication flow
       final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
@@ -43,10 +44,13 @@ class _GoogleLoginScreenState extends State<GoogleLoginScreen>
       );
 
       // Handle successful sign-in here
-      Get.off(() => Home()); // Replace with your home screen route
+      signed = true;
+      return true;
+      // Replace with your home screen route
     } catch (error) {
-      // Handle sign-in error here
       print(error);
+      return false;
+      // Handle sign-in error here
     }
   }
 
@@ -92,7 +96,13 @@ class _GoogleLoginScreenState extends State<GoogleLoginScreen>
                 SizedBox(height: 50),
                 ElevatedButton(
                   onPressed: () async {
-                    _handleSignIn(context);
+                    signed = await _handleSignIn(context);
+                    signed
+                        ? Navigator.of(context)
+                            .pushReplacement(MaterialPageRoute(
+                            builder: (context) => Home(),
+                          ))
+                        : Get.snackbar("خطأ ", "خطأ فى تسجيل الدخول");
                   },
                   style: ElevatedButton.styleFrom(
                     foregroundColor: Colors.black,
