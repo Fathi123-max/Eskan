@@ -55,7 +55,7 @@ class HomePage extends StatelessWidget {
                   // Add logout functionality here
                   _logoutUser(context);
                 },
-                child: Text('تسجبل الخروج '),
+                child: Text('تسجيل الخروج '),
               ),
             ),
           ],

@@ -98,11 +98,12 @@ class _GoogleLoginScreenState extends State<GoogleLoginScreen>
                   onPressed: () async {
                     signed = await _handleSignIn(context);
                     signed
-                        ? Navigator.of(context)
-                            .pushReplacement(MaterialPageRoute(
-                            builder: (context) => Home(),
-                          ))
-                        : Get.snackbar("خطأ ", "خطأ فى تسجيل الدخول");
+                        ? Get.offAll(
+                            () => Home(),
+                          )
+                        : Get.snackbar("خطأ ", "خطأ فى تسجيل الدخول",
+                            colorText: Colors.white,
+                            backgroundColor: Colors.red);
                   },
                   style: ElevatedButton.styleFrom(
                     foregroundColor: Colors.black,

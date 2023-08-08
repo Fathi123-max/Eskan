@@ -1,6 +1,8 @@
-# haider
+# Eskan
 
-A new Flutter project.
+Real estate app for sale and rent. This is active project.
+
+
 
 ## Getting Started
 
