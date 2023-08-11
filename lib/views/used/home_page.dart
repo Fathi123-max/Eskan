@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_ui_firestore/firebase_ui_firestore.dart';
@@ -8,6 +9,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:haider/controllers/used/rentAndRentOutController.dart';
 import 'package:haider/models/used/propertyModel.dart';
 import 'package:haider/views/compunants/fab.dart';
+import 'package:haider/views/used/info.dart';
 
 import '../compunants/rentviewcard.dart';
 import '../screens/avancedSearchPage.dart';
@@ -125,26 +127,24 @@ class HomePage extends StatelessWidget {
                         padding: const EdgeInsets.all(16.0),
                         child: Row(
                           children: [
-                            // GestureDetector(
-                            //   onTap: () {
-                            //     // _showUserPropertiesDialog(context,
-                            //     //     FirebaseAuth.instance.currentUser!);
-                            //   },
-                            //   child:
-                            //    CircleAvatar(
-                            //       radius: 40,
-                            //       backgroundImage: user.photoURL != null
-                            //           ? NetworkImage(user.photoURL!)
-                            //           : NetworkImage(
-                            //               "https://unsplash.com/photos/C8Ta0gwPbQg")),
-                            // ),
-
                             SizedBox(width: 8),
                             Text(
                               'أهلا بكم فى اسكان ✌️',
                               style: TextStyle(
                                 fontSize: 25,
                                 fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            Spacer(),
+                            GestureDetector(
+                              onTap: () {
+                                Get.to(() => Info());
+                              },
+                              child: CircleAvatar(
+                                radius: 15,
+                                backgroundImage: CachedNetworkImageProvider(
+                                  "https://bedzzz.com.au/wp-content/uploads/2017/12/customer-service-icon.png",
+                                ),
                               ),
                             ),
                           ],

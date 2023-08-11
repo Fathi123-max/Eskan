@@ -7,7 +7,6 @@ import 'package:haider/utills/customColors.dart';
 import '../../controllers/used/citycontroller.dart';
 import '../../controllers/used/draweController.dart';
 import '../../controllers/used/themeControllers.dart';
-import '../used/drawer.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -24,7 +23,7 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: Drawerwidget(),
+      // drawer: Drawerwidget(),
       // appBar: AppBar(
       //   centerTitle: true,
       //   elevation: 0.0,
