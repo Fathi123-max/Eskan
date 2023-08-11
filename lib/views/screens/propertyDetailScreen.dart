@@ -352,8 +352,8 @@ class PropertyDetailScreen extends StatelessWidget {
                         children: [
                           CircleAvatar(
                             radius: 30,
-                            backgroundImage:
-                                NetworkImage(firebaseuser!.photoURL!),
+                            backgroundImage: NetworkImage(
+                                "https://img.freepik.com/free-vector/house-with-red-roof-isolated_1284-41870.jpg?w=826&t=st=1691766865~exp=1691767465~hmac=e22807a2be9c697a9bb609d895f80642dcb344e9f367cc6b0a8aec1a5e3d4b27"),
                           ),
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,

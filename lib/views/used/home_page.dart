@@ -16,53 +16,53 @@ import '../screens/google_signin_page.dart';
 class HomePage extends StatelessWidget {
   final RentAndRentOutController rentAndRentOutController =
       Get.put(RentAndRentOutController());
-  var user = FirebaseAuth.instance.currentUser!;
+  // var user = FirebaseAuth.instance.currentUser!;
   TextEditingController textController = TextEditingController();
-  void _showUserPropertiesDialog(BuildContext context, User user) {
-    showDialog(
-      context: context,
-      builder: (context) {
-        return AlertDialog(
-          title: Column(
-            children: [
-              CircleAvatar(
-                radius: 40,
-                backgroundImage: user.photoURL != null
-                    ? NetworkImage(user.photoURL!)
-                    : NetworkImage("https://unsplash.com/photos/C8Ta0gwPbQg"),
-              ),
-              SizedBox(height: 8),
-              Text(
-                user.displayName ?? 'N/A',
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
-              ),
-            ],
-          ),
-          content: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Text('الايميل :${user.email ?? 'N/A'} '),
-              SizedBox(height: 8),
-              Text(
-                  'الهاتف  :${GetStorage().read("phone") ?? '${user.phoneNumber} '} '),
-            ],
-          ),
-          actions: [
-            Center(
-              child: TextButton(
-                onPressed: () {
-                  // Add logout functionality here
-                  _logoutUser(context);
-                },
-                child: Text('تسجيل الخروج '),
-              ),
-            ),
-          ],
-        );
-      },
-    );
-  }
+  // void _showUserPropertiesDialog(BuildContext context, User user) {
+  //   showDialog(
+  //     context: context,
+  //     builder: (context) {
+  //       return AlertDialog(
+  //         title: Column(
+  //           children: [
+  //             CircleAvatar(
+  //               radius: 40,
+  //               backgroundImage: user.photoURL != null
+  //                   ? NetworkImage(user.photoURL!)
+  //                   : NetworkImage("https://unsplash.com/photos/C8Ta0gwPbQg"),
+  //             ),
+  //             SizedBox(height: 8),
+  //             Text(
+  //               user.displayName ?? 'N/A',
+  //               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+  //             ),
+  //           ],
+  //         ),
+  //         content: Column(
+  //           crossAxisAlignment: CrossAxisAlignment.start,
+  //           mainAxisSize: MainAxisSize.min,
+  //           children: [
+  //             Text('الايميل :${user.email ?? 'N/A'} '),
+  //             SizedBox(height: 8),
+  //             Text(
+  //                 'الهاتف  :${GetStorage().read("phone") ?? '${user.phoneNumber} '} '),
+  //           ],
+  //         ),
+  //         actions: [
+  //           Center(
+  //             child: TextButton(
+  //               onPressed: () {
+  //                 // Add logout functionality here
+  //                 _logoutUser(context);
+  //               },
+  //               child: Text('تسجيل الخروج '),
+  //             ),
+  //           ),
+  //         ],
+  //       );
+  //     },
+  //   );
+  // }
 
   void _logoutUser(BuildContext context) async {
     try {
@@ -125,23 +125,25 @@ class HomePage extends StatelessWidget {
                         padding: const EdgeInsets.all(16.0),
                         child: Row(
                           children: [
-                            GestureDetector(
-                              onTap: () {
-                                _showUserPropertiesDialog(context,
-                                    FirebaseAuth.instance.currentUser!);
-                              },
-                              child: CircleAvatar(
-                                  radius: 40,
-                                  backgroundImage: user.photoURL != null
-                                      ? NetworkImage(user.photoURL!)
-                                      : NetworkImage(
-                                          "https://unsplash.com/photos/C8Ta0gwPbQg")),
-                            ),
+                            // GestureDetector(
+                            //   onTap: () {
+                            //     // _showUserPropertiesDialog(context,
+                            //     //     FirebaseAuth.instance.currentUser!);
+                            //   },
+                            //   child:
+                            //    CircleAvatar(
+                            //       radius: 40,
+                            //       backgroundImage: user.photoURL != null
+                            //           ? NetworkImage(user.photoURL!)
+                            //           : NetworkImage(
+                            //               "https://unsplash.com/photos/C8Ta0gwPbQg")),
+                            // ),
+
                             SizedBox(width: 8),
                             Text(
-                              'أهلا بك ${GetStorage().read("name") ?? user.displayName}✌️',
+                              'أهلا بكم فى اسكان ✌️',
                               style: TextStyle(
-                                fontSize: 18,
+                                fontSize: 25,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
