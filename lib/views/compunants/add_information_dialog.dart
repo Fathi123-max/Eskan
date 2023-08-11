@@ -34,20 +34,6 @@ class _EnterInfoDialogState extends State<EnterInfoDialog> {
           key: _formKey,
           child: Column(
             children: [
-              // ... Existing code ...
-              // Padding(
-              //   padding: const EdgeInsets.only(left: 20, right: 20, top: 40),
-              //   child: Container(
-              //     height: 300,
-              //     width: 300,
-              //     decoration: BoxDecoration(
-              //       image: DecorationImage(
-              //         image: AssetImage('assets/images/icon.png'),
-              //         fit: BoxFit.fill,
-              //       ),
-              //     ),
-              //   ),
-              // ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Text(

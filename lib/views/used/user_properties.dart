@@ -6,7 +6,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:haider/controllers/used/rentAndRentOutController.dart';
 import 'package:haider/utills/customColors.dart';
 
-import '../../controllers/unused/getSellAndBuyPropertController.dart';
+import '../../controllers/used/getSellAndBuyPropertController.dart';
 import '../compunants/add_information_dialog.dart';
 import '../compunants/fab.dart';
 import '../screens/addDataScreen.dart';
