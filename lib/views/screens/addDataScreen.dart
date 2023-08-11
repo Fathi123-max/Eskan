@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:haider/controllers/unused/getSellAndBuyPropertController.dart';
 import 'package:haider/controllers/used/addpropertyController.dart';
 import 'package:haider/controllers/used/catogryconroller.dart';
 import 'package:haider/controllers/used/currentUserInfoController.dart';
@@ -22,9 +21,6 @@ class AddDataScreen extends StatelessWidget {
   final box = GetStorage();
 
   final AddPropertyController controller = Get.put(AddPropertyController());
-
-  final GetSellAndBuyPropertyController sellPropertyController =
-      Get.put(GetSellAndBuyPropertyController());
 
   final RentAndRentOutController rentAndRentOutController = Get.find();
 

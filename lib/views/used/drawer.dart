@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:haider/views/screens/google_signin_page.dart';
-import 'package:haider/views/screens/rooms.dart';
 
 import '../../controllers/used/draweController.dart';
 import '../../controllers/used/pageViewController.dart';
@@ -61,7 +60,6 @@ class Drawerwidget extends StatelessWidget {
                       draweController.update();
                       pageViewController.pageViewIndex.value = 0;
 
-                      index == 2 ? Get.to(() => RoomsPage()) : Get.back();
                       Navigator.pop(context);
                     },
                   );

@@ -1,8 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
-import 'package:flutter_firebase_chat_core/flutter_firebase_chat_core.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
@@ -13,9 +11,7 @@ import 'package:photo_view/photo_view.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:whatsapp_unilink/whatsapp_unilink.dart';
 
-import '../../controllers/unused/usrechatcontroller.dart';
 import '../../controllers/used/rentAndRentOutController.dart';
-import '../chat/chats.dart';
 
 class PropertyDetailScreen extends StatelessWidget {
   final PropertyModel property;
@@ -24,10 +20,6 @@ class PropertyDetailScreen extends StatelessWidget {
   var firebaseuser = FirebaseAuth.instance.currentUser;
   final CurrentUserInfoController controller =
       Get.put(CurrentUserInfoController());
-
-  final userchatController chasusercontroller = Get.put(userchatController());
-  // final SqfliliteController sqfliliteController =
-  //     Get.put(SqfliliteController());
 
   launchWhatsApp() async {
     try {
@@ -389,15 +381,6 @@ class PropertyDetailScreen extends StatelessWidget {
             ),
           ),
         ));
-  }
-
-  void _handlePressed(types.User otherUser) async {
-    final room = await FirebaseChatCore.instance.createRoom(otherUser);
-    Get.to(
-      () => ChatPage(
-        room: room,
-      ),
-    );
   }
 }
 
