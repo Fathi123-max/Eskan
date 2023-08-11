@@ -124,12 +124,11 @@ class HomePage extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Padding(
-                        padding: const EdgeInsets.all(16.0),
+                        padding: const EdgeInsets.all(12.0),
                         child: Row(
                           children: [
-                            SizedBox(width: 8),
                             Text(
-                              'أهلا بكم فى اسكان ✌️',
+                              'أهلا بكم فى اسكان',
                               style: TextStyle(
                                 fontSize: 25,
                                 fontWeight: FontWeight.bold,

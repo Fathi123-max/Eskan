@@ -57,11 +57,15 @@ class Info extends StatelessWidget {
             SizedBox(height: 40.0),
             ElevatedButton(
               onPressed: () => Get.dialog(Dialog(
-                child: Container(
+                backgroundColor: Colors.white,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(15)),
+                child: Card(
+                    margin: EdgeInsets.all(15),
                     child: Markdown(
-                  controller: ScrollController(),
-                  selectable: true,
-                  data: '''##  شروط الاستخدام
+                      controller: ScrollController(),
+                      selectable: true,
+                      data: '''##  شروط الاستخدام
 
 1. نحن لسنا وكالة عقارات، وإنما نقدم خدمة من خلالها يستطيع الوكلاء ممارسة التسويق ويمكنك مشاهدة تفاصيل العقارات وإرسال الاستفسارات إليك مباشرة. ولا نشترك في أي اتصالات بينك وبين الوكلاء ولا تشارك في أي جزء من الصفقة.
 
@@ -102,12 +106,11 @@ class Info extends StatelessWidget {
 - لن تقدموا أي مساهمات مضللة أو خادعة أو غير صحيحة بالأساس.
 - لن تقدموا مساهمات تسبب جريمة أو تحتوي على إساءات أو محتوى غير لائق.
  ''',
-                )),
+                    )),
               )),
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  SizedBox(width: 10),
                   Text(
                     "الشروط والاحكام ",
                     style: TextStyle(

@@ -38,8 +38,8 @@ class SearchControllerCustom extends GetxController {
 
         // Add the inequality filters for 'address' field
         mainQuery = mainQuery
-            .where('address', isGreaterThanOrEqualTo: startAtText)
-            .where('address', isLessThan: endAtText);
+            .where('area', isGreaterThanOrEqualTo: startAtText)
+            .where('area', isLessThan: endAtText);
       }
 
       // Perform the main query and add the results to the searchResults list

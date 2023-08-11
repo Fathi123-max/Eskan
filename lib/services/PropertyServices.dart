@@ -168,21 +168,23 @@ class PropertyServices {
   Future<List<PropertyModel>> getCurrentUserPropertyForRentOut() async {
     // CustomToast.showToast(controller.currentUserId.value);
     List<PropertyModel> propertyList = [];
-    await FirebaseFirestore.instance
-        .collection('property')
-        .where('username', isEqualTo: box.read("name"))
-        .where('usernumber', isEqualTo: box.read("phone"))
-        .get()
-        .then((QuerySnapshot querySnapshot) {
-      querySnapshot.docs.forEach((doc) {
-        PropertyModel propertyModel =
-            PropertyModel.fromMap(doc.data() as Map<String, dynamic>);
-        // if (doc['username'] == box.read("name") &&
-        //     doc['usernumber'] == box.read("phone")) {
-        propertyList.add(propertyModel);
-        // }
-      });
-    });
+    box.read("name") != null
+        ? await FirebaseFirestore.instance
+            .collection('property')
+            .where('username', isEqualTo: box.read("name"))
+            .where('usernumber', isEqualTo: box.read("phone"))
+            .get()
+            .then((QuerySnapshot querySnapshot) {
+            querySnapshot.docs.forEach((doc) {
+              PropertyModel propertyModel =
+                  PropertyModel.fromMap(doc.data() as Map<String, dynamic>);
+              // if (doc['username'] == box.read("name") &&
+              //     doc['usernumber'] == box.read("phone")) {
+              propertyList.add(propertyModel);
+              // }
+            });
+          })
+        : null;
     return propertyList;
   }
 

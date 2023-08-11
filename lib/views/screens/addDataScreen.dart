@@ -273,7 +273,7 @@ class AddDataScreen extends StatelessWidget {
                       return null;
                     },
                     onSaved: (value) {
-                      controller.propertyModel.area = value.toString();
+                      controller.propertyModel.area = value.toString().trim();
                       //authController.userModel.userEmail = value.toString();
                     },
                   ),

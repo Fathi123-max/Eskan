@@ -56,7 +56,7 @@ class _PropertySearchPageState extends State<PropertySearchPage> {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: SearchBar(
-                    hintText: "أدخل عنوان العقار ",
+                    hintText: "ابحث باسم المنطقه  ",
                     controller: searchController,
                     trailing: [
                       Padding(
@@ -93,31 +93,31 @@ class _PropertySearchPageState extends State<PropertySearchPage> {
                         },
                       ),
                       SizedBox(height: 16),
-                      Text(
-                        'السعر',
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      RangeSlider(
-                        values: priceRange,
-                        min: 0,
-                        max: 10000,
-                        divisions: 100,
-                        onChanged: (RangeValues values) {
-                          setState(() {
-                            priceRange = values;
-                          });
-                        },
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text('${priceRange.start.toInt()} جنيه'),
-                          Text('${priceRange.end.toInt()} جنيه'),
-                        ],
-                      ),
+                      // Text(
+                      //   'السعر',
+                      //   style: TextStyle(
+                      //     fontSize: 16,
+                      //     fontWeight: FontWeight.bold,
+                      //   ),
+                      // ),
+                      // RangeSlider(
+                      //   values: priceRange,
+                      //   min: 0,
+                      //   max: 10000,
+                      //   divisions: 100,
+                      //   onChanged: (RangeValues values) {
+                      //     setState(() {
+                      //       priceRange = values;
+                      //     });
+                      //   },
+                      // ),
+                      // Row(
+                      //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      //   children: [
+                      //     Text('${priceRange.start.toInt()} جنيه'),
+                      //     Text('${priceRange.end.toInt()} جنيه'),
+                      //   ],
+                      // ),
                       // SizedBox(height: 16),
                       // Text(
                       //   'المساحه',
@@ -250,7 +250,7 @@ class _PropertySearchPageState extends State<PropertySearchPage> {
                             // Set your filter variables here
                             city: city,
                             priceRange: priceRange,
-                            searchText: searchController.text.toLowerCase(),
+                            searchText: searchController.text.trim(),
                             // Add more filter parameters as needed
                           );
 
