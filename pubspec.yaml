@@ -85,6 +85,7 @@ dependencies:
   flutter_login: ^4.2.0
   markdown: ^7.1.1
   flutter_markdown: ^0.6.17+1
+  open_street_map_search_and_pick: ^0.1.0
   
     
 dev_dependencies:

@@ -15,7 +15,7 @@ void main() async {
   await Firebase.initializeApp();
   await GetStorage.init();
 
-  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+  SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
     statusBarIconBrightness: Brightness.light,
     statusBarColor: Colors.white, // status bar color
   ));

@@ -16,7 +16,7 @@ import '../../controllers/used/citycontroller.dart';
 class AddDataScreen extends StatelessWidget {
   final String value;
 
-  AddDataScreen({required this.value});
+  AddDataScreen({super.key, required this.value});
 
   final box = GetStorage();
 
@@ -37,7 +37,7 @@ class AddDataScreen extends StatelessWidget {
             actions: [
               IconButton(
                   onPressed: () => Navigator.of(context).pop(),
-                  icon: Icon(Icons.arrow_back_ios_new)),
+                  icon: const Icon(Icons.arrow_back_ios_new)),
             ],
             elevation: 0.0,
           ),
@@ -52,7 +52,7 @@ class AddDataScreen extends StatelessWidget {
                     padding: const EdgeInsets.all(8.0),
                     child: Text(
                       'Add Service'.tr,
-                      style: TextStyle(
+                      style: const TextStyle(
                           fontWeight: FontWeight.bold,
                           color: CustomColors.prime_color,
                           fontSize: 20),
@@ -70,7 +70,7 @@ class AddDataScreen extends StatelessWidget {
                   padding: const EdgeInsets.all(8.0),
                   child: Text(
                     'Service Name'.tr,
-                    style: TextStyle(
+                    style: const TextStyle(
                         fontSize: 18,
                         color: CustomColors.secondary_color,
                         fontWeight: FontWeight.bold),
@@ -87,32 +87,33 @@ class AddDataScreen extends StatelessWidget {
                     textInputAction: TextInputAction.next,
                     decoration: InputDecoration(
                       hintText: '',
-                      focusedErrorBorder: new OutlineInputBorder(
-                          borderRadius: new BorderRadius.circular(10.0),
-                          borderSide:
-                              new BorderSide(color: CustomColors.prime_color)),
-                      errorBorder: new OutlineInputBorder(
-                          borderRadius: new BorderRadius.circular(10.0),
-                          borderSide:
-                              new BorderSide(color: CustomColors.prime_color)),
-                      enabledBorder: new OutlineInputBorder(
-                          borderRadius: new BorderRadius.circular(10.0),
-                          borderSide:
-                              new BorderSide(color: CustomColors.prime_color)),
-                      focusedBorder: new OutlineInputBorder(
-                          borderRadius: new BorderRadius.circular(10.0),
-                          borderSide:
-                              new BorderSide(color: CustomColors.prime_color)),
+                      focusedErrorBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                          borderSide: const BorderSide(
+                              color: CustomColors.prime_color)),
+                      errorBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                          borderSide: const BorderSide(
+                              color: CustomColors.prime_color)),
+                      enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                          borderSide: const BorderSide(
+                              color: CustomColors.prime_color)),
+                      focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                          borderSide: const BorderSide(
+                              color: CustomColors.prime_color)),
                       labelText: 'أدخل اسم العقار'.tr,
-                      labelStyle: TextStyle(color: Colors.grey),
-                      prefixIcon: Icon(
+                      labelStyle: const TextStyle(color: Colors.grey),
+                      prefixIcon: const Icon(
                         Icons.work,
                         color: Colors.grey,
                       ),
                     ),
                     validator: (value) {
-                      if (value == '' || value == null)
+                      if (value == '' || value == null) {
                         return 'Address  required';
+                      }
                       return null;
                     },
                     onSaved: (value) {
@@ -125,7 +126,7 @@ class AddDataScreen extends StatelessWidget {
                   padding: const EdgeInsets.all(8.0),
                   child: Text(
                     'Type of Service'.tr,
-                    style: TextStyle(
+                    style: const TextStyle(
                         fontSize: 18,
                         color: CustomColors.secondary_color,
                         fontWeight: FontWeight.bold),
@@ -143,14 +144,14 @@ class AddDataScreen extends StatelessWidget {
                               border: Border.all(
                                   color: CustomColors.prime_color, width: 1),
                               borderRadius:
-                                  BorderRadius.all(Radius.circular(10))),
+                                  const BorderRadius.all(Radius.circular(10))),
                           child: Center(
                               child: Padding(
                             padding: const EdgeInsets.only(left: 5, right: 5),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Icon(
+                                const Icon(
                                   Icons.hail,
                                   color: Colors.black54,
                                 ),
@@ -159,14 +160,15 @@ class AddDataScreen extends StatelessWidget {
                                   child: Text(
                                     "${Get.put(AddPropertyController()).selectedValue}"
                                         .tr,
-                                    style: TextStyle(color: Colors.black54),
+                                    style:
+                                        const TextStyle(color: Colors.black54),
                                   ),
                                 ),
                                 IconButton(
                                     onPressed: () {
                                       showService(context);
                                     },
-                                    icon: Icon(Icons.arrow_drop_down))
+                                    icon: const Icon(Icons.arrow_drop_down))
                               ],
                             ),
                           ))),
@@ -177,7 +179,7 @@ class AddDataScreen extends StatelessWidget {
                   padding: const EdgeInsets.all(8.0),
                   child: Text(
                     'Select City'.tr,
-                    style: TextStyle(
+                    style: const TextStyle(
                         fontSize: 18,
                         color: CustomColors.secondary_color,
                         fontWeight: FontWeight.bold),
@@ -195,14 +197,14 @@ class AddDataScreen extends StatelessWidget {
                               border: Border.all(
                                   color: CustomColors.prime_color, width: 1),
                               borderRadius:
-                                  BorderRadius.all(Radius.circular(10))),
+                                  const BorderRadius.all(Radius.circular(10))),
                           child: Center(
                               child: Padding(
                             padding: const EdgeInsets.only(left: 5, right: 5),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Icon(
+                                const Icon(
                                   Icons.location_city_outlined,
                                   color: Colors.black54,
                                 ),
@@ -210,14 +212,15 @@ class AddDataScreen extends StatelessWidget {
                                   alignment: Alignment.centerLeft,
                                   child: Text(
                                     '${controller.selectedCity.value[0].toUpperCase()}${controller.selectedCity.value.substring(1).toLowerCase()}',
-                                    style: TextStyle(color: Colors.black54),
+                                    style:
+                                        const TextStyle(color: Colors.black54),
                                   ),
                                 ),
                                 IconButton(
                                     onPressed: () {
                                       showCitiesListDialog(context);
                                     },
-                                    icon: Icon(Icons.arrow_drop_down))
+                                    icon: const Icon(Icons.arrow_drop_down))
                               ],
                             ),
                           ))),
@@ -228,7 +231,7 @@ class AddDataScreen extends StatelessWidget {
                   padding: const EdgeInsets.all(8.0),
                   child: Text(
                     'Select Area'.tr,
-                    style: TextStyle(
+                    style: const TextStyle(
                         fontSize: 18,
                         color: CustomColors.secondary_color,
                         fontWeight: FontWeight.bold),
@@ -245,25 +248,25 @@ class AddDataScreen extends StatelessWidget {
                     textInputAction: TextInputAction.next,
                     decoration: InputDecoration(
                       hintText: '',
-                      focusedErrorBorder: new OutlineInputBorder(
-                          borderRadius: new BorderRadius.circular(10.0),
-                          borderSide:
-                              new BorderSide(color: CustomColors.prime_color)),
-                      errorBorder: new OutlineInputBorder(
-                          borderRadius: new BorderRadius.circular(10.0),
-                          borderSide:
-                              new BorderSide(color: CustomColors.prime_color)),
-                      enabledBorder: new OutlineInputBorder(
-                          borderRadius: new BorderRadius.circular(10.0),
-                          borderSide:
-                              new BorderSide(color: CustomColors.prime_color)),
-                      focusedBorder: new OutlineInputBorder(
-                          borderRadius: new BorderRadius.circular(10.0),
-                          borderSide:
-                              new BorderSide(color: CustomColors.prime_color)),
+                      focusedErrorBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                          borderSide: const BorderSide(
+                              color: CustomColors.prime_color)),
+                      errorBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                          borderSide: const BorderSide(
+                              color: CustomColors.prime_color)),
+                      enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                          borderSide: const BorderSide(
+                              color: CustomColors.prime_color)),
+                      focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                          borderSide: const BorderSide(
+                              color: CustomColors.prime_color)),
                       labelText: 'Area'.tr,
-                      labelStyle: TextStyle(color: Colors.grey),
-                      prefixIcon: Icon(
+                      labelStyle: const TextStyle(color: Colors.grey),
+                      prefixIcon: const Icon(
                         Icons.location_on,
                         color: Colors.grey,
                       ),
@@ -282,8 +285,8 @@ class AddDataScreen extends StatelessWidget {
 
                 Column(
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
+                    const Padding(
+                      padding: EdgeInsets.all(8.0),
                       child: Text(
                         'المساحه',
                         style: TextStyle(
@@ -303,32 +306,33 @@ class AddDataScreen extends StatelessWidget {
                         textInputAction: TextInputAction.next,
                         decoration: InputDecoration(
                           hintText: '',
-                          focusedErrorBorder: new OutlineInputBorder(
-                              borderRadius: new BorderRadius.circular(10.0),
-                              borderSide: new BorderSide(
+                          focusedErrorBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10.0),
+                              borderSide: const BorderSide(
                                   color: CustomColors.prime_color)),
-                          errorBorder: new OutlineInputBorder(
-                              borderRadius: new BorderRadius.circular(10.0),
-                              borderSide: new BorderSide(
+                          errorBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10.0),
+                              borderSide: const BorderSide(
                                   color: CustomColors.prime_color)),
-                          enabledBorder: new OutlineInputBorder(
-                              borderRadius: new BorderRadius.circular(10.0),
-                              borderSide: new BorderSide(
+                          enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10.0),
+                              borderSide: const BorderSide(
                                   color: CustomColors.prime_color)),
-                          focusedBorder: new OutlineInputBorder(
-                              borderRadius: new BorderRadius.circular(10.0),
-                              borderSide: new BorderSide(
+                          focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10.0),
+                              borderSide: const BorderSide(
                                   color: CustomColors.prime_color)),
                           labelText: 'المساحه بالمتر',
-                          labelStyle: TextStyle(color: Colors.grey),
-                          prefixIcon: Icon(
+                          labelStyle: const TextStyle(color: Colors.grey),
+                          prefixIcon: const Icon(
                             Icons.photo_size_select_small_outlined,
                             color: Colors.grey,
                           ),
                         ),
                         validator: (value) {
-                          if (value == '' || value == null)
+                          if (value == '' || value == null) {
                             return 'Area  required';
+                          }
                           return null;
                         },
                         onSaved: (value) {
@@ -339,8 +343,8 @@ class AddDataScreen extends StatelessWidget {
                     ),
                   ],
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
+                const Padding(
+                  padding: EdgeInsets.all(8.0),
                   child: Text(
                     'غرف النوم',
                     style: TextStyle(
@@ -360,32 +364,33 @@ class AddDataScreen extends StatelessWidget {
                     textInputAction: TextInputAction.next,
                     decoration: InputDecoration(
                       hintText: '',
-                      focusedErrorBorder: new OutlineInputBorder(
-                          borderRadius: new BorderRadius.circular(10.0),
-                          borderSide:
-                              new BorderSide(color: CustomColors.prime_color)),
-                      errorBorder: new OutlineInputBorder(
-                          borderRadius: new BorderRadius.circular(10.0),
-                          borderSide:
-                              new BorderSide(color: CustomColors.prime_color)),
-                      enabledBorder: new OutlineInputBorder(
-                          borderRadius: new BorderRadius.circular(10.0),
-                          borderSide:
-                              new BorderSide(color: CustomColors.prime_color)),
-                      focusedBorder: new OutlineInputBorder(
-                          borderRadius: new BorderRadius.circular(10.0),
-                          borderSide:
-                              new BorderSide(color: CustomColors.prime_color)),
+                      focusedErrorBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                          borderSide: const BorderSide(
+                              color: CustomColors.prime_color)),
+                      errorBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                          borderSide: const BorderSide(
+                              color: CustomColors.prime_color)),
+                      enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                          borderSide: const BorderSide(
+                              color: CustomColors.prime_color)),
+                      focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                          borderSide: const BorderSide(
+                              color: CustomColors.prime_color)),
                       labelText: 'عدد غرف النوم',
-                      labelStyle: TextStyle(color: Colors.grey),
-                      prefixIcon: Icon(
+                      labelStyle: const TextStyle(color: Colors.grey),
+                      prefixIcon: const Icon(
                         Icons.bed_outlined,
                         color: Colors.grey,
                       ),
                     ),
                     validator: (value) {
-                      if (value == '' || value == null)
+                      if (value == '' || value == null) {
                         return 'No of Bedrooms  required';
+                      }
                       return null;
                     },
                     onSaved: (value) {
@@ -394,8 +399,8 @@ class AddDataScreen extends StatelessWidget {
                     },
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
+                const Padding(
+                  padding: EdgeInsets.all(8.0),
                   child: Text(
                     'الحمامات',
                     style: TextStyle(
@@ -415,32 +420,33 @@ class AddDataScreen extends StatelessWidget {
                     textInputAction: TextInputAction.next,
                     decoration: InputDecoration(
                       hintText: '',
-                      focusedErrorBorder: new OutlineInputBorder(
-                          borderRadius: new BorderRadius.circular(10.0),
-                          borderSide:
-                              new BorderSide(color: CustomColors.prime_color)),
-                      errorBorder: new OutlineInputBorder(
-                          borderRadius: new BorderRadius.circular(10.0),
-                          borderSide:
-                              new BorderSide(color: CustomColors.prime_color)),
-                      enabledBorder: new OutlineInputBorder(
-                          borderRadius: new BorderRadius.circular(10.0),
-                          borderSide:
-                              new BorderSide(color: CustomColors.prime_color)),
-                      focusedBorder: new OutlineInputBorder(
-                          borderRadius: new BorderRadius.circular(10.0),
-                          borderSide:
-                              new BorderSide(color: CustomColors.prime_color)),
+                      focusedErrorBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                          borderSide: const BorderSide(
+                              color: CustomColors.prime_color)),
+                      errorBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                          borderSide: const BorderSide(
+                              color: CustomColors.prime_color)),
+                      enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                          borderSide: const BorderSide(
+                              color: CustomColors.prime_color)),
+                      focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                          borderSide: const BorderSide(
+                              color: CustomColors.prime_color)),
                       labelText: 'عدد الحمامات',
-                      labelStyle: TextStyle(color: Colors.grey),
-                      prefixIcon: Icon(
+                      labelStyle: const TextStyle(color: Colors.grey),
+                      prefixIcon: const Icon(
                         Icons.bathroom_outlined,
                         color: Colors.grey,
                       ),
                     ),
                     validator: (value) {
-                      if (value == '' || value == null)
+                      if (value == '' || value == null) {
                         return 'No of Bathrooms required';
+                      }
                       return null;
                     },
                     onSaved: (value) {
@@ -449,8 +455,8 @@ class AddDataScreen extends StatelessWidget {
                     },
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
+                const Padding(
+                  padding: EdgeInsets.all(8.0),
                   child: Text(
                     'المطبخ',
                     style: TextStyle(
@@ -470,32 +476,33 @@ class AddDataScreen extends StatelessWidget {
                     textInputAction: TextInputAction.next,
                     decoration: InputDecoration(
                       hintText: '',
-                      focusedErrorBorder: new OutlineInputBorder(
-                          borderRadius: new BorderRadius.circular(10.0),
-                          borderSide:
-                              new BorderSide(color: CustomColors.prime_color)),
-                      errorBorder: new OutlineInputBorder(
-                          borderRadius: new BorderRadius.circular(10.0),
-                          borderSide:
-                              new BorderSide(color: CustomColors.prime_color)),
-                      enabledBorder: new OutlineInputBorder(
-                          borderRadius: new BorderRadius.circular(10.0),
-                          borderSide:
-                              new BorderSide(color: CustomColors.prime_color)),
-                      focusedBorder: new OutlineInputBorder(
-                          borderRadius: new BorderRadius.circular(10.0),
-                          borderSide:
-                              new BorderSide(color: CustomColors.prime_color)),
+                      focusedErrorBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                          borderSide: const BorderSide(
+                              color: CustomColors.prime_color)),
+                      errorBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                          borderSide: const BorderSide(
+                              color: CustomColors.prime_color)),
+                      enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                          borderSide: const BorderSide(
+                              color: CustomColors.prime_color)),
+                      focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                          borderSide: const BorderSide(
+                              color: CustomColors.prime_color)),
                       labelText: 'عدد المطابخ',
-                      labelStyle: TextStyle(color: Colors.grey),
-                      prefixIcon: Icon(
+                      labelStyle: const TextStyle(color: Colors.grey),
+                      prefixIcon: const Icon(
                         Icons.kitchen_outlined,
                         color: Colors.grey,
                       ),
                     ),
                     validator: (value) {
-                      if (value == '' || value == null)
+                      if (value == '' || value == null) {
                         return 'No of Kitchens required';
+                      }
                       return null;
                     },
                     onSaved: (value) {
@@ -505,8 +512,8 @@ class AddDataScreen extends StatelessWidget {
                   ),
                 ),
 
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
+                const Padding(
+                  padding: EdgeInsets.all(8.0),
                   child: Text(
                     'الاستقبال',
                     style: TextStyle(
@@ -526,25 +533,25 @@ class AddDataScreen extends StatelessWidget {
                     textInputAction: TextInputAction.next,
                     decoration: InputDecoration(
                       hintText: '',
-                      focusedErrorBorder: new OutlineInputBorder(
-                          borderRadius: new BorderRadius.circular(10.0),
-                          borderSide:
-                              new BorderSide(color: CustomColors.prime_color)),
-                      errorBorder: new OutlineInputBorder(
-                          borderRadius: new BorderRadius.circular(10.0),
-                          borderSide:
-                              new BorderSide(color: CustomColors.prime_color)),
-                      enabledBorder: new OutlineInputBorder(
-                          borderRadius: new BorderRadius.circular(10.0),
-                          borderSide:
-                              new BorderSide(color: CustomColors.prime_color)),
-                      focusedBorder: new OutlineInputBorder(
-                          borderRadius: new BorderRadius.circular(10.0),
-                          borderSide:
-                              new BorderSide(color: CustomColors.prime_color)),
+                      focusedErrorBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                          borderSide: const BorderSide(
+                              color: CustomColors.prime_color)),
+                      errorBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                          borderSide: const BorderSide(
+                              color: CustomColors.prime_color)),
+                      enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                          borderSide: const BorderSide(
+                              color: CustomColors.prime_color)),
+                      focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                          borderSide: const BorderSide(
+                              color: CustomColors.prime_color)),
                       labelText: 'عدد اماكن الاستقبال',
-                      labelStyle: TextStyle(color: Colors.grey),
-                      prefixIcon: Icon(
+                      labelStyle: const TextStyle(color: Colors.grey),
+                      prefixIcon: const Icon(
                         Icons.chair_outlined,
                         color: Colors.grey,
                       ),
@@ -564,7 +571,7 @@ class AddDataScreen extends StatelessWidget {
                   padding: const EdgeInsets.all(8.0),
                   child: Text(
                     value == 'sale' ? 'Price' : 'الايجار / الشهر',
-                    style: TextStyle(
+                    style: const TextStyle(
                         fontSize: 18,
                         color: CustomColors.secondary_color,
                         fontWeight: FontWeight.bold),
@@ -581,25 +588,25 @@ class AddDataScreen extends StatelessWidget {
                     textInputAction: TextInputAction.next,
                     decoration: InputDecoration(
                       hintText: '',
-                      focusedErrorBorder: new OutlineInputBorder(
-                          borderRadius: new BorderRadius.circular(10.0),
-                          borderSide:
-                              new BorderSide(color: CustomColors.prime_color)),
-                      errorBorder: new OutlineInputBorder(
-                          borderRadius: new BorderRadius.circular(10.0),
-                          borderSide:
-                              new BorderSide(color: CustomColors.prime_color)),
-                      enabledBorder: new OutlineInputBorder(
-                          borderRadius: new BorderRadius.circular(10.0),
-                          borderSide:
-                              new BorderSide(color: CustomColors.prime_color)),
-                      focusedBorder: new OutlineInputBorder(
-                          borderRadius: new BorderRadius.circular(10.0),
-                          borderSide:
-                              new BorderSide(color: CustomColors.prime_color)),
+                      focusedErrorBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                          borderSide: const BorderSide(
+                              color: CustomColors.prime_color)),
+                      errorBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                          borderSide: const BorderSide(
+                              color: CustomColors.prime_color)),
+                      enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                          borderSide: const BorderSide(
+                              color: CustomColors.prime_color)),
+                      focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                          borderSide: const BorderSide(
+                              color: CustomColors.prime_color)),
                       labelText: value == 'sale' ? 'Price' : 'الايجار',
-                      labelStyle: TextStyle(color: Colors.grey),
-                      prefixIcon: Icon(
+                      labelStyle: const TextStyle(color: Colors.grey),
+                      prefixIcon: const Icon(
                         Icons.label_important_outline,
                         color: Colors.grey,
                       ),
@@ -618,7 +625,7 @@ class AddDataScreen extends StatelessWidget {
                   padding: const EdgeInsets.all(8.0),
                   child: Text(
                     'Description'.tr,
-                    style: TextStyle(
+                    style: const TextStyle(
                         fontSize: 18,
                         color: CustomColors.secondary_color,
                         fontWeight: FontWeight.bold),
@@ -637,28 +644,29 @@ class AddDataScreen extends StatelessWidget {
                     textInputAction: TextInputAction.next,
                     decoration: InputDecoration(
                       hintText: '',
-                      focusedErrorBorder: new OutlineInputBorder(
-                          borderRadius: new BorderRadius.circular(10.0),
-                          borderSide:
-                              new BorderSide(color: CustomColors.prime_color)),
-                      errorBorder: new OutlineInputBorder(
-                          borderRadius: new BorderRadius.circular(10.0),
-                          borderSide:
-                              new BorderSide(color: CustomColors.prime_color)),
-                      enabledBorder: new OutlineInputBorder(
-                          borderRadius: new BorderRadius.circular(10.0),
-                          borderSide:
-                              new BorderSide(color: CustomColors.prime_color)),
-                      focusedBorder: new OutlineInputBorder(
-                          borderRadius: new BorderRadius.circular(10.0),
-                          borderSide:
-                              new BorderSide(color: CustomColors.prime_color)),
+                      focusedErrorBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                          borderSide: const BorderSide(
+                              color: CustomColors.prime_color)),
+                      errorBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                          borderSide: const BorderSide(
+                              color: CustomColors.prime_color)),
+                      enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                          borderSide: const BorderSide(
+                              color: CustomColors.prime_color)),
+                      focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                          borderSide: const BorderSide(
+                              color: CustomColors.prime_color)),
                       labelText: 'Description'.tr,
-                      labelStyle: TextStyle(color: Colors.grey),
+                      labelStyle: const TextStyle(color: Colors.grey),
                     ),
                     validator: (value) {
-                      if (value == '' || value == null)
+                      if (value == '' || value == null) {
                         return 'Detailed Description required';
+                      }
                       return null;
                     },
                     onSaved: (value) {
@@ -672,11 +680,11 @@ class AddDataScreen extends StatelessWidget {
                   padding: const EdgeInsets.all(8.0),
                   child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                          minimumSize: Size(100, 40),
+                          minimumSize: const Size(100, 40),
                           backgroundColor: CustomColors.prime_color),
                       child: Text(
                         "Select Images".tr,
-                        style: TextStyle(color: CustomColors.Lite_color),
+                        style: const TextStyle(color: CustomColors.Lite_color),
                       ),
                       onPressed: () {
                         controller.getImage();
@@ -692,7 +700,7 @@ class AddDataScreen extends StatelessWidget {
                           padding: const EdgeInsets.only(
                               left: 22, right: 22, top: 8),
                           child: GridView.count(
-                            physics: ScrollPhysics(),
+                            physics: const ScrollPhysics(),
                             shrinkWrap: true,
                             crossAxisCount: 2,
                             children: List.generate(
@@ -720,11 +728,12 @@ class AddDataScreen extends StatelessWidget {
                     child: controller.showLoadingBar == false
                         ? ElevatedButton(
                             style: ElevatedButton.styleFrom(
-                                minimumSize: Size(200, 50),
+                                minimumSize: const Size(200, 50),
                                 backgroundColor: CustomColors.green_color),
                             child: Text(
                               "Save Property".tr,
-                              style: TextStyle(color: CustomColors.Lite_color),
+                              style: const TextStyle(
+                                  color: CustomColors.Lite_color),
                             ),
                             onPressed: () async {
                               if (controller.images.value.isEmpty) {
@@ -738,7 +747,7 @@ class AddDataScreen extends StatelessWidget {
                                 controller.propertyModel.city =
                                     controller.selectedCity.value;
                                 // Generate a new UUID
-                                var uuid = Uuid();
+                                var uuid = const Uuid();
                                 String uniqueId = uuid.v4();
 
                                 controller.propertyModel.currentUserId =
@@ -758,7 +767,7 @@ class AddDataScreen extends StatelessWidget {
                                 if (response == 'Data added') {
                                   controller.showLoadingBar(false);
                                   // CustomToast.showToast('Proprty Added');
-                                  Get.showSnackbar(GetSnackBar(
+                                  Get.showSnackbar(const GetSnackBar(
                                     message: 'Proprty Added',
                                     duration: Duration(milliseconds: 300),
                                   ));
@@ -783,14 +792,14 @@ class AddDataScreen extends StatelessWidget {
                                   controller.images.value = [];
                                 } else {
                                   controller.showLoadingBar(false);
-                                  Get.showSnackbar(GetSnackBar(
+                                  Get.showSnackbar(const GetSnackBar(
                                     message: 'Something went wrong',
                                   ));
                                   // CustomToast.showToast('Something went wrong');
                                 }
                               }
                             })
-                        : CircularProgressIndicator(
+                        : const CircularProgressIndicator(
                             color: CustomColors.prime_color,
                           ),
                   );
@@ -809,12 +818,12 @@ class AddDataScreen extends StatelessWidget {
         return AlertDialog(
             title: Text(
               'Select City'.tr,
-              style: TextStyle(fontWeight: FontWeight.bold),
+              style: const TextStyle(fontWeight: FontWeight.bold),
             ),
             content: SingleChildScrollView(
                 child: Column(
               children: [
-                Text(""),
+                const Text(""),
                 Obx(() {
                   return ListView.builder(
                       shrinkWrap: true,
@@ -844,7 +853,7 @@ class AddDataScreen extends StatelessWidget {
                                   BoxShadow(
                                     color: Colors.black.withOpacity(0.1),
                                     blurRadius: 4.0,
-                                    offset: Offset(0, 2),
+                                    offset: const Offset(0, 2),
                                   ),
                                 ],
                               ),
@@ -854,13 +863,13 @@ class AddDataScreen extends StatelessWidget {
                                 children: [
                                   Text(
                                     '${Get.put(CityController()).cityList[index].cityname!.tr}',
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                       fontSize: 16.0,
                                       fontWeight: FontWeight.normal,
                                     ),
                                   ),
-                                  SizedBox(width: 16.0),
-                                  Icon(
+                                  const SizedBox(width: 16.0),
+                                  const Icon(
                                     Icons.location_city,
                                     color: CustomColors.prime_color,
                                   ),
@@ -889,7 +898,7 @@ class AddDataScreen extends StatelessWidget {
           ),
           title: Text(
             'Select Service'.tr,
-            style: TextStyle(
+            style: const TextStyle(
               color: Colors.black,
               fontWeight: FontWeight.bold,
             ),
@@ -927,7 +936,7 @@ class AddDataScreen extends StatelessWidget {
                                 BoxShadow(
                                   color: Colors.black.withOpacity(0.1),
                                   blurRadius: 4.0,
-                                  offset: Offset(0, 2),
+                                  offset: const Offset(0, 2),
                                 ),
                               ],
                             ),
@@ -936,13 +945,13 @@ class AddDataScreen extends StatelessWidget {
                               children: [
                                 Text(
                                   '${Get.put(catogryController()).catogryList[index].catogryname!.tr}',
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     fontSize: 16.0,
                                     fontWeight: FontWeight.normal,
                                   ),
                                 ),
-                                SizedBox(width: 16.0),
-                                Icon(
+                                const SizedBox(width: 16.0),
+                                const Icon(
                                   Icons.design_services,
                                   color: CustomColors.prime_color,
                                 ),
