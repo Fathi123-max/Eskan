@@ -6,6 +6,8 @@ import 'package:haider/utills/customColors.dart';
 import 'package:multi_image_picker/multi_image_picker.dart';
 
 class AddPropertyController extends GetxController {
+  var propertyLocationX = 0.0.obs;
+  var propertyLocationY = 0.0.obs;
   //Variables
   var showLoadingBar = false.obs;
   var selectedCity = 'دمياط'.obs;

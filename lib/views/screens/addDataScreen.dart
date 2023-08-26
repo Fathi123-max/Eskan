@@ -8,10 +8,13 @@ import 'package:haider/controllers/used/rentAndRentOutController.dart';
 import 'package:haider/utills/customColors.dart';
 import 'package:haider/utills/customToast.dart';
 import 'package:haider/views/screens/screen_added_page.dart';
+import 'package:latlong2/latlong.dart' as locmap;
 import 'package:multi_image_picker/multi_image_picker.dart';
+import 'package:open_street_map_search_and_pick/open_street_map_search_and_pick.dart';
 import 'package:uuid/uuid.dart';
 
 import '../../controllers/used/citycontroller.dart';
+import '../../utills/map_screen.dart';
 
 class AddDataScreen extends StatelessWidget {
   final String value;
@@ -20,7 +23,7 @@ class AddDataScreen extends StatelessWidget {
 
   final box = GetStorage();
 
-  final AddPropertyController controller = Get.put(AddPropertyController());
+  final AddPropertyController controller = Get.find<AddPropertyController>();
 
   final RentAndRentOutController rentAndRentOutController = Get.find();
 
@@ -282,7 +285,60 @@ class AddDataScreen extends StatelessWidget {
                   ),
                 ),
                 // add sections
+                Padding(
+                  padding: EdgeInsets.all(8),
+                  child: OutlinedButton(
+                      onPressed: () {
+                        Get.bottomSheet(BottomSheet(
+                          onClosing: () {},
+                          builder: (context) {
+                            return OpenStreetMapSearchAndPick(
+                                center: const LatLong(23, 89),
+                                buttonColor: Colors.blue,
+                                buttonText: 'Set Current Location',
+                                onPicked: (pickedData) {
+                                  controller.propertyLocationX.value =
+                                      pickedData.latLong.latitude;
+                                  controller.propertyLocationY.value =
+                                      pickedData.latLong.longitude;
+                                  controller.areaEditTextController.text =
+                                      pickedData.addressName;
+                                  Get.back();
+                                  print(pickedData.latLong.latitude);
+                                  print(pickedData.latLong.longitude);
+                                  print(pickedData.address);
+                                });
+                          },
+                        ));
+                      },
+                      child: Text("GetLocation")),
+                ),
 
+                Padding(
+                  padding: const EdgeInsets.all(15.0),
+                  child: Stack(children: [
+                    Positioned(
+                        top: 20,
+                        left: 20,
+                        child: GestureDetector(
+                          child: const Icon(
+                            size: 25,
+                            Icons.ac_unit,
+                            color: Colors.white,
+                          ),
+                        )),
+                    Container(
+                        width: Get.width,
+                        height: Get.height * .2,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: Obx(() => MapWidget(
+                            location: locmap.LatLng(
+                                controller.propertyLocationX.value,
+                                controller.propertyLocationY.value)))),
+                  ]),
+                ),
                 Column(
                   children: [
                     const Padding(
