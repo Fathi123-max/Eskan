@@ -249,7 +249,7 @@ class _PropertySearchPageState extends State<PropertySearchPage> {
                                   .performSearch(
                             // Set your filter variables here
                             city: city,
-                            priceRange: priceRange,
+                            // priceRange: priceRange,
                             searchText: searchController.text.trim(),
                             // Add more filter parameters as needed
                           );
