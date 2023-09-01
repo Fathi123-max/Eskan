@@ -6,6 +6,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:haider/utills/localzation.dart';
 import 'package:haider/utills/themes.dart';
 import 'package:haider/views/screens/homeView.dart';
+import 'package:onesignal_flutter/onesignal_flutter.dart';
 
 import 'controllers/used/favourateController.dart';
 import 'controllers/used/themeControllers.dart';
@@ -19,7 +20,13 @@ void main() async {
     statusBarIconBrightness: Brightness.light,
     statusBarColor: Colors.white, // status bar color
   ));
+//Remove this method to stop OneSignal Debugging
+  OneSignal.Debug.setLogLevel(OSLogLevel.verbose);
 
+  OneSignal.initialize("0183cc36-fb23-4be7-89ed-d3b112693d01");
+
+// The promptForPushNotificationsWithUserResponse function will show the iOS or Android push notification prompt. We recommend removing the following code and instead using an In-App Message to prompt for notification permission
+  OneSignal.Notifications.requestPermission(true);
   runApp(MyApp());
 }
 
