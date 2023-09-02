@@ -37,16 +37,19 @@ class _EnterInfoDialogState extends State<EnterInfoDialog> {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Text(
-                  "أدخل بياناتك لاضافه العقار",
+                  "أدخل بياناتك لإضافة العقار",
                   style: TextStyle(
-                      fontWeight: FontWeight.bold, color: Colors.black),
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black,
+                    fontSize: 18,
+                  ),
+                  textAlign: TextAlign.center,
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(
-                    left: 25, right: 25, top: 8, bottom: 2),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 25, vertical: 8),
                 child: TextFormField(
-                  // autovalidateMode: AutovalidateMode.onUserInteraction,
                   controller: _nameController,
                   keyboardType: TextInputType.name,
                   cursorColor: CustomColors.prime_color,
@@ -68,21 +71,20 @@ class _EnterInfoDialogState extends State<EnterInfoDialog> {
                       borderRadius: BorderRadius.circular(10.0),
                       borderSide: BorderSide(color: CustomColors.prime_color),
                     ),
-                    labelText: 'Name'.tr,
+                    labelText: 'الاسم',
                     labelStyle: TextStyle(color: Colors.grey),
                     prefixIcon: Icon(
                       FontAwesomeIcons.person,
-                      color: Colors.grey,
+                      color: CustomColors.prime_color,
                     ),
                   ),
                   validator: _validateName,
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(
-                    left: 25, right: 25, top: 8, bottom: 2),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 25, vertical: 8),
                 child: TextFormField(
-                  // autovalidateMode: AutovalidateMode.onUserInteraction,
                   controller: _phoneController,
                   keyboardType: TextInputType.phone,
                   cursorColor: CustomColors.prime_color,
@@ -104,11 +106,11 @@ class _EnterInfoDialogState extends State<EnterInfoDialog> {
                       borderRadius: BorderRadius.circular(10.0),
                       borderSide: BorderSide(color: CustomColors.prime_color),
                     ),
-                    labelText: 'Phone'.tr,
+                    labelText: 'رقم الهاتف',
                     labelStyle: TextStyle(color: Colors.grey),
                     prefixIcon: Icon(
                       FontAwesomeIcons.phone,
-                      color: Colors.grey,
+                      color: CustomColors.prime_color,
                     ),
                   ),
                   validator: _validatePhone,
@@ -123,11 +125,13 @@ class _EnterInfoDialogState extends State<EnterInfoDialog> {
                           box.write('phone', _phoneController.text);
 
                           // Close the dialog when the button is tapped
-                          Navigator.of(context)
-                              .pushReplacement(MaterialPageRoute(
-                                  builder: (context) => AddDataScreen(
-                                        value: '',
-                                      )));
+                          Navigator.of(context).pushReplacement(
+                            MaterialPageRoute(
+                              builder: (context) => AddDataScreen(
+                                value: '',
+                              ),
+                            ),
+                          );
 
                           // Navigate to the Home view or any other view you desire.
                           // For example:
@@ -139,15 +143,18 @@ class _EnterInfoDialogState extends State<EnterInfoDialog> {
                       color: _isButtonEnabled
                           ? CustomColors.green_color
                           : Colors.grey,
-                      border: Border.all(color: CustomColors.green_color),
                       borderRadius: BorderRadius.all(Radius.circular(10)),
                     ),
                     height: 60,
                     width: MediaQuery.of(context).size.width,
                     child: Center(
                       child: Text(
-                        'حفظ'.tr,
-                        style: TextStyle(color: Colors.white),
+                        'حفظ',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
                   ),
