@@ -7,20 +7,12 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:811029168672:android:855e40d9904c40a15f7245",
+        "mobilesdk_app_id": "1:811029168672:android:061b1a205fa6d7c85f7245",
         "android_client_info": {
-          "package_name": "com.marwan.fathi"
+          "package_name": "com.newfathimarwan"
         }
       },
       "oauth_client": [
-        {
-          "client_id": "811029168672-m18lakoaul8khgg25d9nj1hkkpehuube.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.marwan.fathi",
-            "certificate_hash": "27983b5817f8352f94cb0edbc9c319c22faf9c7b"
-          }
-        },
         {
           "client_id": "811029168672-4bp687jua336smekpr22e3801rp61sv9.apps.googleusercontent.com",
           "client_type": 3
