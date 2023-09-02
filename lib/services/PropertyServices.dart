@@ -196,11 +196,9 @@ class PropertyServices {
         .then((QuerySnapshot querySnapshot) {
       querySnapshot.docs.forEach((doc) {
         // print("Document Id is ${doc.id}");
-        String docId = doc.id;
         PropertyModel propertyModel =
             PropertyModel.fromMap(doc.data() as Map<String, dynamic>);
-        // if (doc['currentUserId'] == controller.currentUserId.value &&
-        //     doc['propertyFor'] == 'sale') {
+
         propertyList.add(propertyModel);
         // }
       });
@@ -295,7 +293,6 @@ class PropertyServices {
         querySnapshot.docs.forEach((doc) {
           PropertyModel propertyModel =
               PropertyModel.fromMap(doc.data() as Map<String, dynamic>);
-          String city = doc['city'];
           int price = int.parse(doc['price']);
           if (doc['propertyFor'] == 'rent' && price >= int.parse(priceFrom)) {
             propertyList.add(propertyModel);
@@ -327,7 +324,6 @@ class PropertyServices {
         querySnapshot.docs.forEach((doc) {
           PropertyModel propertyModel =
               PropertyModel.fromMap(doc.data() as Map<String, dynamic>);
-          String city = doc['city'];
           int price = int.parse(doc['price']);
           if (doc['propertyFor'] == 'rent' &&
               price >= int.parse(priceFrom) &&
@@ -354,7 +350,6 @@ class PropertyServices {
         querySnapshot.docs.forEach((doc) {
           PropertyModel propertyModel =
               PropertyModel.fromMap(doc.data() as Map<String, dynamic>);
-          String city = doc['city'];
 
           propertyList.add(propertyModel);
         });
@@ -423,7 +418,6 @@ class PropertyServices {
         querySnapshot.docs.forEach((doc) {
           PropertyModel propertyModel =
               PropertyModel.fromMap(doc.data() as Map<String, dynamic>);
-          String city = doc['city'];
           int price = int.parse(doc['price']);
           if (doc['propertyFor'] == 'sale' && price >= int.parse(priceFrom)) {
             propertyList.add(propertyModel);
@@ -455,7 +449,6 @@ class PropertyServices {
         querySnapshot.docs.forEach((doc) {
           PropertyModel propertyModel =
               PropertyModel.fromMap(doc.data() as Map<String, dynamic>);
-          String city = doc['city'];
           int price = int.parse(doc['price']);
           if (doc['propertyFor'] == 'sale' &&
               price >= int.parse(priceFrom) &&

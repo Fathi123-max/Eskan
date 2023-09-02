@@ -6,7 +6,6 @@ import 'package:haider/utills/customColors.dart';
 
 import '../../controllers/used/citycontroller.dart';
 import '../../controllers/used/draweController.dart';
-import '../../controllers/used/themeControllers.dart';
 
 class Home extends StatelessWidget {
   final PageViewController pageViewController = Get.put(PageViewController());
@@ -20,7 +19,7 @@ class Home extends StatelessWidget {
   var selectedIndex = 0.obs;
   // Use Rx variable for state management
   @override
-  ThemeController _themeController = Get.put(ThemeController());
+  // ThemeController _themeController = Get.put(ThemeController());
 
   @override
   Widget build(BuildContext context) {
