@@ -1,10 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_ui_firestore/firebase_ui_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 import 'package:haider/controllers/used/rentAndRentOutController.dart';
 import 'package:haider/models/used/propertyModel.dart';
 import 'package:haider/views/compunants/fab.dart';
@@ -12,7 +9,6 @@ import 'package:haider/views/used/info.dart';
 
 import '../compunants/rentviewcard.dart';
 import '../screens/avancedSearchPage.dart';
-import '../screens/google_signin_page.dart';
 
 class HomePage extends StatelessWidget {
   final RentAndRentOutController rentAndRentOutController =
@@ -65,23 +61,23 @@ class HomePage extends StatelessWidget {
   //   );
   // }
 
-  void _logoutUser(BuildContext context) async {
-    try {
-      // Perform the sign-out operation
-      await FirebaseAuth.instance.signOut();
-      final googleSignIn = GoogleSignIn();
-      await googleSignIn.signOut();
-      GetStorage().remove('name');
-      GetStorage().remove('phone');
-      Get.off(() => GoogleLoginScreen()); // Close the user properties dialog
-      // You can navigate to the login screen or any other screen after logout.
-      // For example:
-      // Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => LoginScreen()));
-    } catch (e) {
-      // Handle any errors that may occur during sign-out
-      print('Error during logout: $e');
-    }
-  }
+  // void _logoutUser(BuildContext context) async {
+  //   try {
+  //     // Perform the sign-out operation
+  //     await FirebaseAuth.instance.signOut();
+  //     final googleSignIn = GoogleSignIn();
+  //     await googleSignIn.signOut();
+  //     GetStorage().remove('name');
+  //     GetStorage().remove('phone');
+  //     Get.off(() => GoogleLoginScreen()); // Close the user properties dialog
+  //     // You can navigate to the login screen or any other screen after logout.
+  //     // For example:
+  //     // Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => LoginScreen()));
+  //   } catch (e) {
+  //     // Handle any errors that may occur during sign-out
+  //     print('Error during logout: $e');
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -109,7 +105,7 @@ class HomePage extends StatelessWidget {
               if (rentAndRentOutController.allRentList.value.length == 0) {
                 return Center(
                   child: Text(
-                    "لم تضف عقارات بعد ",
+                    "جارى تحميل العقارات  ",
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                     ),

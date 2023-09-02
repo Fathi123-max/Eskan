@@ -1,8 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
-import 'package:flutter_firebase_chat_core/flutter_firebase_chat_core.dart';
+// import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
+// import 'package:flutter_firebase_chat_core/flutter_firebase_chat_core.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:haider/views/screens/homeView.dart';
@@ -34,14 +34,14 @@ class _GoogleLoginScreenState extends State<GoogleLoginScreen>
       UserCredential userCredential =
           await FirebaseAuth.instance.signInWithCredential(credential);
 
-      await FirebaseChatCore.instance.createUserInFirestore(
-        types.User(
-          firstName: userCredential.user!.displayName,
-          id: userCredential.user!.uid, // UID from Firebase Authentication
-          imageUrl: userCredential.user!.photoURL,
-          lastName: "",
-        ),
-      );
+      // await FirebaseChatCore.instance.createUserInFirestore(
+      //   types.User(
+      //     firstName: userCredential.user!.displayName,
+      //     id: userCredential.user!.uid, // UID from Firebase Authentication
+      //     imageUrl: userCredential.user!.photoURL,
+      //     lastName: "",
+      //   ),
+      // );
 
       // Handle successful sign-in here
       signed = true;

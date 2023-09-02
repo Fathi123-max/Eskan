@@ -8,18 +8,20 @@ import '../../controllers/used/citycontroller.dart';
 import '../../controllers/used/draweController.dart';
 import '../../controllers/used/themeControllers.dart';
 
-class Home extends StatefulWidget {
-  @override
-  _HomeState createState() => _HomeState();
-}
-
-class _HomeState extends State<Home> {
+class Home extends StatelessWidget {
   final PageViewController pageViewController = Get.put(PageViewController());
+
   final DraweController draweController = Get.put(DraweController());
+
   final CityController cityController = Get.put(CityController());
+
   final box = GetStorage();
-  var selectedIndex = 0.obs; // Use Rx variable for state management
+
+  var selectedIndex = 0.obs;
+  // Use Rx variable for state management
+  @override
   ThemeController _themeController = Get.put(ThemeController());
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
