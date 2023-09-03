@@ -35,7 +35,7 @@ class RentAndRentOutController extends GetxController {
   }
 
   getAllRentPropertyFirestorePagnation() {
-    return firestoreService.firestorePagnation();
+    return firestoreService.firestorePagination();
   }
 
   getAllRentPropertyByCatogry(String search) async {

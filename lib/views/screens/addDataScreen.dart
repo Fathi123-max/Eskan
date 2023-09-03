@@ -749,7 +749,7 @@ class AddDataScreen extends StatelessWidget {
                                 controller.showLoadingBar(true);
                                 String response = await controller
                                     .firestoreService
-                                    .addproprtyToDatabase(
+                                    .addPropertyToDatabase(
                                   controller.propertyModel,
                                   controller.images.value,
                                 );

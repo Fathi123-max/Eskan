@@ -64,8 +64,6 @@ class _MyAppState extends State<MyApp> {
           colorScheme: lightColorScheme,
           useMaterial3: true,
         ),
-        themeMode:
-            themeController!.isDarkTheme ? ThemeMode.dark : ThemeMode.light,
         home: Home()
 
         //  FirebaseAuth.instance.currentUser == null

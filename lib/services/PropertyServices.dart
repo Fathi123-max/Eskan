@@ -12,7 +12,7 @@ class PropertyServices {
       FirebaseFirestore.instance.collection('property');
 
 //? add prop to  firebase
-  Future<String> addproprtyToDatabase(
+  Future<String> addPropertyToDatabase(
     PropertyModel propertyModel,
     List images,
   ) async {
@@ -86,7 +86,7 @@ class PropertyServices {
     return propertyList;
   }
 
-  firestorePagnation() {
+  firestorePagination() {
     return property;
   }
 
@@ -102,9 +102,6 @@ class PropertyServices {
             PropertyModel.fromMap(doc.data() as Map<String, dynamic>);
 
         propertyList.add(propertyModel);
-        print("**********************************");
-        print(propertyModel);
-        print("**********************************");
       });
     });
     return propertyList;
@@ -461,22 +458,4 @@ class PropertyServices {
 
     return propertyList;
   }
-
-/** "username": box.read('name'),
-      "usernumber": box.read('phone'),
-      'currentUserId': propertyModel.currentUserId.toString(),
-      'propertyFor': propertyModel.propertyFor.toString(),
-      'propertyType': propertyModel.propertyType.toString(),
-      'city': propertyModel.city.toString(),
-      'area': propertyModel.area.toString(),
-      'size': propertyModel.size.toString(),
-      'bedrooms': propertyModel.bedrooms.toString(),
-      'address': propertyModel.address.toString(),
-      'bathrooms': propertyModel.bathrooms.toString(),
-      'kitchen': propertyModel.kitchen.toString(),
-      'des': propertyModel.descr.toString(),
-      'price': propertyModel.price.toString(),
-      'images': imageUrls,
-      'propertyAction': 'None'.toString(),
-      'time': time */
 }
