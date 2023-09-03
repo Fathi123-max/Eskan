@@ -17,8 +17,14 @@ class RealViewCard extends GetView {
   });
   var colo = Colors.white;
   PropertyModel property;
+
+  dd(context) async {
+    await precacheImage(NetworkImage(property.images![0]), context);
+  }
+
   @override
   Widget build(BuildContext context) {
+    dd(context);
     return GestureDetector(
       onTap: () => Get.to(() => PropertyDetailScreen(
             property: property,
@@ -46,11 +52,6 @@ class RealViewCard extends GetView {
                 width: double.infinity,
                 height: 500,
                 cacheManager: DefaultCacheManager(),
-
-                // placeholder: (context, url) =>
-                //     CircularProgressIndicator(), // Placeholder widget while the image is loading
-                // errorWidget: (context, url, error) =>
-                //     Icon(Icons.error), // Widget to display in case of an error
               ),
               Positioned(
                 bottom: 0,
