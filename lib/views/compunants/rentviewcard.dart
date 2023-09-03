@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:get/get.dart';
 import 'package:haider/models/used/propertyModel.dart';
 
@@ -44,6 +45,8 @@ class RealViewCard extends GetView {
                 fit: BoxFit.cover,
                 width: double.infinity,
                 height: 500,
+                cacheManager: DefaultCacheManager(),
+
                 // placeholder: (context, url) =>
                 //     CircularProgressIndicator(), // Placeholder widget while the image is loading
                 // errorWidget: (context, url, error) =>
