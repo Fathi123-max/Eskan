@@ -1,12 +1,13 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_ui_firestore/firebase_ui_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:haider/models/used/propertyModel.dart';
 import 'package:haider/views/compunants/rentviewcard.dart';
 
 class SearchResultPage extends GetView {
-  SearchResultPage({required this.propertyModelList});
-
-  List<PropertyModel> propertyModelList;
+  SearchResultPage({required this.query});
+  Query<Map<String, dynamic>> query;
 
   @override
   Widget build(BuildContext context) {
@@ -22,14 +23,16 @@ class SearchResultPage extends GetView {
         ],
         elevation: 0.0,
       ),
-      body: ListView.builder(
-        itemCount: propertyModelList.length,
-        itemBuilder: (BuildContext context, int index) {
-          return SizedBox(
-            height: 300,
-            child: RealViewCard(
-              property: propertyModelList[index],
-            ),
+      body: FirestoreListView<Map<String, dynamic>>(
+        scrollDirection: Axis.vertical,
+        shrinkWrap: true,
+        addSemanticIndexes: true,
+        physics: BouncingScrollPhysics(),
+        query: query,
+        itemBuilder: (context, snapshot) {
+          final property = PropertyModel.fromMap(snapshot.data());
+          return RealViewCard(
+            property: property,
           );
         },
       ),

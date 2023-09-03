@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
@@ -123,7 +124,10 @@ class _EnterInfoDialogState extends State<EnterInfoDialog> {
                       ? () async {
                           box.write('name', _nameController.text);
                           box.write('phone', _phoneController.text);
-
+                          FirebaseFirestore.instance.collection("users").add({
+                            "name": _nameController.text,
+                            "phone": _phoneController.text
+                          });
                           // Close the dialog when the button is tapped
                           Navigator.of(context).pushReplacement(
                             MaterialPageRoute(

@@ -54,7 +54,7 @@ class AddPropertyController extends GetxController {
 
   Future getImage() async {
     var image = await MultiImagePicker.pickImages(
-        maxImages: 7, enableCamera: true, selectedAssets: images);
+        maxImages: 4, enableCamera: true, selectedAssets: images);
     images.value = image;
   }
 

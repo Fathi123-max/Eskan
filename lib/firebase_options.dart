@@ -54,7 +54,7 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyABE_is7xr1SsQiI8dNjH14H1i1tB_FpZE',
-    appId: '1:811029168672:android:061b1a205fa6d7c85f7245',
+    appId: '1:811029168672:android:60598f4339f121ae5f7245',
     messagingSenderId: '811029168672',
     projectId: 'escan-7127b',
     storageBucket: 'escan-7127b.appspot.com',

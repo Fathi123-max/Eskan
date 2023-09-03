@@ -176,7 +176,7 @@ class AddDataScreen extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Text(
-                    'Select City'.tr,
+                    'أختر الحى'.tr,
                     style: TextStyle(
                         fontSize: 18,
                         color: CustomColors.secondary_color,

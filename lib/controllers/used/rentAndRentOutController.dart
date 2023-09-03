@@ -1,5 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:haider/models/used/propertyModel.dart';
 import 'package:haider/services/PropertyServices.dart';
 
@@ -46,10 +48,22 @@ class RentAndRentOutController extends GetxController {
     isLoading(false);
   }
 
+  Query<Map<String, dynamic>>? quary;
+  final box = GetStorage();
+  getdata() async {
+    quary = box.read("name") != null
+        ? await FirebaseFirestore.instance
+            .collection('property')
+            .where('username', isEqualTo: box.read("name"))
+            .where('usernumber', isEqualTo: box.read("phone"))
+        : null;
+  }
+
   @override
   void onInit() {
     // TODO: implement onInit
     super.onInit();
+    getdata();
     getRentOutProprtyOfCurrentUser();
     getAllRentProperty();
     getAllRentPropertyFirestorePagnation();
