@@ -94,7 +94,7 @@ class PropertyServices {
     List<PropertyModel> propertyList = [];
     await FirebaseFirestore.instance
         .collection('property')
-        .limit(10)
+        .limit(5)
         .get()
         .then((QuerySnapshot querySnapshot) {
       querySnapshot.docs.forEach((doc) {
