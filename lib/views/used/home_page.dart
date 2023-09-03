@@ -121,7 +121,6 @@ class HomePage extends StatelessWidget {
                   FirestoreListView<Map<String, dynamic>>(
                     scrollDirection: Axis.vertical,
                     shrinkWrap: true,
-                    pageSize: 5,
                     addSemanticIndexes: true,
                     reverse: true,
                     physics: BouncingScrollPhysics(),
