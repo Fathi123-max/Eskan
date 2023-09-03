@@ -26,7 +26,7 @@ class PropertyServices {
           FirebaseStorage.instance.ref().child('RealState/$fileName');
 //quality  update
       await firebaseStorageRef
-          .putData((await propertyModel.images![i].getByteData(quality: 20))
+          .putData((await propertyModel.images![i].getByteData(quality: 10))
               .buffer
               .asUint8List())
           .then((result) {
