@@ -1,6 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:get/get.dart';
 import 'package:haider/models/used/propertyModel.dart';
 
@@ -49,9 +48,8 @@ class RealViewCard extends GetView {
               CachedNetworkImage(
                 imageUrl: property.images![0], // URL of the image
                 fit: BoxFit.cover,
-                width: double.infinity,
-                height: 500,
-                cacheManager: DefaultCacheManager(),
+                width: Get.width,
+                height: 300,
               ),
               Positioned(
                 bottom: 0,

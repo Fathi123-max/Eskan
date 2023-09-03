@@ -129,11 +129,8 @@ class HomePage extends StatelessWidget {
                         .getAllRentPropertyFirestorePagnation(),
                     itemBuilder: (context, snapshot) {
                       final property = PropertyModel.fromMap(snapshot.data());
-                      return SizedBox(
-                        height: 300,
-                        child: RealViewCard(
-                          property: property,
-                        ),
+                      return RealViewCard(
+                        property: property,
                       );
                     },
                   ),
