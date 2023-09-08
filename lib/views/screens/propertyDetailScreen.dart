@@ -385,9 +385,9 @@ class PropertyDetailScreen extends StatelessWidget {
 }
 
 class ViewPhotoPage extends GetView {
-  ViewPhotoPage({this.e, required this.property});
-  var e;
-  PropertyModel property;
+  const ViewPhotoPage({this.e, required this.property});
+  final e;
+  final PropertyModel property;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -418,14 +418,15 @@ class ViewPhotoPage extends GetView {
 // import 'package:flutter/material.dart';
 
 class RoundedImageView extends StatelessWidget {
-  String imageUrl;
-  PropertyModel property;
+  final String imageUrl;
+  final PropertyModel property;
 
-  RoundedImageView({required this.imageUrl, required this.property});
+  const RoundedImageView({required this.imageUrl, required this.property});
 
   @override
   Widget build(BuildContext context) {
     return Container(
+      margin: EdgeInsets.all(4),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(
             20.0), // Adjust the radius as per your preference
@@ -451,6 +452,7 @@ class RoundedImageView extends StatelessWidget {
             fit: BoxFit.cover,
             width: double.infinity,
             height: 500,
+
             // placeholder: (context, url) =>
             //     CircularProgressIndicator(), // Placeholder widget while the image is loading
             // errorWidget: (context, url, error) =>
