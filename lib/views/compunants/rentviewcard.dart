@@ -8,14 +8,11 @@ import '../../utills/customColors.dart';
 import '../screens/propertyDetailScreen.dart';
 
 class RealViewCard extends GetView {
-  final FavoritesController favoritesController =
-      Get.find(); // Get the controller instance
-
-  RealViewCard({
+  const RealViewCard({
     required this.property,
   });
-  var colo = Colors.white;
-  PropertyModel property;
+  final Color colo = Colors.white;
+  final PropertyModel property;
 
   dd(context) async {
     await precacheImage(NetworkImage(property.images![0]), context);
@@ -186,15 +183,16 @@ class RealViewCard extends GetView {
                     // Replace this with your method to get the PropertyModel instance
 
                     // Check if the property is already in favorites
-                    final isFav =
-                        favoritesController.isFavorite(property.currentUserId!);
+                    final isFav = Get.find<FavoritesController>()
+                        .isFavorite(property.currentUserId!);
 
                     if (isFav) {
                       // If already in favorites, remove it
-                      favoritesController.removeFromFavorites(property);
+                      Get.find<FavoritesController>()
+                          .removeFromFavorites(property);
                     } else {
                       // If not in favorites, add it
-                      favoritesController.addToFavorites(property);
+                      Get.find<FavoritesController>().addToFavorites(property);
                     }
                   },
                   child: Container(
@@ -204,7 +202,7 @@ class RealViewCard extends GetView {
                       shape: BoxShape.circle,
                     ),
                     child: Obx(() {
-                      return favoritesController
+                      return Get.find<FavoritesController>()
                               .isFavorite(property.currentUserId!)
                           ? const Icon(
                               Icons.favorite_rounded,
