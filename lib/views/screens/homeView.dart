@@ -7,7 +7,7 @@ import 'package:haider/utills/customColors.dart';
 import '../../controllers/used/citycontroller.dart';
 import '../../controllers/used/draweController.dart';
 
-class Home extends StatelessWidget {
+class Home extends GetView {
   final PageViewController pageViewController = Get.put(PageViewController());
 
   final DraweController draweController = Get.put(DraweController());

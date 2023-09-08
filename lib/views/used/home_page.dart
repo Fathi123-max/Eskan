@@ -10,7 +10,7 @@ import 'package:haider/views/used/info.dart';
 import '../compunants/rentviewcard.dart';
 import '../screens/avancedSearchPage.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends GetView {
   final RentAndRentOutController rentAndRentOutController =
       Get.put(RentAndRentOutController());
 

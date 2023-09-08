@@ -13,7 +13,7 @@ import 'package:whatsapp_unilink/whatsapp_unilink.dart';
 
 import '../../controllers/used/rentAndRentOutController.dart';
 
-class PropertyDetailScreen extends StatelessWidget {
+class PropertyDetailScreen extends GetView {
   final PropertyModel property;
 
   PropertyDetailScreen({required this.property});
@@ -417,7 +417,7 @@ class ViewPhotoPage extends GetView {
 }
 // import 'package:flutter/material.dart';
 
-class RoundedImageView extends StatelessWidget {
+class RoundedImageView extends GetView {
   final String imageUrl;
   final PropertyModel property;
 

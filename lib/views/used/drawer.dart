@@ -7,7 +7,7 @@
 // import '../../controllers/used/pageViewController.dart';
 // import '../../utills/customColors.dart';
 
-// class Drawerwidget extends StatelessWidget {
+// class Drawerwidget extends GetView {
 //   Drawerwidget({super.key});
 //   final DraweController draweController = Get.put(DraweController());
 //   final box = GetStorage();

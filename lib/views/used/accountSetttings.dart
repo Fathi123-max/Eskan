@@ -4,7 +4,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:haider/controllers/used/currentUserInfoController.dart';
 import 'package:haider/utills/customColors.dart';
 
-class AccountSettings extends StatelessWidget {
+class AccountSettings extends GetView {
   final CurrentUserInfoController currentUserInfoController =
       Get.put(CurrentUserInfoController());
 

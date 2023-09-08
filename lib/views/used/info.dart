@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:whatsapp_unilink/whatsapp_unilink.dart';
 
-class Info extends StatelessWidget {
+class Info extends GetView {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

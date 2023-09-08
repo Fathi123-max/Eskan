@@ -13,7 +13,7 @@ import 'package:uuid/uuid.dart';
 
 import '../../controllers/used/citycontroller.dart';
 
-class AddDataScreen extends StatelessWidget {
+class AddDataScreen extends GetView {
   final String value;
 
   AddDataScreen({required this.value});

@@ -7,7 +7,7 @@ import 'package:haider/views/screens/addDataScreen.dart';
 
 import 'currentUserPropertyDetail.dart';
 
-class SellView extends StatelessWidget {
+class SellView extends GetView {
   final GetSellAndBuyPropertyController getSellPropertyController =
       Get.put(GetSellAndBuyPropertyController());
 

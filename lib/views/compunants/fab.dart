@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get_state_manager/src/simple/get_view.dart';
 
-class SearchButton extends StatelessWidget {
+class SearchButton extends GetView {
   final String text;
   final VoidCallback onTap;
   final IconData? icon;

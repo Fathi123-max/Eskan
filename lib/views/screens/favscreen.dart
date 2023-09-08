@@ -4,7 +4,7 @@ import 'package:haider/views/compunants/rentviewcard.dart';
 
 import '../../controllers/used/favourateController.dart';
 
-class FavoritesPage extends StatelessWidget {
+class FavoritesPage extends GetView {
   final FavoritesController favoritesController =
       Get.find(); // Get the controller instance
 

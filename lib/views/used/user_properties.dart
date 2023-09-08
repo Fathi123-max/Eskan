@@ -14,7 +14,7 @@ import '../compunants/add_information_dialog.dart';
 import '../compunants/fab.dart';
 import '../screens/addDataScreen.dart';
 
-class UserProperties extends StatelessWidget {
+class UserProperties extends GetView {
   // const RentOutView({Key key}) : super(key: key);
   final RentAndRentOutController rentOutController = Get.find();
   final GetSellAndBuyPropertyController rentOut2Controller =

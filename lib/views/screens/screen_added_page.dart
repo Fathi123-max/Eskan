@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import '../../models/used/propertyModel.dart';
 import 'homeView.dart';
 
-class SuccessScreen extends StatelessWidget {
+class SuccessScreen extends GetView {
   final PropertyModel property;
 
   SuccessScreen({required this.property});

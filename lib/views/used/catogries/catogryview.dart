@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 
 import '../../../controllers/used/rentAndRentOutController.dart';
 
-class CategoryViewPage extends StatelessWidget {
+class CategoryViewPage extends GetView {
   final String action;
 
   CategoryViewPage({

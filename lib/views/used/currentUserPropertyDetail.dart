@@ -10,7 +10,7 @@ import 'package:photo_view/photo_view.dart';
 
 import '../../utills/customToast.dart';
 
-class CurrentUserPropertyDetail extends StatelessWidget {
+class CurrentUserPropertyDetail extends GetView {
   final PropertyModel property;
 
   CurrentUserPropertyDetail({required this.property});

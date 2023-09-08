@@ -6,7 +6,7 @@ import '../../../controllers/used/catogryconroller.dart';
 import '../../../utills/customColors.dart';
 import '../../screens/propertyDetailScreen.dart';
 
-class catogrylist extends StatelessWidget {
+class catogrylist extends GetView {
   // const RentOutView({Key key}) : super(key: key);
   final catogryController catoController = Get.put(catogryController());
 
