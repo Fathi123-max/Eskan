@@ -7,15 +7,11 @@ import 'homeView.dart';
 class SuccessScreen extends GetView {
   final PropertyModel property;
 
-  SuccessScreen({required this.property});
+  const SuccessScreen({required this.property});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   title: Text('تم رفع العقار بنجاح '),
-      //   centerTitle: true,
-      // ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -67,8 +63,6 @@ class SuccessScreen extends GetView {
                 ),
               ),
             )
-            // Add other details you want to display
-            // You can customize the UI as per your requirements
           ],
         ),
       ),

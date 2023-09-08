@@ -6,8 +6,8 @@ import 'package:haider/models/used/propertyModel.dart';
 import 'package:haider/views/compunants/rentviewcard.dart';
 
 class SearchResultPage extends GetView {
-  SearchResultPage({required this.query});
-  Query<Map<String, dynamic>> query;
+  const SearchResultPage({required this.query});
+  final Query<Map<String, dynamic>> query;
 
   @override
   Widget build(BuildContext context) {

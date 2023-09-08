@@ -13,16 +13,15 @@ import '../../utills/customToast.dart';
 class CurrentUserPropertyDetail extends GetView {
   final PropertyModel property;
 
-  CurrentUserPropertyDetail({required this.property});
-
-  final CurrentUserInfoController controller =
-      Get.put(CurrentUserInfoController());
-  final GetSellAndBuyPropertyController getSellAndBuyPropertyController =
-      Get.find();
-  final RentAndRentOutController rentAndRentOutController = Get.find();
+  const CurrentUserPropertyDetail({required this.property});
 
   @override
   Widget build(BuildContext context) {
+    final CurrentUserInfoController controller =
+        Get.put(CurrentUserInfoController());
+    final GetSellAndBuyPropertyController getSellAndBuyPropertyController =
+        Get.find();
+    final RentAndRentOutController rentAndRentOutController = Get.find();
     return Scaffold(
         appBar: AppBar(
           centerTitle: true,

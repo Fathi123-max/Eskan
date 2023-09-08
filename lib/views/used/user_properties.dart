@@ -16,16 +16,16 @@ import '../screens/addDataScreen.dart';
 
 class UserProperties extends GetView {
   // const RentOutView({Key key}) : super(key: key);
-  final RentAndRentOutController rentOutController = Get.find();
-  final GetSellAndBuyPropertyController rentOut2Controller =
-      Get.put(GetSellAndBuyPropertyController());
-/* CurrentUserPropertyDetail(
-                                    data: rentOutController
-                                    .currentUserRentOutlist[index])*/
-  final box = GetStorage();
 
   @override
   Widget build(BuildContext context) {
+    final RentAndRentOutController rentOutController = Get.find();
+    final GetSellAndBuyPropertyController rentOut2Controller =
+        Get.put(GetSellAndBuyPropertyController());
+/* CurrentUserPropertyDetail(
+                                    data: rentOutController
+                                    .currentUserRentOutlist[index])*/
+    final box = GetStorage();
     rentOutController.getdata();
     return Scaffold(
         floatingActionButtonAnimator: FloatingActionButtonAnimator.scaling,

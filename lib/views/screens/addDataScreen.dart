@@ -16,19 +16,18 @@ import '../../controllers/used/citycontroller.dart';
 class AddDataScreen extends GetView {
   final String value;
 
-  AddDataScreen({required this.value});
-
-  final box = GetStorage();
-
-  final AddPropertyController controller = Get.put(AddPropertyController());
-
-  final RentAndRentOutController rentAndRentOutController = Get.find();
-
-  final CurrentUserInfoController currentUserInfoController =
-      Get.put(CurrentUserInfoController());
+  const AddDataScreen({required this.value});
 
   @override
   Widget build(BuildContext context) {
+    final box = GetStorage();
+
+    final AddPropertyController controller = Get.put(AddPropertyController());
+
+    final RentAndRentOutController rentAndRentOutController = Get.find();
+
+    final CurrentUserInfoController currentUserInfoController =
+        Get.put(CurrentUserInfoController());
     return Hero(
       tag: 'addProperty',
       child: Scaffold(

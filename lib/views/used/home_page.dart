@@ -13,7 +13,6 @@ import '../screens/avancedSearchPage.dart';
 class HomePage extends GetView {
   final RentAndRentOutController rentAndRentOutController =
       Get.put(RentAndRentOutController());
-
   @override
   Widget build(BuildContext context) {
     return SafeArea(

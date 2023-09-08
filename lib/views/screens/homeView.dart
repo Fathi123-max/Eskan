@@ -17,32 +17,10 @@ class Home extends GetView {
   final box = GetStorage();
 
   var selectedIndex = 0.obs;
-  // Use Rx variable for state management
   @override
-  // ThemeController _themeController = Get.put(ThemeController());
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // drawer: Drawerwidget(),
-      // appBar: AppBar(
-      //   centerTitle: true,
-      //   elevation: 0.0,
-      //   title: Text(
-      //     'Services'.tr,
-      //     style: TextStyle(
-      //       fontWeight: FontWeight.bold,
-      //       color: CustomColors.coral_Color,
-      //       fontSize: 22,
-      //     ),
-      //   ),
-      //   actions: [
-      //     IconButton(
-      //       icon: Icon(Icons.brightness_4),
-      //       onPressed: () => _themeController.toggleTheme(),
-      //     ),
-      //   ],
-      // ),
       bottomNavigationBar: Obx(() => BottomNavigationBar(
             type: BottomNavigationBarType.shifting,
             currentIndex: selectedIndex.value,

@@ -16,10 +16,7 @@ import '../../controllers/used/rentAndRentOutController.dart';
 class PropertyDetailScreen extends GetView {
   final PropertyModel property;
 
-  PropertyDetailScreen({required this.property});
-  var firebaseuser = FirebaseAuth.instance.currentUser;
-  final CurrentUserInfoController controller =
-      Get.put(CurrentUserInfoController());
+  const PropertyDetailScreen({required this.property});
 
   launchWhatsApp() async {
     try {
@@ -36,7 +33,9 @@ class PropertyDetailScreen extends GetView {
   @override
   Widget build(BuildContext context) {
     Get.put(RentAndRentOutController()).username.value = property.username!;
-
+    var firebaseuser = FirebaseAuth.instance.currentUser;
+    final CurrentUserInfoController controller =
+        Get.put(CurrentUserInfoController());
     return Scaffold(
         bottomSheet: Container(
           height: 50,

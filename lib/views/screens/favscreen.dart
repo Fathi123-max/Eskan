@@ -5,14 +5,13 @@ import 'package:haider/views/compunants/rentviewcard.dart';
 import '../../controllers/used/favourateController.dart';
 
 class FavoritesPage extends GetView {
-  final FavoritesController favoritesController =
-      Get.find(); // Get the controller instance
+// Get the controller instance
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Obx(() {
-        final favorites = favoritesController
+        final favorites = Get.find<FavoritesController>()
             .favorites; // Get the list of favorite properties
 
         if (favorites.isEmpty) {
