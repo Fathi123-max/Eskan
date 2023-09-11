@@ -213,6 +213,4 @@ class _EnterInfoDialogState extends State<EnterInfoDialog> {
 
     return null; // Return null when the input is valid.
   }
-
-  // ... Same code as before ...
 }
