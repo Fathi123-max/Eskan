@@ -16,7 +16,7 @@ class UserProperties extends StatelessWidget {
   // const RentOutView({Key key}) : super(key: key);
   final RentAndRentOutController rentOutController = Get.find();
   final GetSellAndBuyPropertyController rentOut2Controller =
-      Get.put(GetSellAndBuyPropertyController());
+      Get.find();
 /* CurrentUserPropertyDetail(
                                     data: rentOutController
                                         .currentUserRentOutlist[index])*/
@@ -98,7 +98,7 @@ class UserProperties extends StatelessWidget {
                                   children: [
                                     CachedNetworkImage(
                                       imageUrl: property
-                                          .images![0], // URL of the image
+                                          .firstImageUrl ?? '', // URL of the image
                                       fit: BoxFit.cover,
                                       width: double.infinity,
                                       height: 500,
@@ -150,7 +150,7 @@ class UserProperties extends StatelessWidget {
                                                 ),
                                                 const SizedBox(width: 4),
                                                 Text(
-                                                  '${property.city![0].toUpperCase()}${property.city!.substring(1).toLowerCase()}',
+                                                  '${property.city}',
                                                   style: const TextStyle(
                                                     color: Colors.white,
                                                     fontSize: 14,

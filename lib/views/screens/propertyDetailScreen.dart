@@ -1,5 +1,4 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -7,11 +6,12 @@ import 'package:get/get.dart';
 import 'package:haider/controllers/used/currentUserInfoController.dart';
 import 'package:haider/models/used/propertyModel.dart';
 import 'package:haider/utills/customColors.dart';
-import 'package:photo_view/photo_view.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:whatsapp_unilink/whatsapp_unilink.dart';
 
 import '../../controllers/used/rentAndRentOutController.dart';
+import '../../utills/app_bindings.dart';
+import '../../views/compunants/image_components.dart';
 
 class PropertyDetailScreen extends StatelessWidget {
   final PropertyModel property;
@@ -19,7 +19,7 @@ class PropertyDetailScreen extends StatelessWidget {
   PropertyDetailScreen({required this.property});
   var firebaseuser = FirebaseAuth.instance.currentUser;
   final CurrentUserInfoController controller =
-      Get.put(CurrentUserInfoController());
+      Get.find();
 
   launchWhatsApp() async {
     try {
@@ -35,7 +35,7 @@ class PropertyDetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Get.put(RentAndRentOutController()).username.value = property.username!;
+    Get.find<RentAndRentOutController>().username.value = property.username!;
 
     return Scaffold(
         bottomSheet: Container(
@@ -110,7 +110,7 @@ class PropertyDetailScreen extends StatelessWidget {
                         },
                         scrollDirection: Axis.horizontal,
                         children: property.images!.map((e) {
-                          return RoundedImageView(
+                          return PropertyImageView(
                             imageUrl: e,
                             property: property,
                           );
@@ -173,7 +173,7 @@ class PropertyDetailScreen extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                                 Text(
-                                  '${property.city![0].toUpperCase()}${property.city!.substring(1).toLowerCase()}',
+                                  '${property.city}',
                                   style: TextStyle(
                                       fontSize: 18,
                                       fontWeight: FontWeight.bold,
@@ -384,80 +384,3 @@ class PropertyDetailScreen extends StatelessWidget {
   }
 }
 
-class ViewPhotoPage extends GetView {
-  ViewPhotoPage({this.e, required this.property});
-  var e;
-  PropertyModel property;
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.black,
-        centerTitle: true,
-        automaticallyImplyLeading: false,
-        actions: [
-          IconButton(
-              onPressed: () => Navigator.of(context).pop(),
-              icon: Icon(
-                Icons.arrow_back_ios_new,
-                color: Colors.white,
-              )),
-        ],
-        elevation: 0.0,
-      ),
-      backgroundColor: Colors.black,
-      body: PhotoView(
-        imageProvider: CachedNetworkImageProvider(e),
-        backgroundDecoration: BoxDecoration(color: Colors.black),
-        loadingBuilder: (context, event) =>
-            Center(child: CircularProgressIndicator()),
-      ),
-    );
-  }
-}
-// import 'package:flutter/material.dart';
-
-class RoundedImageView extends StatelessWidget {
-  String imageUrl;
-  PropertyModel property;
-
-  RoundedImageView({required this.imageUrl, required this.property});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(
-            20.0), // Adjust the radius as per your preference
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black12,
-            offset: Offset(0, 2),
-            blurRadius: 4.0,
-          ),
-        ], // Add shadow for elevation effect
-      ),
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(8.0),
-        child: GestureDetector(
-          onTap: () {
-            Get.to(() => ViewPhotoPage(
-                  e: imageUrl,
-                  property: property,
-                ));
-          },
-          child: CachedNetworkImage(
-            imageUrl: imageUrl, // URL of the image
-            fit: BoxFit.cover,
-            width: double.infinity,
-            height: 500,
-            // placeholder: (context, url) =>
-            //     CircularProgressIndicator(), // Placeholder widget while the image is loading
-            // errorWidget: (context, url, error) =>
-            //     Icon(Icons.error), // Widget to display in case of an error
-          ),
-        ),
-      ),
-    );
-  }
-}

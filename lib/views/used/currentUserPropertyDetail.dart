@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:haider/controllers/used/currentUserInfoController.dart';
@@ -6,9 +5,9 @@ import 'package:haider/controllers/used/getSellAndBuyPropertController.dart';
 import 'package:haider/controllers/used/rentAndRentOutController.dart';
 import 'package:haider/models/used/propertyModel.dart';
 import 'package:haider/utills/customColors.dart';
-import 'package:photo_view/photo_view.dart';
 
 import '../../utills/customToast.dart';
+import '../../views/compunants/image_components.dart';
 
 class CurrentUserPropertyDetail extends StatelessWidget {
   final PropertyModel property;
@@ -16,7 +15,7 @@ class CurrentUserPropertyDetail extends StatelessWidget {
   CurrentUserPropertyDetail({required this.property});
 
   final CurrentUserInfoController controller =
-      Get.put(CurrentUserInfoController());
+      Get.find();
   final GetSellAndBuyPropertyController getSellAndBuyPropertyController =
       Get.find();
   final RentAndRentOutController rentAndRentOutController = Get.find();
@@ -58,36 +57,26 @@ class CurrentUserPropertyDetail extends StatelessWidget {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => Scaffold(
-                                      backgroundColor: Colors.black,
-                                      body: PhotoView(
-                                        imageProvider: NetworkImage(e),
-                                        backgroundDecoration:
-                                            BoxDecoration(color: Colors.black),
-                                        loadingBuilder: (context, event) =>
-                                            Center(
-                                                child:
-                                                    CircularProgressIndicator()),
-                                      ),
+                                    builder: (context) => FullScreenImageView(
+                                      imageUrl: e,
+                                      property: property,
                                     ),
                                   ),
                                 );
                               },
                               child: CachedNetworkImage(
                                 imageUrl: e,
-                                imageBuilder: (context, imageProvider) =>
-                                    Container(
-                                  decoration: BoxDecoration(
-                                    image: DecorationImage(
-                                      image: imageProvider,
-                                      fit: BoxFit.cover,
-                                    ),
-                                  ),
+                                fit: BoxFit.cover,
+                                width: double.infinity,
+                                height: 220,
+                                placeholder: (context, url) => Container(
+                                  decoration: BoxDecoration(color: Colors.grey.shade300),
+                                  child: Center(child: CircularProgressIndicator()),
                                 ),
-                                // placeholder: (context, url) =>
-                                //     Center(child: CircularProgressIndicator()),
-                                // errorWidget: (context, url, error) =>
-                                //     Center(child: Icon(Icons.error)),
+                                errorWidget: (context, url, error) => Container(
+                                  decoration: BoxDecoration(color: Colors.grey.shade300),
+                                  child: Center(child: Icon(Icons.broken_image, size: 40, color: Colors.grey)),
+                                ),
                               ),
                             ),
                           );
@@ -145,7 +134,7 @@ class CurrentUserPropertyDetail extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                                 Text(
-                                  '${property.city![0].toUpperCase()}${property.city!.substring(1).toLowerCase()}',
+                                  '${property.city}',
                                   style: TextStyle(
                                       fontSize: 18,
                                       fontWeight: FontWeight.bold,
@@ -334,45 +323,6 @@ class CurrentUserPropertyDetail extends StatelessWidget {
                       : Row(
                           children: [
                             // Expanded(
-                            //     flex: 1,
-                            //     child: Padding(
-                            // padding: const EdgeInsets.all(8.0),
-                            // child: ElevatedButton(
-                            //   style: ElevatedButton.styleFrom(
-                            //       primary: CustomColors.orangeColor),
-                            //   onPressed: () async {
-                            //     String updateValue;
-                            //     if (data.propertyFor == 'rent') {
-                            //       updateValue = 'Rented';
-                            //     } else {
-                            //       updateValue = 'Sold Out';
-                            //     }
-                            //     String response =
-                            //         await getSellAndBuyPropertyController
-                            //               .firestoreService
-                            //               .updateProperty(
-                            //                   data.docId, updateValue);
-                            //       if (response == 'Data Updated') {
-                            //         getSellAndBuyPropertyController
-                            //             .getAllBuyingProperty();
-                            //         getSellAndBuyPropertyController
-                            //             .getSellProprtyOfCurrentUser();
-                            //         rentAndRentOutController
-                            //             .getAllRentProperty();
-                            //         rentAndRentOutController
-                            //             .getRentOutProprtyOfCurrentUser();
-                            //         Get.back();
-                            //         CustomToast.showToast('Changes Saved');
-                            //       } else {
-                            //         CustomToast.showToast(response);
-                            //         Get.back();
-                            //       }
-                            //     },
-                            //     child: Text(data.propertyFor == 'sale'
-                            //         ? 'Mark Sold Out'
-                            //         : 'Mark Rented'),
-                            //   ),
-                            // )),
                             Expanded(child: Obx(() {
                               return Padding(
                                 padding: const EdgeInsets.all(8.0),
@@ -388,7 +338,7 @@ class CurrentUserPropertyDetail extends StatelessWidget {
                                               await getSellAndBuyPropertyController
                                                   .firestoreService
                                                   .deleteProperty(
-                                                      property.currentUserId!,
+                                                      property.docId!,
                                                       property.images!);
                                           if (response == 'Property Deleted') {
                                             // getSellAndBuyPropertyController

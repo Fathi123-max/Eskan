@@ -1,22 +1,15 @@
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:haider/models/used/propertyModel.dart';
 import 'package:haider/services/PropertyServices.dart';
 
 class RentAndRentOutController extends GetxController {
-  // final AuthController controller = Get.find();
   PropertyServices firestoreService = PropertyServices();
   var currentUserRentOutlist = <PropertyModel>[].obs;
   var username = "".obs;
   var allRentList = <PropertyModel>[].obs;
-  var allcatList = [].obs;
+  var allcatList = <PropertyModel>[].obs;
   var isLoading = false.obs;
   var value = true.obs;
-/////////////////////////////////////////////////////
-  final cityEditTextController = TextEditingController();
-  final rangeTextFromController = TextEditingController();
-  final rangeTextToTextController = TextEditingController();
-  //////////////////////////////////////////////////
 
   getRentOutProprtyOfCurrentUser() async {
     isLoading(true);
@@ -38,11 +31,11 @@ class RentAndRentOutController extends GetxController {
     return firestoreService.firestorePagnation();
   }
 
-  getAllRentPropertyByCatogry(String search) async {
+  getAllRentPropertyByCategory(String search) async {
     isLoading(true);
-    var catogrybyname =
-        await firestoreService.getAllRentListByCatogry(search: search);
-    allcatList.value = catogrybyname;
+    var categoryList =
+        await firestoreService.getAllRentListByCategory(category: search);
+    allcatList.value = categoryList;
     isLoading(false);
   }
 

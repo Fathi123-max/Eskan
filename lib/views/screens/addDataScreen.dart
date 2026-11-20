@@ -3,15 +3,15 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:haider/controllers/used/addpropertyController.dart';
 import 'package:haider/controllers/used/catogryconroller.dart';
+import 'package:haider/models/used/catogrymodel.dart';
 import 'package:haider/controllers/used/currentUserInfoController.dart';
 import 'package:haider/controllers/used/rentAndRentOutController.dart';
 import 'package:haider/utills/customColors.dart';
 import 'package:haider/utills/customToast.dart';
 import 'package:haider/views/screens/screen_added_page.dart';
 import 'package:multi_image_picker/multi_image_picker.dart';
-import 'package:uuid/uuid.dart';
-
 import '../../controllers/used/citycontroller.dart';
+import '../../utills/app_bindings.dart';
 
 class AddDataScreen extends StatelessWidget {
   final String value;
@@ -20,12 +20,12 @@ class AddDataScreen extends StatelessWidget {
 
   final box = GetStorage();
 
-  final AddPropertyController controller = Get.put(AddPropertyController());
+  final AddPropertyController controller = Get.find();
 
   final RentAndRentOutController rentAndRentOutController = Get.find();
 
   final CurrentUserInfoController currentUserInfoController =
-      Get.put(CurrentUserInfoController());
+      Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -156,8 +156,8 @@ class AddDataScreen extends StatelessWidget {
                                 ),
                                 Align(
                                   alignment: Alignment.centerLeft,
-                                  child: Text(
-                                    "${Get.put(AddPropertyController()).selectedValue}"
+                                  child:                                 Text(
+                                    "${Get.find<AddPropertyController>().selectedValue}"
                                         .tr,
                                     style: TextStyle(color: Colors.black54),
                                   ),
@@ -209,7 +209,7 @@ class AddDataScreen extends StatelessWidget {
                                 Align(
                                   alignment: Alignment.centerLeft,
                                   child: Text(
-                                    '${controller.selectedCity.value[0].toUpperCase()}${controller.selectedCity.value.substring(1).toLowerCase()}',
+                                    '${controller.selectedCity.value}',
                                     style: TextStyle(color: Colors.black54),
                                   ),
                                 ),
@@ -737,12 +737,7 @@ class AddDataScreen extends StatelessWidget {
 
                                 controller.propertyModel.city =
                                     controller.selectedCity.value;
-                                // Generate a new UUID
-                                var uuid = Uuid();
-                                String uniqueId = uuid.v4();
-
-                                controller.propertyModel.currentUserId =
-                                    uniqueId;
+                                // currentUserId will be set by PropertyServices using Firestore auto-ID
                                 controller.propertyModel.propertyType =
                                     controller.selectedValue.value;
                                 controller.propertyFormKey.currentState!.save();
@@ -816,20 +811,21 @@ class AddDataScreen extends StatelessWidget {
               children: [
                 Text(""),
                 Obx(() {
+                  final cityController = Get.find<CityController>();
                   return ListView.builder(
                       shrinkWrap: true,
-                      itemCount: Get.put(CityController()).cityList.length,
+                      itemCount: cityController.cityList.length,
                       itemBuilder: (context, index) {
                         return Padding(
                           padding: const EdgeInsets.symmetric(
                               horizontal: 16.0, vertical: 8.0),
                           child: InkWell(
                             onTap: () {
-                              String cityName = Get.put(CityController())
+                              String cityName = cityController
                                   .cityList[index]
                                   .cityname!
                                   .tr;
-                              Get.put(AddPropertyController())
+                              Get.find<AddPropertyController>()
                                   .selectedCity
                                   .value = cityName;
                               Navigator.pop(context);
@@ -853,7 +849,7 @@ class AddDataScreen extends StatelessWidget {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
-                                    '${Get.put(CityController()).cityList[index].cityname!.tr}',
+                                    '${Get.find<CityController>().cityList[index].cityname!.tr}',
                                     style: TextStyle(
                                       fontSize: 16.0,
                                       fontWeight: FontWeight.normal,
@@ -882,7 +878,6 @@ class AddDataScreen extends StatelessWidget {
       context: context,
       barrierDismissible: true,
       builder: (BuildContext context) {
-        Get.put(AddPropertyController);
         return AlertDialog(
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(16.0),
@@ -897,7 +892,7 @@ class AddDataScreen extends StatelessWidget {
           content: Obx(() {
             return ListView.builder(
                 shrinkWrap: true,
-                itemCount: Get.put(catogryController()).catogryList.length,
+                itemCount: Get.find<CategoryController>().categoryList.length,
                 itemBuilder: (context, index) {
                   return Row(
                     mainAxisAlignment: MainAxisAlignment.end,
@@ -907,11 +902,11 @@ class AddDataScreen extends StatelessWidget {
                             horizontal: 16.0, vertical: 8.0),
                         child: InkWell(
                           onTap: () {
-                            String valName = Get.put(catogryController())
-                                .catogryList[index]
+                            String valName = Get.find<CategoryController>()
+                                .categoryList[index]
                                 .catogryname!
                                 .tr;
-                            Get.put(AddPropertyController())
+                            Get.find<AddPropertyController>()
                                 .selectedValue
                                 .value = valName;
                             Navigator.pop(context);
@@ -935,7 +930,7 @@ class AddDataScreen extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
-                                  '${Get.put(catogryController()).catogryList[index].catogryname!.tr}',
+                                  '${Get.find<CategoryController>().categoryList[index].catogryname!.tr}',
                                   style: TextStyle(
                                     fontSize: 16.0,
                                     fontWeight: FontWeight.normal,

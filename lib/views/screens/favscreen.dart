@@ -6,7 +6,7 @@ import '../../controllers/used/favourateController.dart';
 
 class FavoritesPage extends StatelessWidget {
   final FavoritesController favoritesController =
-      Get.find(); // Get the controller instance
+      Get.find(); // Get the controller instance (registered in AppBindings)
 
   @override
   Widget build(BuildContext context) {

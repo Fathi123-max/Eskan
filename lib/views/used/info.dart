@@ -5,6 +5,8 @@ import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:whatsapp_unilink/whatsapp_unilink.dart';
 
+import '../../utills/app_config.dart';
+
 class Info extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -152,7 +154,8 @@ class Info extends StatelessWidget {
 
 launchWhatsApp() async {
   try {
-    final link = WhatsAppUnilink(phoneNumber: '+201112243628', text: "");
+          final link =
+          WhatsAppUnilink(phoneNumber: AppConfig.businessPhoneNumber, text: "");
     await launch('$link');
   } catch (e) {
     print(e);

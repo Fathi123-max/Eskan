@@ -1,44 +1,91 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
+/// Supported property listing types.
+enum PropertyFor { sale, rent }
+
+/// Extension for [PropertyFor] enum serialization.
+extension PropertyForExtension on PropertyFor {
+  /// Converts enum to its string representation.
+  String get value => switch (this) {
+        PropertyFor.sale => 'sale',
+        PropertyFor.rent => 'rent',
+      };
+
+  /// Creates enum from string value (case-insensitive).
+  static PropertyFor fromString(String? value) {
+    return switch (value?.toLowerCase()) {
+      'sale' => PropertyFor.sale,
+      'rent' => PropertyFor.rent,
+      _ => PropertyFor.rent, // Default to rent for backward compatibility
+    };
+  }
+}
+
+/// Model representing a property listing.
+/// Used for both rental and sale properties.
 class PropertyModel {
-  String? username;
+  /// Owner's display name
+  final String? username;
 
-  String? usernumber;
+  /// Owner's phone number
+  final String? usernumber;
 
-  String? date;
+  /// Listing date/time
+  final String? date;
 
-  String? action;
+  /// Property action status (e.g., 'active', 'sold', 'rented')
+  final String? action;
 
-  String? docId;
+  /// Firestore document ID
+  final String? docId;
 
-  String? currentUserId;
+  /// Current user ID (Firebase Auth UID)
+  final String? currentUserId;
 
-  String? propertyType;
+  /// Property category/type (e.g., 'Apartment', 'Villa')
+  final String? propertyType;
 
-  String? propertyFor;
+  /// Whether the property is for sale or rent
+  final String? propertyFor;
 
-  String? city;
+  /// City name
+  final String? city;
 
-  String? area;
+  /// Area/neighborhood name
+  final String? area;
 
-  String? address;
+  /// Full address
+  final String? address;
 
-  String? size;
+  /// Size in square meters
+  final String? size;
 
-  String? bedrooms;
+  /// Number of bedrooms
+  final String? bedrooms;
 
-  String? bathrooms;
+  /// Number of bathrooms
+  final String? bathrooms;
 
-  String? kitchen;
+  /// Number of kitchens
+  final String? kitchen;
 
-  String? descr;
+  /// Property description
+  final String? descr;
 
-  String? price;
+  /// Price in currency units (EGP)
+  final String? price;
 
-  List? images;
+  /// List of image URLs
+  final List<String>? images;
 
-  PropertyModel({
+  /// Returns the first image URL if available, otherwise null.
+  /// Use this everywhere instead of [images]![0] to avoid crashes.
+  String? get firstImageUrl =>
+      images?.isNotEmpty == true ? images!.first : null;
+
+  /// Creates a [PropertyModel] instance.
+  const PropertyModel({
     this.username,
     this.usernumber,
     this.date,
@@ -59,6 +106,7 @@ class PropertyModel {
     this.images,
   });
 
+  /// Creates a copy of this model with optional new values.
   PropertyModel copyWith({
     String? username,
     String? usernumber,
@@ -77,7 +125,7 @@ class PropertyModel {
     String? kitchen,
     String? descr,
     String? price,
-    List? images,
+    List<String>? images,
   }) {
     return PropertyModel(
       username: username ?? this.username,
@@ -101,120 +149,135 @@ class PropertyModel {
     );
   }
 
+  /// Converts this model to a Firestore-compatible map.
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
-      'username': username,
-      'usernumber': usernumber,
-      'date': date,
-      'action': action,
-      'docId': docId,
-      'currentUserId': currentUserId,
-      'propertyType': propertyType,
-      'propertyFor': propertyFor,
-      'city': city,
-      'area': area,
-      'address': address,
-      'size': size,
-      'bedrooms': bedrooms,
-      'bathrooms': bathrooms,
-      'kitchen': kitchen,
-      'descr': descr,
-      'price': price,
-      'images': images,
+      if (username != null) 'username': username,
+      if (usernumber != null) 'usernumber': usernumber,
+      if (date != null) 'date': date,
+      if (action != null) 'action': action,
+      if (docId != null) 'docId': docId,
+      if (currentUserId != null) 'currentUserId': currentUserId,
+      if (propertyType != null) 'propertyType': propertyType,
+      if (propertyFor != null) 'propertyFor': propertyFor,
+      if (city != null) 'city': city,
+      if (area != null) 'area': area,
+      if (address != null) 'address': address,
+      if (size != null) 'size': size,
+      if (bedrooms != null) 'bedrooms': bedrooms,
+      if (bathrooms != null) 'bathrooms': bathrooms,
+      if (kitchen != null) 'kitchen': kitchen,
+      if (descr != null) 'descr': descr,
+      if (price != null) 'price': price,
+      if (images != null) 'images': images,
     };
   }
 
+  /// Creates a [PropertyModel] from a Firestore document map.
   factory PropertyModel.fromMap(Map<String, dynamic> map) {
     return PropertyModel(
-      username: map['username'] != null ? map['username'] : null,
-      usernumber: map['usernumber'] != null ? map['usernumber'] : null,
-      date: map['date'] != null ? map['date'] : null,
-      action: map['action'] != null ? map['action'] : null,
-      docId: map['docId'] != null ? map['docId'] : null,
-      currentUserId: map['currentUserId'] != null ? map['currentUserId'] : null,
-      propertyType: map['propertyType'] != null ? map['propertyType'] : null,
-      propertyFor: map['propertyFor'] != null ? map['propertyFor'] : null,
-      city: map['city'] != null ? map['city'] : null,
-      area: map['area'] != null ? map['area'] : null,
-      address: map['address'] != null ? map['address'] : null,
-      size: map['size'] != null ? map['size'] : null,
-      bedrooms: map['bedrooms'] != null ? map['bedrooms'] : null,
-      bathrooms: map['bathrooms'] != null ? map['bathrooms'] : null,
-      kitchen: map['kitchen'] != null ? map['kitchen'] : null,
-      descr: map['descr'] != null ? map['descr'] : null,
-      price: map['price'] != null ? map['price'] : null,
-      images: map['images'] != null ? map['images'] : null,
+      username: map['username'] as String?,
+      usernumber: map['usernumber'] as String?,
+      date: map['date'] as String?,
+      action: map['action'] as String?,
+      docId: map['docId'] as String?,
+      currentUserId: map['currentUserId'] as String?,
+      propertyType: map['propertyType'] as String?,
+      propertyFor: map['propertyFor'] as String?,
+      city: map['city'] as String?,
+      area: map['area'] as String?,
+      address: map['address'] as String?,
+      size: map['size'] as String?,
+      bedrooms: map['bedrooms'] as String?,
+      bathrooms: map['bathrooms'] as String?,
+      kitchen: map['kitchen'] as String?,
+      descr: map['descr'] as String?,
+      price: map['price'] as String?,
+      images: map['images'] as List<String>?,
     );
   }
 
+  /// Converts this model to a JSON string.
   String toJson() => json.encode(toMap());
 
+  /// Creates a [PropertyModel] from a JSON string.
   factory PropertyModel.fromJson(String source) =>
       PropertyModel.fromMap(json.decode(source) as Map<String, dynamic>);
 
+  /// Returns a string representation of this model for debugging.
   @override
   String toString() {
-    return 'PropertyModel(username: $username, usernumber: $usernumber, timestamp: $date, action: $action, docId: $docId, currentUserId: $currentUserId, propertyType: $propertyType, propertyFor: $propertyFor, city: $city, area: $area, address: $address, size: $size, bedrooms: $bedrooms, bathrooms: $bathrooms, kitchen: $kitchen, descr: $descr, price: $price, images: $images)';
+    return 'PropertyModel(
+      username: $username,
+      city: $city,
+      area: $area,
+      address: $address,
+      propertyFor: $propertyFor,
+      price: $price,
+      images: ${images?.length ?? 0} images
+    )';
   }
 
+  /// Equality comparison based on all properties.
   @override
   bool operator ==(covariant PropertyModel other) {
     if (identical(this, other)) return true;
+    if (other is! PropertyModel) return false;
 
-    return other.username == username &&
-        other.usernumber == usernumber &&
-        other.date == date &&
-        other.action == action &&
-        other.docId == docId &&
-        other.currentUserId == currentUserId &&
-        other.propertyType == propertyType &&
-        other.propertyFor == propertyFor &&
-        other.city == city &&
-        other.area == area &&
-        other.address == address &&
-        other.size == size &&
-        other.bedrooms == bedrooms &&
-        other.bathrooms == bathrooms &&
-        other.kitchen == kitchen &&
-        other.descr == descr &&
-        other.price == price &&
-        other.images == images;
+    return username == other.username &&
+        usernumber == other.usernumber &&
+        date == other.date &&
+        action == other.action &&
+        docId == other.docId &&
+        currentUserId == other.currentUserId &&
+        propertyType == other.propertyType &&
+        propertyFor == other.propertyFor &&
+        city == other.city &&
+        area == other.area &&
+        address == other.address &&
+        size == other.size &&
+        bedrooms == other.bedrooms &&
+        bathrooms == other.bathrooms &&
+        kitchen == other.kitchen &&
+        descr == other.descr &&
+        price == other.price &&
+        images == other.images;
   }
 
+  /// Hash code for this model.
   @override
   int get hashCode {
-    return username.hashCode ^
-        usernumber.hashCode ^
-        date.hashCode ^
-        action.hashCode ^
-        docId.hashCode ^
-        currentUserId.hashCode ^
-        propertyType.hashCode ^
-        propertyFor.hashCode ^
-        city.hashCode ^
-        area.hashCode ^
-        address.hashCode ^
-        size.hashCode ^
-        bedrooms.hashCode ^
-        bathrooms.hashCode ^
-        kitchen.hashCode ^
-        descr.hashCode ^
-        price.hashCode ^
-        images.hashCode;
+    return Object.hash(
+      username,
+      usernumber,
+      date,
+      action,
+      docId,
+      currentUserId,
+      propertyType,
+      propertyFor,
+      city,
+      area,
+      address,
+      size,
+      bedrooms,
+      bathrooms,
+      kitchen,
+      descr,
+      price,
+      images,
+    );
   }
 
-  // Convert the list of PropertyModel objects to a JSON string
+  /// Converts a list of [PropertyModel] to a JSON string.
   static String toListJson(List<PropertyModel> list) {
-    final List<Map<String, dynamic>> jsonList = list.map((item) {
-      return item.toMap();
-    }).toList();
-
+    final jsonList = list.map((item) => item.toMap()).toList();
     return json.encode(jsonList);
   }
 
-  // Convert a JSON string to a list of PropertyModel objects
+  /// Creates a list of [PropertyModel] from a JSON string.
   static List<PropertyModel> fromListJson(String jsonList) {
-    final List<dynamic> dynamicList = json.decode(jsonList);
+    final dynamicList = json.decode(jsonList) as List<dynamic>;
     return dynamicList
         .map((item) => PropertyModel.fromJson(json.encode(item)))
         .toList();

@@ -1,84 +1,98 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
 import 'package:haider/controllers/used/pageViewController.dart';
-import 'package:haider/utills/customColors.dart';
 
-import '../../controllers/used/citycontroller.dart';
 import '../../controllers/used/draweController.dart';
-import '../../controllers/used/themeControllers.dart';
+import '../../utills/ui_tokens.dart';
 
+/// Main home screen with bottom navigation.
+///
+/// Refreshed treatment:
+/// - token-driven bottom navigation colors and labels
+/// - calmer surface background so the tabs sit on a real surface
+/// - consistent active/unselected styling without hard-coded grey/blue pairs
 class Home extends StatefulWidget {
+  const Home({super.key});
+
   @override
-  _HomeState createState() => _HomeState();
+  State<Home> createState() => _HomeState();
 }
 
 class _HomeState extends State<Home> {
-  final PageViewController pageViewController = Get.put(PageViewController());
-  final DraweController draweController = Get.put(DraweController());
-  final CityController cityController = Get.put(CityController());
-  final box = GetStorage();
-  var selectedIndex = 0.obs; // Use Rx variable for state management
-  ThemeController _themeController = Get.put(ThemeController());
+  late final PageViewController pageViewController;
+  late final DraweController draweController;
+  late final RxInt selectedIndex;
+
+  @override
+  void initState() {
+    super.initState();
+    pageViewController = Get.find();
+    draweController = Get.find();
+    selectedIndex = 0.obs;
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      // drawer: Drawerwidget(),
-      // appBar: AppBar(
-      //   centerTitle: true,
-      //   elevation: 0.0,
-      //   title: Text(
-      //     'Services'.tr,
-      //     style: TextStyle(
-      //       fontWeight: FontWeight.bold,
-      //       color: CustomColors.coral_Color,
-      //       fontSize: 22,
-      //     ),
-      //   ),
-      //   actions: [
-      //     IconButton(
-      //       icon: Icon(Icons.brightness_4),
-      //       onPressed: () => _themeController.toggleTheme(),
-      //     ),
-      //   ],
-      // ),
-      bottomNavigationBar: Obx(() => BottomNavigationBar(
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        return Scaffold(
+          body: _buildBody(constraints.maxWidth),
+          bottomNavigationBar: _buildBottomNavigationBar(),
+        );
+      },
+    );
+  }
+
+  Widget _buildBody(double maxWidth) {
+    return PageView(
+      controller: pageViewController.pageController.value,
+      onPageChanged: _onPageChanged,
+      children: pageViewController.pageViewItems,
+    );
+  }
+
+  Widget _buildBottomNavigationBar() {
+    return Container(
+      decoration: BoxDecoration(
+        color: Surface.card,
+        border: Border(
+          top: BorderSide(color: Accent.hairline, width: 1),
+        ),
+      ),
+      child: Obx(() => BottomNavigationBar(
             type: BottomNavigationBarType.shifting,
             currentIndex: selectedIndex.value,
-            onTap: (index) {
-              selectedIndex.value = index; // Update the selected index
-              pageViewController.pageController.value
-                  .jumpToPage(index); // Go to the selected page
-            },
-            items: [
+            onTap: _onTabTapped,
+            items: const [
               BottomNavigationBarItem(
                 activeIcon: Icon(Icons.home_rounded),
                 icon: Icon(Icons.home_outlined),
-                label: 'Home'.tr,
+                label: 'الرئيسية',
               ),
               BottomNavigationBarItem(
                 activeIcon: Icon(Icons.favorite_rounded),
                 icon: Icon(Icons.favorite_outline),
-                label: 'المفضله'.tr,
+                label: 'المفضلة',
               ),
               BottomNavigationBarItem(
-                activeIcon: Icon(Icons.people_rounded),
-                icon: Icon(Icons.people_outline),
-                label: 'My Services'.tr,
+                activeIcon: Icon(Icons.home_work_rounded),
+                icon: Icon(Icons.home_work_outlined),
+                label: 'عقاراتي',
               ),
             ],
-            backgroundColor: Colors.white,
-            selectedItemColor: CustomColors.prime_color,
-            unselectedItemColor: CustomColors.coral_Color,
+            backgroundColor: Colors.transparent,
+            selectedItemColor: Accent.primary,
+            unselectedItemColor: Accent.secondary,
           )),
-      body: PageView(
-        controller: pageViewController.pageController.value,
-        onPageChanged: (index) {
-          selectedIndex.value =
-              index; // Update the selected index when page changes
-        },
-        children: pageViewController.pageViewItems,
-      ),
     );
+  }
+
+  void _onPageChanged(int index) {
+    selectedIndex.value = index;
+  }
+
+  void _onTabTapped(int index) {
+    selectedIndex.value = index;
+    pageViewController.pageController.value.jumpToPage(index);
   }
 }

@@ -11,479 +11,381 @@ class PropertyServices {
   CollectionReference property =
       FirebaseFirestore.instance.collection('property');
 
-//? add prop to  firebase
+  /// Add property to Firestore with a proper auto-generated document ID.
+  /// Returns the document ID on success, or an error message on failure.
   Future<String> addproprtyToDatabase(
     PropertyModel propertyModel,
     List images,
   ) async {
-    List imageUrls = [];
-    propertyModel.images = images;
-
-    for (int i = 0; i < propertyModel.images!.length; i++) {
-      //   var fileExtension = path.extension(propertyModel.images[i].path);
-      String fileName = DateTime.now().millisecondsSinceEpoch.toString();
-      var firebaseStorageRef =
-          FirebaseStorage.instance.ref().child('RealState/$fileName');
-//quality  update
-      await firebaseStorageRef
-          .putData((await propertyModel.images![i].getByteData(quality: 20))
-              .buffer
-              .asUint8List())
-          .then((result) {
-        print('Uploaded');
-      }).catchError((erorr) {
-        print("Error in Uploading");
-      });
-
-      String url = await firebaseStorageRef.getDownloadURL();
-      print(url);
-      imageUrls.add(url);
+    // Validate required fields before uploading
+    if (images.isEmpty) {
+      return 'No images provided';
     }
-    String response = '';
-    propertyModel.images = imageUrls;
-    propertyModel.username = box.read('name');
-    propertyModel.usernumber = box.read('phone');
-    propertyModel.date = Timestamp.now().toDate().toString();
-    ;
-    var addPropertyPath = FirebaseFirestore.instance
-        .doc('property/${propertyModel.currentUserId}');
-    await addPropertyPath.set(propertyModel.toMap()).then((value) {
-      response = 'Data added';
-    }).catchError((error) {
-      response = 'error occurred';
-    });
-    return response;
-  }
+    if (propertyModel.address == null ||
+        propertyModel.address!.trim().isEmpty) {
+      return 'Address is required';
+    }
+    if (propertyModel.city == null ||
+        propertyModel.city!.trim().isEmpty) {
+      return 'City is required';
+    }
+    if (propertyModel.area == null ||
+        propertyModel.area!.trim().isEmpty) {
+      return 'Area is required';
+    }
+    if (propertyModel.size == null ||
+        propertyModel.size!.trim().isEmpty) {
+      return 'Size is required';
+    }
+    if (propertyModel.bedrooms == null ||
+        propertyModel.bedrooms!.trim().isEmpty) {
+      return 'Bedrooms are required';
+    }
+    if (propertyModel.price == null ||
+        propertyModel.price!.trim().isEmpty) {
+      return 'Price is required';
+    }
 
-//? get all data fun
-  Stream<List<User>> getAllupdaetList() {
-    return FirebaseFirestore.instance.collection('catogry').snapshots().map(
-        (querySnapshot) =>
-            querySnapshot.docs.map((doc) => User.fromMap(doc.data())).toList());
-  }
+    // Validate numeric fields
+    final priceValue = int.tryParse(propertyModel.price!);
+    if (priceValue == null || priceValue < 0) {
+      return 'Invalid price value';
+    }
+    final bedroomsValue = int.tryParse(propertyModel.bedrooms!);
+    if (bedroomsValue == null || bedroomsValue < 0) {
+      return 'Invalid bedrooms value';
+    }
+    final bathroomsValue = int.tryParse(propertyModel.bathrooms ?? '');
+    if (bathroomsValue == null || bathroomsValue < 0) {
+      return 'Invalid bathrooms value';
+    }
+    final kitchenValue = int.tryParse(propertyModel.kitchen ?? '');
+    if (kitchenValue == null || kitchenValue < 0) {
+      return 'Invalid kitchen value';
+    }
+    final sizeValue = int.tryParse(propertyModel.size!);
+    if (sizeValue == null || sizeValue < 0) {
+      return 'Invalid size value';
+    }
 
-  Stream<List<CityModel>> getAllcityList() {
-    return FirebaseFirestore.instance.collection('city').snapshots().map(
-        (querySnapshot) => querySnapshot.docs
-            .map((doc) => CityModel.fromMap(doc.data()))
-            .toList());
-  }
-
-  Future<List<PropertyModel>> getAllBuyingList() async {
-    List<PropertyModel> propertyList = [];
-    await FirebaseFirestore.instance
-        .collection('property')
-        .get()
-        .then((QuerySnapshot querySnapshot) {
-      querySnapshot.docs.forEach((doc) {
-        PropertyModel propertyModel =
-            PropertyModel.fromMap(doc.data() as Map<String, dynamic>);
-        if (doc['propertyFor'] == 'sale') {
-          propertyList.add(propertyModel);
-        }
-      });
-    });
-    return propertyList;
-  }
-
-  firestorePagnation() {
-    return property;
-  }
-
-  Future<List<PropertyModel>> getAllRentList() async {
-    List<PropertyModel> propertyList = [];
-    await FirebaseFirestore.instance
-        .collection('property')
-        .limit(10)
-        .get()
-        .then((QuerySnapshot querySnapshot) {
-      querySnapshot.docs.forEach((doc) {
-        PropertyModel propertyModel =
-            PropertyModel.fromMap(doc.data() as Map<String, dynamic>);
-
-        propertyList.add(propertyModel);
-        print("**********************************");
-        print(propertyModel);
-        print("**********************************");
-      });
-    });
-    return propertyList;
-  }
-
-  Future<List<PropertyModel>> getAllRentListByCatogry({String? search}) async {
-    List<PropertyModel> propertyListbycat = [];
-    await FirebaseFirestore.instance
-        .collection('property')
-        .where("propertyType", isEqualTo: search)
-        .get()
-        .then((QuerySnapshot querySnapshot) {
-      querySnapshot.docs.forEach((doc) {
-        PropertyModel propertyModel =
-            PropertyModel.fromMap(doc.data() as Map<String, dynamic>);
-
-        propertyListbycat.add(propertyModel);
-      });
-    });
-    return propertyListbycat;
-  }
-
-//? operation fun
-  Future<String> updateProperty(String docID, String updatedValue) async {
-    CollectionReference collectionReference =
-        FirebaseFirestore.instance.collection('property');
-    String response = '';
-    await collectionReference
-        .doc(docID)
-        .update({'propertyAction': updatedValue.toString()})
-        .then((value) => response = 'Data Updated')
-        .catchError((error) => response = "Failed to update user: $error");
-
-    return response;
-  }
-
-  Future<String> deleteProperty(String currentUserId, List images) async {
-    CollectionReference collectionReference =
-        FirebaseFirestore.instance.collection('property');
-    String response = '';
+    // Upload images to Firebase Storage
+    List<String> imageUrls = [];
+    bool uploadFailed = false;
 
     for (int i = 0; i < images.length; i++) {
-      var storageReference =
-          await FirebaseStorage.instance.refFromURL(images[i]);
+      try {
+        final asset = images[i];
+        final byteData = await asset.getByteData(quality: 20);
+        if (byteData == null) {
+          print('Warning: Could not get byte data for image $i, skipping');
+          continue;
+        }
+        final fileName =
+            'RealState/${DateTime.now().millisecondsSinceEpoch}_$i';
+        final firebaseStorageRef = FirebaseStorage.instance.ref().child(fileName);
 
-      await storageReference.delete();
+        await firebaseStorageRef.putData(
+          byteData.buffer.asUint8List(),
+        );
 
-      print('image deleted');
+        final url = await firebaseStorageRef.getDownloadURL();
+        imageUrls.add(url);
+        print('Image $i uploaded successfully');
+      } catch (e) {
+        print('Error uploading image $i: $e');
+        uploadFailed = true;
+        // Continue with other images instead of failing the entire upload
+      }
     }
 
-    await collectionReference
-        .doc(currentUserId)
-        .delete()
-        .then((value) => response = 'Property Deleted')
-        .catchError((error) => response = "Failed to Delete Property: $error");
+    if (imageUrls.isEmpty) {
+      return 'No images were uploaded successfully';
+    }
 
-    return response;
+    // Prepare property data
+    final docRef = property.doc(); // Auto-generated document ID
+    final now = DateTime.now();
+
+    propertyModel.docId = docRef.id;
+    // Use Firebase Auth UID as the owner identifier if available, otherwise fall back to storage
+    propertyModel.currentUserId =
+        box.read('userId') ?? propertyModel.currentUserId ?? '';
+    propertyModel.username = box.read('name');
+    propertyModel.usernumber = box.read('phone');
+    propertyModel.date = Timestamp.fromDate(now).toDate().toString();
+    propertyModel.images = imageUrls;
+
+    // Write to Firestore
+    try {
+      await docRef.set(propertyModel.toMap());
+      print('Property saved with docId: ${docRef.id}');
+      return docRef.id;
+    } catch (e) {
+      print('Error saving property to Firestore: $e');
+      // Clean up uploaded images if Firestore write fails
+      for (final url in imageUrls) {
+        try {
+          final storageRef = FirebaseStorage.instance.refFromURL(url);
+          await storageRef.delete();
+        } catch (_) {
+          // Ignore cleanup errors
+        }
+      }
+      return 'Error saving property: $e';
+    }
   }
 
-//? get current user fun
-  Future<List<PropertyModel>> getCurrentUserPropertyForRentOut() async {
-    // CustomToast.showToast(controller.currentUserId.value);
-    List<PropertyModel> propertyList = [];
-    box.read("name") != null
-        ? await FirebaseFirestore.instance
-            .collection('property')
-            .where('username', isEqualTo: box.read("name"))
-            .where('usernumber', isEqualTo: box.read("phone"))
-            .get()
-            .then((QuerySnapshot querySnapshot) {
-            querySnapshot.docs.forEach((doc) {
-              PropertyModel propertyModel =
-                  PropertyModel.fromMap(doc.data() as Map<String, dynamic>);
-              // if (doc['username'] == box.read("name") &&
-              //     doc['usernumber'] == box.read("phone")) {
-              propertyList.add(propertyModel);
-              // }
-            });
-          })
-        : null;
-    return propertyList;
+  /// Get all categories from Firestore
+  Stream<List<Category>> getAllCategories() {
+    return FirebaseFirestore.instance.collection('catogry').snapshots().map(
+          (querySnapshot) => querySnapshot.docs
+              .map((doc) => Category.fromMap(doc.data()))
+              .toList(),
+        );
   }
 
-  Future<List<PropertyModel>> getCurrentUserPropertyForSelling() async {
-    List<PropertyModel> propertyList = [];
-    await FirebaseFirestore.instance
+  /// Get all cities from Firestore
+  Stream<List<CityModel>> getAllCities() {
+    return FirebaseFirestore.instance.collection('city').snapshots().map(
+          (querySnapshot) => querySnapshot.docs
+              .map((doc) => CityModel.fromMap(doc.data()))
+              .toList(),
+        );
+  }
+
+  /// Get all properties for sale with consistent pagination
+  Future<List<PropertyModel>> getAllBuyingList({int limit = 20}) async {
+    final propertyList = <PropertyModel>[];
+    final querySnapshot = await FirebaseFirestore.instance
         .collection('property')
-        .get()
-        .then((QuerySnapshot querySnapshot) {
-      querySnapshot.docs.forEach((doc) {
-        // print("Document Id is ${doc.id}");
-        String docId = doc.id;
-        PropertyModel propertyModel =
-            PropertyModel.fromMap(doc.data() as Map<String, dynamic>);
-        // if (doc['currentUserId'] == controller.currentUserId.value &&
-        //     doc['propertyFor'] == 'sale') {
-        propertyList.add(propertyModel);
-        // }
-      });
-    });
+        .where('propertyFor', isEqualTo: 'sale')
+        .limit(limit)
+        .get();
+
+    for (final doc in querySnapshot.docs) {
+      final data = doc.data() as Map<String, dynamic>;
+      // Only include documents that have the propertyFor field set to 'sale'
+      if (data['propertyFor'] == 'sale') {
+        propertyList.add(PropertyModel.fromMap(data));
+      }
+    }
     return propertyList;
   }
 
-//? Search fun
+  /// Get the base query for pagination (used by FirestoreListView)
+  Query get propertyQuery => property;
 
-  Future<List<PropertyModel>> serachRentList(
-      String cityname, String priceFrom, String priceTo) async {
-    List<PropertyModel> propertyList = [];
+  /// Get recent properties for rent with consistent pagination
+  Future<List<PropertyModel>> getAllRentList({int limit = 20}) async {
+    final propertyList = <PropertyModel>[];
+    final querySnapshot = await FirebaseFirestore.instance
+        .collection('property')
+        .where('propertyFor', isEqualTo: 'rent')
+        .limit(limit)
+        .get();
 
-    if (cityname != '' && priceFrom == '' && priceTo == '') {
-      //   CustomToast.showToast('controller.cityEditTextController.text');
-      await FirebaseFirestore.instance
-          .collection('property')
-          .get()
-          .then((QuerySnapshot querySnapshot) {
-        querySnapshot.docs.forEach((doc) {
-          PropertyModel propertyModel =
-              PropertyModel.fromMap(doc.data() as Map<String, dynamic>);
-          String city = doc['city'];
+    for (final doc in querySnapshot.docs) {
+      final data = doc.data() as Map<String, dynamic>;
+      if (data['propertyFor'] == 'rent') {
+        propertyList.add(PropertyModel.fromMap(data));
+      }
+    }
+    return propertyList;
+  }
 
-          if (doc['propertyFor'] == 'rent' &&
-              cityname.toLowerCase() == city.toLowerCase()) {
-            propertyList.add(propertyModel);
-          }
-        });
-      });
-    } else if (cityname != '' && priceFrom != '' && priceTo == '') {
-      await FirebaseFirestore.instance
-          .collection('property')
-          .orderBy('price', descending: true)
-          .get()
-          .then((QuerySnapshot querySnapshot) {
-        querySnapshot.docs.forEach((doc) {
-          PropertyModel propertyModel =
-              PropertyModel.fromMap(doc.data() as Map<String, dynamic>);
-          String city = doc['city'];
-          int price = int.parse(doc['price']);
-          if (doc['propertyFor'] == 'rent' &&
-              cityname.toLowerCase() == city.toLowerCase() &&
-              price >= int.parse(priceFrom)) {
-            propertyList.add(propertyModel);
-          }
-        });
-      });
-    } else if (cityname != '' && priceFrom == '' && priceTo != '') {
-      await FirebaseFirestore.instance
-          .collection('property')
-          .orderBy('price', descending: true)
-          .get()
-          .then((QuerySnapshot querySnapshot) {
-        querySnapshot.docs.forEach((doc) {
-          PropertyModel propertyModel =
-              PropertyModel.fromMap(doc.data() as Map<String, dynamic>);
-          String city = doc['city'];
-          int price = int.parse(doc['price']);
-          if (doc['propertyFor'] == 'rent' &&
-              cityname.toLowerCase() == city.toLowerCase() &&
-              price <= int.parse(priceTo)) {
-            propertyList.add(propertyModel);
-          }
-        });
-      });
-    } else if (cityname != '' && priceFrom != '' && priceTo != '') {
-      await FirebaseFirestore.instance
-          .collection('property')
-          .orderBy('price', descending: true)
-          .get()
-          .then((QuerySnapshot querySnapshot) {
-        querySnapshot.docs.forEach((doc) {
-          PropertyModel propertyModel =
-              PropertyModel.fromMap(doc.data() as Map<String, dynamic>);
-          String city = doc['city'];
-          int price = int.parse(doc['price']);
-          if (doc['propertyFor'] == 'rent' &&
-              cityname.toLowerCase() == city.toLowerCase() &&
-              price >= int.parse(priceFrom) &&
-              price <= int.parse(priceTo)) {
-            propertyList.add(propertyModel);
-          }
-        });
-      });
-    } else if (cityname == '' && priceFrom != '' && priceTo == '') {
-      await FirebaseFirestore.instance
-          .collection('property')
-          .orderBy('price', descending: true)
-          .get()
-          .then((QuerySnapshot querySnapshot) {
-        querySnapshot.docs.forEach((doc) {
-          PropertyModel propertyModel =
-              PropertyModel.fromMap(doc.data() as Map<String, dynamic>);
-          String city = doc['city'];
-          int price = int.parse(doc['price']);
-          if (doc['propertyFor'] == 'rent' && price >= int.parse(priceFrom)) {
-            propertyList.add(propertyModel);
-          }
-        });
-      });
-    } else if (cityname == '' && priceFrom == '' && priceTo != '') {
-      await FirebaseFirestore.instance
-          .collection('property')
-          .orderBy('price', descending: true)
-          .get()
-          .then((QuerySnapshot querySnapshot) {
-        querySnapshot.docs.forEach((doc) {
-          PropertyModel propertyModel =
-              PropertyModel.fromMap(doc.data() as Map<String, dynamic>);
+  /// Get properties by category/type
+  Future<List<PropertyModel>> getAllRentListByCategory(
+      {String? category}) async {
+    if (category == null || category.isEmpty) {
+      return [];
+    }
 
-          int price = int.parse(doc['price']);
-          if (doc['propertyFor'] == 'rent' && price <= int.parse(priceTo)) {
-            propertyList.add(propertyModel);
-          }
-        });
+    final propertyList = <PropertyModel>[];
+    final querySnapshot = await FirebaseFirestore.instance
+        .collection('property')
+        .where('propertyType', isEqualTo: category)
+        .limit(50)
+        .get();
+
+    for (final doc in querySnapshot.docs) {
+      propertyList.add(PropertyModel.fromMap(doc.data() as Map<String, dynamic>));
+    }
+    return propertyList;
+  }
+
+  /// Update a property's action status (e.g., 'Sold Out', 'Rented')
+  Future<String> updateProperty(String docId, String updatedValue) async {
+    if (docId.isEmpty) {
+      return 'Invalid document ID';
+    }
+
+    try {
+      await property.doc(docId).update({
+        'propertyAction': updatedValue.toString(),
+        'updatedAt': FieldValue.serverTimestamp(),
       });
-    } else if (cityname == '' && priceFrom != '' && priceTo != '') {
-      await FirebaseFirestore.instance
-          .collection('property')
-          .orderBy('price', descending: true)
-          .get()
-          .then((QuerySnapshot querySnapshot) {
-        querySnapshot.docs.forEach((doc) {
-          PropertyModel propertyModel =
-              PropertyModel.fromMap(doc.data() as Map<String, dynamic>);
-          String city = doc['city'];
-          int price = int.parse(doc['price']);
-          if (doc['propertyFor'] == 'rent' &&
-              price >= int.parse(priceFrom) &&
-              price <= int.parse(priceTo)) {
-            propertyList.add(propertyModel);
-          }
-        });
-      });
+      return 'Data Updated';
+    } catch (e) {
+      return 'Failed to update property: $e';
+    }
+  }
+
+  /// Delete a property and its images from storage
+  Future<String> deleteProperty(String docId, List images) async {
+    if (docId.isEmpty) {
+      return 'Invalid document ID';
+    }
+
+    // Delete images from Firebase Storage
+    for (final imageUrl in images) {
+      try {
+        final storageReference = FirebaseStorage.instance.refFromURL(imageUrl);
+        await storageReference.delete();
+        print('Image deleted: $imageUrl');
+      } catch (e) {
+        print('Error deleting image $imageUrl: $e');
+        // Continue with other images even if one fails
+      }
+    }
+
+    // Delete the Firestore document
+    try {
+      await property.doc(docId).delete();
+      return 'Property Deleted';
+    } catch (e) {
+      return 'Failed to Delete Property: $e';
+    }
+  }
+
+  /// Get current user's properties for rent out
+  Future<List<PropertyModel>> getCurrentUserPropertyForRentOut() async {
+    final propertyName = box.read('name');
+    final propertyPhone = box.read('phone');
+
+    if (propertyName == null || propertyPhone == null) {
+      return [];
+    }
+
+    final propertyList = <PropertyModel>[];
+    final querySnapshot = await property
+        .where('username', isEqualTo: propertyName)
+        .where('usernumber', isEqualTo: propertyPhone)
+        .limit(50)
+        .get();
+
+    for (final doc in querySnapshot.docs) {
+      propertyList.add(PropertyModel.fromMap(doc.data() as Map<String, dynamic>));
+    }
+    return propertyList;
+  }
+
+  /// Get current user's properties for selling
+  Future<List<PropertyModel>> getCurrentUserPropertyForSelling() async {
+    final propertyName = box.read('name');
+    final propertyPhone = box.read('phone');
+
+    if (propertyName == null || propertyPhone == null) {
+      return [];
+    }
+
+    final propertyList = <PropertyModel>[];
+    final querySnapshot = await property
+        .where('username', isEqualTo: propertyName)
+        .where('usernumber', isEqualTo: propertyPhone)
+        .where('propertyFor', isEqualTo: 'sale')
+        .limit(50)
+        .get();
+
+    for (final doc in querySnapshot.docs) {
+      propertyList.add(PropertyModel.fromMap(doc.data() as Map<String, dynamic>));
+    }
+    return propertyList;
+  }
+
+  /// Search properties for rent with server-side filtering
+  Future<List<PropertyModel>> searchRentList({
+    String? cityName,
+    int? priceFrom,
+    int? priceTo,
+  }) async {
+    return _searchProperties(
+      propertyFor: 'rent',
+      cityName: cityName,
+      priceFrom: priceFrom,
+      priceTo: priceTo,
+    );
+  }
+
+  /// Search properties for sale with server-side filtering
+  Future<List<PropertyModel>> searchBuyList({
+    String? cityName,
+    int? priceFrom,
+    int? priceTo,
+  }) async {
+    return _searchProperties(
+      propertyFor: 'sale',
+      cityName: cityName,
+      priceFrom: priceFrom,
+      priceTo: priceTo,
+    );
+  }
+
+  /// Core search method with server-side filtering
+  Future<List<PropertyModel>> _searchProperties({
+    required String propertyFor,
+    String? cityName,
+    int? priceFrom,
+    int? priceTo,
+    int limit = 50,
+  }) async {
+    Query query = property.where('propertyFor', isEqualTo: propertyFor);
+
+    // Add city filter if provided
+    if (cityName != null && cityName.isNotEmpty) {
+      query = query.where('city', isEqualTo: cityName);
+    }
+
+    // Add price range filters if provided
+    if (priceFrom != null && priceFrom > 0) {
+      query = query.where('price', isGreaterThanOrEqualTo: priceFrom);
+    }
+    if (priceTo != null && priceTo > 0) {
+      query = query.where('price', isLessThanOrEqualTo: priceTo);
+    }
+
+    // Always apply a limit
+    query = query.limit(limit);
+
+    // Order by price descending for consistent results
+    query = query.orderBy('price', descending: true);
+
+    final querySnapshot = await query.get();
+    final propertyList = <PropertyModel>[];
+
+    for (final doc in querySnapshot.docs) {
+      propertyList.add(PropertyModel.fromMap(doc.data() as Map<String, dynamic>));
     }
 
     return propertyList;
   }
 
-  Future<List<PropertyModel>> serachBuyList(
-      String cityname, String priceFrom, String priceTo) async {
-    List<PropertyModel> propertyList = [];
+  /// Search properties by text (area name)
+  Future<List<PropertyModel>> searchByArea(String areaText) async {
+    if (areaText.isEmpty) {
+      return [];
+    }
 
-    if (cityname != '' && priceFrom == '' && priceTo == '') {
-      //   CustomToast.showToast('controller.cityEditTextController.text');
-      await FirebaseFirestore.instance
-          .collection('property')
-          .get()
-          .then((QuerySnapshot querySnapshot) {
-        querySnapshot.docs.forEach((doc) {
-          PropertyModel propertyModel =
-              PropertyModel.fromMap(doc.data() as Map<String, dynamic>);
-          String city = doc['city'];
+    final propertyList = <PropertyModel>[];
+    final querySnapshot = await property
+        .where('area', isGreaterThanOrEqualTo: areaText)
+        .where('area', isLessThan: areaText + 'z')
+        .limit(50)
+        .get();
 
-          propertyList.add(propertyModel);
-        });
-      });
-    } else if (cityname != '' && priceFrom != '' && priceTo == '') {
-      await FirebaseFirestore.instance
-          .collection('property')
-          .orderBy('price', descending: true)
-          .get()
-          .then((QuerySnapshot querySnapshot) {
-        querySnapshot.docs.forEach((doc) {
-          PropertyModel propertyModel =
-              PropertyModel.fromMap(doc.data() as Map<String, dynamic>);
-          String city = doc['city'];
-          int price = int.parse(doc['price']);
-          if (doc['propertyFor'] == 'sale' &&
-              cityname.toLowerCase() == city.toLowerCase() &&
-              price >= int.parse(priceFrom)) {
-            propertyList.add(propertyModel);
-          }
-        });
-      });
-    } else if (cityname != '' && priceFrom == '' && priceTo != '') {
-      await FirebaseFirestore.instance
-          .collection('property')
-          .orderBy('price', descending: true)
-          .get()
-          .then((QuerySnapshot querySnapshot) {
-        querySnapshot.docs.forEach((doc) {
-          PropertyModel propertyModel =
-              PropertyModel.fromMap(doc.data() as Map<String, dynamic>);
-          String city = doc['city'];
-          int price = int.parse(doc['price']);
-          if (doc['propertyFor'] == 'sale' &&
-              cityname.toLowerCase() == city.toLowerCase() &&
-              price <= int.parse(priceTo)) {
-            propertyList.add(propertyModel);
-          }
-        });
-      });
-    } else if (cityname != '' && priceFrom != '' && priceTo != '') {
-      await FirebaseFirestore.instance
-          .collection('property')
-          .orderBy('price', descending: true)
-          .get()
-          .then((QuerySnapshot querySnapshot) {
-        querySnapshot.docs.forEach((doc) {
-          PropertyModel propertyModel =
-              PropertyModel.fromMap(doc.data() as Map<String, dynamic>);
-          String city = doc['city'];
-          int price = int.parse(doc['price']);
-          if (doc['propertyFor'] == 'sale' &&
-              cityname.toLowerCase() == city.toLowerCase() &&
-              price >= int.parse(priceFrom) &&
-              price <= int.parse(priceTo)) {
-            propertyList.add(propertyModel);
-          }
-        });
-      });
-    } else if (cityname == '' && priceFrom != '' && priceTo == '') {
-      await FirebaseFirestore.instance
-          .collection('property')
-          .orderBy('price', descending: true)
-          .get()
-          .then((QuerySnapshot querySnapshot) {
-        querySnapshot.docs.forEach((doc) {
-          PropertyModel propertyModel =
-              PropertyModel.fromMap(doc.data() as Map<String, dynamic>);
-          String city = doc['city'];
-          int price = int.parse(doc['price']);
-          if (doc['propertyFor'] == 'sale' && price >= int.parse(priceFrom)) {
-            propertyList.add(propertyModel);
-          }
-        });
-      });
-    } else if (cityname == '' && priceFrom == '' && priceTo != '') {
-      await FirebaseFirestore.instance
-          .collection('property')
-          .orderBy('price', descending: true)
-          .get()
-          .then((QuerySnapshot querySnapshot) {
-        querySnapshot.docs.forEach((doc) {
-          PropertyModel propertyModel =
-              PropertyModel.fromMap(doc.data() as Map<String, dynamic>);
-
-          int price = int.parse(doc['price']);
-          if (doc['propertyFor'] == 'sale' && price <= int.parse(priceTo)) {
-            propertyList.add(propertyModel);
-          }
-        });
-      });
-    } else if (cityname == '' && priceFrom != '' && priceTo != '') {
-      await FirebaseFirestore.instance
-          .collection('property')
-          .orderBy('price', descending: true)
-          .get()
-          .then((QuerySnapshot querySnapshot) {
-        querySnapshot.docs.forEach((doc) {
-          PropertyModel propertyModel =
-              PropertyModel.fromMap(doc.data() as Map<String, dynamic>);
-          String city = doc['city'];
-          int price = int.parse(doc['price']);
-          if (doc['propertyFor'] == 'sale' &&
-              price >= int.parse(priceFrom) &&
-              price <= int.parse(priceTo)) {
-            propertyList.add(propertyModel);
-          }
-        });
-      });
+    for (final doc in querySnapshot.docs) {
+      propertyList.add(PropertyModel.fromMap(doc.data() as Map<String, dynamic>));
     }
 
     return propertyList;
   }
-
-/** "username": box.read('name'),
-      "usernumber": box.read('phone'),
-      'currentUserId': propertyModel.currentUserId.toString(),
-      'propertyFor': propertyModel.propertyFor.toString(),
-      'propertyType': propertyModel.propertyType.toString(),
-      'city': propertyModel.city.toString(),
-      'area': propertyModel.area.toString(),
-      'size': propertyModel.size.toString(),
-      'bedrooms': propertyModel.bedrooms.toString(),
-      'address': propertyModel.address.toString(),
-      'bathrooms': propertyModel.bathrooms.toString(),
-      'kitchen': propertyModel.kitchen.toString(),
-      'des': propertyModel.descr.toString(),
-      'price': propertyModel.price.toString(),
-      'images': imageUrls,
-      'propertyAction': 'None'.toString(),
-      'time': time */
 }

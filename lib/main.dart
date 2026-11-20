@@ -8,69 +8,59 @@ import 'package:haider/utills/themes.dart';
 import 'package:haider/views/screens/homeView.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 
-import 'controllers/used/favourateController.dart';
-import 'controllers/used/themeControllers.dart';
+import 'utills/app_config.dart';
+import 'utills/app_bindings.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   await GetStorage.init();
 
-  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+  SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
     statusBarIconBrightness: Brightness.light,
-    statusBarColor: Colors.white, // status bar color
+    statusBarColor: Colors.transparent,
   ));
-//Remove this method to stop OneSignal Debugging
+
+  // Remove this method to stop OneSignal Debugging
   OneSignal.Debug.setLogLevel(OSLogLevel.verbose);
 
-  OneSignal.initialize("0183cc36-fb23-4be7-89ed-d3b112693d01");
+  OneSignal.initialize(AppConfig.onesignalAppId);
 
-// The promptForPushNotificationsWithUserResponse function will show the iOS or Android push notification prompt. We recommend removing the following code and instead using an In-App Message to prompt for notification permission
+  // The promptForPushNotificationsWithUserResponse function will show the iOS or Android push notification prompt.
+  // We recommend removing the following code and instead using an In-App Message to prompt for notification permission
   OneSignal.Notifications.requestPermission(true);
-  runApp(MyApp());
+
+  runApp(const MyApp());
 }
 
-class MyApp extends StatefulWidget {
-  @override
-  State<MyApp> createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
-  var box;
-  ThemeController? themeController;
-
-  @override
-  void initState() {
-    super.initState();
-    themeController = Get.put(ThemeController());
-    Get.put(FavoritesController());
-
-    box = GetStorage().read('name');
-  }
+/// Main application widget.
+/// Uses GetX for state management and dependency injection.
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
-        translations: Languages(),
-        locale: const Locale('ar', 'EG'),
-        debugShowCheckedModeBanner: false,
-        title: 'إسكان',
-        defaultTransition: Transition.cupertino,
-        darkTheme: ThemeData(
-          useMaterial3: true,
-          colorScheme: darkColorScheme,
-        ),
-        theme: ThemeData(
-          colorScheme: lightColorScheme,
-          useMaterial3: true,
-        ),
-        themeMode:
-            themeController!.isDarkTheme ? ThemeMode.dark : ThemeMode.light,
-        home: Home()
+    // Initialize theme controller - it's registered as permanent in AppBindings
+    final themeController = Get.find<ThemeController>();
 
-        //  FirebaseAuth.instance.currentUser == null
-        //     ? GoogleLoginScreen()
-        // : Home(),
-        );
+    return GetMaterialApp(
+      translations: Languages(),
+      locale: const Locale('ar', 'EG'),
+      defaultLocale: const Locale('ar', 'EG'),
+      debugShowCheckedModeBanner: false,
+      title: 'إسكان',
+      defaultTransition: Transition.cupertino,
+      darkTheme: ThemeData(
+        useMaterial3: true,
+        colorScheme: darkColorScheme,
+      ),
+      theme: ThemeData(
+        colorScheme: lightColorScheme,
+        useMaterial3: true,
+      ),
+      themeMode: themeController.isDarkTheme ? ThemeMode.dark : ThemeMode.light,
+      initialBinding: AppBindings(),
+      home: const Home(),
+    );
   }
 }

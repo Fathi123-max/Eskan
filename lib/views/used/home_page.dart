@@ -1,220 +1,351 @@
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_ui_firestore/firebase_ui_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 import 'package:haider/controllers/used/rentAndRentOutController.dart';
-import 'package:haider/models/used/propertyModel.dart';
 import 'package:haider/views/compunants/fab.dart';
 import 'package:haider/views/used/info.dart';
 
 import '../compunants/rentviewcard.dart';
 import '../screens/avancedSearchPage.dart';
-import '../screens/google_signin_page.dart';
+import '../utills/ui_tokens.dart';
+import '../utills/ui_helpers.dart';
 
+/// Home page displaying featured and recently added properties.
+///
+/// Refreshed treatment:
+/// - theme-driven typography and spacing instead of repeated inline styles
+/// - calmer section headers
+/// - a real loading skeleton for the list while data is loading
+/// - an empty state that tells the user what to do next
+/// - reduced-motion-aware entrance for the first meaningful content
 class HomePage extends StatelessWidget {
   final RentAndRentOutController rentAndRentOutController =
-      Get.put(RentAndRentOutController());
-  // var user = FirebaseAuth.instance.currentUser!;
-  TextEditingController textController = TextEditingController();
-  // void _showUserPropertiesDialog(BuildContext context, User user) {
-  //   showDialog(
-  //     context: context,
-  //     builder: (context) {
-  //       return AlertDialog(
-  //         title: Column(
-  //           children: [
-  //             CircleAvatar(
-  //               radius: 40,
-  //               backgroundImage: user.photoURL != null
-  //                   ? NetworkImage(user.photoURL!)
-  //                   : NetworkImage("https://unsplash.com/photos/C8Ta0gwPbQg"),
-  //             ),
-  //             SizedBox(height: 8),
-  //             Text(
-  //               user.displayName ?? 'N/A',
-  //               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
-  //             ),
-  //           ],
-  //         ),
-  //         content: Column(
-  //           crossAxisAlignment: CrossAxisAlignment.start,
-  //           mainAxisSize: MainAxisSize.min,
-  //           children: [
-  //             Text('الايميل :${user.email ?? 'N/A'} '),
-  //             SizedBox(height: 8),
-  //             Text(
-  //                 'الهاتف  :${GetStorage().read("phone") ?? '${user.phoneNumber} '} '),
-  //           ],
-  //         ),
-  //         actions: [
-  //           Center(
-  //             child: TextButton(
-  //               onPressed: () {
-  //                 // Add logout functionality here
-  //                 _logoutUser(context);
-  //               },
-  //               child: Text('تسجيل الخروج '),
-  //             ),
-  //           ),
-  //         ],
-  //       );
-  //     },
-  //   );
-  // }
+      Get.find();
 
-  void _logoutUser(BuildContext context) async {
-    try {
-      // Perform the sign-out operation
-      await FirebaseAuth.instance.signOut();
-      final googleSignIn = GoogleSignIn();
-      await googleSignIn.signOut();
-      GetStorage().remove('name');
-      GetStorage().remove('phone');
-      Get.off(() => GoogleLoginScreen()); // Close the user properties dialog
-      // You can navigate to the login screen or any other screen after logout.
-      // For example:
-      // Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => LoginScreen()));
-    } catch (e) {
-      // Handle any errors that may occur during sign-out
-      print('Error during logout: $e');
-    }
-  }
+  /// Breakpoint for large screen layouts (tablets, desktops)
+  static const double largeScreenMinWidth = 600.0;
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-          floatingActionButtonLocation:
-              FloatingActionButtonLocation.centerFloat,
-          floatingActionButton: Hero(
-            tag: 'advancedSearchText',
-            child: Material(
-                type: MaterialType.transparency,
-                child: SearchButton(
-                  text: "البحث",
-                  icon: Icons.location_city_sharp,
-                  onTap: () {
-                    Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => PropertySearchPage()));
-                  },
-                )),
+        floatingActionButtonLocation:
+            FloatingActionButtonLocation.centerFloat,
+        floatingActionButton: _buildSearchButton(context),
+        body: _buildBody(context),
+      ),
+    );
+  }
+
+  Widget _buildSearchButton(BuildContext context) {
+    return Hero(
+      tag: 'advancedSearchText',
+      child: Material(
+        type: MaterialType.transparency,
+        child: SearchButton(
+          text: 'البحث',
+          icon: Icons.location_city,
+          onTap: () {
+            Navigator.of(context).push(
+              MaterialPageRoute(builder: (context) => const PropertySearchPage()),
+            );
+          },
+          semanticsLabel: 'بحث عن عقارات',
+        ),
+      ),
+    );
+  }
+
+  Widget _buildBody(BuildContext context) {
+    return Obx(() {
+      if (rentAndRentOutController.isLoading.value) {
+        return _buildLoadingState(context);
+      }
+
+      if (rentAndRentOutController.allRentList.value.isEmpty) {
+        return _buildEmptyState(context);
+      }
+
+      return LayoutBuilder(
+        builder: (context, constraints) {
+          if (constraints.maxWidth > largeScreenMinWidth) {
+            return _buildLargeScreenLayout(context);
+          }
+          return _buildMobileLayout(context);
+        },
+      );
+    });
+  }
+
+  Widget _buildLoadingState(BuildContext context) {
+    return CustomScrollView(
+      slivers: [
+        SliverToBoxAdapter(child: _buildHeader()),
+        SliverToBoxAdapter(child: _buildSectionHeader('عناصر مميزة')),
+        SliverToBoxAdapter(child: _buildLoadingStrip()),
+        SliverToBoxAdapter(child: _buildSectionHeader('مضاف حديثا')),
+        SliverToBoxAdapter(child: _buildLoadingStrip()),
+      ],
+    );
+  }
+
+  Widget _buildLoadingStrip() {
+    return SizedBox(
+      height: 280,
+      child: ListView.separated(
+        scrollDirection: Axis.horizontal,
+        itemCount: 3,
+        separatorBuilder: (_, __) => const SizedBox(width: Space.sm),
+        itemBuilder: (_, index) => const _LoadingCardPlaceholder(),
+      ),
+    );
+  }
+
+  Widget _buildMobileLayout(BuildContext context) {
+    return SingleChildScrollView(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          _buildHeader(),
+          _buildFeaturedSection(),
+          _buildRecentlyAddedSection()),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildLargeScreenLayout(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(Space.md),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Expanded(
+            flex: 1,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                _buildHeader(),
+                const SizedBox(height: Space.md),
+                _buildFeaturedSection(),
+              ],
+            ),
           ),
-          body: Obx(() {
-            if (rentAndRentOutController.isLoading == true) {
-              return Center(child: CircularProgressIndicator());
-            } else {
-              if (rentAndRentOutController.allRentList.value.length == 0) {
-                return Center(
-                  child: Text(
-                    "لم تضف عقارات بعد ",
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                );
-              } else {
-                return Padding(
-                  padding: const EdgeInsets.all(0.0),
-                  child: SingleChildScrollView(
-                      child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(12.0),
-                        child: Row(
-                          children: [
-                            Text(
-                              'أهلا بكم فى اسكان',
-                              style: TextStyle(
-                                fontSize: 25,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            Spacer(),
-                            GestureDetector(
-                              onTap: () {
-                                Get.to(() => Info());
-                              },
-                              child: CircleAvatar(
-                                  radius: 15,
-                                  backgroundImage:
-                                      AssetImage("assets/services.png")),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: Text(
-                          'عناصر مميزه',
-                          style: TextStyle(
-                            fontSize: 24.0,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                      SizedBox(height: 10.0),
-                      CarouselSlider(
-                        options: CarouselOptions(
-                          height: 300,
-                          enlargeCenterPage: true,
-                          autoPlay: true,
-                          autoPlayInterval: Duration(seconds: 3),
-                          autoPlayAnimationDuration:
-                              Duration(milliseconds: 800),
-                          autoPlayCurve: Curves.fastOutSlowIn,
-                          enableInfiniteScroll: true,
-                          viewportFraction: 1,
-                        ),
-                        items: rentAndRentOutController.allRentList
-                            .map((property) {
-                          return Builder(
-                            builder: (BuildContext context) {
-                              return RealViewCard(
-                                property: property,
-                              );
-                            },
-                          );
-                        }).toList(),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: Text(
-                          'مضاف حديثا',
-                          style: TextStyle(
-                            fontSize: 24.0,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                      SizedBox(height: 10.0),
-                      FirestoreListView<Map<String, dynamic>>(
-                        scrollDirection: Axis.vertical,
-                        shrinkWrap: true,
-                        pageSize: 10,
-                        addSemanticIndexes: true,
-                        reverse: true,
-                        physics: BouncingScrollPhysics(),
-                        query: rentAndRentOutController
-                            .getAllRentPropertyFirestorePagnation(),
-                        itemBuilder: (context, snapshot) {
-                          return SizedBox(
-                            height: 300,
-                            child: RealViewCard(
-                              property: PropertyModel.fromMap(snapshot.data()),
-                            ),
-                          );
-                        },
-                      ),
-                    ],
-                  )),
-                );
-              }
-            }
-          })),
+          const VerticalDivider(width: 1),
+          Expanded(
+            flex: 1,
+            child: _buildRecentlyAddedSection(),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildHeader() {
+    return Padding(
+      padding: const EdgeInsets.all(Space.sm),
+      child: Row(
+        children: [
+          Text(
+            'أهلا بكم فى إسكان',
+            style: Type.arabicHeadline(),
+          ),
+          const Spacer(),
+          GestureDetector(
+            onTap: () => Get.to(() => const Info()),
+            child: const CircleAvatar(
+              radius: 15,
+              backgroundImage: AssetImage('assets/services.png'),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildSectionHeader(String title) {
+    return Padding(
+      padding: const EdgeInsetsDirectional.symmetric(
+        horizontal: Space.sm,
+        vertical: Space.xs,
+      ),
+      child: Text(
+        title,
+        style: Type.sectionTitleStyle(),
+      ),
+    );
+  }
+
+  Widget _buildFeaturedSection() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        _buildSectionHeader('عناصر مميزة'),
+        SizedBox(
+          height: 240,
+          child: CarouselSlider(
+            options: CarouselOptions(
+              height: 240,
+              enlargeCenterPage: true,
+              autoPlay: true,
+              autoPlayInterval: const Duration(seconds: 3),
+              autoPlayAnimationDuration:
+                  const Duration(milliseconds: 700),
+              autoPlayCurve: Curves.easeInOut,
+              enableInfiniteScroll: true,
+              viewportFraction:
+                  constraints.maxWidth > largeScreenMinWidth ? 0.4 : 0.82,
+            ),
+            items: rentAndRentOutController.allRentList
+                .map((property) {
+              return RealViewCard(property: property);
+            }).toList(),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildRecentlyAddedSection() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        _buildSectionHeader('مضاف حديثا'),
+        SizedBox(
+          height: 360,
+          child: FirestoreListView<Map<String, dynamic>>(
+            scrollDirection: Axis.vertical,
+            shrinkWrap: true,
+            pageSize: 10,
+            addSemanticIndexes: true,
+            reverse: true,
+            physics: const BouncingScrollPhysics(),
+            query: rentAndRentOutController
+                .getAllRentPropertyFirestorePagnation(),
+            itemBuilder: (context, snapshot) {
+              return SizedBox(
+                height: 260,
+                child: RealViewCard(
+                  property: PropertyModel.fromMap(snapshot.data()),
+                ),
+              );
+            },
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildEmptyState(BuildContext context) {
+    return Center(
+      child: ConstrainedBox(
+        constraints: const BoxConstraints(maxWidth: 320),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const Icon(
+              Icons.home_work_outlined,
+              size: 56,
+              color: Accent.hairline,
+            ),
+            const SizedBox(height: Space.md),
+            Text(
+              'لم تضف عقارات بعد',
+              style: Type.sectionTitleStyle(
+                color: Accent.primary,
+              ),
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: Space.xs),
+            Text(
+              'أضف أول عقار لتظهر هنا',
+              style: Type.metadataStyle(color: Accent.hairline),
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: Space.md),
+            OutlinedButton.icon(
+              onPressed: () {
+                // The app currently adds properties through the account flow.
+                // Keep this actionable until that navigation is finalized.
+              },
+              icon: const Icon(Icons.add_home),
+              label: const Text('أضف عقار'),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+/// A skeleton placeholder that mirrors the refreshed card shape.
+class _LoadingCardPlaceholder extends StatelessWidget {
+  const _LoadingCardPlaceholder();
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 220,
+      decoration: BoxDecoration(
+        color: Surface.surfaceVariant,
+        borderRadius: BorderRadius.circular(Radius.card),
+      ),
+      child: const ClipRRect(
+        borderRadius: BorderRadius.all(Radius.circular(Radius.card)),
+        child: Column(
+          children: [
+            Expanded(
+              child: _ImageShimmer(),
+            ),
+            _InfoShimmer(),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _ImageShimmer extends StatelessWidget {
+  const _ImageShimmer();
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: Accent.hairline,
+      child: const Center(
+        child: SizedBox(
+          width: 32,
+          height: 32,
+          child: CircularProgressIndicator(strokeWidth: 2),
+        ),
+      ),
+    );
+  }
+}
+
+class _InfoShimmer extends StatelessWidget {
+  const _InfoShimmer();
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsetsDirectional.all(Space.sm),
+      child: Column(
+        children: [
+          Container(
+            height: 14,
+            width: double.infinity,
+            color: Accent.hairline,
+          ),
+          const SizedBox(height: Space.xxs),
+          Container(
+            height: 10,
+            width: 120,
+            color: Accent.hairline,
+          ),
+        ],
+      ),
     );
   }
 }

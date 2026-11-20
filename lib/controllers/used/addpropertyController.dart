@@ -6,67 +6,59 @@ import 'package:haider/utills/customColors.dart';
 import 'package:multi_image_picker/multi_image_picker.dart';
 
 class AddPropertyController extends GetxController {
-  //Variables
+  // Variables
   var showLoadingBar = false.obs;
   var selectedCity = 'دمياط'.obs;
-  // var citieslist = <CityModel>[CityModel("cairo")].obs;
-  var citieslist2 =
-      ['Kar Albattikh'.tr, 'Dammita'.tr, "new Dammita".tr, "Kar Saad".tr].obs;
-
-  var values = <String>[
-    'Driver',
-    "Plumbing",
-    "Carpentry".tr,
-    'Gardening'.tr,
-    'Cleaning Houses'.tr,
-    'Electrician'.tr,
-    'Blacksmith'.tr,
-    'Tiling'.tr,
-    'Teacher'.tr,
-    'Gardening'.tr,
-    'Nurse'.tr,
-    'Mecanical'.tr,
-    'Baby setter'.tr,
-    'Color Man'.tr,
-    'Ground Man'.tr,
-    'other'.tr,
-  ].obs;
   var selectedValue = 'اختار نوع العقار'.obs;
   var selectedColor = CustomColors.prime_color.obs;
   var unSelectedColor = CustomColors.secondary_color.obs;
   var images = <Asset>[].obs;
-  PropertyModel propertyModel = PropertyModel();
-  PropertyServices firestoreService = PropertyServices();
-  var propertyFormKey = GlobalKey<FormState>();
+  final PropertyModel propertyModel = PropertyModel();
+  final PropertyServices firestoreService = PropertyServices();
+  final propertyFormKey = GlobalKey<FormState>();
+
+  // Form controllers
   final cityEditTextController = TextEditingController();
-  var areaEditTextController = TextEditingController();
-  var addressEditTextController = TextEditingController();
-  var sizeEditTextController = TextEditingController();
-  var bedroomsEditTextController = TextEditingController();
-  var bathroomsTextController = TextEditingController();
-  var kitchenEditTextController = TextEditingController();
-  var hallEditTextController = TextEditingController();
-  var desEditTextController = TextEditingController();
-  var priceEditTextController = TextEditingController();
-
-////////////////////////////////////////////
-  //Mathods
-
-  Future getImage() async {
-    var image = await MultiImagePicker.pickImages(
-        maxImages: 7, enableCamera: true, selectedAssets: images);
-    images.value = image;
-  }
-
-  // Future<void> getCitiesData() async {
-  //   var list = await firestoreService.getcitiesList();
-  //   citieslist.value = list;
-  // }
+  final areaEditTextController = TextEditingController();
+  final addressEditTextController = TextEditingController();
+  final sizeEditTextController = TextEditingController();
+  final bedroomsEditTextController = TextEditingController();
+  final bathroomsTextController = TextEditingController();
+  final kitchenEditTextController = TextEditingController();
+  final hallEditTextController = TextEditingController();
+  final desEditTextController = TextEditingController();
+  final priceEditTextController = TextEditingController();
 
   @override
   void onInit() {
     super.onInit();
+  }
 
-    //  getCitiesData();
+  @override
+  void onClose() {
+    // Clean up controllers
+    cityEditTextController.dispose();
+    areaEditTextController.dispose();
+    addressEditTextController.dispose();
+    sizeEditTextController.dispose();
+    bedroomsEditTextController.dispose();
+    bathroomsTextController.dispose();
+    kitchenEditTextController.dispose();
+    hallEditTextController.dispose();
+    desEditTextController.dispose();
+    priceEditTextController.dispose();
+    super.onClose();
+  }
+
+  /// Pick images for the property listing
+  Future<void> getImage() async {
+    final pickedImages = await MultiImagePicker.pickImages(
+      maxImages: 7,
+      enableCamera: true,
+      selectedAssets: images,
+    );
+    if (pickedImages != null) {
+      images.value = pickedImages;
+    }
   }
 }

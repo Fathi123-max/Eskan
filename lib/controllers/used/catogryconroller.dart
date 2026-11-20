@@ -4,20 +4,26 @@ import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 import '../../models/used/catogrymodel.dart';
 import '../../services/PropertyServices.dart';
 
-class catogryController extends GetxController {
-  RxList<User> catogryList = RxList<User>([]);
+class CategoryController extends GetxController {
+  final RxList<Category> categoryList = RxList<Category>([]);
+  StreamSubscription? _categorySubscription;
 
   @override
-  void onInit() async {
-    await getAllcatogryList();
-
+  void onInit() {
+    _loadCategories();
     super.onInit();
   }
 
-  Future<String> getAllcatogryList() async {
-    await PropertyServices().getAllupdaetList().listen((event) {
-      catogryList.value = event;
+  void _loadCategories() {
+    final services = PropertyServices();
+    _categorySubscription = services.getAllCategories().listen((event) {
+      categoryList.value = event;
     });
-    return "";
+  }
+
+  @override
+  void onClose() {
+    _categorySubscription?.cancel();
+    super.onClose();
   }
 }

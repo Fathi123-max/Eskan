@@ -5,19 +5,25 @@ import 'package:haider/models/used/cityModel.dart';
 import '../../services/PropertyServices.dart';
 
 class CityController extends GetxController {
-  RxList<CityModel> cityList = RxList<CityModel>([]);
+  final RxList<CityModel> cityList = RxList<CityModel>([]);
+  StreamSubscription? _citySubscription;
 
   @override
-  void onInit() async {
-    await getAllcatogryList();
-
+  void onInit() {
+    _loadCities();
     super.onInit();
   }
 
-  Future<String> getAllcatogryList() async {
-    await PropertyServices().getAllcityList().listen((event) {
+  void _loadCities() {
+    final services = PropertyServices();
+    _citySubscription = services.getAllCities().listen((event) {
       cityList.value = event;
     });
-    return "";
+  }
+
+  @override
+  void onClose() {
+    _citySubscription?.cancel();
+    super.onClose();
   }
 }

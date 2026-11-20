@@ -16,7 +16,7 @@ class _EnterInfoDialogState extends State<EnterInfoDialog> {
   // ... Same code as before ...
   final box = GetStorage();
 
-  final controller = Get.put(CurrentUserInfoController());
+  final controller = Get.find<CurrentUserInfoController>();
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 

@@ -6,7 +6,7 @@ import 'package:haider/utills/customColors.dart';
 
 class AccountSettings extends StatelessWidget {
   final CurrentUserInfoController currentUserInfoController =
-      Get.put(CurrentUserInfoController());
+      Get.find();
 
   final box = GetStorage();
   @override
@@ -60,7 +60,7 @@ class AccountSettings extends StatelessWidget {
                           'Name',
                         ),
                         Text(
-                          box.read("name").toString(),
+                          box.read("name")?.toString() ?? 'ليس لديك حساب',
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             color: Colors.black54,
@@ -89,7 +89,7 @@ class AccountSettings extends StatelessWidget {
                           'Phone'.tr,
                         ),
                         Text(
-                          box.read("phone").toString(),
+                          box.read("phone")?.toString() ?? 'ليس لديك حساب',
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             color: Colors.black54,

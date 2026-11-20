@@ -6,16 +6,15 @@ import '../../../controllers/used/catogryconroller.dart';
 import '../../../utills/customColors.dart';
 import '../../screens/propertyDetailScreen.dart';
 
-class catogrylist extends StatelessWidget {
-  // const RentOutView({Key key}) : super(key: key);
-  final catogryController catoController = Get.put(catogryController());
+class CategoryListPage extends StatelessWidget {
+  final CategoryController categoryController = Get.find();
 
   TextEditingController textEditingController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: catoController.catogryList.length == 0
+        body: categoryController.categoryList.length == 0
             ? Center(
                 child: CircularProgressIndicator(),
               )
@@ -26,11 +25,11 @@ class catogrylist extends StatelessWidget {
                   mainAxisSpacing: 10,
                   crossAxisSpacing: 10,
                 ),
-                itemCount: catoController.catogryList.value.length,
+                itemCount: categoryController.categoryList.value.length,
                 itemBuilder: (BuildContext context, int index) {
                   return _buildServiceCategory(
-                      catoController.catogryList[index].catogryname!,
-                      catoController.catogryList[index].catogryimage!);
+                      categoryController.categoryList[index].catogryname!,
+                      categoryController.categoryList[index].catogryimage!);
                 },
               ));
   }
@@ -89,11 +88,11 @@ class catogryView extends StatefulWidget {
 
 class _catogryViewState extends State<catogryView> {
   final RentAndRentOutController rentOutController =
-      Get.put(RentAndRentOutController());
+      Get.find();
 
   @override
   void initState() {
-    rentOutController.getAllRentPropertyByCatogry(widget.name!);
+    rentOutController.getAllRentPropertyByCategory(widget.name!);
   }
 
   @override
@@ -195,7 +194,7 @@ class _catogryViewState extends State<catogryView> {
                                       ),
                                       SizedBox(height: 4),
                                       Text(
-                                        '${rentOutController.allcatList[index].city[0].toUpperCase()}${rentOutController.allcatList[index].city.substring(1).toLowerCase()}',
+                                        '${rentOutController.allcatList[index].city}',
                                         style: TextStyle(
                                           fontWeight: FontWeight.bold,
                                           color: Colors.black54,
@@ -227,8 +226,8 @@ class _catogryViewState extends State<catogryView> {
             onSubmitted: (value5) {
               print(value5);
               print("............................................");
-              rentOutController.getAllRentPropertyByCatogry(value5);
-              print(rentOutController.getAllRentPropertyByCatogry(value5));
+              rentOutController.getAllRentPropertyByCategory(value5);
+              print(rentOutController.getAllRentPropertyByCategory(value5));
             },
           ),
         ), */

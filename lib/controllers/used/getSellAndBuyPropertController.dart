@@ -1,17 +1,8 @@
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:haider/models/used/propertyModel.dart';
 import 'package:haider/services/PropertyServices.dart';
 
 class GetSellAndBuyPropertyController extends GetxController {
-  // final AuthController controller=Get.find();
-
-  var value = true.obs;
-
-  final cityEditTextController = TextEditingController();
-  final rangeTextFromController = TextEditingController();
-  final rangeTextToTextController = TextEditingController();
-
   PropertyServices firestoreService = PropertyServices();
   var currentUserSellinglist = <PropertyModel>[].obs;
   var allBuyList = <PropertyModel>[].obs;

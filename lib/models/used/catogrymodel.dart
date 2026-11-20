@@ -1,57 +1,63 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
+// ignore_for_file: public_member_api_docs
 import 'dart:convert';
 
-class User {
-  String? catogryname;
-  String? catogryimage;
-  User({
-    this.catogryname,
-    this.catogryimage,
-  });
+/// Represents a property category/type (e.g., "Apartment", "Villa", "Office").
+class Category {
+  /// Category name
+  final String? catogryname;
 
-  User copyWith({
-    String? catogryname,
-    String? catogryimage,
-  }) {
-    return User(
+  /// Category image URL
+  final String? catogryimage;
+
+  /// Creates a [Category] instance.
+  const Category({this.catogryname, this.catogryimage});
+
+  /// Creates a copy of this model with optional new values.
+  Category copyWith({String? catogryname, String? catogryimage}) {
+    return Category(
       catogryname: catogryname ?? this.catogryname,
       catogryimage: catogryimage ?? this.catogryimage,
     );
   }
 
+  /// Converts this model to a Firestore-compatible map.
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
-      'catogryname': catogryname,
-      'catogryimage': catogryimage,
+      if (catogryname != null) 'catogryname': catogryname,
+      if (catogryimage != null) 'catogryimage': catogryimage,
     };
   }
 
-  factory User.fromMap(Map<String, dynamic> map) {
-    return User(
-      catogryname:
-          map['catogryname'] != null ? map['catogryname'] as String : null,
-      catogryimage:
-          map['catogryimage'] != null ? map['catogryimage'] as String : null,
+  /// Creates a [Category] from a Firestore document map.
+  factory Category.fromMap(Map<String, dynamic> map) {
+    return Category(
+      catogryname: map['catogryname'] as String?,
+      catogryimage: map['catogryimage'] as String?,
     );
   }
 
+  /// Converts this model to a JSON string.
   String toJson() => json.encode(toMap());
 
-  factory User.fromJson(String source) =>
-      User.fromMap(json.decode(source) as Map<String, dynamic>);
+  /// Creates a [Category] from a JSON string.
+  factory Category.fromJson(String source) =>
+      Category.fromMap(json.decode(source) as Map<String, dynamic>);
 
+  /// Returns a string representation for debugging.
   @override
   String toString() =>
-      'catogrumodel(catogryname: $catogryname, catogryimage: $catogryimage)';
+      'Category(catogryname: $catogryname, catogryimage: $catogryimage)';
 
+  /// Equality comparison.
   @override
-  bool operator ==(covariant User other) {
+  bool operator ==(covariant Category other) {
     if (identical(this, other)) return true;
-
-    return other.catogryname == catogryname &&
-        other.catogryimage == catogryimage;
+    if (other is! Category) return false;
+    return catogryname == other.catogryname &&
+        catogryimage == other.catogryimage;
   }
 
+  /// Hash code.
   @override
-  int get hashCode => catogryname.hashCode ^ catogryimage.hashCode;
+  int get hashCode => Object.hash(catogryname, catogryimage);
 }

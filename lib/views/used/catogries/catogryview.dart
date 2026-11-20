@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../controllers/used/rentAndRentOutController.dart';
+import '../../../utills/app_bindings.dart';
 
 class CategoryViewPage extends StatelessWidget {
   final String action;
@@ -12,7 +13,7 @@ class CategoryViewPage extends StatelessWidget {
   });
 
   final RentAndRentOutController rentAndRentOutController =
-      Get.put(RentAndRentOutController());
+      Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -48,13 +49,17 @@ class CategoryViewPage extends StatelessWidget {
                             ),
                             child: CachedNetworkImage(
                               imageUrl: rentAndRentOutController
-                                  .allRentList[index].images![0],
-                              // placeholder: (context, url) =>
-                              //     CircularProgressIndicator(),
-                              // errorWidget: (context, url, error) =>
-                              //     Icon(Icons.error),
+                                  .allRentList[index].firstImageUrl ?? '',
                               fit: BoxFit.cover,
                               height: 150,
+                              placeholder: (context, url) => Container(
+                                decoration: BoxDecoration(color: Colors.grey.shade300),
+                                child: Center(child: CircularProgressIndicator()),
+                              ),
+                              errorWidget: (context, url, error) => Container(
+                                decoration: BoxDecoration(color: Colors.grey.shade300),
+                                child: Center(child: Icon(Icons.broken_image, size: 40, color: Colors.grey)),
+                              ),
                             ),
                           ),
                           Padding(
@@ -84,7 +89,7 @@ class CategoryViewPage extends StatelessWidget {
                                     ),
                                     SizedBox(width: 4),
                                     Text(
-                                      '${rentAndRentOutController.allRentList[index].city?[0].toUpperCase()}${rentAndRentOutController.allRentList[index].city?.substring(1).toLowerCase()}',
+                                      '${rentAndRentOutController.allRentList[index].city}',
                                       style: TextStyle(
                                         fontSize: 14,
                                         color: Colors.grey[600],

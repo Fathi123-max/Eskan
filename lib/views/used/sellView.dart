@@ -9,7 +9,7 @@ import 'currentUserPropertyDetail.dart';
 
 class SellView extends StatelessWidget {
   final GetSellAndBuyPropertyController getSellPropertyController =
-      Get.put(GetSellAndBuyPropertyController());
+      Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -76,7 +76,7 @@ class SellView extends StatelessWidget {
                                                   getSellPropertyController
                                                       .currentUserSellinglist[
                                                           index]
-                                                      .images![0],
+                                                      .firstImageUrl ?? '',
                                               imageBuilder:
                                                   (context, imageProvider) =>
                                                       Container(
@@ -153,7 +153,7 @@ class SellView extends StatelessWidget {
                                         padding: const EdgeInsets.only(
                                             left: 5, right: 5),
                                         child: Text(
-                                          '${getSellPropertyController.currentUserSellinglist[index].city![0].toUpperCase()}${getSellPropertyController.currentUserSellinglist[index].city!.substring(1).toLowerCase()}',
+                                          '${getSellPropertyController.currentUserSellinglist[index].city}',
                                           style: TextStyle(
                                               fontWeight: FontWeight.bold,
                                               color:
