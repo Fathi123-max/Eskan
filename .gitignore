@@ -40,3 +40,5 @@ app.*.map.json
 
 # Agent skills (auto-installed via npx skills add)
 .agents/
+config.bat
+node_modules
